@@ -93,7 +93,7 @@ class Cookie
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(string $name, string $value = null, $expire = 0, ?string $path = '/', string $domain = null, bool $secure = false, bool $httpOnly = true, bool $raw = false, string $sameSite = null)
+    public function __construct(string $name, string $value = null, $expire = 0, string $path = '/', string $domain = null, bool $secure = false, bool $httpOnly = true, bool $raw = false, string $sameSite = null)
     {
         // from PHP source code
         if (preg_match("/[=,; \t\r\n\013\014]/", $name)) {

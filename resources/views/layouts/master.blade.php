@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="{{ asset('labo/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="{{ asset('labo/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
-  
+
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{ asset('labo/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
   <!-- iCheck for checkboxes and radio inputs -->
@@ -59,11 +59,11 @@
 
   <header class="main-header" style="position: fixed; width: 100%">
     <!-- Logo -->
-    <a href="dashboard.php" class="logo">
+    <a href="{{url('dashboard')}}" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><img src="{{asset($labo->logo)}}" style="width: 50px"></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><img src="{{asset($labo->logo)}}" style="width: 90px""></span>
+      <span class="logo-lg"><img src="{{asset($labo->logo)}}" style="width: 90px"></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -74,7 +74,7 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-  
+
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -171,7 +171,7 @@
 
 
   <!-- Content Wrapper. Contains page content -->
-  
+
       <!-- /.row (main row) -->
 
   <!-- /.content-wrapper -->
@@ -339,10 +339,10 @@
 
 
   $(function () {
- 
 
-    
-     
+
+
+
     $.ajax({
       type:'get',
       url:'/statistics',
@@ -375,7 +375,7 @@
       ]
     }
 
-    
+
     var barChartCanvas                   = $('#barChart').get(0).getContext('2d')
     var barChart                         = new Chart(barChartCanvas)
     var barChartData                     = areaChartData
@@ -418,7 +418,7 @@
   })
 
 
-  
+
 </script>
 
 </body>

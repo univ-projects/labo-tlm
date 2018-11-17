@@ -20,11 +20,11 @@
 
         <li>
           <a href="{{url('equipes')}}">
-            <i class="fa fa-group"></i> 
+            <i class="fa fa-group"></i>
             <span>Equipes</span>
           </a>
         </li>
-        
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-user"></i> <span>Membres</span>
@@ -40,34 +40,34 @@
 
           <li>
           <a href="{{url('theses')}}">
-            <i class="fa fa-file-pdf-o"></i> 
+            <i class="fa fa-file-pdf-o"></i>
             <span>Thèses</span>
           </a>
         </li>
-  
+
         <li>
           <a href="{{url('articles')}}">
-            <i class="fa fa-newspaper-o"></i> 
+            <i class="fa fa-newspaper-o"></i>
             <span>Articles</span></a>
           </li>
-        
+
         <li >
           <a href="{{url('projets')}}">
-            <i class="fa fa-folder-open-o"></i> 
+            <i class="fa fa-folder-open-o"></i>
             <span>Projets</span>
           </a>
         </li>
-        
-      
+
+
           @if(Auth::user()->role->nom == 'admin' )
 
           <li>
           <a href="{{url('parametre')}}">
-            <i class="fa fa-gears"></i> 
+            <i class="fa fa-gears"></i>
             <span>Paramètre</span></a>
           </li>
           @endif
-          
+
 @endsection
 
 @section('content')
@@ -149,4 +149,3 @@
             <!-- /.box-body -->
   </div>
 @endsection
-
