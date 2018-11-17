@@ -149,6 +149,79 @@
 
       <ul class="sidebar-menu" data-widget="tree">
         @yield('asidebar')
+              <li {{{ (Request::is('dashboard/*') ? 'class=active' : '') }}} {{{ (Request::is('dashboard') ? 'class=active' : '') }}}>
+                <a href="{{url('dashboard')}}">
+                  <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                </a>
+              </li>
+
+              <li {{{ (Request::is('equipes/*') ? 'class=active' : '') }}} {{{ (Request::is('equipes') ? 'class=active' : '') }}}>
+                <a href="{{url('equipes')}}">
+                  <i class="fa fa-group"></i>
+                  <span>Equipes</span>
+                </a>
+              </li>
+
+              <li class="treeview {{{ (Request::is('membres/*') ? 'active' : '') }}} {{{ (Request::is('membres') ? 'active' : '') }}}{{{ (Request::is('trombinoscope/*') ? 'active' : '') }}} {{{ (Request::is('trombinoscope') ? 'active' : '') }}}">
+                <a href="#">
+                  <i class="fa fa-user"></i> <span>Membres</span>
+                  <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li {{{ (Request::is('trombinoscope/*') ? 'class=active' : '') }}} {{{ (Request::is('trombinoscope') ? 'class=active' : '') }}}>
+                    <a href="{{url('trombinoscope')}}"><i class="fa fa-id-badge"></i> Trombinoscope</a>
+                  </li>
+                  <li {{{ (Request::is('membres/*') ? 'class=active' : '') }}} {{{ (Request::is('membres') ? 'class=active' : '') }}}>
+                    <a href="{{url('membres')}}"><i class="fa fa-list"></i> Liste</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li {{{ (Request::is('theses/*') ? 'class=active' : '') }}} {{{ (Request::is('theses') ? 'class=active' : '') }}}>
+                <a href="{{url('theses')}}">
+                  <i class="fa fa-file-pdf-o"></i>
+                  <span>Thèses</span>
+                </a>
+              </li>
+
+              <li {{{ (Request::is('articles/*') ? 'class=active' : '') }}} {{{ (Request::is('articles') ? 'class=active' : '') }}}>
+                <a href="{{url('articles')}}">
+                  <i class="fa fa-newspaper-o"></i>
+                  <span>Articles</span></a>
+                </li>
+
+              <li {{{ (Request::is('projets/*') ? 'class=active' : '') }}} {{{ (Request::is('projets') ? 'class=active' : '') }}}>
+                <a href="{{url('projets')}}">
+                  <i class="fa fa-folder-open-o"></i>
+                  <span>Projets</span>
+                </a>
+              </li>
+
+              <li {{{ (Request::is('#/*') ? 'class=active' : '') }}} {{{ (Request::is('#') ? 'class=active' : '') }}}>
+                <a href="{{url('projets')}}">
+                  <i class="fa fa-folder-open-o"></i>
+                  <span>Matériels</span>
+                </a>
+              </li>
+
+              <li {{{ (Request::is('#/*') ? 'class=active' : '') }}} {{{ (Request::is('#') ? 'class=active' : '') }}}>
+                <a href="{{url('projets')}}">
+                  <i class="fa fa-folder-open-o"></i>
+                  <span>Partenaires</span>
+                </a>
+              </li>
+
+
+                @if(Auth::user()->role->nom == 'admin' )
+
+                <li {{{ (Request::is('parametre/*') ? 'class=active' : '') }}} {{{ (Request::is('parametre') ? 'class=active' : '') }}}>
+                <a href="{{url('parametre')}}">
+                  <i class="fa fa-gears"></i>
+                  <span>Paramètres</span></a>
+                </li>
+                @endif
       </ul>
     </section>
     <!-- /.sidebar -->

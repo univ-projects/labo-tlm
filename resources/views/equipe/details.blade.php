@@ -17,62 +17,7 @@
 @endsection
 
 @section('asidebar')
-	<li >
-          <a href="{{url('dashboard')}}">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-          </a>
-        </li>
 
-         <li class="active">
-          <a href="{{url('equipes')}}">
-            <i class="fa fa-group"></i> 
-            <span>Equipes</span>
-          </a>
-        </li>
-        
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i> <span>Membres</span>
-            <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{url('trombinoscope')}}"><i class="fa fa-id-badge"></i> Trombinoscope</a></li>
-            <li><a href="{{url('membres')}}"><i class="fa fa-list"></i> Liste</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <a href="{{url('theses')}}">
-            <i class="fa fa-file-pdf-o"></i> 
-            <span>Thèses</span>
-          </a>
-        </li>
-
-
-        <li>
-          <a href="{{url('articles')}}">
-            <i class="fa fa-newspaper-o"></i> 
-            <span>Articles</span></a>
-        </li>
-
-       
-        <li>
-          <a href="{{url('projets')}}">
-            <i class="fa fa-folder-open-o"></i> 
-            <span>Projets</span>
-          </a>
-        </li>
-        
-          @if(Auth::user()->role->nom == 'admin' )
-
-          <li>
-          <a href="{{url('parametre')}}">
-            <i class="fa fa-gears"></i> 
-            <span>Paramètres</span></a>
-          </li>
-          @endif
 @endsection
 
 @section('content')
@@ -95,7 +40,7 @@
           <!-- The time line -->
           <ul class="timeline" style="padding-top: 30px;">
             <!-- timeline time label -->
-            
+
             <!-- /.timeline-label -->
             <!-- timeline item -->
             <li>
@@ -106,7 +51,7 @@
                 <h3 class="timeline-header"><a >Intitulé</a></h3>
 
                 <div class="timeline-body">
-                  {{$equipe->intitule}} 
+                  {{$equipe->intitule}}
                 </div>
               </div>
             </li>
@@ -116,7 +61,7 @@
               <i class="fa fa-user bg-aqua"></i>
 
               <div class="timeline-item">
-               
+
 
                 <h3 class="timeline-header no-border"><a>Chef de l'équipe </a></h3>
                 <div class="timeline-body">
@@ -150,7 +95,7 @@
                 </div>
               </div>
             </li>
-           
+
             <li>
               <i class="fa fa-clock-o bg-gray"></i>
             </li>
@@ -165,7 +110,7 @@
               <fieldset>
 
                       <div class="form-group ">
-                        <label class="col-md-3 control-label">Intitulé</label>  
+                        <label class="col-md-3 control-label">Intitulé</label>
                         <div class="col-md-9 inputGroupContainer">
                           <div class="input-group" style="width: 70%">
                             <input  name="intitule" class="form-control" value="{{$equipe->intitule}}" type="text">
@@ -174,7 +119,7 @@
                       </div>
 
                       <div class="form-group ">
-                        <label class="col-md-3 control-label">Achronyme</label>  
+                        <label class="col-md-3 control-label">Achronyme</label>
                         <div class="col-md-9 inputGroupContainer">
                           <div class="input-group" style="width: 70%">
                             <input  name="achronymes" class="form-control" value="{{$equipe->achronymes}}" type="text">
@@ -183,7 +128,7 @@
                       </div>
 
                       <div class="form-group ">
-                        <label class="col-xs-3 control-label">Chef de l'équipe</label>  
+                        <label class="col-xs-3 control-label">Chef de l'équipe</label>
                         <div class="col-xs-9 inputGroupContainer">
                           <div class="input-group" style="width: 70%">
 
@@ -214,13 +159,13 @@
                         </div>
                       </div>
                   </div>
- 
+
 
               </fieldset>
 
               <div style="padding-top: 30px; margin-left: 35%;">
               <a href="{{url('equipes/'.$equipe->id.'/details')}}" class=" btn btn-lg btn-default"><i class="fa  fa-mail-reply"></i> &nbsp;Annuler</a>
-               <button type="submit" class=" btn btn-lg btn-primary"><i class="fa fa-check"></i> Modifier</button> 
+               <button type="submit" class=" btn btn-lg btn-primary"><i class="fa fa-check"></i> Modifier</button>
               </div>
             </form>
       </div>
@@ -254,7 +199,7 @@
             </div>
 
             <!-- timeLine start -->
-    
+
 
     </div>
 @endsection

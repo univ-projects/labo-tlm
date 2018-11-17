@@ -18,71 +18,14 @@
 
 @section('asidebar')
 
-        <li >
-          <a href="{{url('dashboard')}}">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="{{url('equipes')}}">
-            <i class="fa fa-group"></i> 
-            <span>Equipes</span>
-          </a>
-        </li>
-        
-        <li class="treeview active">
-          <a href="#">
-            <i class="fa fa-user"></i> <span>Membres</span>
-            <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{url('trombinoscope')}}"><i class="fa fa-id-badge"></i> Trombinoscope</a></li>
-            <li><a href="{{url('membres')}}"><i class="fa fa-list"></i> Liste</a></li>
-          </ul>
-        </li>
-
-         <li>
-          <a href="{{url('theses')}}">
-            <i class="fa fa-file-pdf-o"></i> 
-            <span>Thèses</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="{{url('articles')}}">
-            <i class="fa fa-newspaper-o"></i> 
-            <span>Articles</span></a>
-          </li>
-
-        
-        <li>
-          <a href="{{url('projets')}}">
-            <i class="fa fa-folder-open-o"></i> 
-            <span>Projets</span>
-          </a>
-        </li>
-        
-       
-        
-          @if(Auth::user()->role->nom == 'admin' )
-
-          <li>
-          <a href="{{url('parametre')}}">
-            <i class="fa fa-gears"></i> 
-            <span>Paramètres</span></a>
-          </li>
-          @endif
-     @endsection
+@endsection
 
 @section('content')
 
     <div class="row">
       <div class="col-xs-12">
         <div class="box">
-            
+
           <div class="container col-xs-12">
 
             <form class="well form-horizontal" method="POST" action="{{url('membres')}}" id="contact_form" enctype="multipart/form-data">
@@ -96,7 +39,7 @@
                     <div class="col-md-5">
 
                       <div class="form-group ">
-                        <label class="col-md-3 control-label">Nom *</label>  
+                        <label class="col-md-3 control-label">Nom *</label>
                         <div class="col-md-9 inputGroupContainer @if($errors->get('name')) has-error @endif">
                           <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -116,7 +59,7 @@
                        <!-- Text input-->
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label">Prénom *</label>  
+                        <label class="col-md-3 control-label">Prénom *</label>
                         <div class="col-md-9 inputGroupContainer @if($errors->get('prenom')) has-error @endif">
                           <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -133,7 +76,7 @@
                       </div>
 
 
-                       <div class="form-group"> 
+                       <div class="form-group">
                           <label class="col-md-3 control-label">Grade *</label>
                             <div class="col-md-9 selectContainer @if($errors->get('grade')) has-error @endif">
                               <div class="input-group">
@@ -159,7 +102,7 @@
                             </div>
                       </div>
 
-                      <div class="form-group"> 
+                      <div class="form-group">
                           <label class="col-md-3 control-label">Equipe *</label>
                             <div class="col-md-9 selectContainer @if($errors->get('equipe')) has-error @endif">
                               <div class="input-group">
@@ -185,7 +128,7 @@
                       </div>
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label">E-Mail *</label>  
+                        <label class="col-md-3 control-label">E-Mail *</label>
                           <div class="col-md-9 inputGroupContainer @if($errors->get('email')) has-error @endif">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
@@ -202,7 +145,7 @@
                       </div>
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label">Password *</label>  
+                        <label class="col-md-3 control-label">Password *</label>
                           <div class="col-md-9 inputGroupContainer @if($errors->get('password')) has-error @endif">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa  fa-lock"></i></span>
@@ -220,12 +163,12 @@
 
                     </div>
 
-                    
+
                 <div class="col-md-7">
                     <div class="row">
                       <div class="col-md-9">
                       <div class="form-group">
-                            <label class="col-md-4 control-label">Date De Naissance</label>  
+                            <label class="col-md-4 control-label">Date De Naissance</label>
                             <div class="col-md-8 inputGroupContainer input-group Date">
                               <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
@@ -238,8 +181,8 @@
                       <div class="form-group">
                             <label class="col-md-4 control-label" title="publique?">
                               <input name="autorisation_public_date_naiss" type="checkbox" class="flat-red" value="0" >
-                            </label>  
-                            <label class="control-label">publique ?</label> 
+                            </label>
+                            <label class="control-label">publique ?</label>
                            </div>
                          </div>
                     </div>
@@ -247,7 +190,7 @@
                     <div class="row">
                       <div class="col-md-9">
                       <div class="form-group">
-                              <label class="col-md-4 control-label">N° Téléphone</label>  
+                              <label class="col-md-4 control-label">N° Téléphone</label>
                                 <div class="col-md-8 input-group">
                                 <div class="input-group-addon">
                                   <i class="fa fa-phone"></i>
@@ -260,8 +203,8 @@
                       <div class="form-group">
                             <label class="col-md-4 control-label" title="publique?">
                               <input name="autorisation_public_num_tel" type="checkbox" class="flat-red" value="0">
-                            </label>  
-                            <label class="control-label">publique ?</label> 
+                            </label>
+                            <label class="control-label">publique ?</label>
                            </div>
                       </div>
                     </div>
@@ -269,7 +212,7 @@
                     <div class="row">
                       <div class="col-md-9">
                       <div class="form-group">
-                              <label class="col-md-4 control-label">Linkedin</label>  
+                              <label class="col-md-4 control-label">Linkedin</label>
                                 <div class="col-md-8 inputGroupContainer">
                                 <div class="input-group">
                                 <span class="input-group-addon"><i class="fa  fa-linkedin-square"></i></span>
@@ -282,8 +225,8 @@
                       <div class="form-group">
                             <label class="col-md-4 control-label" title="publique?">
                               <input name="autorisation_public_linkedin" type="checkbox" class="flat-red" value="1">
-                            </label>  
-                            <label class="control-label">publique ?</label> 
+                            </label>
+                            <label class="control-label">publique ?</label>
                            </div>
                          </div> -->
                     </div>
@@ -291,7 +234,7 @@
                     <div class="row">
                       <div class="col-md-9">
                       <div class="form-group">
-                              <label class="col-md-4 control-label">ResearshGate</label>  
+                              <label class="col-md-4 control-label">ResearshGate</label>
                                 <div class="col-md-8 inputGroupContainer">
                                 <div class="input-group">
                                 <span class="input-group-addon"></span>
@@ -304,8 +247,8 @@
                       <div class="form-group">
                             <label class="col-md-4 control-label" title="publique?">
                               <input name="autorisation_public_rg" type="checkbox" class="flat-red" value="1">
-                            </label>  
-                            <label class="control-label">publique ?</label> 
+                            </label>
+                            <label class="control-label">publique ?</label>
                            </div>
                          </div> -->
                     </div>
@@ -313,7 +256,7 @@
                     <div class="row">
                          <div class="col-md-9">
                            <div class="form-group">
-                              <label class="col-md-4 control-label">Photo</label>  
+                              <label class="col-md-4 control-label">Photo</label>
                               <div class="col-md-8 inputGroupContainer">
                               <input name="img" type="file" >
                              </div>
@@ -324,8 +267,8 @@
                            <div class="form-group">
                             <label class="col-md-4 control-label">
                               <input name="autorisation_public_photo" type="checkbox" class="flat-red" value="0">
-                            </label>  
-                            <label class="control-label">publique ?</label> 
+                            </label>
+                            <label class="control-label">publique ?</label>
                            </div>
                          </div>
                        </div>
@@ -335,7 +278,7 @@
 
               <div style="padding-top: 30px; margin-left: 35%;">
               <a href="{{url('membres')}}" class=" btn btn-lg btn-default"><i class="fa  fa-mail-reply"></i> &nbsp;Annuler</a>
-               <button type="submit" class=" btn btn-lg btn-primary"><i class="fa fa-check"></i> Valider</button> 
+               <button type="submit" class=" btn btn-lg btn-primary"><i class="fa fa-check"></i> Valider</button>
                   </div>
             </form>
           </div>
@@ -344,5 +287,3 @@
       </div>
 
   @endsection
-
-  

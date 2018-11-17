@@ -12,63 +12,9 @@
 @endsection
 
 @section('asidebar')
-  <li class="active" >
-          <a href="{{url('dashboard')}}">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-          </a>
-        </li>
 
-        <li>
-          <a href="{{url('equipes')}}">
-            <i class="fa fa-group"></i> 
-            <span>Equipes</span>
-          </a>
-        </li>
-        
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i> <span>Membres</span>
-            <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{url('trombinoscope')}}"><i class="fa fa-id-badge"></i> Trombinoscope</a></li>
-            <li><a href="{{url('membres')}}"><i class="fa fa-list"></i> Liste</a></li>
-          </ul>
-        </li>
-
-          <li>
-          <a href="{{url('theses')}}">
-            <i class="fa fa-file-pdf-o"></i> 
-            <span>Thèses</span>
-          </a>
-        </li>
-  
-        <li>
-          <a href="{{url('articles')}}">
-            <i class="fa fa-newspaper-o"></i> 
-            <span>Articles</span></a>
-          </li>
-        
-        <li >
-          <a href="{{url('projets')}}">
-            <i class="fa fa-folder-open-o"></i> 
-            <span>Projets</span>
-          </a>
-        </li>
-        
-      
-          @if(Auth::user()->role->nom == 'admin' )
-
-          <li>
-          <a href="{{url('parametre')}}">
-            <i class="fa fa-gears"></i> 
-            <span>Paramètre</span></a>
-          </li>
-          @endif
-          
 @endsection
+
 @section('content')
  <div class="row">
       <div class="col-xs-12">
@@ -82,7 +28,7 @@
           </div>
             <!-- /.box-header -->
         <div class="box-body">
-              
+
           @if(count($equipes) > 0)
             @if(isset($equipes))
               <h3>Equipes:</h3><br>
@@ -103,16 +49,16 @@
                     <td><a href="{{url('membres/'.$equipe->chef_id.'/details')}}">{{$equipe->chef->name}} {{$equipe->chef->prenom}}</a></td>
                     <td>
                       <div class="btn-group">
-                       
+
                             <a href="{{ url('equipes/'.$equipe->id.'/details')}}" class="btn btn-info">
                               <i class="fa fa-eye"></i>
                             </a>
-                         
+
                       </div>
                     </td>
                   </tr>
                   @endforeach
-                   
+
                 </tbody>
                 <tfoot>
                 <tr>
@@ -120,7 +66,7 @@
                   <th>inttitulé</th>
                   <th>Chef</th>
                   <th>Action</th>
-                  
+
                 </tr>
                 </tfoot>
               </table>
@@ -150,7 +96,7 @@
                     <td>{{$membre->grade}}</td>
                     <td>
                       <div class="btn-group">
-                        
+
                         <form action="{{ url('membres/'.$membre->id)}}" method="post">
                             {{csrf_field()}}
                             {{method_field('DELETE')}}
@@ -179,7 +125,7 @@
                                           </button>
                                       </div>
                                       <div class="modal-body text-center">
-                                          Voulez-vous vraiment effectuer la suppression ? 
+                                          Voulez-vous vraiment effectuer la suppression ?
                                       </div>
                                       <div class="modal-footer">
                                           <form class="form-inline" action="{{ url('membres/'.$membre->id)}}"  method="POST">
@@ -199,7 +145,7 @@
                     </td>
                   </tr>
                   @endforeach
-                   
+
                 </tbody>
                 <tfoot>
                 <tr>
@@ -208,7 +154,7 @@
                   <th>Email</th>
                   <th>Grade</th>
                   <th>Action</th>
-                  
+
                 </tr>
                 </tfoot>
               </table>
@@ -240,8 +186,8 @@
                     <td>{{$these->coencadreur_int}}{{$these->coencadreur_ext}}</td>
                     <td>{{$these->date_soutenance}}</td>
                     <td>
-                      
-                      <form action="{{ url('theses/'.$these->id)}}" method="post"> 
+
+                      <form action="{{ url('theses/'.$these->id)}}" method="post">
 
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
@@ -269,7 +215,7 @@
                                       </button>
                                   </div>
                                   <div class="modal-body text-center">
-                                      Voulez-vous vraiment effectuer la suppression ? 
+                                      Voulez-vous vraiment effectuer la suppression ?
                                   </div>
                                   <div class="modal-footer">
                                       <form class="form-inline" action="{{ url('theses/'.$these->id)}}"  method="POST">
@@ -325,7 +271,7 @@
                     <td>
                       <div class="btn-group">
                         <form action="{{ url('articles/'.$article->id)}}" method="post">
-                          
+
                           {{csrf_field()}}
                           {{method_field('DELETE')}}
 
@@ -353,7 +299,7 @@
                                       </button>
                                   </div>
                                   <div class="modal-body text-center">
-                                      Voulez-vous vraiment effectuer la suppression ? 
+                                      Voulez-vous vraiment effectuer la suppression ?
                                   </div>
                                   <div class="modal-footer">
                                       <form class="form-inline" action="{{ url('articles/'.$article->id)}}"  method="POST">
@@ -373,13 +319,13 @@
                     </td>
                   </tr>
                   @endforeach
-                  
+
                  </tbody>
                 <tfoot>
                 <tr>
                   <th>Titre</th>
                   <th>Type</th>
-                  
+
                   <th>Année</th>
                   <th>Actions</th>
                 </tr>
@@ -411,7 +357,7 @@
                     <td>{{ $projet->partenaires }}</td>
                     <td><a href="{{url('membres/'.$projet->chef_id.'/details')}}">{{ $projet->chef->name}} {{ $projet->chef->prenom}}</a></td>
                     <td>
-                      @foreach ($projet->users as $user) 
+                      @foreach ($projet->users as $user)
                       <ul>
                           <li><a href="{{url('membres/'.$user->id.'/details')}}">{{ $user->name }} {{ $user->prenom }}</a></li>
                       </ul>
@@ -421,7 +367,7 @@
                     <td>
 
 
-                      <form action="{{ url('projets/'.$projet->id)}}" method="post"> 
+                      <form action="{{ url('projets/'.$projet->id)}}" method="post">
 
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
@@ -448,7 +394,7 @@
                                       </button>
                                   </div>
                                   <div class="modal-body text-center">
-                                      Voulez-vous vraiment effectuer la suppression ? 
+                                      Voulez-vous vraiment effectuer la suppression ?
                                   </div>
                                   <div class="modal-footer">
                                       <form class="form-inline" action="{{ url('projets/'.$projet->id)}}"  method="POST">
@@ -470,7 +416,7 @@
                   </tr>
                   @endforeach
 
-                  
+
 
 
                 </tbody>
@@ -494,7 +440,7 @@
             @if((count($equipes) == 0)&&(count($membres) == 0) && (count($theses) == 0) && (count($articles)== 0) && (count($projets) == 0))
               <p style="margin-left: 100px; margin-bottom: 50px">Aucune information trouvée</p>
             @endif
-          </div>        
-      </div>     
+          </div>
+      </div>
     </div>
 @endsection

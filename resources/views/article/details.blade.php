@@ -15,60 +15,7 @@
 @endsection
 
 @section('asidebar')
-      <li >
-          <a href="{{url('dashboard')}}">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="{{url('equipes')}}">
-            <i class="fa fa-group"></i> 
-            <span>Equipes</span>
-          </a>
-        </li>
-        
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i> <span>Membres</span>
-            <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li ><a href="{{url('trombinoscope')}}"><i class="fa fa-id-badge"></i> Trombinoscope</a></li>
-            <li class="active"><a href="{{url('membres')}}"><i class="fa fa-list"></i> Liste</a></li>
-          </ul>
-        </li>
-
-         <li>
-          <a href="{{url('theses')}}">
-            <i class="fa fa-file-pdf-o"></i> 
-            <span>Thèses</span>
-          </a>
-        </li>
-      
-         <li class="active">
-          <a href="{{url('articles')}}">
-            <i class="fa fa-newspaper-o"></i> 
-            <span>Articles</span></a>
-          </li>
-
-           <li>
-          <a href="{{url('projets')}}">
-            <i class="fa fa-folder-open-o"></i> 
-            <span>Projets</span>
-          </a>
-        </li>
-        
-          @if(Auth::user()->role->nom == 'admin' )
-
-          <li>
-          <a href="{{url('parametre')}}">
-            <i class="fa fa-gears"></i> 
-            <span>Paramètres</span></a>
-          </li>
-          @endif
+    
 @endsection
 
 @section('content')
@@ -135,14 +82,14 @@
                   </div>
                 </div>
                 @endif
-          
+
                   <strong><i class="margin-r-5"></i></strong>
                   <hr>
 
                 <div class="row">
 
                   <div class="col-md-3">
-                  <strong><i class="margin-r-5"></i>Nom de la conférence</strong>                
+                  <strong><i class="margin-r-5"></i>Nom de la conférence</strong>
                  </div>
                   <div class="col-md-9">
                     <p class="text-muted">
@@ -154,7 +101,7 @@
                 <div class="row" style="margin-top: 10px">
 
                   <div class="col-md-3">
-                  <strong>Nom du journal</strong>                
+                  <strong>Nom du journal</strong>
                  </div>
                   <div class="col-md-9">
                     <p class="text-muted">
@@ -165,7 +112,7 @@
 
                 <div class="row" style="margin-top: 10px">
                   <div class="col-md-3">
-                  <strong>ISSN</strong>                
+                  <strong>ISSN</strong>
                  </div>
                   <div class="col-md-9">
                     <p class="text-muted">
@@ -176,7 +123,7 @@
 
                 <div class="row" style="margin-top: 10px">
                   <div class="col-md-3">
-                  <strong>ISBN</strong>                
+                  <strong>ISBN</strong>
                  </div>
                   <div class="col-md-9">
                     <p class="text-muted">
@@ -204,7 +151,7 @@
 
                 <div class="row">
                 <div class="col-md-3">
-                  <strong><i class="fa fa-calendar margin-r-5"></i>Date</strong>                
+                  <strong><i class="fa fa-calendar margin-r-5"></i>Date</strong>
                  </div>
                   <div class="col-md-9">
                     <p class="text-muted">
@@ -218,28 +165,28 @@
 
                 <div class="row">
                 <div class="col-md-3">
-                  <strong><i class="fa  fa-link  margin-r-5"></i>DOI</strong>                
+                  <strong><i class="fa  fa-link  margin-r-5"></i>DOI</strong>
                  </div>
                   <div class="col-md-9">
                     <a href="#">{{ $article->doi }}</a>
-                  </div> 
-                  </div>   
-                  
+                  </div>
+                  </div>
+
                   @if($article->detail)
                   <div class="row" style="margin-top: 10px">
                     <div class="col-md-3">
-                      <strong><i class="fa  fa-link  margin-r-5"></i>Détails</strong>                
+                      <strong><i class="fa  fa-link  margin-r-5"></i>Détails</strong>
                     </div>
                     <div class="col-md-9">
                         <a  href="{{asset( $article->detail)}}">Lien fichier</a>
-                    </div> 
-                  </div> 
+                    </div>
+                  </div>
                   @endif
-              
+
             </div>
             <!-- /.box-body -->
           </div>
-          
+
          </div><!-- /.container -->
        </div>
       </div>

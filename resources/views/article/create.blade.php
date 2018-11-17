@@ -18,68 +18,14 @@
 
 @section('asidebar')
 
-        <li >
-          <a href="{{url('dashboard')}}">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="{{url('equipes')}}">
-            <i class="fa fa-group"></i> 
-            <span>Equipes</span>
-          </a>
-        </li>
-        
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i> <span>Membres</span>
-            <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li ><a href="{{url('trombinoscope')}}"><i class="fa fa-id-badge"></i> Trombinoscope</a></li>
-            <li class="active"><a href="{{url('membres')}}"><i class="fa fa-list"></i> Liste</a></li>
-          </ul>
-        </li>
-
-         <li>
-          <a href="{{url('theses')}}">
-            <i class="fa fa-file-pdf-o"></i> 
-            <span>Thèses</span>
-          </a>
-        </li>
-      
-         <li class="active">
-          <a href="{{url('articles')}}">
-            <i class="fa fa-newspaper-o"></i> 
-            <span>Articles</span></a>
-          </li>
-
-           <li>
-          <a href="{{url('projets')}}">
-            <i class="fa fa-folder-open-o"></i> 
-            <span>Projets</span>
-          </a>
-        </li>
-        
-          @if(Auth::user()->role->nom == 'admin' )
-
-          <li>
-          <a href="{{url('parametre')}}">
-            <i class="fa fa-gears"></i> 
-            <span>Paramètres</span></a>
-          </li>
-          @endif
   @endsection
 
 @section('content')
-    
+
     <div class="row">
       <div class="col-xs-12">
         <div class="box">
-            
+
           <div class="container col-xs-12">
 
             <form class="well form-horizontal" action="{{ url('articles') }}" method="post"  id="contact_form" enctype="multipart/form-data">
@@ -90,7 +36,7 @@
                 <legend><center><h2><b>Nouvel article</b></h2></center></legend><br>
 
                   <div class="form-group ">
-                        <label class="col-xs-3 control-label">Titre (*)</label>  
+                        <label class="col-xs-3 control-label">Titre (*)</label>
                         <div class="col-xs-9 inputGroupContainer  @if($errors->get('titre')) has-error @endif">
                           <div style="width: 70%">
                             <input  name="titre" class="form-control" placeholder="Titre" type="text" value="{{old('titre')}}">
@@ -104,7 +50,7 @@
 
                           </div>
                         </div>
-                  </div>  
+                  </div>
 
                   <div class="form-group">
                       <label class="col-md-3 control-label">Résumé (*)</label>
@@ -123,7 +69,7 @@
                   </div>
 
                   <div class="form-group ">
-                        <label class="col-xs-3 control-label">Type (*)</label>  
+                        <label class="col-xs-3 control-label">Type (*)</label>
                         <div class="col-xs-9 inputGroupContainer @if($errors->get('type')) has-error @endif">
                           <div style="width: 70%">
                             <select name="type" class="form-control select">
@@ -148,11 +94,11 @@
                   </div>
 
                  <div class="form-group ">
-                        <label class="col-xs-3 control-label">Membres internes (*)</label>  
+                        <label class="col-xs-3 control-label">Membres internes (*)</label>
                         <div class="col-xs-9 inputGroupContainer @if($errors->get('membre[]')) has-error @endif">
                           <div style="width: 70%">
                             <select name="membre[]" class="form-control select2" multiple="multiple">
-                              
+
                                @foreach($membres as $membre)
                               <option value="{{$membre->id}}">
                                 {{$membre->name}} {{$membre->prenom}}
@@ -168,20 +114,20 @@
                             </span>
                           </div>
                         </div>
-                  </div> 
+                  </div>
 
                   <div class="form-group ">
-                        <label class="col-xs-3 control-label">Membres externes</label>  
+                        <label class="col-xs-3 control-label">Membres externes</label>
                         <div class="col-xs-9 inputGroupContainer">
                           <div style="width: 70%">
                             <input  name="membres_ext" class="form-control" placeholder="Saisir les noms des membres externes separés par ','" type="text" value="{{old('membres_ext')}}">
                           </div>
                         </div>
-                  </div>  
- 
+                  </div>
+
 
                   <div class="form-group ">
-                        <label class="col-xs-3 control-label">Ville (*)</label>  
+                        <label class="col-xs-3 control-label">Ville (*)</label>
                         <div class="col-xs-9 inputGroupContainer @if($errors->get('ville')) has-error @endif">
                           <div style="width: 70%">
                             <input  name="ville" class="form-control" placeholder="Lieu " type="text" value="{{old('ville')}}">
@@ -194,10 +140,10 @@
                             </span>
                           </div>
                         </div>
-                  </div> 
+                  </div>
 
                   <div class="form-group ">
-                        <label class="col-xs-3 control-label">Pays (*)</label>  
+                        <label class="col-xs-3 control-label">Pays (*)</label>
                         <div class="col-xs-9 inputGroupContainer @if($errors->get('pays')) has-error @endif">
                           <div style="width: 70%">
                             <input  name="pays" class="form-control" placeholder="Lieu" type="text" value="{{old('pays')}}">
@@ -210,46 +156,46 @@
                             </span>
                           </div>
                         </div>
-                  </div> 
+                  </div>
 
                   <div class="form-group ">
-                        <label class="col-xs-3 control-label">Nom de la conférence</label>  
+                        <label class="col-xs-3 control-label">Nom de la conférence</label>
                         <div class="col-xs-9 inputGroupContainer">
                           <div style="width: 70%">
                             <input  name="conference" class="form-control" type="text" value="{{old('conference')}}">
                           </div>
                         </div>
-                  </div> 
+                  </div>
 
                   <div class="form-group ">
-                        <label class="col-xs-3 control-label">Nom du journal</label>  
+                        <label class="col-xs-3 control-label">Nom du journal</label>
                         <div class="col-xs-9 inputGroupContainer">
                           <div style="width: 70%">
                             <input  name="journal" class="form-control" type="text" value="{{old('journal')}}">
                           </div>
                         </div>
-                  </div> 
+                  </div>
 
                   <div class="form-group ">
-                        <label class="col-xs-3 control-label">ISSN</label>  
+                        <label class="col-xs-3 control-label">ISSN</label>
                         <div class="col-xs-9 inputGroupContainer">
                           <div style="width: 70%">
                             <input  name="issn" class="form-control" type="numbers" value="{{old('issn')}}">
                           </div>
                         </div>
-                  </div> 
+                  </div>
 
                   <div class="form-group ">
-                        <label class="col-xs-3 control-label">ISBN</label>  
+                        <label class="col-xs-3 control-label">ISBN</label>
                         <div class="col-xs-9 inputGroupContainer">
                           <div style="width: 70%">
                             <input  name="isbn" class="form-control" type="numbers" value="{{old('isbn')}}">
                           </div>
                         </div>
-                  </div> 
+                  </div>
 
                   <div class="form-group ">
-                        <label class="col-xs-3 control-label">Mois (*)</label>  
+                        <label class="col-xs-3 control-label">Mois (*)</label>
                         <div class="col-xs-9 inputGroupContainer @if($errors->get('mois')) has-error @endif">
                           <div style="width: 70%">
                             <input type="text" name="mois" class="form-control pull-right" value="{{old('mois')}}">
@@ -266,7 +212,7 @@
 
 
                    <div class="form-group ">
-                        <label class="col-xs-3 control-label">Année (*)</label>  
+                        <label class="col-xs-3 control-label">Année (*)</label>
                         <div class="col-xs-9 inputGroupContainer @if($errors->get('annee')) has-error @endif">
                           <div style="width: 70%">
                             <input type="text" name="annee" class="form-control pull-right" value="{{old('annee')}}">
@@ -282,13 +228,13 @@
                   </div>
 
                   <div class="form-group ">
-                        <label class="col-xs-3 control-label">DOI</label>  
+                        <label class="col-xs-3 control-label">DOI</label>
                         <div class="col-xs-9 inputGroupContainer">
                           <div style="width: 70%">
                             <input  name="doi" class="form-control" placeholder="URL" type="text" value="{{old('doi')}}">
                           </div>
                         </div>
-                  </div> 
+                  </div>
 
                   <div class="form-group">
                       <label class="col-md-3 control-label">Détails</label>
@@ -298,13 +244,13 @@
                         </div>
                       </div>
                   </div>
-                  
+
 
               </fieldset>
 
               <div class="row" style="padding-top: 30px; margin-left: 35%;">
               <a href="{{url('articles')}}" class=" btn btn-lg btn-default"><i class="fa  fa-mail-reply"></i> &nbsp;Annuler</a>
-               <button type="submit" class=" btn btn-lg btn-primary"><i class="fa fa-check"></i> Valider</button> 
+               <button type="submit" class=" btn btn-lg btn-primary"><i class="fa fa-check"></i> Valider</button>
                   </div>
             </form>
           </div>
@@ -312,4 +258,3 @@
        </div>
       </div>
  @endsection
- 

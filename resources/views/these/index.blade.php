@@ -15,67 +15,11 @@
 @endsection
 
 @section('asidebar')
-        <li >
-          <a href="{{url('dashboard')}}">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-          </a>
-        </li>
 
-         <li>
-          <a href="{{url('equipes')}}">
-            <i class="fa fa-group"></i> 
-            <span>Equipes</span>
-          </a>
-        </li>
-        
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i> <span>Membres</span>
-            <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{url('trombinoscope')}}"><i class="fa fa-id-badge"></i> Trombinoscope</a></li>
-            <li><a href="{{url('membres')}}"><i class="fa fa-list"></i> Liste</a></li>
-          </ul>
-        </li>
-         <li class="active">
-          <a href="{{url('theses')}}">
-            <i class="fa fa-file-pdf-o"></i> 
-            <span>Thèses</span>
-          </a>
-        </li>
-       
-
-        <li>
-          <a href="{{url('articles')}}">
-            <i class="fa fa-newspaper-o"></i> 
-            <span>Articles</span></a>
-          </li>
-          
-        <li>
-          <a href="{{url('projets')}}">
-            <i class="fa fa-folder-open-o"></i> 
-            <span>Projets</span>
-          </a>
-        </li>
-        
-       
-
-          @if(Auth::user()->role->nom == 'admin' )
-
-          <li>
-          <a href="{{url('parametre')}}">
-            <i class="fa fa-gears"></i> 
-            <span>Paramètres</span></a>
-          </li>
-          @endif
-
-    @endsection
+@endsection
 
 @section('content')
-      
+
     <div class="row">
       <div class="col-md-12">
         <div class="box col-xs-12">
@@ -84,10 +28,10 @@
              <div class="box-header col-xs-9">
               <h3 class="box-title">Liste des thèses</h3>
             </div>
-            
+
           </div>
           </div>
-            
+
             <!-- /.box-header -->
             <div class="box-body">
               @if(Auth::user()->role->nom == 'admin' )
@@ -117,8 +61,8 @@
                     <td>{{$these->coencadreur_int}}{{$these->coencadreur_ext}}</td>
                     <td>{{$these->date_soutenance}}</td>
                     <td>
-                      
-                      <form action="{{ url('theses/'.$these->id)}}" method="post"> 
+
+                      <form action="{{ url('theses/'.$these->id)}}" method="post">
 
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
@@ -146,7 +90,7 @@
                                       </button>
                                   </div>
                                   <div class="modal-body text-center">
-                                      Voulez-vous vraiment effectuer la suppression ? 
+                                      Voulez-vous vraiment effectuer la suppression ?
                                   </div>
                                   <div class="modal-footer">
                                       <form class="form-inline" action="{{ url('theses/'.$these->id)}}"  method="POST">
@@ -181,9 +125,9 @@
             </div>
             <!-- /.box-body -->
           </div>
-        
+
       </div>
-      
+
     </div>
-    
+
  @endsection
