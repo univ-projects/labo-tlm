@@ -53,10 +53,17 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Article');
     }
-    
+
     public function role()
     {
         //foreign key de role-id dans la table users
         return $this->belongsTo(Role::class);
     }
+
+    public function materiels()
+    {
+        return $this->hasMany('App\Materiel');
+    }
+
+
 }

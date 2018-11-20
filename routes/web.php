@@ -70,6 +70,17 @@ Route::get('projets/{id}/edit','ProjetController@edit');
 Route::put('projets/{id}','ProjetController@update');
 Route::delete('projets/{id}','ProjetController@destroy');
 
+
+Route::get('materiels','MaterielController@index');
+Route::get('materiels/create','MaterielController@create');
+Route::post('materiels','MaterielController@store');
+Route::get('materiels/{id}/details','MaterielController@details');
+Route::get('materiels/{id}/edit','MaterielController@edit');
+Route::put('materiels/{id}','MaterielController@update');
+Route::delete('materiels/{id}','MaterielController@destroy');
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -93,14 +104,14 @@ Route::get('/statistics',function(){
 	 $b6 = DB::table('theses')->where(DB::raw("DATE_FORMAT(STR_TO_DATE(date_debut,'%m/%d/%Y'),'%Y')"),$year-5)->count();
 	 $b7 = DB::table('theses')->where(DB::raw("DATE_FORMAT(STR_TO_DATE(date_debut,'%m/%d/%Y'),'%Y')"),$year-6)->count();
 
-	 //$date = new Carbon( $these->date_debut );  
+	 //$date = new Carbon( $these->date_debut );
 
 	 //$t1 = DB::table('theses')->distinct('id')->where(,$year)->count();
 
     $annee = [$year-6,$year-5,$year-4,$year-3,$year-2,$year-1,$year];
     $article = [$a7, $a6, $a5,$a4,$a3,$a2,$a1];
     $these = [$b7, $b6, $b5,$b4,$b3,$b2,$b1];
-  
+
 	return response()->json(["annee"=>$annee,
 							 "article"=> $article,
 							 "these"=> $these
@@ -109,7 +120,7 @@ Route::get('/statistics',function(){
 
 Route::any('/search',function(){
 
-	$labo = Parametre::find('1'); 
+	$labo = Parametre::find('1');
     $q = Input::get ( 'q' );
     $membres = User::where('name','LIKE','%'.$q.'%')->orWhere('prenom','LIKE','%'.$q.'%')->orWhere('email','LIKE','%'.$q.'%')->get();
     $theses = These::where('titre','LIKE','%'.$q.'%')->orWhere('sujet','LIKE','%'.$q.'%')->get();
@@ -125,7 +136,7 @@ Route::any('/search',function(){
             'projets' => $projets,
             'equipes' => $equipes,
             'labo'=>$labo,
-            
+
         ]);;
 
 });

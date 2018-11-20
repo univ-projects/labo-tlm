@@ -314,6 +314,7 @@ class ComposerStaticInitc4a3b668e15bc31216c179cbf4f6f57d
     );
 
     public static $classMap = array (
+        'App\\Actualite' => __DIR__ . '/../..' . '/app/Actualite.php',
         'App\\Article' => __DIR__ . '/../..' . '/app/Article.php',
         'App\\ArticleUser' => __DIR__ . '/../..' . '/app/ArticleUser.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
@@ -328,6 +329,7 @@ class ComposerStaticInitc4a3b668e15bc31216c179cbf4f6f57d
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\EquipeController' => __DIR__ . '/../..' . '/app/Http/Controllers/EquipeController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\ParametreController' => __DIR__ . '/../..' . '/app/Http/Controllers/ParametreController.php',
         'App\\Http\\Controllers\\ProjetController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProjetController.php',
         'App\\Http\\Controllers\\TheseController' => __DIR__ . '/../..' . '/app/Http/Controllers/TheseController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
@@ -344,7 +346,10 @@ class ComposerStaticInitc4a3b668e15bc31216c179cbf4f6f57d
         'App\\Http\\Requests\\equipeRequest' => __DIR__ . '/../..' . '/app/Http/Requests/equipeRequest.php',
         'App\\Http\\Requests\\projetRequest' => __DIR__ . '/../..' . '/app/Http/Requests/projetRequest.php',
         'App\\Http\\Requests\\theseRequest' => __DIR__ . '/../..' . '/app/Http/Requests/theseRequest.php',
+        'App\\Http\\Requests\\userEditRequest' => __DIR__ . '/../..' . '/app/Http/Requests/userEditRequest.php',
         'App\\Http\\Requests\\userRequest' => __DIR__ . '/../..' . '/app/Http/Requests/userRequest.php',
+        'App\\Materiel' => __DIR__ . '/../..' . '/app/Materiel.php',
+        'App\\Parametre' => __DIR__ . '/../..' . '/app/Parametre.php',
         'App\\Policies\\ArticlePolicy' => __DIR__ . '/../..' . '/app/Policies/ArticlePolicy.php',
         'App\\Policies\\ProjetPolicy' => __DIR__ . '/../..' . '/app/Policies/ProjetPolicy.php',
         'App\\Policies\\ThesePolicy' => __DIR__ . '/../..' . '/app/Policies/ThesePolicy.php',

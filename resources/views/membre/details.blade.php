@@ -16,7 +16,7 @@
 @endsection
 
 @section('asidebar')
-		   
+
  @endsection
 
 @section('content')
@@ -89,7 +89,7 @@
                   <strong><i class="fa fa-group  margin-r-5"></i>Equipe</strong>
                  </div>
                   <div class="col-md-9">
-                    <a href="#">{{$membre->equipe->intitule}}</a>
+                    <a href="{{url('equipes/'.$membre->equipe_id.'/details')}}">{{$membre->equipe->intitule}}</a>
                   </div>
                 </div>
                 @endif

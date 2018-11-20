@@ -121,7 +121,7 @@
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar" style="position: fixed;">
     <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar" style="padding-top: 50px;">
+    <section class="sidebar" style="padding-top: 10px;">
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
@@ -188,7 +188,7 @@
 
               <li {{{ (Request::is('articles/*') ? 'class=active' : '') }}} {{{ (Request::is('articles') ? 'class=active' : '') }}}>
                 <a href="{{url('articles')}}">
-                  <i class="fa fa-newspaper-o"></i>
+                  <i class="fa fa-file-text-o"></i>
                   <span>Articles</span></a>
                 </li>
 
@@ -199,16 +199,30 @@
                 </a>
               </li>
 
-              <li {{{ (Request::is('#/*') ? 'class=active' : '') }}} {{{ (Request::is('#') ? 'class=active' : '') }}}>
-                <a href="{{url('projets')}}">
-                  <i class="fa fa-folder-open-o"></i>
+              <li {{{ (Request::is('articles/*') ? 'class=active' : '') }}} {{{ (Request::is('articles') ? 'class=active' : '') }}}>
+                <a href="{{url('articles')}}">
+                  <i class="fa fa-newspaper-o"></i>
+                  <span>Actualités</span></a>
+                </li>
+
+                <li {{{ (Request::is('articles/*') ? 'class=active' : '') }}} {{{ (Request::is('articles') ? 'class=active' : '') }}}>
+                  <a href="{{url('articles')}}">
+                    <i class="fa fa-calendar"></i>
+                    <span>Evènements</span></a>
+                  </li>
+
+              @if(Auth::user()->role->nom == 'admin' )
+              <li {{{ (Request::is('materiels/*') ? 'class=active' : '') }}} {{{ (Request::is('materiels') ? 'class=active' : '') }}}>
+                <a href="{{url('materiels')}}">
+                  <i class="fa fa-flask"></i>
                   <span>Matériels</span>
                 </a>
               </li>
+              @endif
 
               <li {{{ (Request::is('#/*') ? 'class=active' : '') }}} {{{ (Request::is('#') ? 'class=active' : '') }}}>
                 <a href="{{url('projets')}}">
-                  <i class="fa fa-folder-open-o"></i>
+                  <i class="fa fa-handshake-o"></i>
                   <span>Partenaires</span>
                 </a>
               </li>
@@ -397,14 +411,40 @@
 </script>
 <script>
   $(function () {
-    $('#example1').DataTable()
+    $('#example1').DataTable({
+      "language": {
+         "lengthMenu": "afficher _MENU_ résultats",
+         "zeroRecords": "Aucun résultat trouvé",
+         "info": "affichage de la page _PAGE_ pour _PAGES_",
+         "infoEmpty": "Aucun résultat trouvé",
+         "infoFiltered": "Trier de _MAX_ résultats)",
+         "search":"Recherche:",
+         "paginate": {
+           "previous": "Précédent",
+           "next":"Suivant"
+       }
+     }
+    });
     $('#example2').DataTable({
       'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
+      'lengthChange': true,
+      'searching'   : true,
       'ordering'    : true,
       'info'        : true,
-      'autoWidth'   : false
+      'autoWidth'   : false,
+      "order": [ 2, 'asc' ],//    'order' => array('created'=>'DESC')
+      "language": {
+         "lengthMenu": "afficher _MENU_ résultats",
+         "zeroRecords": "Aucun résultat trouvé",
+         "info": "affichage de la page _PAGE_ pour _PAGES_",
+         "infoEmpty": "Aucun résultat trouvé",
+         "infoFiltered": "Trier de _MAX_ résultats)",
+         "search":"Recherche:",
+         "paginate": {
+           "previous": "Précédent",
+           "next":"Suivant"
+       }
+     }
     })
   })
 </script>
