@@ -112,14 +112,18 @@ class UserController extends Controller
         $roles = Role::all();
         $labo = Parametre::find('1');
 
+        if(Auth::user()->role->nom == 'admin' || Auth::user()->id===$membre->id ){
+          return view('membre.edit')->with([
+              'membre' => $membre,
+              'equipes' => $equipes,
+              'roles' => $roles,
+              'labo'=>$labo,
 
-        return view('membre.edit')->with([
-            'membre' => $membre,
-            'equipes' => $equipes,
-            'roles' => $roles,
-            'labo'=>$labo,
-
-        ]);;
+          ]);;
+        }
+        else{
+           return view('errors.403',['labo'=>$labo]);
+        }
 
     }
 

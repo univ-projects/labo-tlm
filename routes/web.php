@@ -79,6 +79,25 @@ Route::get('materiels/{id}/edit','MaterielController@edit');
 Route::put('materiels/{id}','MaterielController@update');
 Route::delete('materiels/{id}','MaterielController@destroy');
 
+Route::get('actualites','ActualiteController@index');
+Route::get('actualites/create','ActualiteController@create');
+Route::post('actualites','ActualiteController@store');
+Route::get('actualites/{id}/details','ActualiteController@details');
+Route::get('actualites/{id}/edit','ActualiteController@edit');
+Route::put('actualites/{id}','ActualiteController@update');
+Route::delete('actualites/{id}','ActualiteController@destroy');
+
+
+Route::get('evenements','EvenementController@index');
+Route::get('evenements/create','EvenementController@create');
+Route::post('evenements','EvenementController@store');
+Route::get('evenements/{id}/details','EvenementController@details');
+Route::get('evenements/{id}/edit','EvenementController@edit');
+Route::put('evenements/{id}','EvenementController@update');
+Route::delete('evenements/{id}','EvenementController@destroy');
+Route::get('evenements/{id}/participe','EvenementController@participe');
+Route::get('evenements/{id}/pasParticipe','EvenementController@pasParticipe');
+
 
 
 Auth::routes();

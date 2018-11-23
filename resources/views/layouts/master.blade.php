@@ -199,14 +199,14 @@
                 </a>
               </li>
 
-              <li {{{ (Request::is('articles/*') ? 'class=active' : '') }}} {{{ (Request::is('articles') ? 'class=active' : '') }}}>
-                <a href="{{url('articles')}}">
+              <li {{{ (Request::is('actualites/*') ? 'class=active' : '') }}} {{{ (Request::is('actualites') ? 'class=active' : '') }}}>
+                <a href="{{url('actualites')}}">
                   <i class="fa fa-newspaper-o"></i>
                   <span>Actualités</span></a>
                 </li>
 
-                <li {{{ (Request::is('articles/*') ? 'class=active' : '') }}} {{{ (Request::is('articles') ? 'class=active' : '') }}}>
-                  <a href="{{url('articles')}}">
+                <li {{{ (Request::is('evenements/*') ? 'class=active' : '') }}} {{{ (Request::is('evenements') ? 'class=active' : '') }}}>
+                  <a href="{{url('evenements')}}">
                     <i class="fa fa-calendar"></i>
                     <span>Evènements</span></a>
                   </li>
@@ -381,6 +381,44 @@
     $('#datepicker').datepicker({
       autoclose: true
     })
+    $('#event-date').daterangepicker({
+    timePicker: true,
+    timePicker24Hour: true,
+
+    locale: {
+      format: 'YYYY-MM-DD HH:mm',
+      "separator": " A ",
+       "applyLabel": "Confirmer",
+       "cancelLabel": "Annuler",
+       "fromLabel": "De",
+       "toLabel": "A",
+       "customRangeLabel": "Modifier",
+       "daysOfWeek": [
+           "Dim",
+           "Lun",
+           "Mar",
+           "Mer",
+           "Jeu",
+           "Ven",
+           "Sam"
+       ],
+       "monthNames": [
+           "Janvier",
+           "Février",
+           "Mars",
+           "Avril",
+           "Mai",
+           "Juin",
+           "Juillet",
+           "Août",
+           "Septembre",
+           "Octobre",
+           "Novembre",
+           "Décembre"
+       ],
+       "firstDay": 1
+    }
+  });
 
     //iCheck for checkbox and radio inputs
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
@@ -409,6 +447,7 @@
     })
   })
 </script>
+
 <script>
   $(function () {
     $('#example1').DataTable({
@@ -446,8 +485,31 @@
        }
      }
     })
+    $('#example3').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false,
+      "order": [ 2, 'desc' ],//    'order' => array('created'=>'DESC')
+      "language": {
+         "lengthMenu": "afficher _MENU_ résultats",
+         "zeroRecords": "Aucun résultat trouvé",
+         "info": "affichage de la page _PAGE_ pour _PAGES_",
+         "infoEmpty": "Aucun résultat trouvé",
+         "infoFiltered": "Trier de _MAX_ résultats)",
+         "search":"Recherche:",
+         "paginate": {
+           "previous": "Précédent",
+           "next":"Suivant"
+       }
+     }
+    })
   })
 </script>
+
+
 <script>
 
 

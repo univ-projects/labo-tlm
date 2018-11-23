@@ -49,13 +49,17 @@ class MaterielController extends Controller
       $labo = Parametre::find('1');
       $proprietaires = User::all();
 
+      if(Auth::user()->role->nom == 'admin' ){
+        return view('materiel.details')->with([
+            'materiel' => $materiel,
+            'proprietaires'=>$proprietaires,
+            'labo'=>$labo,
 
-      return view('materiel.details')->with([
-          'materiel' => $materiel,
-          'proprietaires'=>$proprietaires,
-          'labo'=>$labo,
-
-      ]);;
+        ]);;
+      }
+      else{
+        return view('errors.403',['labo'=>$labo]);
+      }
   }
 
   public function create()
@@ -105,13 +109,17 @@ class MaterielController extends Controller
       $proprietaires = User::all();
       $labo = Parametre::find('1');
 
+      if(Auth::user()->role->nom == 'admin' ){
+        return view('materiel.edit')->with([
+            'materiel' => $materiel,
+            'proprietaires' => $proprietaires,
+            'labo'=>$labo,
 
-      return view('materiel.edit')->with([
-          'materiel' => $materiel,
-          'proprietaires' => $proprietaires,
-          'labo'=>$labo,
-
-      ]);;
+        ]);;
+      }
+      else{
+        return view('errors.403',['labo'=>$labo]);
+      }
 
   }
 
