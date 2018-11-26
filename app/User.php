@@ -37,6 +37,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Equipe');
     }
+    public function parametre()
+    {
+        return $this->belongsTo('App\Parametre');
+    }
 
 
     public function projet()

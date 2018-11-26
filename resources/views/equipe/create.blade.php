@@ -5,7 +5,7 @@
 @section('header_page')
 
       <h1>
-        Thèses
+        Equipes
         <small>Nouvelle</small>
       </h1>
       <ol class="breadcrumb">

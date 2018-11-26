@@ -15,9 +15,14 @@ class Equipe extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function membres()
+		public function membres()
     {
     	return $this->hasMany('App\User');
     }
+
+		public function labo()
+		{
+			return $this->belongsTo('App\Parametre');
+		}
 
 }

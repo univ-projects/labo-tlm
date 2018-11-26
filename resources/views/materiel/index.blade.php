@@ -48,26 +48,23 @@
                 <thead>
                 <tr>
                   <th>Photo</th>
-                  <th>Numéro</th>
                   <th>Libéllé</th>
                   <th>Description</th>
-                  <th>Propriétaire</th>
+                  <th>Quantité</th>
                   <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                   @foreach($materiels as $materiel)
                   <tr>
-                    <td> <img src="{{$materiel->photo}}" alt="{{$materiel->photo}}" name="{{$materiel->libelle}}" width="250px" height="200px"> </td>
-                    <td>{{$materiel->numero}}</td>
+                    <td> <img src="{{$materiel->photo}}" alt="{{$materiel->photo}}" name="" width="250px" height="200px"> </td>
                     <td>{{$materiel->libelle}}</td>
                     <td style="width:250px">{{ str_limit($materiel->description, $limit = 60, $end = '...') }}</td>
 
-                    <td>
-                      @if($materiel->proprietaireUser)
-                        <a href="{{url('membres/'.$materiel->proprietaire.'/details')}}">{{$materiel->proprietaireUser->name}} {{$materiel->proprietaireUser->prenom}}</a>
-                      @endif
+                    <td style="text-align:center">
+                      {{$materiel->quantity}}
                     </td>
+
 
                     <td>
                       <div class="btn-group">
@@ -90,7 +87,7 @@
                             </button> -->
 
                              <a href="#supprimer{{ $materiel->id }}Modal" role="button" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                      <div class="modal fade" id="supprimer{{ $materiel->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $materiel->id }}ModalLabel" aria-hidden="true">
+                             <div class="modal fade" id="supprimer{{ $materiel->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $materiel->id }}ModalLabel" aria-hidden="true">
                           <div class="modal-dialog">
                               <div class="modal-content">
                                   <div class="modal-header">
@@ -115,6 +112,22 @@
                       </div>
 
                             @endif
+                            <style media="screen">
+
+                              #affect-btn{
+                                background:rgba(0,0,0,0);border-radius:10px;color:#428bca;border:1px solid #428bca
+                              }
+                              #affect-btn:hover{
+                                background: #428bca;
+                                color:#fff;
+                              }
+                            </style>
+
+
+                            <form action="{{url('materiels/'.$materiel->id.'/edit')}}">
+                                <input type="submit" value="+ Affecter" id="affect-btn"/>
+                            </form>
+
                         </form>
                     </div>
                     </td>
@@ -126,9 +139,9 @@
                 <tr>
                   <th>Photo</th>
                   <th>Libéllé</th>
-                  <th>description</th>
-                  <th>Numéro</th>
-                  <th>propriétaire</th>
+                  <th>Description</th>
+                  <th>Quantité</th>
+                  <th>Action</th>
                 </tr>
                 </tfoot>
               </table>

@@ -136,7 +136,7 @@
       <form action="/search" method="POST" class="sidebar-form" role="search">
       {{ csrf_field() }}
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <input type="text" name="q" class="form-control" placeholder="Rechercher ...">
           <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
@@ -229,12 +229,40 @@
 
 
                 @if(Auth::user()->role->nom == 'admin' )
-
-                <li {{{ (Request::is('parametre/*') ? 'class=active' : '') }}} {{{ (Request::is('parametre') ? 'class=active' : '') }}}>
-                <a href="{{url('parametre')}}">
-                  <i class="fa fa-gears"></i>
-                  <span>Paramètres</span></a>
+                <li class="treeview {{{ (Request::is('parametre/*') ? 'active' : '') }}} {{{ (Request::is('parametre') ? 'active' : '') }}}">
+                  <a href="#">
+                    <i class="fa fa-gears"></i> <span>Laboratoires</span>
+                    <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li {{{ (Request::is('labos-trombinoscope/*') ? 'class=active' : '') }}} {{{ (Request::is('labos-trombinoscope') ? 'class=active' : '') }}}>
+                      <a href="{{url('labos-trombinoscope')}}"><i class="fa fa-id-badge"></i> Trombinoscope</a>
+                    </li>
+                    <li {{{ (Request::is('laboratoires/*') ? 'class=active' : '') }}} {{{ (Request::is('laboratoires') ? 'class=active' : '') }}}>
+                      <a href="{{url('laboratoires')}}"><i class="fa fa-list"></i> Liste</a>
+                    </li>
+                  </ul>
                 </li>
+
+                <li class="treeview {{{ (Request::is('parametre/*') ? 'active' : '') }}} {{{ (Request::is('parametre') ? 'active' : '') }}}{{{ (Request::is('trombinoscope/*') ? 'active' : '') }}} {{{ (Request::is('trombinoscope') ? 'active' : '') }}}">
+                  <a href="#">
+                    <i class="fa fa-user"></i> <span>Paramètres</span>
+                    <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li {{{ (Request::is('trombinoscope/*') ? 'class=active' : '') }}} {{{ (Request::is('trombinoscope') ? 'class=active' : '') }}}>
+                      <a href="{{url('trombinoscope')}}"><i class="fa fa-id-badge"></i> Rôles</a>
+                    </li>
+                    <li {{{ (Request::is('membres/*') ? 'class=active' : '') }}} {{{ (Request::is('membres') ? 'class=active' : '') }}}>
+                      <a href="{{url('membres')}}"><i class="fa fa-list"></i> EasyLab</a>
+                    </li>
+                  </ul>
+                </li>
+
                 @endif
       </ul>
     </section>
@@ -343,6 +371,7 @@
 
 
 <script>
+$('#txt').wysihtml5();
   $(function () {
     //Initialize Select2 Elements
     $('.select2').select2()

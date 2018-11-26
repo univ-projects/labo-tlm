@@ -7,10 +7,14 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Actualite' => $baseDir . '/app/Actualite.php',
+    'App\\Affecter' => $baseDir . '/app/Affecter.php',
     'App\\Article' => $baseDir . '/app/Article.php',
     'App\\ArticleUser' => $baseDir . '/app/ArticleUser.php',
+    'App\\Category' => $baseDir . '/app/Category.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Equipe' => $baseDir . '/app/Equipe.php',
+    'App\\Evenement' => $baseDir . '/app/Evenement.php',
+    'App\\EvenementUser' => $baseDir . '/app/EvenementUser.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\ActualiteController' => $baseDir . '/app/Http/Controllers/ActualiteController.php',
     'App\\Http\\Controllers\\ArticleController' => $baseDir . '/app/Http/Controllers/ArticleController.php',
@@ -41,6 +45,7 @@ return array(
     'App\\Http\\Requests\\actualiteRequest' => $baseDir . '/app/Http/Requests/actualiteRequest.php',
     'App\\Http\\Requests\\articleRequest' => $baseDir . '/app/Http/Requests/articleRequest.php',
     'App\\Http\\Requests\\equipeRequest' => $baseDir . '/app/Http/Requests/equipeRequest.php',
+    'App\\Http\\Requests\\evenementRequest' => $baseDir . '/app/Http/Requests/evenementRequest.php',
     'App\\Http\\Requests\\materielRequest' => $baseDir . '/app/Http/Requests/materielRequest.php',
     'App\\Http\\Requests\\projetRequest' => $baseDir . '/app/Http/Requests/projetRequest.php',
     'App\\Http\\Requests\\theseRequest' => $baseDir . '/app/Http/Requests/theseRequest.php',

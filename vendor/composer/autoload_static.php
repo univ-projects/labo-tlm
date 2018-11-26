@@ -315,10 +315,14 @@ class ComposerStaticInitc4a3b668e15bc31216c179cbf4f6f57d
 
     public static $classMap = array (
         'App\\Actualite' => __DIR__ . '/../..' . '/app/Actualite.php',
+        'App\\Affecter' => __DIR__ . '/../..' . '/app/Affecter.php',
         'App\\Article' => __DIR__ . '/../..' . '/app/Article.php',
         'App\\ArticleUser' => __DIR__ . '/../..' . '/app/ArticleUser.php',
+        'App\\Category' => __DIR__ . '/../..' . '/app/Category.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Equipe' => __DIR__ . '/../..' . '/app/Equipe.php',
+        'App\\Evenement' => __DIR__ . '/../..' . '/app/Evenement.php',
+        'App\\EvenementUser' => __DIR__ . '/../..' . '/app/EvenementUser.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\ActualiteController' => __DIR__ . '/../..' . '/app/Http/Controllers/ActualiteController.php',
         'App\\Http\\Controllers\\ArticleController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArticleController.php',
@@ -349,6 +353,7 @@ class ComposerStaticInitc4a3b668e15bc31216c179cbf4f6f57d
         'App\\Http\\Requests\\actualiteRequest' => __DIR__ . '/../..' . '/app/Http/Requests/actualiteRequest.php',
         'App\\Http\\Requests\\articleRequest' => __DIR__ . '/../..' . '/app/Http/Requests/articleRequest.php',
         'App\\Http\\Requests\\equipeRequest' => __DIR__ . '/../..' . '/app/Http/Requests/equipeRequest.php',
+        'App\\Http\\Requests\\evenementRequest' => __DIR__ . '/../..' . '/app/Http/Requests/evenementRequest.php',
         'App\\Http\\Requests\\materielRequest' => __DIR__ . '/../..' . '/app/Http/Requests/materielRequest.php',
         'App\\Http\\Requests\\projetRequest' => __DIR__ . '/../..' . '/app/Http/Requests/projetRequest.php',
         'App\\Http\\Requests\\theseRequest' => __DIR__ . '/../..' . '/app/Http/Requests/theseRequest.php',

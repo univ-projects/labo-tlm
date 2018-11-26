@@ -21,82 +21,111 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
+Route::prefix('front')->group(function () {
+
+  Route::get('/', function () {
+      return view('acceuil');
+  });
+  Route::get('A-propos', function () {
+      return view('about');
+  });
+  Route::get('Actualites', function () {
+      return view('actualites');
+  });
+  Route::get('Nos-laboratoires', function () {
+      return view('labos');
+  });
+  Route::get('Evenements', function () {
+      return view('events');
+  });
+  Route::get('Contact', function () {
+      return view('contact');
+  });
+
+});
+
 
 
 Route::get('dashboard','dashController@index');
-Route::get('parametre','ParametreController@create');
-Route::post('parametre','ParametreController@store');
+// Route::get('parametre','ParametreController@create');
+// Route::post('parametre','ParametreController@store');
 
-Route::get('theses','TheseController@index');
-Route::get('theses/create','TheseController@create');
+Route::get('laboratoires/{id}/details','ParametreController@details');
+Route::get('labos-trombinoscope','ParametreController@trombi');
+Route::resource('laboratoires', 'ParametreController',[
+    'only' => ['index', 'create','store','edit','update','destroy']
+]);
+
+
+
 Route::post('theses','TheseController@store')->middleware('thesecond');
 Route::get('theses/{id}/details','TheseController@details');
-Route::get('theses/{id}/edit','TheseController@edit');
-Route::put('theses/{id}','TheseController@update');
-Route::delete('theses/{id}','TheseController@destroy');
+Route::resource('theses', 'TheseController',[
+    'only' => ['index', 'create','edit','update','destroy']
+]);
 
-Route::get('articles','ArticleController@index');
-Route::get('articles/create','ArticleController@create');
-Route::post('articles','ArticleController@store');
+
+
+
+
 Route::get('articles/{id}/details','ArticleController@details');
-Route::get('articles/{id}/edit','ArticleController@edit');
-Route::put('articles/{id}','ArticleController@update');
-Route::delete('articles/{id}','ArticleController@destroy');
+Route::resource('articles', 'ArticleController',[
+    'only' => ['index', 'create','store','edit','update','destroy']
+]);
 
-Route::get('membres','UserController@index');
-Route::get('membres/create','UserController@create');
-Route::post('membres','UserController@store');
+
+
+
+
 Route::get('membres/{id}/details','UserController@details');
 Route::get('trombinoscope','UserController@trombi');
-Route::get('membres/{id}/edit','UserController@edit');
-Route::put('membres/{id}','UserController@update');
-Route::delete('membres/{id}','UserController@destroy');
+Route::resource('membres', 'UserController',[
+    'only' => ['index', 'create','store','edit','update','destroy']
+]);
 
 
-Route::get('test','EquipeController@index');
 
-Route::get('equipes','EquipeController@index');
-Route::get('equipes/create','EquipeController@create');
-Route::post('equipes','EquipeController@store');
+
+
 Route::get('equipes/{id}/details','EquipeController@details');
-Route::put('equipes/{id}','EquipeController@update');
-Route::delete('equipes/{id}','EquipeController@destroy');
+Route::resource('equipes', 'EquipeController',[
+    'only' => ['index', 'create','store','update','destroy']
+]);
 
-Route::get('projets','ProjetController@index');
-Route::get('projets/create','ProjetController@create');
-Route::post('projets','ProjetController@store');
+
+
+
 Route::get('projets/{id}/details','ProjetController@details');
-Route::get('projets/{id}/edit','ProjetController@edit');
-Route::put('projets/{id}','ProjetController@update');
-Route::delete('projets/{id}','ProjetController@destroy');
+Route::resource('projets', 'ProjetController',[
+    'only' => ['index', 'create','store','edit','update','destroy']
+]);
 
 
-Route::get('materiels','MaterielController@index');
-Route::get('materiels/create','MaterielController@create');
-Route::post('materiels','MaterielController@store');
+
+
 Route::get('materiels/{id}/details','MaterielController@details');
-Route::get('materiels/{id}/edit','MaterielController@edit');
-Route::put('materiels/{id}','MaterielController@update');
-Route::delete('materiels/{id}','MaterielController@destroy');
+Route::resource('materiels', 'MaterielController',[
+    'only' => ['index', 'create','store','edit','update','destroy']
+]);
 
-Route::get('actualites','ActualiteController@index');
-Route::get('actualites/create','ActualiteController@create');
-Route::post('actualites','ActualiteController@store');
+
+
+
 Route::get('actualites/{id}/details','ActualiteController@details');
-Route::get('actualites/{id}/edit','ActualiteController@edit');
-Route::put('actualites/{id}','ActualiteController@update');
-Route::delete('actualites/{id}','ActualiteController@destroy');
+Route::resource('actualites', 'ActualiteController',[
+    'only' => ['index', 'create','store','edit','update','destroy']
+]);
 
 
-Route::get('evenements','EvenementController@index');
-Route::get('evenements/create','EvenementController@create');
-Route::post('evenements','EvenementController@store');
+
+
 Route::get('evenements/{id}/details','EvenementController@details');
-Route::get('evenements/{id}/edit','EvenementController@edit');
-Route::put('evenements/{id}','EvenementController@update');
-Route::delete('evenements/{id}','EvenementController@destroy');
 Route::get('evenements/{id}/participe','EvenementController@participe');
 Route::get('evenements/{id}/pasParticipe','EvenementController@pasParticipe');
+Route::resource('evenements', 'EvenementController',[
+    'only' => ['index', 'create','store','edit','update','destroy']
+]);
+
 
 
 

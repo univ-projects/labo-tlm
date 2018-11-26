@@ -180,7 +180,7 @@
                                 <div class="col-md-9 inputGroupContainer @if($errors->get('contenu')) has-error @endif">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-lg fa-info-circle"></i></span>
-                                        <textarea name="contenu" rows="5" style="width:100%">{{$actualite->contenu}}</textarea>
+                                        <textarea name="contenu" rows="5" style="width:100%" id="txt">{{$actualite->contenu}}</textarea>
                                       </div>
                                       <span class="help-block">
                                         @if($errors->get('contenu'))

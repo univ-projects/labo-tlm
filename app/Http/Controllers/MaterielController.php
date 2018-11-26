@@ -9,6 +9,7 @@ use Illuminate\Http\UploadedFile;
 use App\Http\Requests\materielRequest;
 use App\Parametre;
 use App\Materiel;
+use App\Category;
 use App\User;
 
 
@@ -24,8 +25,10 @@ class MaterielController extends Controller
 
    public function index()
   {
-      $materiels = Materiel::all();
+      // $materiels = Materiel::all();
       $labo = Parametre::find('1');
+      $materiels = Category::all();
+      // print_r($materiels);die();
 
       if( Auth::user()->role->nom == 'admin')
           {

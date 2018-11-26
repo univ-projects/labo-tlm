@@ -44,6 +44,12 @@
                <div>
                  <button href="{{('excel')}}">Excel</button>
                </div> -->
+                 @foreach($actualites as $actualite)
+               <?php
+               //contenu avec html balise b a i autorisé
+                //echo strip_tags($actualite->contenu, '<b><a><i>');
+               ?> </br>
+                 @endforeach
               <table id="example3" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -66,7 +72,7 @@
                     </td>
                     <td>@if($actualite->created_at==$actualite->updated_at) {{$actualite->created_at}} @else {{$actualite->updated_at}} @endif</td>
                     <td><span class="label  @if($actualite->status) label-success @else label-default @endif">@if($actualite->status) En ligne @else Hors-ligne @endif</span></td>
-                    <td style="width:250px">{{ str_limit($actualite->contenu, $limit = 60, $end = '...') }}</td>
+                    <td style="width:250px"><?php echo str_limit(strip_tags($actualite->contenu, '<b><a><i>'), $limit = 60, $end = '...') ?></td>
 
 
                     <td>
