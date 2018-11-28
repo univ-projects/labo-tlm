@@ -128,7 +128,24 @@
                         </div>
                       </div>
 
-                      <div class="form-group">
+                      <div class="form-group ">
+                        <label class="col-md-3 control-label">Quantité</label>
+                        <div class="col-md-9 inputGroupContainer @if($errors->get('quantite')) has-error @endif">
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lg fa-flask"></i></span>
+                            <input type="number" name="quantite"  min="0" class="form-control"  type="text" value="@if(isset(old('quantite'))){{old('quantite')}} @else 0 @endif" >
+                           </div>
+                            <span class="help-block">
+                                @if($errors->get('quantite'))
+                                  @foreach($errors->get('quantite') as $message)
+                                    <li> {{ $message }} </li>
+                                  @endforeach
+                                @endif
+                            </span>
+                        </div>
+                      </div>
+
+                      <!-- <div class="form-group">
                          <label class="col-md-3 control-label">Numéro * </label>
                            <div class="col-md-9 selectContainer @if($errors->get('numero')) has-error @endif">
                              <div class="input-group">
@@ -144,7 +161,7 @@
                                @endif
                            </span>
                            </div>
-                         </div>
+                         </div> -->
 
                       <div class="form-group">
                           <label class="col-md-3 control-label">Description</label>
@@ -170,7 +187,7 @@
 
                 <div class="col-md-6">
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label class="col-md-3 control-label">Proprietaire </label>
                         <div class="col-md-9 selectContainer @if($errors->get('proprietaire')) has-error @endif">
                           <div class="input-group">
@@ -193,7 +210,7 @@
                         </span>
 
                         </div>
-                      </div>
+                      </div> -->
                     <div class="form-group">
                         <label class="col-md-3 control-label">Photo</label>
 

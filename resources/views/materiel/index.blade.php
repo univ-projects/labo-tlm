@@ -46,13 +46,13 @@
                </div> -->
               <table id="example2" class="table table-bordered table-striped">
                 <thead>
-                <tr>
-                  <th>Photo</th>
-                  <th>Libéllé</th>
-                  <th>Description</th>
-                  <th>Quantité</th>
-                  <th>Action</th>
-                </tr>
+                  <tr>
+                    <th>Photo</th>
+                    <th>Libéllé</th>
+                    <th>Description</th>
+                    <th>Quantité</th>
+                    <th>Action</th>
+                  </tr>
                 </thead>
                 <tbody>
                   @foreach($materiels as $materiel)

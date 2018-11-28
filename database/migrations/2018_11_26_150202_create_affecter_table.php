@@ -14,6 +14,7 @@ class CreateAffecterTable extends Migration
     public function up()
     {
         Schema::create('affecter', function (Blueprint $table) {
+          $table->increments('id');
           $table->integer('materiel_id')->unsigned();
           $table->integer('user_id')->unsigned();
           $table->dateTime('from');

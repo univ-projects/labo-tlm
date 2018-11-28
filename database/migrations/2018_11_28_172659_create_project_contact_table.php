@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticleUserTable extends Migration
+class CreateProjectContactTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateArticleUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('article_user', function (Blueprint $table) {
+      Schema::create('project_contact', function (Blueprint $table) {
           $table->increments('id');
           $table->integer('contact_id')->unsigned();
           $table->integer('project_id')->unsigned();
@@ -21,7 +21,7 @@ class CreateArticleUserTable extends Migration
 
           $table-> foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
           $table-> foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
-        });
+      });
     }
 
     /**
@@ -31,6 +31,6 @@ class CreateArticleUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('article_user');
+        Schema::dropIfExists('project_contact');
     }
 }

@@ -354,6 +354,7 @@ class ComposerStaticInitc4a3b668e15bc31216c179cbf4f6f57d
         'App\\Http\\Requests\\articleRequest' => __DIR__ . '/../..' . '/app/Http/Requests/articleRequest.php',
         'App\\Http\\Requests\\equipeRequest' => __DIR__ . '/../..' . '/app/Http/Requests/equipeRequest.php',
         'App\\Http\\Requests\\evenementRequest' => __DIR__ . '/../..' . '/app/Http/Requests/evenementRequest.php',
+        'App\\Http\\Requests\\exemplaireRequest' => __DIR__ . '/../..' . '/app/Http/Requests/exemplaireRequest.php',
         'App\\Http\\Requests\\materielRequest' => __DIR__ . '/../..' . '/app/Http/Requests/materielRequest.php',
         'App\\Http\\Requests\\projetRequest' => __DIR__ . '/../..' . '/app/Http/Requests/projetRequest.php',
         'App\\Http\\Requests\\theseRequest' => __DIR__ . '/../..' . '/app/Http/Requests/theseRequest.php',

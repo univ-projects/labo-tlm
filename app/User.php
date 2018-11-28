@@ -69,5 +69,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Materiel');
     }
 
+    public function affecter()
+    {
+        return $this->hasMany('App\Affecter');
+    }
+
 
 }

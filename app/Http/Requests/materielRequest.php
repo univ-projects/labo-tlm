@@ -25,7 +25,7 @@ class materielRequest extends FormRequest
     {
         return [
             'libelle'=> 'required',
-            'numero' => 'required'
+            'description'=>'required'
         ];
     }
 }

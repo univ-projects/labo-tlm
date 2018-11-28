@@ -46,6 +46,7 @@ return array(
     'App\\Http\\Requests\\articleRequest' => $baseDir . '/app/Http/Requests/articleRequest.php',
     'App\\Http\\Requests\\equipeRequest' => $baseDir . '/app/Http/Requests/equipeRequest.php',
     'App\\Http\\Requests\\evenementRequest' => $baseDir . '/app/Http/Requests/evenementRequest.php',
+    'App\\Http\\Requests\\exemplaireRequest' => $baseDir . '/app/Http/Requests/exemplaireRequest.php',
     'App\\Http\\Requests\\materielRequest' => $baseDir . '/app/Http/Requests/materielRequest.php',
     'App\\Http\\Requests\\projetRequest' => $baseDir . '/app/Http/Requests/projetRequest.php',
     'App\\Http\\Requests\\theseRequest' => $baseDir . '/app/Http/Requests/theseRequest.php',

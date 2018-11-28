@@ -15,10 +15,7 @@ class CreateMaterielsTable extends Migration
     {
         Schema::create('materiels', function (Blueprint $table) {
           $table->increments('id');
-          $table->string('libelle',200);
-          $table->integer('numero');
-          $table->string('photo')->nullable();
-          $table->text('description')->nullable();
+          $table->string('numero');
           $table->integer('proprietaire')->unsigned()->nullable();
           $table->timestamps();
 

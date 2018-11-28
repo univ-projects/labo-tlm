@@ -107,6 +107,11 @@ Route::get('materiels/{id}/details','MaterielController@details');
 Route::resource('materiels', 'MaterielController',[
     'only' => ['index', 'create','store','edit','update','destroy']
 ]);
+Route::post('exemplaires/{catId}','MaterielController@addExemplaire');
+Route::delete('exemplaires/{id}/{catId}','MaterielController@deleteExemplaire');
+Route::put('exemplaires/{id}/{catId}','MaterielController@editExemplaire');
+
+
 
 
 
