@@ -111,7 +111,7 @@ Route::post('exemplaires/{catId}','MaterielController@addExemplaire');
 Route::delete('exemplaires/{id}/{catId}','MaterielController@deleteExemplaire');
 Route::put('exemplaires/{id}/{catId}','MaterielController@editExemplaire');
 
-
+Route::post('/postajaxTypeProprietaire','MaterielController@postType');
 
 
 
@@ -130,6 +130,15 @@ Route::get('evenements/{id}/pasParticipe','EvenementController@pasParticipe');
 Route::resource('evenements', 'EvenementController',[
     'only' => ['index', 'create','store','edit','update','destroy']
 ]);
+
+
+
+
+Route::get('partenaires/{id}/details','PartenaireController@details');
+Route::resource('partenaires', 'PartenaireController',[
+    'only' => ['index', 'create','store','edit','update','destroy']
+]);
+
 
 
 

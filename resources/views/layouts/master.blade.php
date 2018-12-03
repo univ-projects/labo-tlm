@@ -11,6 +11,8 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
+
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="{{ asset('labo/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
   <!-- Font Awesome -->
@@ -43,6 +45,8 @@
   <link rel="stylesheet" href="{{asset('labo/plugins/timepicker/bootstrap-timepicker.min.css')}}">
   <!-- Select2 -->
   <link rel="stylesheet" href="{{asset('labo/bower_components/select2/dist/css/select2.min.css')}}">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flagstrap/1.0/css/flags.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -220,8 +224,8 @@
               </li>
               @endif
 
-              <li {{{ (Request::is('#/*') ? 'class=active' : '') }}} {{{ (Request::is('#') ? 'class=active' : '') }}}>
-                <a href="{{url('projets')}}">
+              <li {{{ (Request::is('partenaires/*') ? 'class=active' : '') }}} {{{ (Request::is('partenaires') ? 'class=active' : '') }}}>
+                <a href="{{url('partenaires')}}">
                   <i class="fa fa-handshake-o"></i>
                   <span>Partenaires</span>
                 </a>
@@ -369,9 +373,12 @@
 <!-- iCheck 1.0.1 -->
 <script src="{{ asset('labo/plugins/iCheck/icheck.min.js')}}"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flagstrap/1.0/js/jquery.flagstrap.js" charset="utf-8"></script>
+
 
 <script>
 $('#txt').wysihtml5();
+$('#txt2').wysihtml5();
   $(function () {
     //Initialize Select2 Elements
     $('.select2').select2()
@@ -621,8 +628,70 @@ $('#txt').wysihtml5();
 
   })
 
+</script>
 
 
+<script type="text/javascript">
+$(document).ready(function(){
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  $('.proprietaire_type').change(function(){
+    if($(this).val() != '')
+    {
+
+      var type_proprietaire = $(this).val();
+
+
+      $.ajax({
+        url: '/postajaxTypeProprietaire',
+        type: 'POST',
+                      /* send the csrf-token and the input to the controller */
+          data: {_token: CSRF_TOKEN, type_proprietaire:type_proprietaire},
+          dataType: 'JSON',
+          success: function (data) {
+                        $('#proprietaire_result').html(data);
+
+                    }
+      })
+    }
+    else{
+      $('#proprietaire_result').html('');
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  $('.edit_proprietaire_type').change(function(){
+    if($(this).val() != '')
+    {
+
+      var type_proprietaire = $(this).val();
+
+
+      $.ajax({
+        url: '/postajaxTypeProprietaire',
+        type: 'POST',
+                      /* send the csrf-token and the input to the controller */
+          data: {_token: CSRF_TOKEN, type_proprietaire:type_proprietaire},
+          dataType: 'JSON',
+          success: function (data) {
+                        $('.edit_proprietaire_result').html(data);
+
+                    }
+      })
+    }
+    else{
+      $('#edit_proprietaire_result').html('');
+    }
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+   $('#select-country').flagStrap();
 </script>
 
 </body>

@@ -5,12 +5,12 @@
 @section('header_page')
 
       <h1>
-        Equipes
-        <small>Nouvelle</small>
+        Partenaires
+        <small>Nouveau</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-        <li><a href="{{url('equipes')}}">Equipes</a></li>
+        <li><a href="{{url('partenaires')}}">Partenaires</a></li>
         <li class="active">Ajouter</li>
       </ol>
 
@@ -101,34 +101,13 @@
 
           <div class="container col-xs-12">
 
-            <form class="well form-horizontal" action=" {{url('equipes')}} " method="post"  id="contact_form" enctype="multipart/form-data">
+            <form class="well form-horizontal" action=" {{url('partenaires')}} " method="post"  id="contact_form" enctype="multipart/form-data">
               {{ csrf_field() }}
               <fieldset>
 
                 <!-- Form Name -->
-                <legend><center><h2><b>Nouvelle équipe</b></h2></center></legend><br>
+                <legend><center><h2><b>Nouveau partenaire</b></h2></center></legend><br>
 
-                <div class="form-group">
-                      <label class="col-xs-3 control-label">Laboratoire (*)</label>
-                      <div class="col-xs-9 inputGroupContainer @if($errors->get('labo')) has-error @endif">
-                        <div style="width: 70%">
-                          <select class="form-control" name="labo">
-                            <option></option>
-                            @foreach($labos as $l)
-                              <option value="{{$l->id}}">{{$l->nom}}</option>
-                            @endforeach
-                          </select>
-                            <span class="help-block">
-                              @if($errors->get('labo'))
-                                @foreach($errors->get('labo') as $message)
-                                  <li> {{ $message }} </li>
-                                @endforeach
-                              @endif
-                          </span>
-
-                        </div>
-                      </div>
-                </div>
 
                   <div class="form-group">
                         <label class="col-xs-3 control-label">Intitulé (*)</label>
@@ -148,16 +127,57 @@
                   </div>
 
                   <div class="form-group">
-                      <label class="col-md-3 control-label">Achronymes</label>
-                      <div class="col-md-9 inputGroupContainer" >
-                        <div style="width: 70%">
-                          <input  name="achronymes" class="form-control" placeholder="intitule" type="text" value="{{old('achronymes')}}">
+                        <label class="col-xs-3 control-label">Type (*)</label>
+                        <div class="col-xs-9 inputGroupContainer @if($errors->get('type')) has-error @endif">
+                          <div style="width: 70%">
+                            <select class="form-control" name="type">
+                                <option value="organisme">Organisme</option>
+                                <option value="laboratoire">Laboratoire</option>
+                                <option value="entreprise">Entreprise</option>
+                                <option value="administration">Administration</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                              <span class="help-block">
+                                @if($errors->get('type'))
+                                  @foreach($errors->get('type') as $message)
+                                    <li> {{ $message }} </li>
+                                  @endforeach
+                                @endif
+                            </span>
+
+                          </div>
                         </div>
+                  </div>
+
+
+                  <div class="form-group">
+                      <label class="col-md-3 control-label">Pays (*)</label>
+                      <div class="col-md-9 inputGroupContainer" >
+                        <div id="select-country" data-input-name="pays" data-selected-country="DZ"></div>
                       </div>
                   </div>
 
+
                   <div class="form-group">
-                      <label class="col-md-3 control-label">Résumé (*)</label>
+                        <label class="col-xs-3 control-label">Ville (*)</label>
+                        <div class="col-xs-9 inputGroupContainer @if($errors->get('ville')) has-error @endif">
+                          <div style="width: 70%">
+                            <input  name="ville" class="form-control" placeholder="Ville" type="text" value="{{old('ville')}}">
+                              <span class="help-block">
+                                @if($errors->get('ville'))
+                                  @foreach($errors->get('ville') as $message)
+                                    <li> {{ $message }} </li>
+                                  @endforeach
+                                @endif
+                            </span>
+
+                          </div>
+                        </div>
+                  </div>
+
+
+                  <div class="form-group">
+                      <label class="col-md-3 control-label">Résumé</label>
                       <div class="col-md-9 inputGroupContainer @if($errors->get('resume')) has-error @endif" >
                         <div style="width: 70%">
                           <textarea name="resume" class="form-control" rows="3" placeholder="Entrez ..." id="txt">{{old('resume')}}</textarea>
@@ -174,25 +194,12 @@
                       </div>
                   </div>
 
-                  <div class="form-group ">
-                        <label class="col-xs-3 control-label">Chef de l'équipe (*)</label>
-                        <div class="col-xs-9 inputGroupContainer @if($errors->get('chef_id')) has-error @endif">
+
+                  <div class="form-group">
+                        <label class="col-xs-3 control-label">Lien</label>
+                        <div class="col-xs-9 inputGroupContainer ">
                           <div style="width: 70%">
-                            <select name="chef_id" class="form-control select2">
-                              <option></option>
-                               @foreach($membres as $membre)
-                              <option value="{{$membre->id}}">{{$membre->name}} {{$membre->prenom}}</option>
-                               @endforeach
-                            </select>
-
-                            <span class="help-block">
-                                @if($errors->get('chef_id'))
-                                  @foreach($errors->get('chef_id') as $message)
-                                    <li> {{ $message }} </li>
-                                  @endforeach
-                                @endif
-                            </span>
-
+                            <input  name="lien" class="form-control" placeholder="http://" type="text" value="{{old('lien')}}">
                           </div>
                         </div>
                   </div>
@@ -205,26 +212,19 @@
                               <div class="hvr-profile-img">
                                 <input type="file" name="img" id='actualite-photo'  class="upload w180" title="Dimensions 180 X 180" id="imag">
                               </div>
-                              <i class="fa fa-camera"> <h4>Importer une photo</h4></i>
+                              <i class="fa fa-camera"> <h4>Importer le logo du partenaire</h4></i>
                             </div>
 
                           </div>
                   </div>
 
-                 <div class="form-group">
-                      <label class="col-md-3 control-label">Axes de recherche</label>
-                      <div class="col-md-9 inputGroupContainer" >
-                        <div style="width: 70%">
-                          <textarea name="axes_recherche" class="form-control" rows="3" placeholder="Entrez ..." id="txt2">{{old('axes_recherche')}}</textarea>
-                        </div>
-                      </div>
-                  </div>
+
 
 
               </fieldset>
 
               <div class="row" style="padding-top: 30px; margin-left: 35%;">
-              <a href="{{url('equipes')}}" class=" btn btn-lg btn-default"><i class="fa  fa-mail-reply"></i> &nbsp;Annuler</a>
+              <a href="{{url('partenaires')}}" class=" btn btn-lg btn-default"><i class="fa  fa-mail-reply"></i> &nbsp;Annuler</a>
                <button type="submit" class=" btn btn-lg btn-primary"><i class="fa fa-check"></i> Valider</button>
                   </div>
             </form>

@@ -1,14 +1,14 @@
 @extends('layouts.master')
 
-@section('title','LRI | Liste des équipes')
+@section('title','LRI | Liste des partenaires')
 
 @section('header_page')
 	<h1>
-        Equipes
+        Partenaires
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-        <li class="active">Equipes</li>
+        <li class="active">Partenaires</li>
       </ol>
 @endsection
 
@@ -25,7 +25,7 @@
           <div class="container" style="padding-top: 30px">
           <div class="row">
             <div class="box-header col-xs-11">
-              <legend><center><h2><b>EQUIPES</b></h2></center></legend>
+              <legend><center><h2><b>PARTENAIRES</b></h2></center></legend>
             </div>
 
           </div>
@@ -36,13 +36,13 @@
 
             @if(Auth::user()->role->nom == 'admin' )
             <div class=" pull-right" style="padding-bottom: 20px">
-                <a href="{{url('equipes/create')}}" type="button" class="btn btn-block btn-success btn-lg"><i class="fa fa-plus"></i> <i class="fa fa-group"></i> Nouvelle équipe</a>
+                <a href="{{url('partenaires/create')}}" type="button" class="btn btn-block btn-success btn-lg"><i class="fa fa-plus"></i> <i class="fa fa-handshake-o"></i> Nouveau partenaire</a>
             </div>
             @endif
 
             <div class="row" >
               <div class="col-xs-12">
-              @foreach($equipes as $equipe)
+              @foreach($partenaires as $partenaire)
 
 
                 <div class="col-xs-6">
@@ -50,7 +50,7 @@
                     <div class="box-tools pull-right">
                       @if(Auth::user()->role->nom == 'admin' )
 
-                 <!--      <form action="{{ url('equipes/'.$equipe->id)}}" method="post">
+                 <!--      <form action="{{ url('partenaires/'.$partenaire->id)}}" method="post">
 
                           {{csrf_field()}}
                           {{method_field('DELETE')}}
@@ -59,12 +59,12 @@
                       </form> -->
 
 
-                      <a href="#supprimer{{ $equipe->id }}Modal" role="button" class="btn btn-box-tool" data-toggle="modal"><i class="fa fa-times"></i></a>
-                      <div class="modal fade" id="supprimer{{ $equipe->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $equipe->id }}ModalLabel" aria-hidden="true">
+                      <a href="#supprimer{{ $partenaire->id }}Modal" role="button" class="btn btn-box-tool" data-toggle="modal"><i class="fa fa-times"></i></a>
+                      <div class="modal fade" id="supprimer{{ $partenaire->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $partenaire->id }}ModalLabel" aria-hidden="true">
                           <div class="modal-dialog">
                               <div class="modal-content">
                                   <div class="modal-header">
-                                    <!--   <h5 class="modal-title" id="supprimer{{ $equipe->id }}ModalLabel">Supprimer</h5> -->
+                                    <!--   <h5 class="modal-title" id="supprimer{{ $partenaire->id }}ModalLabel">Supprimer</h5> -->
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                       </button>
@@ -73,7 +73,7 @@
                                       Voulez-vous vraiment effectuer la suppression ?
                                   </div>
                                   <div class="modal-footer">
-                                      <form class="form-inline" action="{{ url('equipes/'.$equipe->id)}}"  method="POST">
+                                      <form class="form-inline" action="{{ url('partenaires/'.$partenaire->id)}}"  method="POST">
                                           @method('DELETE')
                                           @csrf
                                       <button type="button" class="btn btn-light" data-dismiss="modal">Non</button>
@@ -88,33 +88,36 @@
                     </div>
 
                     <div class="widget-user-header bg-aqua-active">
-                      <a class="users-list-name1" href="{{ url('equipes/'.$equipe->id.'/details')}}"><h3 class="widget-user-username">{{$equipe->intitule}}</h3></a>
-                      <h5 class="widget-user-desc">{{$equipe->achronymes}}</h5>
+                      <a class="users-list-name1" href="{{ url('partenaires/'.$partenaire->id.'/details')}}"><h3 class="widget-user-username">{{$partenaire->nom}}</h3></a>
+                      <h5 class="widget-user-desc">{{$partenaire->achronymes}}</h5>
                     </div>
                     <div class="widget-user-image">
 
-											@if(isset($equipe->photo))
-												<img class="img-circle" src="{{asset($equipe->photo)}}" alt="Equipe Avatar">
+											@if(isset($partenaire->logo))
+												<img class="img-circle" src="{{asset($partenaire->logo)}}" alt="partenaire logo">
 											@else
-												<img class="img-circle" src="{{asset($equipe->chef->photo)}}" alt="User Avatar">
+												<img class="img-circle" src="{{asset('uploads/photo/materiels/materielDefault.png')}}" alt="Partenaire logo">
 											@endif
                     </div>
                     <div class="box-footer">
                       <div class="row">
-													<?php $notZero=false; ?>
+
+												<?php $notZero=false; ?>
                         @foreach($nbr as $nbrs)
-                        @if($nbrs->equipe_id == $equipe->id)
+													@if($nbrs->partenaire_id == $partenaire->id)
                         <div class="col-sm-4 border-right">
                           <div class="description-block">
                             <h5 class="description-header">
-															{{$notZero=true}}
-                             {{$nbrs->total}}
+
+														{{$notZero=true}}
+                             <?php $notZero=true; ?>
 
                           </h5>
-                            <span class="description-text">Membres</span>
+                            <span class="description-text">Contacts</span>
                           </div>
                         </div>
-                        @endif
+													@endif
+
                          @endforeach
 												 @if($notZero==false)
 												 <div class="col-sm-4 border-right">
@@ -122,26 +125,61 @@
 														 <h5 class="description-header">
 															 0
 													 </h5>
-														 <span class="description-text">Membres</span>
+														 <span class="description-text">Contacts</span>
 													 </div>
 												 </div>
 												 @endif
 
+												 <?php $notZero=false; ?>
+												 @foreach($nbr_particip_article as $nbrs)
+													 @if($nbrs->partenaire_id == $partenaire->id)
+													<div class="col-sm-4 border-right">
+														<div class="description-block">
+															<h5 class="description-header">
+																{{$nbrs->total}}
+																<?php $notZero=true; ?>
+														</h5>
+															<span class="description-text">Articles</span>
+														</div>
+													</div>
+
+												@endif
+
+											 @endforeach
+											 @if($notZero==false)
+											 <div class="col-sm-4 border-right">
+												 <div class="description-block">
+													 <h5 class="description-header">
+														 0
+												 </h5>
+													 <span class="description-text">Articles</span>
+												 </div>
+											 </div>
+											 @endif
 
 
-                        <div class="col-sm-4 border-right">
+												<?php $notZero=false; ?>
+												@foreach($nbr_particip_proj as $nbrs)
+													@if($nbrs->partenaire_id == $partenaire->id)
+                        <div class="col-sm-4">
                           <div class="description-block">
-                            <h5 class="description-header">Chef d'équipe</h5>
-                            <span class="description-text"><a href="{{url('membres/'.$equipe->chef_id.'/details')}}" style="color: black">{{$equipe->chef->name}} {{$equipe->chef->prenom}}</a></span>
+                            <h5 class="description-header">{{$nbrs->total}}<?php $notZero=true; ?></h5>
+                            <span class="description-text">Projets</span>
                           </div>
                         </div>
+												@endif
 
-                        <!-- <div class="col-sm-4">
-                          <div class="description-block">
-                            <h5 class="description-header">20</h5>
-                            <span class="description-text">Publications</span>
-                          </div>
-                        </div> -->
+											 @endforeach
+											 @if($notZero==false)
+											 <div class="col-sm-4 border-right">
+												 <div class="description-block">
+													 <h5 class="description-header">
+														 0
+												 </h5>
+													 <span class="description-text">Projets</span>
+												 </div>
+											 </div>
+											 @endif
                         <!-- /.col -->
                       </div>
                       <!-- /.row -->

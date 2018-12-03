@@ -12,6 +12,7 @@ use App\Parametre;
 use App\Materiel;
 use App\Category;
 use App\User;
+use App\Equipe;
 use App\Affecter;
 
 
@@ -54,14 +55,24 @@ class MaterielController extends Controller
       $materiel = Category::find($id);
       $labo = Parametre::find('1');
       $proprietaires = User::all();
+        $equipes = Equipe::all();
       $exemplaires = Materiel::where('category_id', $id)->get();
       // print_r($materiel->category);die();
       $affectations = DB::table('affecter')
-            ->join('users', 'users.id', '=', 'affecter.user_id')
+            ->leftjoin('users', 'users.id', '=', 'affecter.user_id')
+            ->leftjoin('equipes', 'equipes.id', '=', 'affecter.proprietaireEquipe')
             ->join('materiels', 'materiels.id', '=', 'affecter.materiel_id')
             ->join('categories', 'categories.id', '=', 'materiels.category_id')
             ->where('categories.id',$id)
             ->get();
+    // $affectations2 = DB::table('affecter')
+    //               ->join('equipes', 'equipes.id', '=', 'affecter.proprietaireEquipe')
+    //               ->join('materiels', 'materiels.id', '=', 'affecter.materiel_id')
+    //               ->join('categories', 'categories.id', '=', 'materiels.category_id')
+    //               ->where('categories.id',$id)
+    //               ->get();
+      // $affectations=array_merge($affectations1,$affectations2);
+
       // $affectations = Affecter::where($materiel->category, $id)->get();
       // print_r($affectations);die();
 
@@ -72,7 +83,8 @@ class MaterielController extends Controller
             'labo'=>$labo,
             'exemplaires'=>$exemplaires,
             'affectations'=>$affectations,
-            'catId'=>$id
+            'catId'=>$id,
+            'equipes'=>$equipes
 
         ]);;
       }
@@ -202,37 +214,137 @@ class MaterielController extends Controller
   public function editExemplaire(exemplaireRequest $request , $id,$catId)
   {
 
+
       $materiel = Materiel::find($id);
       $labo = Parametre::find('1');
 
 
         $oldProprietaire=  $materiel->proprietaire;
+        $oldProprietaireEquipe=  $materiel->proprietaireEquipe;
+
 
 
         $materiel->numero = $request->input('numero');
-        $materiel->proprietaire = $request->input('proprietaire');
+        if ($request->input('type_proprietaire')=="membre") {
+          $materiel->proprietaire = $request->input('proprietaire');
+          $materiel->proprietaireEquipe = NULL;
+        }
+        else{
+          $materiel->proprietaireEquipe = $request->input('proprietaire');
+          $materiel->proprietaire = NULL;
+        }
 
 
 
+        if (isset($materiel->proprietaireEquipe)) { // si c une equipe
+          if($materiel->proprietaireEquipe!=$oldProprietaireEquipe){
 
-    if(  $materiel->save()){
-        if($oldProprietaire!=$materiel->proprietaire){
-            if(isset($materiel->proprietaire)){
+            if($materiel->save()){
               $affect = new Affecter();
               $affect->materiel_id=$materiel->id;
-              $affect->user_id=$materiel->proprietaire;
+              $affect->proprietaireEquipe=$materiel->proprietaireEquipe;
               $affect->from=$materiel->created_at;
               $affect->save();
             }
-          $affectUpdate=Affecter::where('materiel_id', $id)
-          ->where('user_id',$oldProprietaire)
-          ->get();
-          foreach ($affectUpdate as $affected) {
-            $affected->to=$materiel->updated_at;
-            $affected->save();
           }
         }
-    }
+        else  if (isset($materiel->proprietaire)) { // si c un membre
+
+            if($materiel->proprietaire!=$oldProprietaire){
+
+              if($materiel->save()){
+                $affect = new Affecter();
+                $affect->materiel_id=$materiel->id;
+                $affect->user_id=$materiel->proprietaire;
+                $affect->from=$materiel->created_at;
+                $affect->save();
+
+              }
+            }
+          }
+          else { //si proprietaire n'est pas défini
+            $materiel->proprietaire=NULL;
+            $materiel->proprietaireEquipe=NULL;
+            $materiel->save();
+          }
+
+          if(isset($oldProprietaireEquipe)){
+            $affectUpdate=Affecter::where('materiel_id', $id)
+            ->where('proprietaireEquipe',$oldProprietaireEquipe)
+            ->get();
+          }
+          else if(isset($oldProprietaire)){
+            $affectUpdate=Affecter::where('materiel_id', $id)
+            ->where('user_id',$oldProprietaire)
+            ->get();
+          }
+          if(isset($affectUpdate)){
+            foreach ($affectUpdate as $affected) {
+              $affected->to=$materiel->updated_at;
+              $affected->save();
+            }
+          }
+
+    //
+    // if(  $materiel->save()){
+    //   if (isset($materiel->proprietaire)) {
+    //     if (isset($oldProprietaire) || !isset($oldProprietaireEquipe)) {
+    //       if($oldProprietaire!=$materiel->proprietaire){
+    //           if(isset($materiel->proprietaire)){
+    //               $affect = new Affecter();
+    //               $affect->materiel_id=$materiel->id;
+    //               $affect->user_id=$materiel->proprietaire;
+    //               $affect->from=$materiel->created_at;
+    //               $affect->save();
+    //             }
+    //             $affectUpdate=Affecter::where('materiel_id', $id)
+    //             ->where('user_id',$oldProprietaire)
+    //             ->get();
+    //             foreach ($affectUpdate as $affected) {
+    //               $affected->to=$materiel->updated_at;
+    //               $affected->save();
+    //             }
+    //       }
+    //     }
+    //   }
+    //   else if(isset($materiel->proprietaireEquipe)){
+    //     if (isset($oldProprietaireEquipe) || !isset($oldProprietaire)) {
+    //       if($oldProprietaireEquipe!=$materiel->proprietaireEquipe){
+    //           if(isset($materiel->proprietaireEquipe)){
+    //               $affect = new Affecter();
+    //               $affect->materiel_id=$materiel->id;
+    //               $affect->proprietaireEquipe=$materiel->proprietaireEquipe;
+    //               $affect->from=$materiel->created_at;
+    //               $affect->save();
+    //             }
+    //             $affectUpdate=Affecter::where('materiel_id', $id)
+    //             ->where('proprietaireEquipe',$oldProprietaireEquipe)
+    //             ->get();
+    //             foreach ($affectUpdate as $affected) {
+    //               $affected->to=$materiel->updated_at;
+    //               $affected->save();
+    //             }
+    //       }
+    //     }
+    //   }
+
+        // if($oldProprietaire!=$materiel->proprietaire){
+        //     if(isset($materiel->proprietaire)){
+        //       $affect = new Affecter();
+        //       $affect->materiel_id=$materiel->id;
+        //       $affect->user_id=$materiel->proprietaire;
+        //       $affect->from=$materiel->created_at;
+        //       $affect->save();
+        //     }
+        //   $affectUpdate=Affecter::where('materiel_id', $id)
+        //   ->where('user_id',$oldProprietaire)
+        //   ->get();
+        //   foreach ($affectUpdate as $affected) {
+        //     $affected->to=$materiel->updated_at;
+        //     $affected->save();
+        //   }
+        // }
+    //}
 
     return redirect('materiels/'.$catId.'/details');
 
@@ -245,7 +357,13 @@ class MaterielController extends Controller
       $labo = Parametre::find('1');
 
         $materiel->numero = $request->input('numero');
-         $materiel->proprietaire = $request->input('proprietaire');
+        if ($request->input('type_proprietaire')=="membre") {
+          $materiel->proprietaire = $request->input('proprietaire');
+        }
+        else{
+          $materiel->proprietaireEquipe = $request->input('proprietaire');
+        }
+
          $materiel->category_id = $catId;
 
 
@@ -255,10 +373,15 @@ class MaterielController extends Controller
       $qte++;
       $category->quantity=$qte;
       $category->save();
-      if(isset($materiel->proprietaire)){
+      if(isset($materiel->proprietaire) || isset($materiel->proprietaireEquipe)){
         $affect = new Affecter();
         $affect->materiel_id=$materiel->id;
-        $affect->user_id=$materiel->proprietaire;
+        if ($request->input('type_proprietaire')=="membre") {
+          $affect->user_id = $request->input('proprietaire');
+        }
+        else{
+          $affect->proprietaireEquipe = $request->input('proprietaire');
+        }
         $affect->from=$materiel->created_at;
         $affect->save();
       }
@@ -288,6 +411,57 @@ class MaterielController extends Controller
           }
   }
 
+  public function postType(Request $request)
+  {
+    // $response = array(
+    //        'status' => 'success',
+    //        'type' => $request->type_proprietaire,
+    //    );
+       if($request->type_proprietaire=="equipe"){
+          // $response=Materiel::where('proprietaire', NULL)->get();
+          $response=Equipe::all();
+       }
+       else {
+         $response=User::all();
+       }
 
+       if(isset($response)){
+         $output='';
+         $output.="
+         <label class=\"col-md-3 control-label\">Proprietaire </label>
+          <div class=\"col-md-9 selectContainer\" >
+            <div class=\"input-group\">
+            <span class=\"input-group-addon\"><i class=";
+              if($request->type_proprietaire=="equipe"){
+                 $output.="\"fa fa-lg fa-users\"";
+              }
+              else{
+                $output.="\"fa fa-lg fa-user\"";
+              }
+            $output.="></i></span>
+            <select name=\"proprietaire\" class=\"form-control\">
+
+                <option></option>";
+                if($request->type_proprietaire=="equipe"){
+                  foreach ($response as $p) {
+                    $output.=" <option value=\"$p->id\">$p->intitule</option>";
+                  }
+                }
+                else{
+                  foreach ($response as $p) {
+                    $output.=" <option value=\"$p->id\">$p->name $p->prenom</option>";
+                  }
+                }
+
+              $output.="  </select>
+
+            </div>
+
+          </div>
+         ";
+       }
+
+       return response()->json($output);
+  }
 
 }

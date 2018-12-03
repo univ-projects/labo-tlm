@@ -300,56 +300,48 @@
 																 <h2>Ajouter un exemplaire de ce materiel</h2>
 														 </div>
 														 <div class="modal-footer">
-																 <form class="form-inline" action="{{ url('exemplaires/'.$catId)}}"  method="POST">
+																 <form class="well form-horizontal" action="{{ url('exemplaires/'.$catId)}}"  method="POST">
 																	   {{ csrf_field() }}
+																		  <fieldset>
 
-																	 <div class="col-md-6">
-																		 <div class="form-group">
-																				<label class="col-md-3 control-label">Numéro * </label>
-																					<div class="col-md-9 selectContainer @if($errors->get('numero')) has-error @endif">
-																						<div class="input-group">
-																						<span class="input-group-addon"><i class="fa fa-lg fa-barcode"></i></span>
-																						<input name="numero" placeholder="numéro" class="form-control"  type="text" value="{{old('numero')}}">
+																				<div class="form-group">
+																						<label class="col-md-3 control-label">Numéro * </label>
+																							<div class="col-md-9 selectContainer @if($errors->get('numero')) has-error @endif">
+																								<div class="input-group">
+																								<span class="input-group-addon"><i class="fa fa-lg fa-barcode"></i></span>
+																								<input name="numero" placeholder="numéro" class="form-control"  type="text" value="{{old('numero')}}">
 
-																						</div>
-																						<span class="help-block">
-																							@if($errors->get('numero'))
-																								@foreach($errors->get('numero') as $message)
-																									<li> {{ $message }} </li>
-																								@endforeach
-																							@endif
-																					</span>
+																								</div>
+																								<span class="help-block">
+																									@if($errors->get('numero'))
+																										@foreach($errors->get('numero') as $message)
+																											<li> {{ $message }} </li>
+																										@endforeach
+																									@endif
+																							</span>
+																							</div>
 																					</div>
-																				</div>
-																	 </div>
 
-
-																		<div class="col-md-6">
-																			<div class="form-group">
-																				<label class="col-md-3 control-label">Proprietaire </label>
-																					<div class="col-md-9 selectContainer @if($errors->get('proprietaire')) has-error @endif">
-																						<div class="input-group">
-																						<span class="input-group-addon"><i class="fa fa-lg fa-barcode"></i></span>
-																						<select name="proprietaire" class="form-control">
-
-																								<option></option>
-
-																							 @foreach($proprietaires as $p)
-																							<option value="{{$p->id}}">{{$p->name}} {{$p->prenom}}</option>
-																							 @endforeach
-																						</select>
-
+																				<div class="form-group">
+																						<label class="col-md-3 control-label">Type proprietaire </label>
+																							<div class="col-md-9 selectContainer">
+																								<div class="input-group">
+																									<span class="input-group-addon"><i class="fa fa-lg fa-user"></i></span>
+																									<select name="type_proprietaire" class="form-control proprietaire_type">
+																										<option value="" selected></option>
+																										<option value="membre">Membre</option>
+																										<option value="equipe">Equipe</option>
+																									</select>
+																								</div>
+																							</div>
 																						</div>
-																						<span class="help-block">
-																							@if($errors->get('proprietaire'))
-																								@foreach($errors->get('proprietaire') as $message)
-																									<li> {{ $message }} </li>
-																								@endforeach
-																							@endif
-																					</span>
-																					</div>
+
+
+																				<div class="form-group" id="proprietaire_result">
+
 																				</div>
-																			</div>
+
+																		</fieldset>
 
 
 
@@ -386,6 +378,15 @@
 													<a href="{{ url('membres/'.$materiel->proprietaireUser->id.'/details')}}">
 														{{$materiel->proprietaireUser->name}} {{$materiel->proprietaireUser->prenom}}
 													</a>
+													@elseif($materiel->proprietaireEquipe)
+													@foreach($equipes as $equipe)
+													@if($equipe->id==$materiel->proprietaireEquipe)
+													<a href="{{ url('equipes/'.$materiel->proprietaireEquipe.'/details')}}">
+														{{$equipe->intitule}}
+													</a>
+													<?php break; ?>
+													@endif
+													@endforeach
 													@else
 														Non affecté
 													@endif
@@ -463,9 +464,15 @@
 																						 @if($affectation->materiel_id==$materiel->id)
 																						 <tr>
 																							 <td>
+																								 @if($affectation->user_id)
 																								 <a href="{{url('membres/'.$affectation->user_id.'/details')}}">
 																								 	{{$affectation->name}} {{$affectation->prenom}}
 																								 </a>
+																								 @else
+																								 <a href="{{url('equipes/'.$affectation->proprietaireEquipe.'/details')}}">
+																								 {{$affectation->intitule}}
+																								</a>
+																								 @endif
 																							 </td>
 																							 <td>{{$affectation->from}}</td>
 
@@ -498,60 +505,83 @@
 																						 <h2>Modifier cet exemplaire</h2>
 																				 </div>
 																				 <div class="modal-footer">
-																						 <form class="form-inline" action="{{ url('exemplaires/'.$materiel->id.'/'.$materiel->category_id)}}"  method="POST">
+																						 <form class="well form-horizontal" action="{{ url('exemplaires/'.$materiel->id.'/'.$materiel->category_id)}}"  method="POST" >
 																								 @method('PUT')
 																								 @csrf
-																								 <div class="col-md-6">
-																									 <div class="form-group">
- 																											<label class="col-md-3 control-label">Numéro * </label>
- 																												<div class="col-md-9 selectContainer @if($errors->get('numero')) has-error @endif">
- 																													<div class="input-group">
- 																													<span class="input-group-addon"><i class="fa fa-lg fa-barcode"></i></span>
- 																													<input name="numero" placeholder="numéro" class="form-control"  type="number" value="{{$materiel->numero}}">
+																								 <fieldset style="text-align:center">
 
- 																													</div>
- 																													<span class="help-block">
- 																														@if($errors->get('numero'))
- 																															@foreach($errors->get('numero') as $message)
- 																																<li> {{ $message }} </li>
- 																															@endforeach
- 																														@endif
- 																												</span>
- 																												</div>
- 																											</div>
-																								 </div>
+																											 	<div class="form-group col-md-12" >
+		 																											<label class="col-md-3 control-label">Numéro * </label>
+		 																												<div class="col-md-9 selectContainer @if($errors->get('numero')) has-error @endif">
+		 																													<div class="input-group">
+		 																													<span class="input-group-addon"><i class="fa fa-lg fa-barcode"></i></span>
+		 																													<input name="numero" placeholder="numéro" class="form-control"  type="number" value="{{$materiel->numero}}">
 
-
-																								 <div class="col-md-6" >
-
-  																										<label class="col-md-3 ">Propriétaire </label>
-  																											<div class="col-md-9 selectContainer @if($errors->get('proprietaire')) has-error @endif" >
-  																												<div class="input-group " >
-  																												<span class="input-group-addon"><i class="fa fa-lg fa-user"></i></span>
-																													<select name="proprietaire" class="form-control">
-																														@if($materiel->proprietaireUser)
-																															<option value="{{$materiel->proprietaire}}" selected>{{$materiel->proprietaireUser->name}} {{$materiel->proprietaireUser->prenom}}</option>
-
-																														@endif
-																															<option></option>
-																														 @foreach($proprietaires as $p)
-																														<option value="{{$p->id}}">{{$p->name}} {{$p->prenom}}</option>
-																														 @endforeach
-																													</select>
+		 																													</div>
+		 																													<span class="help-block">
+		 																														@if($errors->get('numero'))
+		 																															@foreach($errors->get('numero') as $message)
+		 																																<li> {{ $message }} </li>
+		 																															@endforeach
+		 																														@endif
+		 																												</span>
+		 																												</div>
+		 																										</div>
 
 
-  																												</div>
-  																												<span class="help-block">
-  																													@if($errors->get('proprietaire'))
-  																														@foreach($errors->get('proprietaire') as $message)
-  																															<li> {{ $message }} </li>
-  																														@endforeach
-  																													@endif
-  																											</span>
-  																											</div>
+																													 <div class="form-group col-md-12">
+									 																						<label class="col-md-3 control-label">Type proprietaire </label>
+									 																							<div class="col-md-9 selectContainer">
+									 																								<div class="input-group">
+									 																									<span class="input-group-addon"><i class="fa fa-lg fa-user"></i></span>
+									 																									<select name="type_proprietaire" class="form-control edit_proprietaire_type">
 
-																								 </div>
+									 																										<option value="" ></option>
+									 																										<option value="membre" 	@if($materiel->proprietaire) selected @endif >Membre</option>
+									 																										<option value="equipe" 	@if($materiel->proprietaireEquipe) selected @endif>Equipe</option>
+									 																									</select>
+									 																								</div>
+									 																							</div>
+									 																						</div>
 
+
+																													<div class="form-group edit_proprietaire_result">
+			  																										<label class="col-md-3 ">Propriétaire </label>
+			  																											<div class="col-md-9 selectContainer @if($errors->get('proprietaire')) has-error @endif" >
+			  																												<div class="input-group " >
+			  																												<span class="input-group-addon"><i class="fa fa-lg fa-user"></i></span>
+																																<select name="proprietaire" class="form-control">
+																																	@if($materiel->proprietaireUser)
+																																		<option value="{{$materiel->proprietaire}}" selected>{{$materiel->proprietaireUser->name}} {{$materiel->proprietaireUser->prenom}}</option>
+																																		@elseif($materiel->proprietaireEquipe)
+																																		<option value="{{$materiel->proprietaireEquipe}}" selected>{{$materiel->proprietaire_equipe->intitule}}</option>
+																																	@endif
+																																		<option></option>
+																																	@if($materiel->proprietaireUser)
+																																	 @foreach($proprietaires as $p)
+																																	<option value="{{$p->id}}">{{$p->name}} {{$p->prenom}}</option>
+																																	 @endforeach
+																																	  @else
+																																		@foreach($equipes as $e)
+																																	 <option value="{{$e->id}}">{{$e->intitule}}</option>
+																																		@endforeach
+																																	 @endif
+																																</select>
+
+
+			  																												</div>
+			  																												<span class="help-block">
+			  																													@if($errors->get('proprietaire'))
+			  																														@foreach($errors->get('proprietaire') as $message)
+			  																															<li> {{ $message }} </li>
+			  																														@endforeach
+			  																													@endif
+			  																											</span>
+			  																											</div>
+
+																											 			</div>
+
+																								 </fieldset>
 
  																									<div class="row" style="text-align: center;padding-top: 30px; ">
  																										   <button type="button" class="btn btn-light" data-dismiss="modal">Annuler</button>

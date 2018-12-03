@@ -24,5 +24,9 @@ class Equipe extends Model
 		{
 			return $this->belongsTo('App\Parametre');
 		}
+		public function materiels()
+		{
+				return $this->hasMany('App\Materiel');
+		}
 
 }
