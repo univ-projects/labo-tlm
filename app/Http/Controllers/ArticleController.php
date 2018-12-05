@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Article;
 use App\User;
 use App\ArticleUser;
+use App\ArticleContact;
 use App\Parametre;
+use App\Contact;
 use Auth;
 use App\Http\Requests\articleRequest;
 use Illuminate\Http\UploadedFile;
@@ -51,8 +53,15 @@ class ArticleController extends Controller
             {
 	 	$membres = User::all();
 	 	$article = Article::all();
+		$contacts = Contact::all();
 
-	 	return view('article.create',['membres'=>$membres],['labo'=>$labo]);
+		return view('article.create')->with([
+				'membres' => $membres,
+				'labo'=>$labo,
+				'contacts'=>$contacts
+
+		]);;
+
 			 }
             // else{
             //     return view('errors.403');
@@ -90,8 +99,8 @@ class ArticleController extends Controller
 	 	$article->doi = $request->input('doi');
 	 	$article->membres_ext = $request->input('membres_ext');
 	 	$article->deposer = Auth::user()->id;
-	 	
-	 	
+
+
 	 	$article->save();
 
         $members =  $request->input('membre');
@@ -100,9 +109,19 @@ class ArticleController extends Controller
 		 	$article_user->article_id = $article->id;
 		 	$article_user->user_id = $value;
 	 	    $article_user->save();
+         }
 
-         } 
+				 $membres_ext =  $request->input('membres_ext');
+				 if (isset($membres_ext)) {
 
+					 foreach ($membres_ext as $key => $value) {
+						$article_contact = new ArticleContact();
+						$article_contact->article_id = $article->id;
+						$article_contact->contact_id = $value;
+						$article_contact->save();
+							}
+
+				 }
 	 	return redirect('articles');
 
 	 	//return response()->json(["arr"=>$request->input('membre')]);
@@ -127,7 +146,7 @@ class ArticleController extends Controller
 
     //modifier et inserer
     public function update(articleRequest $request ,$id){
-    
+
     	$article = Article::find($id);
     	$labo = Parametre::find('1');
 
@@ -153,26 +172,26 @@ class ArticleController extends Controller
         $article->detail = '/uploads/article/'.$file_name;
 
         }
-	 	
+
 	 	$article->save();
 
 	 	$members =  $request->input('membre');
         $article_user = ArticleUser::where('article_id',$id);
         $article_user->delete();
-        
+
         foreach ($members as $key => $value) {
             $article_user = new ArticleUser();
             $article_user->article_id = $article->id;
             $article_user->user_id = $value;
             $article_user->save();
 
-         } 
+         }
 
-	 	
+
 
 	 	return redirect('articles');
     }
-    
+
     //supprimer un article
     public function destroy($id){
 

@@ -215,6 +215,25 @@
                     <span>Evènements</span></a>
                   </li>
 
+
+                  <li class="treeview {{{ (Request::is('partenaires/*') ? 'class=active' : '') }}} {{{ (Request::is('partenaires') ? 'class=active' : '') }}} {{{ (Request::is('contacts/*') ? 'class=active' : '') }}} {{{ (Request::is('contacts') ? 'class=active' : '') }}}">
+                    <a href="#">
+                      <i class="fa fa-handshake-o"></i> <span>Partenaires</span>
+                      <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                          </span>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li {{{ (Request::is('partenaires/*') ? 'class=active' : '') }}} {{{ (Request::is('partenaires') ? 'class=active' : '') }}}>
+                        <a href="{{url('partenaires')}}"><i class="fa fa-id-badge"></i> Liste des partenaires</a>
+                      </li>
+                      <li {{{ (Request::is('contacts/*') ? 'class=active' : '') }}} {{{ (Request::is('contacts') ? 'class=active' : '') }}}>
+                        <a href="{{url('contacts')}}"><i class="fa fa-list"></i> Liste des contacts</a>
+                      </li>
+                    </ul>
+                  </li>
+
+
               @if(Auth::user()->role->nom == 'admin' )
               <li {{{ (Request::is('materiels/*') ? 'class=active' : '') }}} {{{ (Request::is('materiels') ? 'class=active' : '') }}}>
                 <a href="{{url('materiels')}}">
@@ -224,12 +243,7 @@
               </li>
               @endif
 
-              <li {{{ (Request::is('partenaires/*') ? 'class=active' : '') }}} {{{ (Request::is('partenaires') ? 'class=active' : '') }}}>
-                <a href="{{url('partenaires')}}">
-                  <i class="fa fa-handshake-o"></i>
-                  <span>Partenaires</span>
-                </a>
-              </li>
+
 
 
                 @if(Auth::user()->role->nom == 'admin' )

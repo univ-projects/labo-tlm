@@ -1,15 +1,15 @@
 @extends('layouts.master')
 
- @section('title','LRI | Détails actualités')
+ @section('title','LRI | Détails projet')
 
 @section('header_page')
       <h1>
-        Actualité
+        Projet
         <small>Détails</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-        <li><a href="{{url('actualites')}}">Actualités</a></li>
+        <li><a href="{{url('projets')}}">Projets</a></li>
         <li class="active">Détails</li>
       </ol>
 @endsection
@@ -34,28 +34,28 @@
                   </div>
                   <div class="col-md-9">
                     <p class="text-muted">
-                      {{$actualite->titre}}
+                      {{$projet->intitule}}
 
                     </p>
                   </div>
                 </div>
                 <div class="row container">
                   <div class="col-md-3">
-                    <strong>Contenu</strong>
+                    <strong>Résumé</strong>
                   </div>
                   <div class="col-md-9">
                     <p class="text-muted">
-                     {{$actualite->contenu}}
+                     {{$projet->resume}}
                     </p>
                   </div>
                 </div>
                 <div class="row container">
                   <div class="col-md-3">
-                    <strong>Photo</strong>
+                    <strong>Type</strong>
                   </div>
                   <div class="col-md-9">
                     <p class="text-muted">
-                      <img src="{{asset($actualite->photo)}}" alt="Actualité photo">
+                      {{$projet->type}}
                     </p>
                   </div>
                 </div>
@@ -64,28 +64,28 @@
                   <hr>
 
                   <div class="col-md-3">
-                    <strong><i class="fa fa-group  margin-r-5"></i>Auteur</strong>
+                    <strong><i class="fa fa-group  margin-r-5"></i>Partenaires</strong>
                   </div>
                   <div class="col-md-9">
                     <p class="text-muted">
-                      {{$actualite->proprietaireUser->name}} {{$actualite->proprietaireUser->prenom}}
+                      {{$projet->partenaires}}
                     </p>
                   </div>
 
                   <strong><i class="margin-r-5"></i></strong>
                 <hr>
                 <div class="col-md-3">
-                  <strong><i class="fa fa-user  margin-r-5"></i>Chef du actualite</strong>
+                  <strong><i class="fa fa-user  margin-r-5"></i>Chef du projet</strong>
                  </div>
                   <div class="col-md-9">
-                    <a href="{{url('membres/'.$actualite->chef_id.'/details')}}">{{$actualite->chef->name}} {{$actualite->chef->prenom}}</a>
+                    <a href="{{url('membres/'.$projet->chef_id.'/details')}}">{{$projet->chef->name}} {{$projet->chef->prenom}}</a>
                   </div>
 
                 <strong><i class="margin-r-5"></i></strong>
                   <hr>
 
                 <div class="col-md-3">
-                  <strong><i class="fa fa-group  margin-r-5"></i>Membres du actualite</strong>
+                  <strong><i class="fa fa-group  margin-r-5"></i>Membres du projet</strong>
                  </div>
                   <div class="col-md-9">
                     @foreach($membres as $membre)
@@ -98,23 +98,23 @@
 
                   <strong><i class="margin-r-5"></i></strong>
                 <hr>
-                @if($actualite->lien)
+                @if($projet->lien)
                 <div class="row">
                 <div class="col-md-3">
                   <strong><i class="fa fa-link  margin-r-5"></i>Lien</strong>
                  </div>
                   <div class="col-md-9">
-                    <a href="#">{{$actualite->lien}}</a>
+                    <a href="#">{{$projet->lien}}</a>
                   </div>
                 </div>
                 @endif
-                @if($actualite->detail)
+                @if($projet->detail)
                 <div class="row" style="margin-top: 10px">
                 <div class="col-md-3">
                   <strong><i class="fa fa-link  margin-r-5"></i>Details</strong>
                  </div>
                   <div class="col-md-9">
-                    <a href="{{asset($actualite->detail)}}">Lien fichier</a>
+                    <a href="{{asset($projet->detail)}}">Lien fichier</a>
                   </div>
                 </div>
                 @endif

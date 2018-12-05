@@ -140,7 +140,7 @@
 
                   <div class="row" style="margin-top: 10px">
                   <div class="col-md-3">
-                    <strong><i class="fa fa-lg fa-barcode margin-r-5"></i>Quantité </strong>
+                    <strong><i class="fa fa-lg fa-sort-amount-asc  margin-r-5"></i>Quantité </strong>
                   </div>
                   <div class="col-md-9">
                     <p class="text-muted">
@@ -255,8 +255,6 @@
 
 											<div class="col-md-6">
 
-
-													<div class="form-group">
 														<div class="form-group">
 																<label class="col-md-3 control-label">Photo</label>
 
@@ -269,7 +267,7 @@
 																			</div>
 																		</div>
 														</div>
-													</div>
+
 
 											</div>
 

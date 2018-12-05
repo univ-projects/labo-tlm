@@ -117,10 +117,27 @@
                   </div>
 
                   <div class="form-group ">
+                         <label class="col-xs-3 control-label">Membres externes </label>
+                         <div class="col-xs-9 inputGroupContainer ">
+                           <div style="width: 70%">
+                             <select name="membres_ext" class="form-control select2" multiple="multiple">
+
+                                @foreach($contacts as $contact)
+                               <option value="{{$contact->id}}">
+                                 {{$contact->nom}} {{ $contact->prenom}}
+                               </option>
+                                @endforeach
+                             </select>
+
+                           </div>
+                         </div>
+                   </div>
+
+                  <div class="form-group ">
                         <label class="col-xs-3 control-label">Membres externes</label>
                         <div class="col-xs-9 inputGroupContainer">
                           <div style="width: 70%">
-                            <input  name="membres_ext" class="form-control" placeholder="Saisir les noms des membres externes separés par ','" type="text" value="{{old('membres_ext')}}">
+                            <input  name="" class="form-control" placeholder="Saisir les noms des membres externes separés par ','" type="text" value="{{old('membres_ext')}}">
                           </div>
                         </div>
                   </div>

@@ -20,6 +20,7 @@ class CreateContactTable extends Migration
             $table->string('fonction')->nullable();
             $table->string('email')->nullable();
             $table->string('num_tel')->nullable();
+            $table->string('photo');
             $table-> integer('partenaire_id')->unsigned();
             $table-> foreign('partenaire_id')->references('id')->on('partenaires')->onDelete('set null');
             $table->timestamps();

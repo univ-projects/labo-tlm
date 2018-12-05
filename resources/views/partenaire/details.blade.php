@@ -105,6 +105,7 @@
               @if(Auth::user()->role->nom == 'admin' )
 
               <li><a href="#modifier" data-toggle="tab">Modifier</a></li>
+              <li><a href="#contact" data-toggle="tab">Contacts</a></li>
               @endif
             </ul>
 
@@ -201,6 +202,7 @@
           </ul>
         </div>
       </div>
+
 
       <div class="tab-pane" id="modifier">
           <form class="well form-horizontal" action="{{url('partenaires/'. $partenaire->id) }} " method="post"  id="contact_form" enctype="multipart/form-data">
@@ -354,6 +356,58 @@
               </div>
             </form>
       </div>
+
+      <div class="tab-pane" id="contact" style="padding:25px 0 25px 0">
+
+
+
+        <table id="example2" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th><i class="fa fa-lg fa-user margin-r-5"></i>Nom</th>
+              <th><i class="fa fa-lg fa-user margin-r-5"></i>Prénom</th>
+              <th><i class="fa fa-lg fa-tasks margin-r-5"></i>Fonction</th>
+              <th><i class="fa fa-lg fa-envelope margin-r-5"></i>Email</th>
+              <th><i class="fa fa-lg fa-phone margin-r-5"></i>Téléphone</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($contacts as $contact)
+            <tr>
+
+              <td>{{$contact->nom}}</td>
+              <td>{{$contact->prenom}}</td>
+              <td>{{$contact->fonction}}</td>
+              <td>{{$contact->email}}</td>
+              <td>{{$contact->telephone}}</td>
+              <td>
+                <div class="btn-group">
+
+                      <a href="{{ url('contacts/'.$contact->id.'/details')}}" class="btn btn-info">
+                        <i class="fa fa-eye"></i>
+                      </a>
+                    </div>
+                </td>
+
+            </tr>
+            @endforeach
+
+          </tbody>
+          <tfoot>
+            <tr>
+              <th><i class="fa fa-lg fa-user margin-r-5"></i>Nom</th>
+              <th><i class="fa fa-lg fa-user margin-r-5"></i>Prénom</th>
+              <th><i class="fa fa-lg fa-tasks margin-r-5"></i>Fonction</th>
+              <th><i class="fa fa-lg fa-envelope margin-r-5"></i>Email</th>
+              <th><i class="fa fa-lg fa-phone margin-r-5"></i>Téléphone</th>
+              <th>Action</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+
       </div>
       </div>
     </div>
@@ -386,9 +440,11 @@
                   <ul class="users-list clearfix">
                     @foreach($contacts as $contact)
                     <li>
+                      <a  href="{{url('contacts/'.$contact->id.'/details')}}">
                       <img src="{{asset($contact->photo)}}" alt="User Image">
-                      <a class="users-list-name" href="{{url('contacts/'.$contact->id.'/details')}}">{{$contact->name}}</a>
+                        <span class="users-list-name"> {{$contact->nom}}</span>
                       <span class="users-list-date">{{$contact->prenom}}</span>
+                      </a>
                     </li>
                     @endforeach
                   </ul>

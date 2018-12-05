@@ -1,16 +1,16 @@
 @extends('layouts.master')
 
-@section('title','LRI | Ajouter un partenaire')
+@section('title','LRI | Ajouter un contact')
 
 @section('header_page')
 
       <h1>
-        Partenaires
+        Contactes
         <small>Nouveau</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-        <li><a href="{{url('partenaires')}}">Partenaires</a></li>
+        <li><a href="{{url('contacts')}}">Contacts</a></li>
         <li class="active">Ajouter</li>
       </ol>
 
@@ -101,45 +101,22 @@
 
           <div class="container col-xs-12">
 
-            <form class="well form-horizontal" action=" {{url('partenaires')}} " method="post"  id="contact_form" enctype="multipart/form-data">
+            <form class="well form-horizontal" action=" {{url('contacts')}} " method="post"  id="contact_form" enctype="multipart/form-data">
               {{ csrf_field() }}
               <fieldset>
 
                 <!-- Form Name -->
-                <legend><center><h2><b>Nouveau partenaire</b></h2></center></legend><br>
+                <legend><center><h2><b>Nouveau contact</b></h2></center></legend><br>
 
 
                   <div class="form-group">
-                        <label class="col-xs-3 control-label">Intitulé (*)</label>
-                        <div class="col-xs-9 inputGroupContainer @if($errors->get('intitule')) has-error @endif">
+                        <label class="col-xs-3 control-label">Nom (*)</label>
+                        <div class="col-xs-9 inputGroupContainer @if($errors->get('name')) has-error @endif">
                           <div style="width: 70%">
-                            <input  name="intitule" class="form-control" placeholder="intitule" type="text" value="{{old('titre')}}">
+                            <input  name="name" class="form-control" placeholder="Nom" type="text" value="{{old('name')}}">
                               <span class="help-block">
-                                @if($errors->get('intitule'))
-                                  @foreach($errors->get('intitule') as $message)
-                                    <li> {{ $message }} </li>
-                                  @endforeach
-                                @endif
-                            </span>
-
-                          </div>
-                        </div>
-                  </div>
-
-                  <div class="form-group">
-                        <label class="col-xs-3 control-label">Type (*)</label>
-                        <div class="col-xs-9 inputGroupContainer @if($errors->get('type')) has-error @endif">
-                          <div style="width: 70%">
-                            <select class="form-control" name="type">
-                                <option value="organisme">Organisme</option>
-                                <option value="laboratoire">Laboratoire</option>
-                                <option value="entreprise">Entreprise</option>
-                                <option value="administration">Administration</option>
-                                <option value="autre">Autre</option>
-                            </select>
-                              <span class="help-block">
-                                @if($errors->get('type'))
-                                  @foreach($errors->get('type') as $message)
+                                @if($errors->get('name'))
+                                  @foreach($errors->get('name') as $message)
                                     <li> {{ $message }} </li>
                                   @endforeach
                                 @endif
@@ -151,21 +128,13 @@
 
 
                   <div class="form-group">
-                      <label class="col-md-3 control-label">Pays (*)</label>
-                      <div class="col-md-9 inputGroupContainer" >
-                        <div id="select-country" data-input-name="pays" data-selected-country="DZ"></div>
-                      </div>
-                  </div>
-
-
-                  <div class="form-group">
-                        <label class="col-xs-3 control-label">Ville (*)</label>
-                        <div class="col-xs-9 inputGroupContainer @if($errors->get('ville')) has-error @endif">
+                        <label class="col-xs-3 control-label">Prénom (*)</label>
+                        <div class="col-xs-9 inputGroupContainer @if($errors->get('prenom')) has-error @endif">
                           <div style="width: 70%">
-                            <input  name="ville" class="form-control" placeholder="Ville" type="text" value="{{old('ville')}}">
+                            <input  name="prenom" class="form-control" placeholder="Prénom" type="text" value="{{old('prenom')}}">
                               <span class="help-block">
-                                @if($errors->get('ville'))
-                                  @foreach($errors->get('ville') as $message)
+                                @if($errors->get('prenom'))
+                                  @foreach($errors->get('prenom') as $message)
                                     <li> {{ $message }} </li>
                                   @endforeach
                                 @endif
@@ -177,32 +146,67 @@
 
 
                   <div class="form-group">
-                      <label class="col-md-3 control-label">Résumé</label>
-                      <div class="col-md-9 inputGroupContainer @if($errors->get('resume')) has-error @endif" >
-                        <div style="width: 70%">
-                          <textarea name="resume" class="form-control" rows="3" placeholder="Entrez ..." id="txt">{{old('resume')}}</textarea>
+                      <label class="col-md-3 control-label">Partenaire</label>
+                        <div class="col-md-9 selectContainer @if($errors->get('partenaire_id')) has-error @endif">
+                          <div class="input-group" style="width: 70%">
+                              <select name="partenaire_id" class="form-control selectpicker">
+                                <option></option>
+                                @foreach($partenaires as $partenaire)
+                                <option value="{{$partenaire->id}}">{{$partenaire->nom}}</option>
+                                @endforeach
 
-                            <span class="help-block">
-                                @if($errors->get('resume'))
-                                  @foreach($errors->get('resume') as $message)
-                                    <li> {{ $message }} </li>
-                                  @endforeach
-                                @endif
-                            </span>
-
+                              </select>
+                              <span class="help-block">
+                            @if($errors->get('partenaire_id'))
+                              @foreach($errors->get('partenaire_id') as $message)
+                                <li> {{ $message }} </li>
+                              @endforeach
+                            @endif
+                        </span>
+                          </div>
                         </div>
-                      </div>
                   </div>
 
 
                   <div class="form-group">
-                        <label class="col-xs-3 control-label">Lien</label>
+                        <label class="col-xs-3 control-label">Fonction</label>
                         <div class="col-xs-9 inputGroupContainer ">
                           <div style="width: 70%">
-                            <input  name="lien" class="form-control" placeholder="http://" type="text" value="{{old('lien')}}">
+                            <input  name="fonction" class="form-control"  type="text" value="{{old('fonction')}}">
                           </div>
                         </div>
                   </div>
+
+
+
+                  <div class="form-group">
+                        <label class="col-xs-3 control-label">Email (*)</label>
+                        <div class="col-xs-9 inputGroupContainer @if($errors->get('email')) has-error @endif">
+                          <div style="width: 70%">
+                            <input  name="email" class="form-control" placeholder="exemple@xyz.a" type="email" value="{{old('email')}}">
+                              <span class="help-block">
+                                @if($errors->get('email'))
+                                  @foreach($errors->get('email') as $message)
+                                    <li> {{ $message }} </li>
+                                  @endforeach
+                                @endif
+                            </span>
+
+                          </div>
+                        </div>
+                  </div>
+
+      
+
+                  <div class="form-group">
+                          <label class="col-md-3 control-label">N° Téléphone</label>
+                            <div class="col-md-9 inputGroupContainer">
+                              <div class="input-group" style="width: 70%">
+                                <input name="num_tel" type="text" class="form-control" data-inputmask='"mask": "(999) 999-999-999"' data-mask value="">
+                              </div>
+                          </div>
+                    </div>
+
 
                   <div class="form-group">
                       <label class="col-md-3 control-label">Photo</label>
@@ -212,7 +216,7 @@
                               <div class="hvr-profile-img">
                                 <input type="file" name="img" id='actualite-photo'  class="upload w180" title="Dimensions 180 X 180" id="imag">
                               </div>
-                              <i class="fa fa-camera"> <h4>Importer le logo du partenaire</h4></i>
+                              <i class="fa fa-camera"> <h4>Importer une photo</h4></i>
                             </div>
 
                           </div>

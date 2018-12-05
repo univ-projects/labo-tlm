@@ -141,6 +141,13 @@ Route::resource('partenaires', 'PartenaireController',[
 
 
 
+Route::get('contacts/{id}/details','ContactController@details');
+Route::resource('contacts', 'ContactController',[
+    'only' => ['index', 'create','store','edit','update','destroy']
+]);
+
+
+
 
 
 Auth::routes();
