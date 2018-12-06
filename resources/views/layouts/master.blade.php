@@ -290,6 +290,7 @@
 
    <!-- statistiques start  -->
   <div class="content-wrapper" style="padding-top: 50px">
+
     <!-- Content Header (Page header) -->
         <section class="content-header" >
              @yield('header_page')
@@ -393,6 +394,7 @@
 <script>
 $('#txt').wysihtml5();
 $('#txt2').wysihtml5();
+
   $(function () {
     //Initialize Select2 Elements
     $('.select2').select2()
@@ -702,6 +704,138 @@ $(document).ready(function(){
   });
 });
 </script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  $('.partenaire_type').change(function(){
+    if($(this).val() != '')
+    {
+
+      var type_partenaire = $(this).val();
+
+
+
+      $.ajax({
+
+        url: '/postajaxPartenaireContact',
+        type: 'POST',
+                      /* send the csrf-token and the input to the controller */
+          data: {_token: CSRF_TOKEN, type_partenaire:type_partenaire},
+          dataType: 'JSON',
+          success: function (data) {
+                      $('#contact_result').html(data);
+                    }
+
+      })
+    }
+    else{
+      $('#contact_result').html('');
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  $('.edit_partenaire_type').change(function(){
+    if($(this).val() != '')
+    {
+
+      var type_partenaire = $(this).val();
+
+
+
+      $.ajax({
+
+        url: '/postajaxPartenaireContact',
+        type: 'POST',
+                      /* send the csrf-token and the input to the controller */
+          data: {_token: CSRF_TOKEN, type_partenaire:type_partenaire},
+          dataType: 'JSON',
+          success: function (data) {
+
+                      $('#edit_contact_result').html(data);
+                    }
+
+      })
+    }
+    else{
+      $('#edit_contact_result').html('');
+    }
+  });
+});
+</script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  $('.partenaire_type2').change(function(){
+    if($(this).val() != '')
+    {
+
+      var type_partenaire = $(this).val();
+
+
+
+      $.ajax({
+
+        url: '/postajaxPartenaireContact2',
+        type: 'POST',
+                      /* send the csrf-token and the input to the controller */
+          data: {_token: CSRF_TOKEN, type_partenaire:type_partenaire},
+          dataType: 'JSON',
+          success: function (data) {
+                      $('#contact_result2').html(data);
+                    }
+
+      })
+    }
+    else{
+      $('#contact_result2').html('');
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  $('.edit_partenaire_type2').change(function(){
+    if($(this).val() != '')
+    {
+
+      var type_partenaire = $(this).val();
+
+
+
+      $.ajax({
+
+        url: '/postajaxPartenaireContact2',
+        type: 'POST',
+                      /* send the csrf-token and the input to the controller */
+          data: {_token: CSRF_TOKEN, type_partenaire:type_partenaire},
+          dataType: 'JSON',
+          success: function (data) {
+                      $('#edit_contact_result2').html(data);
+                    }
+
+      })
+    }
+    else{
+      $('#edit_contact_result2').html('');
+    }
+  });
+});
+</script>
+
 
 
 <script type="text/javascript">

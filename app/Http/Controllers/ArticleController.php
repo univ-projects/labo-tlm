@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+
+use Illuminate\Support\Facades\Hash;
+use Illuminate\support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Article;
 use App\User;
 use App\ArticleUser;
 use App\ArticleContact;
 use App\Parametre;
+use App\Partenaire;
 use App\Contact;
 use Auth;
 use App\Http\Requests\articleRequest;
@@ -37,11 +41,21 @@ class ArticleController extends Controller
     	$labo = Parametre::find('1');
 	 	$article = Article::find($id);
 	 	$membres = Article::find($id)->users()->orderBy('name')->get();
+		$membres_ext =DB::table('articles')
+					->leftjoin('article_contact', 'articles.id', '=', 'article_contact.article_id')
+					->join('contacts', 'contacts.id', '=', 'article_contact.contact_id')
+					->join('partenaires', 'partenaires.id', '=', 'contacts.partenaire_id')
+					->select('*', DB::raw('contacts.nom as contactNom'))
+					->where('articles.id',$id)
+					->get();
+
+					// print_r(reset($membres_ext));die();
 
 	 	return view('article.details')->with([
 	 		'article' => $article,
 	 		'membres'=>$membres,
 	 		'labo'=>$labo,
+			'membres_ext'=>$membres_ext
 	 	]);;
     }
 
@@ -54,11 +68,13 @@ class ArticleController extends Controller
 	 	$membres = User::all();
 	 	$article = Article::all();
 		$contacts = Contact::all();
+		$partenaires = Partenaire::all();
 
 		return view('article.create')->with([
 				'membres' => $membres,
 				'labo'=>$labo,
-				'contacts'=>$contacts
+				'contacts'=>$contacts,
+				'partenaires'=>$partenaires
 
 		]);;
 
@@ -97,7 +113,8 @@ class ArticleController extends Controller
 	 	$article->mois = $request->input('mois');
 	 	$article->annee = $request->input('annee');
 	 	$article->doi = $request->input('doi');
-	 	$article->membres_ext = $request->input('membres_ext');
+		// $membres_ext =  $request->input('membres_ext');
+	 	// $article->membres_ext = $request->input('membres_ext');
 	 	$article->deposer = Auth::user()->id;
 
 
@@ -110,9 +127,10 @@ class ArticleController extends Controller
 		 	$article_user->user_id = $value;
 	 	    $article_user->save();
          }
+				 $membres_ext=$request->input('membres_ext');
 
-				 $membres_ext =  $request->input('membres_ext');
 				 if (isset($membres_ext)) {
+
 
 					 foreach ($membres_ext as $key => $value) {
 						$article_contact = new ArticleContact();
@@ -134,6 +152,8 @@ class ArticleController extends Controller
 	 	$article = Article::find($id);
 	 	$membres = User::all();
 	 	$labo = Parametre::find('1');
+		$contacts = Contact::all();
+		$partenaires = Partenaire::all();
 
 	 	$this->authorize('update', $article);
 
@@ -141,6 +161,8 @@ class ArticleController extends Controller
 	 		'article' => $article,
 	 		'membres'=>$membres,
 	 		'labo'=>$labo,
+			'contacts'=>$contacts,
+			'partenaires'=>$partenaires
 	 	]);;
     }
 
@@ -186,6 +208,19 @@ class ArticleController extends Controller
             $article_user->save();
 
          }
+				 $membres_ext=$request->input('membres_ext');
+				 $article_contact = ArticleContact::where('article_id',$id);
+				 $article_contact->delete();
+
+				 if (isset($membres_ext)) {
+
+					 foreach ($membres_ext as $key => $value) {
+						$article_contact = new ArticleContact();
+						$article_contact->article_id = $article->id;
+						$article_contact->contact_id = $value;
+						$article_contact->save();
+							}
+						}
 
 
 
@@ -203,4 +238,37 @@ class ArticleController extends Controller
         return redirect('articles');
 
     }
+
+		public function postType(Request $request)
+	  {
+
+				 $partenaires_ext = $request->type_partenaire;
+
+					 if (isset($partenaires_ext)) {
+
+								 $cpt=0;
+								 $contacts=array();
+							foreach ($partenaires_ext as $key => $value) {
+								$contactsPartenaire=DB::table('contacts')
+														->where('partenaire_id',$value)
+														->get();
+								array_push($contacts,$contactsPartenaire);
+							}
+							$contacts=reset($contacts);
+
+					 }
+
+
+					$output='';
+	       if(isset($contacts)){
+
+								 foreach ($contacts as $contact) {
+									 $output.=" <option value=\"$contact->id\">$contact->nom $contact->prenom</option>";
+								 }
+
+	       }
+
+	       return response()->json($output);
+	  }
+
 }

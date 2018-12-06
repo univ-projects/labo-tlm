@@ -121,7 +121,7 @@
               @if(Auth::id() == $contact->id || Auth::user()->role->nom == 'admin' )
               <li ><a href="#activity1" data-toggle="tab">Modifier</a></li>
               @endif
-              <li><a href="#timeline" data-toggle="tab">Articles</a></li>
+              <li><a href="#timeline" data-toggle="tab">Participations</a></li>
             </ul>
 
             <div class="tab-content">
@@ -319,28 +319,21 @@
 								<table id="example2" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th><i class="fa fa-lg fa-user margin-r-5"></i>Contact</th>
-											<th><i class="fa fa-lg fa-tasks margin-r-5"></i>Fonction</th>
-											<th><i class="fa fa-lg fa-envelope margin-r-5"></i>Email</th>
-											<th><i class="fa fa-lg fa-phone margin-r-5"></i>Téléphone</th>
-											<th><i class="fa fa-lg fa-envelope margin-r-5"></i>Type de participation</th>
-
-											<th>Action</th>
+											<th><i class="fa fa-lg fa-tasks margin-r-5"></i>Type</th>
+											<th><i class="fa fa-lg fa-tag margin-r-5"></i>Titre</th>
+											<th><i class="fa fa-lg fa-comment margin-r-5"></i>Déscription</th>
+											<th>Voir</th>
 										</tr>
 									</thead>
 									<tbody>
 										@foreach($participants as $contact)
 										<tr>
-
-											<td>{{$contact->nom}} {{$contact->prenom}}</td>
-											<td>{{$contact->fonction}}</td>
-											<td>{{$contact->email}}</td>
-											<td>{{$contact->num_tel}}</td>
-											<td>{{$contact->type}}</td>
+											<td style="width:100px">{{$contact->type}}</td>
+											<td>{{ str_limit($contact->titre, $limit = 60, $end = '...') }}</td>
+											<td>{{ str_limit($contact->resume, $limit = 60, $end = '...') }}</td>
 											<td>
 												<div class="btn-group">
-
-															<a href="{{ url('contacts/'.$contact->id.'/details')}}" class="btn btn-info">
+															<a href="{{ url(strtolower($contact->type).'s/'.$contact->id.'/details')}}" class="btn btn-info">
 																<i class="fa fa-eye"></i>
 															</a>
 														</div>
@@ -352,11 +345,10 @@
 									</tbody>
 									<tfoot>
 										<tr>
-											<th><i class="fa fa-lg fa-user margin-r-5"></i>Contact</th>
-											<th><i class="fa fa-lg fa-tasks margin-r-5"></i>Fonction</th>
-											<th><i class="fa fa-lg fa-envelope margin-r-5"></i>Type de participation</th>
-											<th><i class="fa fa-lg fa-phone margin-r-5"></i>Téléphone</th>
-											<th>Action</th>
+											<th><i class="fa fa-lg fa-tasks margin-r-5"></i>Type</th>
+											<th><i class="fa fa-lg fa-tag margin-r-5"></i>Titre</th>
+											<th><i class="fa fa-lg fa-comment margin-r-5"></i>Déscription</th>
+											<th>Voir</th>
 										</tr>
 									</tfoot>
 								</table>

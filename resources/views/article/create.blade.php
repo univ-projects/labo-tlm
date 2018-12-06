@@ -116,15 +116,16 @@
                         </div>
                   </div>
 
+
                   <div class="form-group ">
-                         <label class="col-xs-3 control-label">Membres externes </label>
+                         <label class="col-xs-3 control-label">Partenaires </label>
                          <div class="col-xs-9 inputGroupContainer ">
                            <div style="width: 70%">
-                             <select name="membres_ext" class="form-control select2" multiple="multiple">
+                             <select name="partenaire_type" class="form-control select2 partenaire_type" multiple="multiple">
 
-                                @foreach($contacts as $contact)
-                               <option value="{{$contact->id}}">
-                                 {{$contact->nom}} {{ $contact->prenom}}
+                                @foreach($partenaires as $partenaire)
+                               <option value="{{$partenaire->id}}">
+                                 {{$partenaire->nom}}
                                </option>
                                 @endforeach
                              </select>
@@ -134,13 +135,17 @@
                    </div>
 
                   <div class="form-group ">
-                        <label class="col-xs-3 control-label">Membres externes</label>
-                        <div class="col-xs-9 inputGroupContainer">
-                          <div style="width: 70%">
-                            <input  name="" class="form-control" placeholder="Saisir les noms des membres externes separés par ','" type="text" value="{{old('membres_ext')}}">
-                          </div>
-                        </div>
-                  </div>
+                    <label class="col-xs-3 control-label">Membres éxternes </label>
+                    <div class="col-xs-9 inputGroupContainer ">
+                      <div style="width: 70%">
+                        <select name="membres_ext[]" class="form-control select2" multiple="multiple" id="contact_result">
+
+                        </select>
+                      </div>
+                    </div>
+                   </div>
+
+
 
 
                   <div class="form-group ">

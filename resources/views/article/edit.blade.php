@@ -16,7 +16,7 @@
 
 @section('asidebar')
 
-  
+
 
 @endsection
 
@@ -92,6 +92,40 @@
                       </div>
                     </div>
                   </div>
+
+									<div class="form-group ">
+												 <label class="col-xs-3 control-label">Partenaires </label>
+												 <div class="col-xs-9 inputGroupContainer ">
+													 <div style="width: 70%">
+														 <select name="partenaire_type" class="form-control select2 edit_partenaire_type" multiple="multiple">
+
+																@foreach($partenaires as $partenaire)
+															 <option value="{{$partenaire->id}}">
+																 {{$partenaire->nom}}
+															 </option>
+																@endforeach
+														 </select>
+
+													 </div>
+												 </div>
+									 </div>
+
+									<div class="form-group ">
+										<label class="col-xs-3 control-label">Membres éxternes </label>
+										<div class="col-xs-9 inputGroupContainer ">
+											<div style="width: 70%">
+												<select name="membres_ext[]" class="form-control select2" multiple="multiple" id="edit_contact_result">
+													<option>
+                             @foreach ($article->contacts as $contact)
+                              <option value="{{$contact->id}}" selected>
+                                  {{ $contact->nom }} {{ $contact->prenom }}
+                              </option>
+                            @endforeach
+                          </option>
+												</select>
+											</div>
+										</div>
+									 </div>
 
 
 

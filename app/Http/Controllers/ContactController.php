@@ -38,16 +38,22 @@ class ContactController extends Controller
     $labo = Parametre::find('1');
 
     $first = DB::table('project_contact')
-              ->select('*',DB::raw('\'Projet\' as type'))
-               ->leftJoin('contacts', 'contacts.id', '=', 'project_contact.contact_id');
+              ->select(DB::raw('\'Projet\' as type,project_id,projets.intitule as titre,resume,projets.id as id'))
+               ->leftJoin('projets', 'projets.id', '=', 'project_contact.project_id')
+               ->where('contact_id',$id);
 
     $participants = DB::table('article_contact')
-                ->select('*',DB::raw('\'Article\' as type'))
-                ->leftJoin('contacts', 'contacts.id', '=', 'article_contact.contact_id')
+
+
+                ->select(DB::raw('\'Article\' as type,article_id ,articles.titre as titre,resume,articles.id as id'))
+                ->leftJoin('articles', 'articles.id', '=', 'article_id')
                 ->unionAll($first)
+                ->where('contact_id',$id)
                 ->get();
 
-                // print_r($participants);die();
+
+
+                 // print_r($participants);die();
     // $participants = DB::table('project_contact')
     //
     //           ->fulljoin('contacts', 'contacts.id', '=', 'project_contact.contact_id')

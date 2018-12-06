@@ -95,14 +95,14 @@
                   </div>
 
 
-                  <div class="form-group ">
+                  <!-- <div class="form-group ">
                         <label class="col-xs-3 control-label">Partenaires</label>
                         <div class="col-xs-9 inputGroupContainer">
                           <div style="width: 70%">
                             <input  name="partenaires" class="form-control" placeholder="Partenaire" type="text" value="{{old('partenaires')}}">
                           </div>
                         </div>
-                  </div>
+                  </div> -->
 
                   <div class="form-group ">
                         <label class="col-xs-3 control-label">Chef du projet (*)</label>
@@ -144,6 +144,37 @@
                       </div>
                     </div>
                   </div>
+
+
+
+                  <div class="form-group ">
+                         <label class="col-xs-3 control-label">Partenaires </label>
+                         <div class="col-xs-9 inputGroupContainer ">
+                           <div style="width: 70%">
+                             <select name="partenaire_type" class="form-control select2 partenaire_type2" multiple="multiple">
+
+                                @foreach($partenaires as $partenaire)
+                               <option value="{{$partenaire->id}}">
+                                 {{$partenaire->nom}}
+                               </option>
+                                @endforeach
+                             </select>
+
+                           </div>
+                         </div>
+                   </div>
+
+                  <div class="form-group ">
+                    <label class="col-xs-3 control-label">Membres éxternes </label>
+                    <div class="col-xs-9 inputGroupContainer ">
+                      <div style="width: 70%">
+                        <select name="membres_ext[]" class="form-control select2" multiple="multiple" id="contact_result2">
+
+                        </select>
+                      </div>
+                    </div>
+                   </div>
+
 
 
                   <div class="form-group ">
