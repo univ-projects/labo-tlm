@@ -101,7 +101,7 @@
 
           <div class="container col-xs-12">
 
-            <form class="well form-horizontal" action=" {{url('articles/'. $article->id) }}" method="post"  id="contact_form">
+            <form class="well form-horizontal" action=" {{url('articles/'. $article->id) }}" method="post"  id="contact_form" enctype="multipart/form-data">
               <input type="hidden" name="_method" value="PUT">
             	{{ csrf_field() }}
               <fieldset>
@@ -278,7 +278,7 @@
 											<label class="col-md-3 control-label">Photo</label>
 
 													<div class="col-md-9 inputGroupContainer">
-														<div id='actualite-upload' style="background-image:url('{{asset($projet->photo)}}')">
+														<div id='actualite-upload' style="background-image:url('{{asset($article->photo)}}')">
 															<div class="hvr-profile-img">
 																<input type="file" name="img" id='actualite-photo'  class="upload w180" title="Dimensions 180 X 180" id="imag">
 															</div>
