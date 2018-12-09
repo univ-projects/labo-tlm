@@ -101,6 +101,16 @@ class ArticleController extends Controller
 
         }
 
+				if($request->hasFile('img')){
+						$file = $request->file('img');
+						$file_name = time().'.'.$file->getClientOriginalExtension();
+						$file->move(public_path('/uploads/photo/articles'),$file_name);
+
+				}
+				else{
+						$file_name="articleDefault.png";
+				}
+
 	 	$article->type = $request->input('type');
 	 	$article->titre = $request->input('titre');
 	 	$article->resume = $request->input('resume');
@@ -112,6 +122,7 @@ class ArticleController extends Controller
 	 	$article->ISBN = $request->input('isbn');
 	 	$article->mois = $request->input('mois');
 	 	$article->annee = $request->input('annee');
+		$article->photo = 'uploads/photo/articles/'.$file_name;
 	 	$article->doi = $request->input('doi');
 		// $membres_ext =  $request->input('membres_ext');
 	 	// $article->membres_ext = $request->input('membres_ext');
@@ -194,6 +205,18 @@ class ArticleController extends Controller
         $article->detail = '/uploads/article/'.$file_name;
 
         }
+				if($request->hasFile('img')){
+						$file = $request->file('img');
+						$file_name = time().'.'.$file->getClientOriginalExtension();
+						$file->move(public_path('/uploads/photo/articles'),$file_name);
+
+				}
+				else{
+						$file_name="articleDefault.png";
+				}
+
+
+		$article->photo = 'uploads/photo/articles/'.$file_name;
 
 	 	$article->save();
 

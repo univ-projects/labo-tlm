@@ -99,6 +99,7 @@ class UserController extends Controller
             $membre->lien_linkedin = $request->input('lien_linkedin');
             $membre->photo = 'uploads/photo/users/'.$file_name;
 
+
             $membre->save();
         return redirect('membres');
 
@@ -162,6 +163,7 @@ class UserController extends Controller
             {
           $membre->role_id = $request->role_id;
             }
+          $membre->photo = 'uploads/photo/users/'.$file_name;
 
         $membre->save();
 

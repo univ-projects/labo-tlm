@@ -107,6 +107,19 @@
 
                   @endif
 
+                  <strong><i class="margin-r-5"></i></strong>
+                <hr>
+                @if(strpos($projet->photo, 'Default') == false)
+                <div class="row">
+                <div class="col-md-3">
+                  <strong><i class="fa fa-link  margin-r-5"></i>Image</strong>
+                 </div>
+                  <div class="col-md-9">
+                    <img src="{{asset($projet->photo)}}" alt="{{$projet->intitule}}">
+                  </div>
+                </div>
+                @endif
+
 
                   <strong><i class="margin-r-5"></i></strong>
                 <hr>

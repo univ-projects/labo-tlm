@@ -89,13 +89,25 @@ class ProjetController extends Controller
             $file->move(public_path('/uploads/projet'),$file_name);
             $projet->detail = '/uploads/projet/'.$file_name;
         }
+        if($request->hasFile('img')){
+            $file = $request->file('img');
+            $file_name = time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('/uploads/photo/projets'),$file_name);
+
+        }
+        else{
+            $file_name="projetDefault.png";
+        }
 
 	 	$projet->intitule = $request->input('intitule');
 	 	$projet->resume = $request->input('resume');
 	 	$projet->type = $request->input('type');
+    $projet->type = $request->input('type');
+    $projet->photo = 'uploads/photo/projets/'.$file_name;
 	 	// $projet->partenaires = $request->input('partenaires');
 	 	$projet->lien = $request->input('lien');
         $projet->chef_id = $request->input('chef_id');
+
 
 
 
@@ -165,10 +177,21 @@ class ProjetController extends Controller
 
         }
 
+        if($request->hasFile('img')){
+            $file = $request->file('img');
+            $file_name = time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('/uploads/photo/projets'),$file_name);
+
+        }
+        else{
+            $file_name="projetDefault.png";
+        }
+
         $projet->intitule = $request->input('intitule');
         $projet->resume = $request->input('resume');
         $projet->type = $request->input('type');
-        $projet->partenaires = $request->input('partenaires');
+        // $projet->partenaires = $request->input('partenaires');
+        $projet->photo = 'uploads/photo/projets/'.$file_name;
         $projet->lien = $request->input('lien');
         $projet->chef_id = $request->input('chef_id');
 
