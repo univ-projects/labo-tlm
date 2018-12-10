@@ -89,7 +89,7 @@
 							<ul class="menu">
 								<li class="home menu-item current-menu-item"><a href="{{url('laboratoires/')}}"><img src="public/images/icons/home-icon.png" alt="Home"></a></li>
 								<li class="menu-item"><a href="{{url('laboratoires/A-propos')}}">A propos</a></li>
-								<li class="menu-item"><a href="{{url('laboratoires/Actualites')}}">Actualités</a></li>
+								<li class="menu-item"><a href="{{url('laboratoires/actualites')}}">Actualités</a></li>
 								<li class="menu-item "><a href="{{url('laboratoires/Nos-laboratoires')}}">Laboratoires</a></li>
 								<li class="menu-item "><a href="{{url('laboratoires/Evenements')}}">Evénements</a></li>
 								<li class="menu-item"><a href="{{url('laboratoires/Contact')}}">Contact</a></li>

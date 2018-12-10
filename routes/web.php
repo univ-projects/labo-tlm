@@ -29,9 +29,11 @@ Route::prefix('front')->group(function () {
   Route::get('A-propos', function () {
       return view('about');
   });
-  Route::get('Actualites', function () {
-      return view('actualites');
-  });
+
+  Route::get('actualites','frontController@acctualite');
+  // Route::get('actualites', function () {
+  //     return view('front/actualites');
+  // });
   Route::get('Nos-laboratoires', function () {
       return view('labos');
   });
@@ -41,6 +43,10 @@ Route::prefix('front')->group(function () {
   Route::get('Contact', function () {
       return view('contact');
   });
+
+  Route::get('actualite/{id}','frontController@actualite');
+
+  Route::get('profile/{id}','frontController@profile');
 
 });
 
