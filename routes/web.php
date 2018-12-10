@@ -78,6 +78,7 @@ Route::get('articles/{id}/details','ArticleController@details');
 Route::resource('articles', 'ArticleController',[
     'only' => ['index', 'create','store','edit','update','destroy']
 ]);
+Route::post('/postajaxPartenaireContact','ArticleController@postType');
 
 
 
@@ -105,6 +106,7 @@ Route::get('projets/{id}/details','ProjetController@details');
 Route::resource('projets', 'ProjetController',[
     'only' => ['index', 'create','store','edit','update','destroy']
 ]);
+Route::post('/postajaxPartenaireContact2','ProjetController@postType');
 
 
 

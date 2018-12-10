@@ -60,17 +60,8 @@
                   </div>
                 </div>
 
-                  <strong><i class="margin-r-5"></i></strong>
-                  <hr>
 
-                  <div class="col-md-3">
-                    <strong><i class="fa fa-group  margin-r-5"></i>Partenaires</strong>
-                  </div>
-                  <div class="col-md-9">
-                    <p class="text-muted">
-                      {{$projet->partenaires}}
-                    </p>
-                  </div>
+
 
                   <strong><i class="margin-r-5"></i></strong>
                 <hr>
@@ -95,6 +86,40 @@
                     @endforeach
 
                   </div>
+
+
+                  @if(reset($membres_ext))
+
+                    <div class="col-md-3 " style="padding-top: 20px">
+                      <strong><i class="fa fa-handshake-o margin-r-5"></i>Partenaires</strong>
+                    </div>
+                    <div class="col-md-9" style="padding-top: 20px">
+                    @foreach($membres_ext as $membre)
+                    <ul>
+                        <li>
+                          <a href="{{url('contacts/'.$membre->id.'/details')}}"> {{$membre->contactNom}} {{$membre->prenom}}</a>
+                          (<a href="{{url('partenaires/'.$membre->id.'/details')}}"> {{$membre->nom}}</a>)
+                        </li>
+                    </ul>
+
+                    @endforeach
+                    </div>
+
+                  @endif
+
+                  <strong><i class="margin-r-5"></i></strong>
+                <hr>
+                @if(strpos($projet->photo, 'Default') == false)
+                <div class="row">
+                <div class="col-md-3">
+                  <strong><i class="fa fa-link  margin-r-5"></i>Image</strong>
+                 </div>
+                  <div class="col-md-9">
+                    <img src="{{asset($projet->photo)}}" alt="{{$projet->intitule}}">
+                  </div>
+                </div>
+                @endif
+
 
                   <strong><i class="margin-r-5"></i></strong>
                 <hr>

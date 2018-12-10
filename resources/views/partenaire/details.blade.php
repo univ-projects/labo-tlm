@@ -437,6 +437,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
+                  @if(reset($contacts))
                   <ul class="users-list clearfix">
                     @foreach($contacts as $contact)
                     <li>
@@ -448,6 +449,9 @@
                     </li>
                     @endforeach
                   </ul>
+                  @else
+                  <b>Aucun contact trouvé</b>
+                  @endif
                   <!-- /.users-list -->
                 </div>
                 <!-- /.box-body -->

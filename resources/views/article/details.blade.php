@@ -15,7 +15,7 @@
 @endsection
 
 @section('asidebar')
-    
+
 @endsection
 
 @section('content')
@@ -72,13 +72,21 @@
                     @endforeach
                   </div>
                 </div>
-                @if($article->membres_ext)
+                @if(reset($membres_ext))
                 <div class="row">
                   <div class="col-md-3 " style="padding-top: 20px">
-                    <strong><i class="fa fa-user margin-r-5"></i> Membres externes</strong>
+                    <strong><i class="fa fa-handshake-o margin-r-5"></i> Partenaires</strong>
                   </div>
                   <div class="col-md-9" style="padding-top: 20px">
-                    {{$article->membres_ext}}
+                  @foreach($membres_ext as $membre)
+                  <ul>
+                      <li>
+                        <a href="{{url('contacts/'.$membre->id.'/details')}}"> {{$membre->contactNom}} {{$membre->prenom}}</a>
+                        (<a href="{{url('partenaires/'.$membre->id.'/details')}}"> {{$membre->nom}}</a>)
+                      </li>
+                  </ul>
+
+                  @endforeach
                   </div>
                 </div>
                 @endif
@@ -159,6 +167,23 @@
                     </p>
                   </div>
                 </div>
+
+                  @if(strpos($article->photo, 'Default') == false)
+                <strong><i class="margin-r-5"></i></strong>
+                <hr>
+
+              <div class="row">
+
+                <div class="col-md-3">
+                <strong><i class="margin-r-5"></i>Image</strong>
+               </div>
+                <div class="col-md-9">
+
+                    <img src="{{asset($article->photo)}}" alt="{{$article->intitule}}">
+                  </p>
+                </div>
+              </div>
+              @endif
 
                 <strong><i class="margin-r-5"></i></strong>
                   <hr>

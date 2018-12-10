@@ -55,7 +55,17 @@
                   <tr>
                     <td>{{ $projet->intitule }}</td>
                     <td>{{ $projet->type }}</td>
-                    <td>{{ $projet->partenaires }}</td>
+                    <td>
+                      <?php $samePartenaire=array(); ?>
+                      @foreach ($projet->contacts as $contact)
+                        @if (!in_array($contact->partenaire_contact->id,$samePartenaire))
+                        <ul>
+                            <li><a href="{{url('contacts/'.$contact->id.'/details')}}">{{ $contact->partenaire_contact->nom }} </a></li>
+                        </ul>
+                        <?php array_push($samePartenaire,$contact->partenaire_contact->id) ?>
+                        @endif
+                        @endforeach
+                    </td>
                     <td><a href="{{url('membres/'.$projet->chef_id.'/details')}}">{{ $projet->chef->name}} {{ $projet->chef->prenom}}</a></td>
                     <td>
                       @foreach ($projet->users as $user)
