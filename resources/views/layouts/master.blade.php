@@ -392,8 +392,8 @@
 
 
 <script>
-$('#txt').wysihtml5();
-$('#txt2').wysihtml5();
+    $('#txt').wysihtml5();
+    $('#txt2').wysihtml5();
 
   $(function () {
     //Initialize Select2 Elements
@@ -431,6 +431,9 @@ $('#txt2').wysihtml5();
 
     //Date picker
     $('#datepicker').datepicker({
+      autoclose: true
+    })
+    $('#datepicker2').datepicker({
       autoclose: true
     })
     $('#event-date').daterangepicker({
@@ -561,88 +564,89 @@ $('#txt2').wysihtml5();
   })
 </script>
 
+@yield('scripts')
 
 <script>
 
 
-  $(function () {
-
-
-
-
-    $.ajax({
-      type:'get',
-      url:'/statistics',
-      success:function(data,status){
-         console.log(data.annee);
-         //areaChartData.labels = data.res;
-         var areaChartData = {
-      labels  : data.annee,
-      datasets: [
-        {
-          label               : 'Electronics',
-          fillColor           : 'rgba(210, 214, 222, 1)',
-          strokeColor         : 'rgba(210, 214, 222, 1)',
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : data.these
-        },
-        {
-          label               : 'Digital Goods',
-          fillColor           : 'rgba(60,141,188,0.9)',
-          strokeColor         : 'rgba(60,141,188,0.8)',
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : data.article
-        }
-      ]
-    }
-
-
-    var barChartCanvas                   = $('#barChart').get(0).getContext('2d')
-    var barChart                         = new Chart(barChartCanvas)
-    var barChartData                     = areaChartData
-    barChartData.datasets[1].fillColor   = '#00a65a'
-    barChartData.datasets[1].strokeColor = '#00a65a'
-    barChartData.datasets[1].pointColor  = '#00a65a'
-    var barChartOptions                  = {
-      //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-      scaleBeginAtZero        : true,
-      //Boolean - Whether grid lines are shown across the chart
-      scaleShowGridLines      : true,
-      //String - Colour of the grid lines
-      scaleGridLineColor      : 'rgba(0,0,0,.05)',
-      //Number - Width of the grid lines
-      scaleGridLineWidth      : 1,
-      //Boolean - Whether to show horizontal lines (except X axis)
-      scaleShowHorizontalLines: true,
-      //Boolean - Whether to show vertical lines (except Y axis)
-      scaleShowVerticalLines  : true,
-      //Boolean - If there is a stroke on each bar
-      barShowStroke           : true,
-      //Number - Pixel width of the bar stroke
-      barStrokeWidth          : 2,
-      //Number - Spacing between each of the X value sets
-      barValueSpacing         : 5,
-      //Number - Spacing between data sets within X values
-      barDatasetSpacing       : 1,
-      //String - A legend template
-      legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
-      //Boolean - whether to make the chart responsive
-      responsive              : true,
-      maintainAspectRatio     : true
-    }
-
-    barChartOptions.datasetFill = false
-    barChart.Bar(barChartData, barChartOptions)
-      }
-    });
-
-  })
+  // $(function () {
+  //
+  //
+  //
+  //
+  //   $.ajax({
+  //     type:'get',
+  //     url:'/statistics',
+  //     success:function(data,status){
+  //        console.log(data.annee);
+  //        //areaChartData.labels = data.res;
+  //        var areaChartData = {
+  //     labels  : data.annee,
+  //     datasets: [
+  //       {
+  //         label               : 'Electronics',
+  //         fillColor           : 'rgba(210, 214, 222, 1)',
+  //         strokeColor         : 'rgba(210, 214, 222, 1)',
+  //         pointColor          : 'rgba(210, 214, 222, 1)',
+  //         pointStrokeColor    : '#c1c7d1',
+  //         pointHighlightFill  : '#fff',
+  //         pointHighlightStroke: 'rgba(220,220,220,1)',
+  //         data                : data.these
+  //       },
+  //       {
+  //         label               : 'Digital Goods',
+  //         fillColor           : 'rgba(60,141,188,0.9)',
+  //         strokeColor         : 'rgba(60,141,188,0.8)',
+  //         pointColor          : '#3b8bba',
+  //         pointStrokeColor    : 'rgba(60,141,188,1)',
+  //         pointHighlightFill  : '#fff',
+  //         pointHighlightStroke: 'rgba(60,141,188,1)',
+  //         data                : data.article
+  //       }
+  //     ]
+  //   }
+  //
+  //
+  //   var barChartCanvas                   = $('#barChart').get(0).getContext('2d')
+  //   var barChart                         = new Chart(barChartCanvas)
+  //   var barChartData                     = areaChartData
+  //   barChartData.datasets[1].fillColor   = '#00a65a'
+  //   barChartData.datasets[1].strokeColor = '#00a65a'
+  //   barChartData.datasets[1].pointColor  = '#00a65a'
+  //   var barChartOptions                  = {
+  //     //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+  //     scaleBeginAtZero        : true,
+  //     //Boolean - Whether grid lines are shown across the chart
+  //     scaleShowGridLines      : true,
+  //     //String - Colour of the grid lines
+  //     scaleGridLineColor      : 'rgba(0,0,0,.05)',
+  //     //Number - Width of the grid lines
+  //     scaleGridLineWidth      : 1,
+  //     //Boolean - Whether to show horizontal lines (except X axis)
+  //     scaleShowHorizontalLines: true,
+  //     //Boolean - Whether to show vertical lines (except Y axis)
+  //     scaleShowVerticalLines  : true,
+  //     //Boolean - If there is a stroke on each bar
+  //     barShowStroke           : true,
+  //     //Number - Pixel width of the bar stroke
+  //     barStrokeWidth          : 2,
+  //     //Number - Spacing between each of the X value sets
+  //     barValueSpacing         : 5,
+  //     //Number - Spacing between data sets within X values
+  //     barDatasetSpacing       : 1,
+  //     //String - A legend template
+  //     legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+  //     //Boolean - whether to make the chart responsive
+  //     responsive              : true,
+  //     maintainAspectRatio     : true
+  //   }
+  //
+  //   barChartOptions.datasetFill = false
+  //   barChart.Bar(barChartData, barChartOptions)
+  //     }
+  //   });
+  //
+  // })
 
 </script>
 
@@ -831,6 +835,73 @@ $(document).ready(function(){
     }
     else{
       $('#edit_contact_result2').html('');
+    }
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  $('.partenaire_type3').change(function(){
+
+    if($(this).val() != '')
+    {
+
+      var type_partenaire = $(this).val();
+          alert(type_partenaire);
+
+
+      $.ajax({
+
+        url: '/postajaxPartenaireContact3',
+        type: 'POST',
+                      /* send the csrf-token and the input to the controller */
+          data: {_token: CSRF_TOKEN, type_partenaire:type_partenaire},
+          dataType: 'JSON',
+          success: function (data) {
+                      $('#contact_result3').html(data);
+                    }
+
+      })
+    }
+    else{
+      $('#contact_result3').html('');
+    }
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  $('.edit_partenaire_type3').change(function(){
+    if($(this).val() != '')
+    {
+
+      var type_partenaire = $(this).val();
+
+
+
+      $.ajax({
+
+        url: '/postajaxPartenaireContact3',
+        type: 'POST',
+                      /* send the csrf-token and the input to the controller */
+          data: {_token: CSRF_TOKEN, type_partenaire:type_partenaire},
+          dataType: 'JSON',
+          success: function (data) {
+                      $('#edit_contact_result3').html(data);
+                    }
+
+      })
+    }
+    else{
+      $('#edit_contact_result3').html('');
     }
   });
 });

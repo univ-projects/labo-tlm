@@ -75,7 +75,7 @@
                         <div class="col-xs-9 inputGroupContainer @if($errors->get('user_id')) has-error @endif">
                           <div style="width: 70%">
                             <select name="user_id" class="form-control select2" >
-                              <option{{old('user_id')}}></option>
+                              <option value="{{old('user_id')}}"></option>
                                @foreach($membres as $membre)
                               <option value="{{$membre->id}}">{{$membre->name}} {{$membre->prenom}}</option>
                                @endforeach
@@ -132,6 +132,31 @@
                   </div>
 
                   <div class="form-group ">
+                        <label class="col-xs-3 control-label">Partenaire</label>
+                        <div class="col-xs-9 inputGroupContainer">
+                          <div style="width: 70%">
+                            <select name="partenaire" class="form-control partenaire_type3">
+                              <option></option>
+                               @foreach($partenaires as $partenaire)
+                              <option value="{{$partenaire->id}}">{{$partenaire->nom}}</option>
+                               @endforeach
+                            </select>
+                          </div>
+                        </div>
+                  </div>
+
+                  <div class="form-group ">
+                    <label class="col-xs-3 control-label">CoEncadreur éxterne </label>
+                    <div class="col-xs-9 inputGroupContainer ">
+                      <div style="width: 70%">
+                        <select name="membres_ext" class="form-control " id="contact_result3">
+
+                        </select>
+                      </div>
+                    </div>
+                   </div>
+
+                  <div class="form-group ">
                         <label class="col-xs-3 control-label">CoEncadreur externe</label>
                         <div class="col-xs-9 inputGroupContainer">
                           <div style="width: 70%">
@@ -148,8 +173,8 @@
                         <label class="col-xs-3 control-label">Date d'inscription (*)</label>
                         <div class="col-xs-9 inputGroupContainer @if($errors->get('date_debut')) has-error @endif">
                           <div style="width: 70%">
-                            <input name="date_debut" type="text" class="form-control pull-right" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask id="datepicker" value="{{old('date_debut')}}">
-
+                            <!-- <input name="date_debut" type="text" class="form-control pull-right" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask id="datepicker" value="{{old('date_debut')}}"> -->
+                            <input type="date" name="date_debut" class="form-control pull-right" value="{{old('date_debut')}}">
                             <span class="help-block">
                                 @if($errors->get('date_debut'))
                                   @foreach($errors->get('date_debut') as $message)
@@ -166,7 +191,8 @@
                         <label class="col-xs-3 control-label">Date de soutenance</label>
                         <div class="col-xs-9 inputGroupContainer">
                           <div style="width: 70%">
-                            <input name="date_soutenance" type="text" class="form-control pull-right" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask id="datepicker" value="{{old('date_soutenance')}}">
+                            <!-- <input name="date_soutenance" type="text" class="form-control pull-right" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask id="datepicker2" value="{{old('date_soutenance')}}"> -->
+                              <input type="date" name="date_soutenance" class="form-control pull-right" value="{{old('date_soutenance')}}">
                           </div>
                         </div>
                   </div>

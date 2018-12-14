@@ -92,6 +92,14 @@
         <canvas id="barChart" style="height:230px"></canvas>
       </div>
     </div>
-            <!-- /.box-body -->
+
+
+
   </div>
+
+@endsection
+
+@section('scripts')
+<script src="{{url( 'js/Chart.min.js' )}}"></script>
+  <script src="{{url( 'js/create-charts.js' )}}"></script>
 @endsection

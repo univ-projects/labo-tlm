@@ -57,8 +57,13 @@
                     <td>{{$these->titre}}</td>
                     <td>{{$these->sujet}}</td>
                     <td>{{$these->user->name}} {{$these->user->prenom}}</td>
-                    <td>{{$these->encadreur_int}}{{$these->encadreur_ext}}</td>
-                    <td>{{$these->coencadreur_int}}{{$these->coencadreur_ext}}</td>
+                    <td>
+                      <li>{{$these->encadreur_int}}</li>
+                    </td>
+                    <td>
+                        <li>{{$these->coencadreur_int}}</li>
+                    
+                      </td>
                     <td>{{$these->date_soutenance}}</td>
                     <td>
 

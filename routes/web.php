@@ -51,8 +51,11 @@ Route::prefix('front')->group(function () {
 });
 
 
-
+// Route::get('chartjs', 'dashController@chartjs');
+Route::get('chartjs', 'dashController@getMonthlyArticleTheseData');
 Route::get('dashboard','dashController@index');
+
+
 // Route::get('parametre','ParametreController@create');
 // Route::post('parametre','ParametreController@store');
 
@@ -69,6 +72,7 @@ Route::get('theses/{id}/details','TheseController@details');
 Route::resource('theses', 'TheseController',[
     'only' => ['index', 'create','edit','update','destroy']
 ]);
+Route::post('/postajaxPartenaireContact3','TheseController@postType');
 
 
 
@@ -161,6 +165,7 @@ Route::resource('contacts', 'ContactController',[
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::get('/statistics',function(){
 

@@ -15,7 +15,7 @@
 @endsection
 
 @section('asidebar')
-  
+
 @endsection
 
 @section('content')
@@ -62,8 +62,8 @@
                     <strong><i class="fa fa-user margin-r-5"></i> Encadreur</strong>
                   </div>
                   <div class="col-md-9">
-                    {{ $these->encadreur_int}}
-                    {{ $these->encadreur_ext}}
+                    <li> {{ $these->encadreur_int}}</li>
+                    <!-- <li> {{ $these->contact->nom}}{{ $these->contact->prenom }}</li> -->
                   </div>
 
                   <strong><i class="margin-r-5"></i></strong>
@@ -73,8 +73,8 @@
                     <strong><i class="fa fa-user margin-r-5"></i> Coencadreur</strong>
                   </div>
                   <div class="col-md-9">
-                    {{ $these->coencadreur_int }}
-                    {{ $these->coencadreur_ext }}
+                    <li> {{ $these->coencadreur_int }}</li>
+                    <li> {{ $these->contact->nom }}{{ $these->contact->prenom }}</li>
                   </div>
 
                   <strong><i class="margin-r-5"></i></strong>
