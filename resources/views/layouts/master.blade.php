@@ -64,10 +64,17 @@
   <header class="main-header" style="position: fixed; width: 100%">
     <!-- Logo -->
     <a href="{{url('dashboard')}}" class="logo">
+      @if(isset($labo->logo))
     <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><img src="{{asset($labo->logo)}}" style="width: 50px"></span>
+      <span class="logo-mini"><img src="{{asset($labo->logo)}}" style="width: 50px;"></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><img src="{{asset($labo->logo)}}" style="width: 90px"></span>
+      <span class="logo-lg"><img src="{{asset($labo->logo)}}" style="width: 90px;height:50px"></span>
+      @else
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><img src="{{asset('uploads/photo/labos/laboImgDefault.png')}}" style="width: 50px;"></span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><img src="{{asset('uploads/photo/labos/laboImgDefault.png')}}" style="width: 90px;height:50px"></span>
+      @endif
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -152,19 +159,19 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
 
       <ul class="sidebar-menu" data-widget="tree">
-        @yield('asidebar')
+
               <li {{{ (Request::is('dashboard/*') ? 'class=active' : '') }}} {{{ (Request::is('dashboard') ? 'class=active' : '') }}}>
                 <a href="{{url('dashboard')}}">
                   <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
               </li>
 
-              <li {{{ (Request::is('equipes/*') ? 'class=active' : '') }}} {{{ (Request::is('equipes') ? 'class=active' : '') }}}>
+              <!-- <li {{{ (Request::is('equipes/*') ? 'class=active' : '') }}} {{{ (Request::is('equipes') ? 'class=active' : '') }}}>
                 <a href="{{url('equipes')}}">
                   <i class="fa fa-group"></i>
                   <span>Equipes</span>
                 </a>
-              </li>
+              </li> -->
 
               <li class="treeview {{{ (Request::is('membres/*') ? 'active' : '') }}} {{{ (Request::is('membres') ? 'active' : '') }}}{{{ (Request::is('trombinoscope/*') ? 'active' : '') }}} {{{ (Request::is('trombinoscope') ? 'active' : '') }}}">
                 <a href="#">
@@ -246,7 +253,7 @@
 
 
 
-                @if(Auth::user()->role->nom == 'admin' )
+
                 <li class="treeview {{{ (Request::is('parametre/*') ? 'active' : '') }}} {{{ (Request::is('parametre') ? 'active' : '') }}}">
                   <a href="#">
                     <i class="fa fa-gears"></i> <span>Laboratoires</span>
@@ -264,6 +271,7 @@
                   </ul>
                 </li>
 
+                  @if(Auth::user()->role->nom == 'admin' || Auth::user()->role->nom == 'directeur')
                 <li class="treeview {{{ (Request::is('parametre/*') ? 'active' : '') }}} {{{ (Request::is('parametre') ? 'active' : '') }}}{{{ (Request::is('trombinoscope/*') ? 'active' : '') }}} {{{ (Request::is('trombinoscope') ? 'active' : '') }}}">
                   <a href="#">
                     <i class="fa fa-user"></i> <span>Paramètres</span>
@@ -319,6 +327,7 @@
     <div class="tab-content">
       <!-- Home tab content -->
       <div class="tab-pane" id="control-sidebar-home-tab">
+
         <!-- /.control-sidebar-menu -->
       </div>
       <!-- /.tab-pane -->

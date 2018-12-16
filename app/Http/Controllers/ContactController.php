@@ -21,7 +21,7 @@ class ContactController extends Controller
 
   public function index()
   {
-  $labo = Parametre::find('1');
+$labo = $this->getCurrentLabo();
   $contacts = Contact::all();
 
       return view('contact.index')->with([
@@ -35,7 +35,7 @@ class ContactController extends Controller
   {
     $contact = Contact::find($id);
     $partenaires = Partenaire::all();
-    $labo = Parametre::find('1');
+    $labo = $this->getCurrentLabo();
 
     $first = DB::table('project_contact')
               ->select(DB::raw('\'Projet\' as type,project_id,projets.intitule as titre,resume,projets.id as id'))
@@ -76,30 +76,22 @@ class ContactController extends Controller
 
   public function create()
   {
-      $labo = Parametre::find('1');
+  $labo = $this->getCurrentLabo();
         $partenaires = Partenaire::all();
 
-
-      if( Auth::user()->role->nom == 'admin')
-          {
             return view('contact.create')->with([
                 'labo'=>$labo,
                 'partenaires'=>$partenaires
             ]);
-          }
-          else{
-              return view('errors.403' ,['labo'=>$labo]);
-          }
+
   }
 
 
   public function store(contactRequest $request)
   {
-      $labo = Parametre::find('1');
+    $labo = $this->getCurrentLabo();
       $contact = new Contact();
-      //
-      if( Auth::user()->role->nom == 'admin')
-          {
+
 
       if($request->hasFile('img')){
               $file = $request->file('img');
@@ -117,14 +109,12 @@ class ContactController extends Controller
           $contact->email = $request->input('email');
           $contact->num_tel= $request->input('num_tel');
           $contact->photo = 'uploads/photo/contacts/'.$file_name;
+          $contact->created_by = Auth::user()->id;
 
           $contact->save();
 
           return redirect('contacts');
-          }
-      else{
-              return view('errors.403',['labo'=>$labo]);
-          }
+
 
   }
 
@@ -134,9 +124,8 @@ class ContactController extends Controller
   {
     $contact = Contact::find($id);
     $partenaires = Partenaire::all();
-    $labo = Parametre::find('1');
-    if( Auth::user()->role->nom == 'admin')
-        {
+    $labo = $this->getCurrentLabo();
+
     $first = DB::table('project_contact')
               ->select('*',DB::raw('\'Projet\' as type'))
                ->leftJoin('contacts', 'contacts.id', '=', 'project_contact.contact_id');
@@ -157,20 +146,14 @@ class ContactController extends Controller
         'participants'=>$participants
 
     ]);;
-  }
-  else{
-      return view('errors.403' ,['labo'=>$labo]);
-  }
+
 
   }
 
   public function update(contactRequest $request,$id)
   {
-      $labo = Parametre::find('1');
+  $labo = $this->getCurrentLabo();
       $contact = Contact::find($id);
-      //
-      if( Auth::user()->role->nom == 'admin')
-          {
 
       if($request->hasFile('img')){
               $file = $request->file('img');
@@ -192,22 +175,18 @@ class ContactController extends Controller
           $contact->save();
 
           return redirect('contacts/'.$id.'/details');
-          }
-      else{
-              return view('errors.403',['labo'=>$labo]);
-          }
+
 
   }
 
 
   public function destroy($id)
   {
-      if( Auth::user()->role->nom == 'admin')
-          {
+
       $contact = Contact::find($id);
       $contact->delete();
       return redirect('contacts');
-      }
+
   }
 
 

@@ -4,12 +4,12 @@
 
 @section('header_page')
       <h1>
-        Laboratoires
+        laboratoires
         <small>Liste</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href="{{url('laboratoires')}}">Laboratoires</a></li>
+        <li><a href="{{url('laboratoires')}}">laboratoires</a></li>
         <li class="active">Liste</li>
       </ol>
 
@@ -36,7 +36,7 @@
             <div class="box-body">
 
               <div class=" pull-right">
-                <a href="{{url('laboratoires/create')}}" type="button" class="btn btn-block btn-success btn-lg"><i class="fa fa-user-plus"></i> Nouveau laboratoire</a>
+                <a href="{{url('laboratoires/create')}}" type="button" class="btn btn-block btn-success btn-lg"><i class="fa fa-user-plus"></i> Nouveau laboratoireratoire</a>
               </div>
 
 <!--
@@ -56,17 +56,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($labos as $labo)
+                  @foreach($laboratoires as $laboratoire)
                   <tr>
-                    <td> <img src="{{$labo->logo}}" alt="{{$labo->achronymes}}"></td>
-                    <td>{{$labo->nom}}</td>
-                    <td>{{$labo->achronymes}}</td>
-                    <td>@if(isset($labo->directeu))<a href="{{url('membres/'.$labo->directeur.'/details')}}">{{$labo->directeu->name}} {{$labo->directeu->prenom}}</a>@endif</td>
+                    <td> <img src="{{$laboratoire->logo}}" alt="{{$laboratoire->achronymes}}" width="100px" height="100px"></td>
+                    <td>{{$laboratoire->nom}}</td>
+                    <td>{{$laboratoire->achronymes}}</td>
+                    <td>@if(isset($laboratoire->directeu))<a href="{{url('membres/'.$laboratoire->directeur.'/details')}}">{{$laboratoire->directeu->name}} {{$laboratoire->directeu->prenom}}</a>@endif</td>
 
                     <td style="text-align:center">
                       <?php $zeroEquipe=true; ?>
                        @foreach($nbrEquipes as $nbrs)
-                      @if($nbrs->labo_id == $labo->id)
+                      @if($nbrs->labo_id == $laboratoire->id)
                        {{$nbrs->total}}
                        <?php $zeroEquipe=false;break; ?>
                        @endif
@@ -78,41 +78,39 @@
 
                     <td style="text-align:center">
                       <?php $zeroMembre=true; ?>
-                       @foreach($nbrMembres as $nbrs)
-                       	@foreach($equipes as $e)
-                      	@if($nbrs->equipe_id == $e->id AND $labo->id == $e->labo_id)
-                        {{$nbrs->total}}
-                        <?php $zeroMembre=false;break; ?>
-                       @endif
-                      @endforeach
-                       <?php if(!$zeroMembre) break; ?>
+                      @foreach($nbrMembres as $nbrs)
+                        @if($nbrs->labo_id == $laboratoire->id)
+                          {{$nbrs->total}}
+                          <?php $zeroMembre=false ?>
+                        @endif
                       @endforeach
                       @if($zeroMembre)
                         0
-                       @endif
+                      @endif
+
                     </td>
                     <td>
                       <div class="btn-group">
 
-                        <form action="{{ url('laboratoires/'.$labo->id)}}" method="post">
+                        <form action="{{ url('laboratoires/'.$laboratoire->id)}}" method="post">
                             {{csrf_field()}}
                             {{method_field('DELETE')}}
 
-                            <a href="{{ url('laboratoires/'.$labo->id.'/details')}}" class="btn btn-info">
+                            <a href="{{ url('laboratoires/'.$laboratoire->id.'/details')}}" class="btn btn-info">
                               <i class="fa fa-eye"></i>
                             </a>
 
-                            <a href="{{url('laboratoires/'.$labo->id.'/edit')}}" class="btn btn-default">
+                            <a href="{{url('laboratoires/'.$laboratoire->id.'/edit')}}" class="btn btn-default">
                               <i class="fa fa-edit"></i>
                             </a>
 
 
-                             <a href="#supprimer{{ $labo->id }}Modal" role="button" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                      <div class="modal fade" id="supprimer{{ $labo->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $labo->id }}ModalLabel" aria-hidden="true">
+                             <a href="#supprimer{{ $laboratoire->id }}Modal" role="button" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                      <div class="modal fade" id="supprimer{{ $laboratoire->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $laboratoire->id }}ModalLabel" aria-hidden="true">
                           <div class="modal-dialog">
                               <div class="modal-content">
                                   <div class="modal-header">
-                                    <!--   <h5 class="modal-title" id="supprimer{{ $labo->id }}ModalLabel">Supprimer</h5> -->
+                                    <!--   <h5 class="modal-title" id="supprimer{{ $laboratoire->id }}ModalLabel">Supprimer</h5> -->
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                       </button>
@@ -121,7 +119,7 @@
                                       Voulez-vous vraiment effectuer la suppression ?
                                   </div>
                                   <div class="modal-footer">
-                                      <form class="form-inline" action="{{ url('laboratoires/'.$labo->id)}}"  method="POST">
+                                      <form class="form-inline" action="{{ url('laboratoires/'.$laboratoire->id)}}"  method="POST">
                                           @method('DELETE')
                                           @csrf
                                       <button type="button" class="btn btn-light" data-dismiss="modal">Non</button>

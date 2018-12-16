@@ -19,7 +19,7 @@ class EquipeController extends Controller
 
     public function index()
     {
-    $labo = Parametre::find('1');
+    $labo = $this->getCurrentLabo();
     $equipes = Equipe::all();
      // $nbr = DB::table('users')
      //            ->groupBy('equipe_id')
@@ -39,7 +39,7 @@ class EquipeController extends Controller
 
     public function create()
     {
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
         $labos= Parametre::all();
 
         if( Auth::user()->role->nom == 'admin')
@@ -58,7 +58,7 @@ class EquipeController extends Controller
 
     public function details($id)
     {
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
           $labos= Parametre::all();
         $equipe = Equipe::find($id);
         $membres = User::where('equipe_id', $id)->get();
@@ -73,7 +73,7 @@ class EquipeController extends Controller
 
     public function store(equipeRequest $request)
     {
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
 
         $equipe = new equipe();
 
@@ -103,7 +103,7 @@ class EquipeController extends Controller
 
     public function update(equipeRequest $request,$id)
     {
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
         $equipe = Equipe::find($id);
 
         if( Auth::user()->role->nom == 'admin')

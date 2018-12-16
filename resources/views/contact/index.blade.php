@@ -35,11 +35,11 @@
 
             <!-- /.box-header -->
             <div class="box-body">
-              @if(Auth::user()->role->nom == 'admin' )
+
               <div class=" pull-right">
                 <a href="{{url('contacts/create')}}" type="button" class="btn btn-block btn-success btn-lg"><i class="fa fa-plus"></i> Nouveau contact</a>
               </div>
-               @endif
+
 <!--
                <div>
                  <button href="{{('excel')}}">Excel</button>
@@ -79,12 +79,12 @@
                             <a href="{{ url('contacts/'.$contact->id.'/details')}}" class="btn btn-info">
                               <i class="fa fa-eye"></i>
                             </a>
-                             @if(Auth::user()->role->nom == 'admin' )
+                            @if(Auth::user()->role->nom == 'admin' || Auth::user()->id===$contact->created_by)
                             <a href="{{url('contacts/'.$contact->id.'/edit')}}" class="btn btn-default">
                               <i class="fa fa-edit"></i>
                             </a>
                             @endif
-                            @if(Auth::user()->role->nom != 'membre' )
+                            @if(Auth::user()->role->nom == 'admin' || Auth::user()->id===$contact->created_by)
                             <!-- <button  type="submit" class="btn btn-danger ">
                                 <i class="fa fa-trash-o"></i>
                             </button> -->

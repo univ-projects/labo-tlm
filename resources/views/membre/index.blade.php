@@ -17,7 +17,7 @@
 @endsection
 
 @section('asidebar')
-    
+
   @endsection
 
 @section('content')
@@ -49,6 +49,8 @@
                 <tr>
                   <th>Nom</th>
                   <th>Prénom</th>
+                  <th>Laboratoire</th>
+                  <th>Equipe</th>
                   <th>Email</th>
                   <th>Grade</th>
                   <th>Action</th>
@@ -59,6 +61,12 @@
                   <tr>
                     <td>{{$membre->name}}</td>
                     <td>{{$membre->prenom}}</td>
+                    <td><a href="laboratoires/{{$membre->equipe->labo_id}}/details">
+                      {{$membre->equipe->labo['achronymes']}}
+                    </a></td>
+                    <td> <a href="equipes/{{$membre->equipe_id}}/details">
+                       {{$membre->equipe->achronymes}}
+                    </a></td>
                     <td>{{$membre->email}}</td>
                     <td>{{$membre->grade}}</td>
                     <td>
@@ -118,6 +126,8 @@
                 <tr>
                   <th>Nom</th>
                   <th>Prénom</th>
+                  <th>Laboratoire</th>
+                  <th>Equipe</th>
                   <th>Email</th>
                   <th>Grade</th>
                   <th>Action</th>

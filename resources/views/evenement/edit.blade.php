@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title','LRI | Modifier une évènement')
+@section('title','LRI | Modifier un évènement')
 
 @section('header_page')
 
@@ -180,7 +180,7 @@
                                 <div class="col-md-9 inputGroupContainer @if($errors->get('contenu')) has-error @endif">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-lg fa-info-circle"></i></span>
-                                        <textarea name="contenu" rows="5" style="width:100%">{{$evenement->contenu}}</textarea>
+                                        <textarea name="contenu" rows="5" style="width:100%" id="txt">{{$evenement->contenu}}</textarea>
                                       </div>
                                       <span class="help-block">
                                         @if($errors->get('contenu'))
@@ -202,6 +202,23 @@
                             <span class="help-block">
                                 @if($errors->get('from'))
                                   @foreach($errors->get('from') as $message)
+                                    <li> {{ $message }} </li>
+                                  @endforeach
+                                @endif
+                            </span>
+                        </div>
+                      </div>
+
+                      <div class="form-group ">
+                        <label class="col-md-3 control-label">Lieu</label>
+                        <div class="col-md-9 inputGroupContainer @if($errors->get('lieu')) has-error @endif">
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lg fa-map-marker"></i></span>
+                            <input type="text" class="form-control" name="lieu" value="{{$evenement->lieu}}"/>
+                           </div>
+                            <span class="help-block">
+                                @if($errors->get('lieu'))
+                                  @foreach($errors->get('lieu') as $message)
                                     <li> {{ $message }} </li>
                                   @endforeach
                                 @endif

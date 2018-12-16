@@ -20,21 +20,27 @@ class ParametreController extends Controller
     public function index()
    {
        $membres = User::all();
-       $labo = Parametre::find('1');
+
+
+       $labo = $this->getCurrentLabo();
+
        $labos = Parametre::all();
        $equipes=Equipe::all();
+
 
        $nbrEquipes = DB::table('equipes')
                 ->select( DB::raw('count(*) as total,labo_id'))
                 ->groupBy('labo_id')
                 ->get();
+
       $nbrMembres = DB::table('users')
-                ->select( DB::raw('count(*) as total,equipe_id'))
-                ->groupBy('equipe_id')
+                ->select( DB::raw('count(*) as total,labo_id'))
+                ->leftjoin('equipes', 'equipes.id', '=', 'users.equipe_id')
+                ->groupBy('labo_id')
                 ->get();
 
       return view('laboratoire.index')->with([
-                    'labos' => $labos,
+                    'laboratoires' => $labos,
                     'nbrEquipes' => $nbrEquipes,
                     'nbrMembres'=>$nbrMembres,
                     'equipes'=>$equipes,
@@ -46,7 +52,8 @@ class ParametreController extends Controller
    public function trombi()
    {
        // $membres = User::all()->orderBy('name');
-       $labo = Parametre::find('1');
+       $labo = $this->getCurrentLabo();
+
        $labos = Parametre::all();
        $equipes=Equipe::all();
 
@@ -58,17 +65,19 @@ class ParametreController extends Controller
                  ->select( DB::raw('count(*) as total,labo_id'))
                  ->groupBy('labo_id')
                  ->get();
+
         $nbrMembres = DB::table('users')
-                  ->select( DB::raw('count(*) as total,equipe_id'))
-                  ->groupBy('equipe_id')
-                  ->get();
+                           ->select( DB::raw('count(*) as total,labo_id'))
+                           ->leftjoin('equipes', 'equipes.id', '=', 'users.equipe_id')
+                           ->groupBy('labo_id')
+                           ->get();
 
            return view('laboratoire.trombinoscope')->with([
                'labos' => $labos,
                'nbrEquipes' => $nbrEquipes,
                'nbrMembres'=>$nbrMembres,
                'equipes' =>$equipes,
-               'labo'=>$labo,
+
            ]);;
 
    }
@@ -76,22 +85,107 @@ class ParametreController extends Controller
 
    public function details($id)
    {
-       $labo = Parametre::find('1');
+
+     $labo = $this->getCurrentLabo();
+
        $equipe = Equipe::find($id);
-       $membres = User::where('equipe_id', $id)->get();
+       $membres = DB::table('users')
+            ->select( DB::raw('users.id as user_id,equipes.id,users.equipe_id,equipes.labo_id,parametres.id,name,prenom,users.photo as photo_user'))
+             ->leftjoin('equipes', 'equipes.id', '=', 'users.equipe_id')
+              ->leftjoin('parametres', 'parametres.id', '=', 'equipes.labo_id')
+              ->where('labo_id', $id)
+              ->get();
        $laboDetail = Parametre::find($id);
 
+       $equipes = DB::table('parametres')
+            ->leftjoin('equipes', 'equipes.labo_id', '=', 'parametres.id')
+            ->where('labo_id',$id)
+            ->get();
+
+
        return view('laboratoire.details')->with([
-           'equipe' => $equipe,
+           'equipes' => $equipes,
            'membres' => $membres,
            'labo'=>$labo,
           'laboDetail'=> $laboDetail,
        ]);
    }
 
+   public function edit($id)
+   {
+     $labo = $this->getCurrentLabo();
+
+       $equipe = Equipe::find($id);
+       $membres = DB::table('users')
+            ->select( DB::raw('users.id as user_id,equipes.id,users.equipe_id,equipes.labo_id,parametres.id,name,prenom,users.photo as photo_user'))
+             ->leftjoin('equipes', 'equipes.id', '=', 'users.equipe_id')
+              ->leftjoin('parametres', 'parametres.id', '=', 'equipes.labo_id')
+              ->where('labo_id', $id)
+              ->get();
+       $laboDetail = Parametre::find($id);
+
+       $equipes = DB::table('parametres')
+            ->leftjoin('equipes', 'equipes.labo_id', '=', 'parametres.id')
+            ->where('labo_id',$id)
+            ->get();
+
+       if( Auth::user()->role->nom == 'admin' || Auth::user()->role->nom == 'directeur')
+           {
+               return view('laboratoire.edit')->with([
+                   'equipes' => $equipes,
+                   'membres' => $membres,
+                   'labo'=>$labo,
+                  'laboDetail'=> $laboDetail,
+               ]);
+             }
+             else{
+                 return view('errors.403',['labo'=>$labo]);
+             }
+   }
+
+   public function update(Request $request,$id)
+   {
+
+     $labo = Parametre::find($id);
+
+         $labo->nom = $request->input('nom');
+        $labo->achronymes = $request->input('achronymes');
+        $labo->directeur = $request->input('directeur');
+         $labo->apropos = $request->input('apropos');
+
+
+         if($request->hasFile('img')){
+             $file = $request->file('img');
+             $file_name_img = time().'.'.$file->getClientOriginalExtension();
+             $file->move(public_path('/uploads/photo/labos'),$file_name_img);
+
+         }
+         else{
+             $file_name_img="laboImgDefault.png";
+         }
+         if($request->hasFile('logo')){
+             $file = $request->file('logo');
+             $file_name_logo = time().'.'.$file->getClientOriginalExtension();
+             $file->move(public_path('/uploads/photo/labos'),$file_name_logo);
+         }
+         else{
+             $file_name_logo="laboImgDefault.png";
+         }
+
+       $labo->photo = '/uploads/photo/labos/'.$file_name_img;
+       $labo->logo = '/uploads/photo/labos/'.$file_name_logo;
+
+
+       $labo->save();
+
+       return redirect('laboratoires/'.$id.'/details');
+
+   }
+
     public function create()
     {
-      $labo = Parametre::find('1');
+    $labo = $this->getCurrentLabo();
+
       if( Auth::user()->role->nom == 'admin')
           {
               $membres = User::all();
@@ -106,7 +200,9 @@ class ParametreController extends Controller
     {
 
       $newLab = new Parametre();
-      $labo = Parametre::find('1');
+
+      $labo = $this->getCurrentLabo();
+
 
           $newLab->nom = $request->input('nom');
           $newLab->achronymes = $request->input('achronymes');
@@ -121,7 +217,7 @@ class ParametreController extends Controller
 
           }
           else{
-              $file_name_img="laboImgDefault.png";
+              $file_name_img="laboLogoDefault.png";
           }
           if($request->hasFile('logo')){
               $file = $request->file('logo');
@@ -129,15 +225,25 @@ class ParametreController extends Controller
               $file->move(public_path('/uploads/photo/labos'),$file_name_logo);
           }
           else{
-              $file_name_logo="laboLogoDefault.png";
+              $file_name_logo="laboImgDefault.png";
           }
 
-        $newLab->photo = 'uploads/photo/labos/'.$file_name_img;
-        $newLab->logo = 'uploads/photo/labos/'.$file_name_logo;
+        $newLab->photo = '/uploads/photo/labos/'.$file_name_img;
+        $newLab->logo = '/uploads/photo/labos/'.$file_name_logo;
 
         $newLab->save();
 
         return redirect('laboratoires');
 
     }
+
+    public function destroy($id)
+    {
+
+              $laboratoire = Parametre::find($id);
+              $laboratoire->delete();
+              return redirect('laboratoires');
+
+    }
+
 }

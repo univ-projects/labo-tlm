@@ -118,7 +118,8 @@
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#activity" data-toggle="tab">A propos</a></li>
-              @if(Auth::id() == $contact->id || Auth::user()->role->nom == 'admin' )
+            
+							 @if(Auth::user()->role->nom == 'admin' || Auth::user()->id===$contact->created_by)
               <li ><a href="#activity1" data-toggle="tab">Modifier</a></li>
               @endif
               <li><a href="#timeline" data-toggle="tab">Participations</a></li>

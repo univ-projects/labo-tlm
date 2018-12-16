@@ -24,7 +24,7 @@ class UserController extends Controller
      public function index()
     {
         $membres = User::all();
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
 
         return view('membre.index' , ['membres' => $membres],['labo'=>$labo]);
     }
@@ -32,7 +32,7 @@ class UserController extends Controller
     public function trombi()
     {
         // $membres = User::all()->orderBy('name');
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
         $membres = DB::table('users')->distinct('id')->orderBy('name')->get();
 
         return view('membre.trombinoscope', ['membres' => $membres],['labo'=>$labo]);
@@ -43,7 +43,7 @@ class UserController extends Controller
         $membre = User::find($id);
         $equipes = Equipe::all();
         $roles = Role::all();
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
 
 
         return view('membre.details')->with([
@@ -57,7 +57,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
         if( Auth::user()->role->nom == 'admin')
             {
                 $equipes = Equipe::all();
@@ -71,7 +71,7 @@ class UserController extends Controller
     public function store(userRequest $request)
     {
         $membre = new User();
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
         if($request->hasFile('img')){
             $file = $request->file('img');
             $file_name = time().'.'.$file->getClientOriginalExtension();
@@ -111,7 +111,7 @@ class UserController extends Controller
         $membre = User::find($id);
         $equipes = Equipe::all();
         $roles = Role::all();
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
 
         if(Auth::user()->role->nom == 'admin' || Auth::user()->id===$membre->id ){
           return view('membre.edit')->with([
@@ -132,14 +132,16 @@ class UserController extends Controller
     {
 
         $membre = User::find($id);
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
 
         if($request->hasFile('img')){
             $file = $request->file('img');
             $file_name = time().'.'.$file->getClientOriginalExtension();
             $file->move(public_path('/uploads/photo/users'),$file_name);
-
-                        }
+          }
+          else{
+              $file_name="userDefault.png";
+          }
 
         $membre->name = $request->input('name');
         $membre->prenom = $request->input('prenom');

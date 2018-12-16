@@ -25,7 +25,7 @@ class TheseController extends Controller
     public function index()
     {
         $theses = These::all();
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
 
         return view('these.index' , ['theses' => $theses] , ['labo'=>$labo]);
     }
@@ -33,8 +33,7 @@ class TheseController extends Controller
     public function details($id)
     {
         $these = These::find($id);
-        $labo = Parametre::find('1');
-
+        $labo = $this->getCurrentLabo();
         return view('these.details', ['these' => $these], ['labo'=>$labo]);
     }
 
@@ -44,7 +43,7 @@ class TheseController extends Controller
             {
                 $membres = User::all();
                 $these = These::all();
-                $labo = Parametre::find('1');
+                $labo = $this->getCurrentLabo();
                 $partenaires=Partenaire::all();
                 return view('these.ajouter')->with([
                   'membres' => $membres,
@@ -54,7 +53,7 @@ class TheseController extends Controller
 
             }
             else{
-                $labo = Parametre::find('1');
+                $labo = $this->getCurrentLabo();
                 return view('errors.403', ['labo'=>$labo]);
             }
 

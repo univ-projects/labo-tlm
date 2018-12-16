@@ -21,7 +21,7 @@ class PartenaireController extends Controller
 
   public function index()
   {
-  $labo = Parametre::find('1');
+  $labo = $this->getCurrentLabo();
   $partenaires = Partenaire::all();
    // $nbr = DB::table('users')
    //            ->groupBy('equipe_id')
@@ -57,23 +57,19 @@ class PartenaireController extends Controller
 
   public function create()
   {
-      $labo = Parametre::find('1');
+    $labo = $this->getCurrentLabo();
 
 
-      if( Auth::user()->role->nom == 'admin')
-          {
+
             return view('partenaire.create')->with([
                 'labo'=>$labo,
             ]);
-          }
-          else{
-              return view('errors.403' ,['labo'=>$labo]);
-          }
+
   }
 
   public function details($id)
   {
-      $labo = Parametre::find('1');
+      $labo = $this->getCurrentLabo();
       $labos= Parametre::all();
       $partenaire = Partenaire::find($id);
       $contacts= Contact::where('partenaire_id', $id)->get();
@@ -88,7 +84,7 @@ class PartenaireController extends Controller
 
   public function store(partenaireRequest $request)
   {
-      $labo = Parametre::find('1');
+      $labo = $this->getCurrentLabo();
 
       $partenaire = new Partenaire();
 
@@ -109,6 +105,7 @@ class PartenaireController extends Controller
       $partenaire->ville = $request->input('ville');
       $partenaire->lien = $request->input('lien');
       $partenaire->logo = 'uploads/photo/partenaires/'.$file_name;
+      $partenaire->created_by = Auth::user()->id;
 
       $partenaire->save();
 
@@ -118,11 +115,8 @@ class PartenaireController extends Controller
 
   public function update(partenaireRequest $request,$id)
   {
-      $labo = Parametre::find('1');
+      $labo = $this->getCurrentLabo();
       $partenaire = Partenaire::find($id);
-      //
-      if( Auth::user()->role->nom == 'admin')
-          {
 
       if($request->hasFile('img')){
               $file = $request->file('img');
@@ -141,23 +135,19 @@ class PartenaireController extends Controller
           $partenaire->lien = $request->input('lien');
           $partenaire->logo = 'uploads/photo/partenaires/'.$file_name;
 
+
           $partenaire->save();
 
           return redirect('partenaires/'.$id.'/details');
-          }
-      else{
-              return view('errors.403',['labo'=>$labo]);
-          }
+
 
   }
 
   public function destroy($id)
   {
-      if( Auth::user()->role->nom == 'admin')
-          {
+
       $partenaire = Partenaire::find($id);
       $partenaire->delete();
       return redirect('partenaires');
-      }
   }
 }

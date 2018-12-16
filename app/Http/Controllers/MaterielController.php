@@ -29,7 +29,7 @@ class MaterielController extends Controller
    public function index()
   {
       // $materiels = Materiel::all();
-      $labo = Parametre::find('1');
+      $labo = $this->getCurrentLabo();
       $materiels = Category::all();
       // print_r($materiels);die();
 
@@ -53,7 +53,7 @@ class MaterielController extends Controller
   {
       // $materiel = Materiel::find($id);
       $materiel = Category::find($id);
-      $labo = Parametre::find('1');
+      $labo = $this->getCurrentLabo();
       $proprietaires = User::all();
         $equipes = Equipe::all();
       $exemplaires = Materiel::where('category_id', $id)->get();
@@ -95,7 +95,7 @@ class MaterielController extends Controller
 
   public function create()
   {
-      $labo = Parametre::find('1');
+      $labo = $this->getCurrentLabo();
       if( Auth::user()->role->nom == 'admin')
           {
               $proprietaires = User::all();
@@ -109,7 +109,7 @@ class MaterielController extends Controller
   public function store(materielRequest $request)
   {
       $materiel = new Category();
-      $labo = Parametre::find('1');
+      $labo = $this->getCurrentLabo();
       if($request->hasFile('img')){
           $file = $request->file('img');
           $file_name = time().'.'.$file->getClientOriginalExtension();
@@ -148,7 +148,7 @@ class MaterielController extends Controller
 
       // $materiel = Materiel::find($id);
       $proprietaires = User::all();
-      $labo = Parametre::find('1');
+      $labo = $this->getCurrentLabo();
       $materiel = Category::find($id);
 
       if(Auth::user()->role->nom == 'admin' ){
@@ -169,7 +169,7 @@ class MaterielController extends Controller
   {
 
       // $materiel = Materiel::find($id);
-      $labo = Parametre::find('1');
+      $labo = $this->getCurrentLabo();
       $materiel = Category::find($id);
 
       if($request->hasFile('img')){
@@ -216,7 +216,7 @@ class MaterielController extends Controller
 
 
       $materiel = Materiel::find($id);
-      $labo = Parametre::find('1');
+      $labo = $this->getCurrentLabo();
 
 
         $oldProprietaire=  $materiel->proprietaire;
@@ -354,7 +354,7 @@ class MaterielController extends Controller
   {
 
         $materiel = new Materiel();
-      $labo = Parametre::find('1');
+    $labo = $this->getCurrentLabo();
 
         $materiel->numero = $request->input('numero');
         if ($request->input('type_proprietaire')=="membre") {

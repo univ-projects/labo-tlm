@@ -30,7 +30,8 @@ class ArticleController extends Controller
 	//permet de lister les articles
     public function index(){
 
-    	$labo = Parametre::find('1');
+		$labo = $this->getCurrentLabo();
+
     	$listarticle = Article::all();
     	return view('article.index' , ['articles' => $listarticle] ,['labo'=>$labo]);
 
@@ -38,7 +39,8 @@ class ArticleController extends Controller
 
     public function details($id)
     {
-    	$labo = Parametre::find('1');
+			$labo = $this->getCurrentLabo();
+
 	 	$article = Article::find($id);
 	 	$membres = Article::find($id)->users()->orderBy('name')->get();
 		$membres_ext =DB::table('articles')
@@ -62,7 +64,7 @@ class ArticleController extends Controller
     //affichage de formulaire de creation d'articles
 	 public function create()
 	 {
-	 	$labo = Parametre::find('1');
+		 $labo = $this->getCurrentLabo();
 	 	// if( Auth::user()->role->nom == 'admin')
             {
 	 	$membres = User::all();
@@ -89,7 +91,7 @@ class ArticleController extends Controller
 	 public function store(articleRequest $request){
 
 	 	$article = new Article();
-	 	$labo = Parametre::find('1');
+		$labo = $this->getCurrentLabo();
 
 	 	if($request->hasFile('detail')){
 
@@ -162,7 +164,7 @@ class ArticleController extends Controller
 
 	 	$article = Article::find($id);
 	 	$membres = User::all();
-	 	$labo = Parametre::find('1');
+$labo = $this->getCurrentLabo();
 		$contacts = Contact::all();
 		$partenaires = Partenaire::all();
 
@@ -181,7 +183,7 @@ class ArticleController extends Controller
     public function update(articleRequest $request ,$id){
 
     	$article = Article::find($id);
-    	$labo = Parametre::find('1');
+		$labo = $this->getCurrentLabo();
 
     	$article->type = $request->input('type');
 	 	$article->titre = $request->input('titre');

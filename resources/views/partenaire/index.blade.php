@@ -34,11 +34,11 @@
             <!-- /.box-header -->
           <div class="box-body">
 
-            @if(Auth::user()->role->nom == 'admin' )
+
             <div class=" pull-right" style="padding-bottom: 20px">
                 <a href="{{url('partenaires/create')}}" type="button" class="btn btn-block btn-success btn-lg"><i class="fa fa-plus"></i> <i class="fa fa-handshake-o"></i> Nouveau partenaire</a>
             </div>
-            @endif
+
 
             <div class="row" >
               <div class="col-xs-12">
@@ -48,7 +48,7 @@
                 <div class="col-xs-6">
                   <div class="box box-widget widget-user">
                     <div class="box-tools pull-right">
-                      @if(Auth::user()->role->nom == 'admin' )
+                      @if(Auth::user()->role->nom == 'admin' || Auth::user()->id===$partenaire->created_by)
 
                  <!--      <form action="{{ url('partenaires/'.$partenaire->id)}}" method="post">
 

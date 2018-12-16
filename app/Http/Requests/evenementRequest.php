@@ -27,8 +27,7 @@ class evenementRequest extends FormRequest
             'titre' => 'required|min:3',
             'contenu' => 'required|min:3',
             'status' => 'required',
-            'from' => 'required',
-            'to' => 'required'
+            'from' => 'required'
 
         ];
     }

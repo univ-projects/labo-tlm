@@ -75,6 +75,7 @@ class EvenementController extends Controller
             $evenement->photo = $request->input('photo');
             $evenement->auteur = Auth::user()->id;
             $evenement->status = $request->input('status');
+            $evenement->lieu = $request->input('lieu');
 
             $allDate=explode(' A ',$request->input('from'));
             $evenement->from = $allDate[0].':00';
@@ -130,6 +131,7 @@ class EvenementController extends Controller
           $evenement->contenu = $request->input('contenu');
           $evenement->status = $request->input('status');
           $evenement->auteur = Auth::user()->id;
+          $evenement->lieu = $request->input('lieu');
 
         if (isset($file_name)) {
             $evenement->photo = 'uploads/photo/evenements/'.$file_name;
@@ -150,12 +152,11 @@ class EvenementController extends Controller
 
     public function destroy($id)
     {
-        if( Auth::user()->role->nom == 'admin')
-            {
-              $evenement = evenement::find($id);
+
+              $evenement = Evenement::find($id);
               $evenement->delete();
               return redirect('evenements');
-            }
+
     }
 
 

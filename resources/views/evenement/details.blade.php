@@ -234,8 +234,9 @@
                     <div class="col-md-6">
                       <h2 class="entry-title">{{$evenement->titre}}</h2>
                       <small class="date">@if($evenement->created_at==$evenement->updated_at) {{$evenement->created_at}} @else {{$evenement->updated_at}} @endif</small>
+                       <small class="date"> @if($evenement->lieu) </br><span> <i class="fa fa-map-marker"></i> </span> {{$evenement->lieu}}@endif </small>
                       <p>
-                        {{$evenement->contenu}}
+                        <?php echo strip_tags($evenement->contenu, '<b><a><i><u>') ?>
                       </p>
 
                   </div>

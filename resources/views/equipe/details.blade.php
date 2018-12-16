@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
- @section('title','LRI | Détails equipe')
+ @section('title',"EasyLab | $equipe->achronymes")
 
 @section('header_page')
 
@@ -11,7 +11,7 @@
         <ol class="breadcrumb">
           <li><a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
           <li><a href="{{url('equipes')}}">Equipes</a></li>
-          <li class="active">Détails</li>
+          <li class="active">{{$equipe->achronymes}}</li>
         </ol>
 
 @endsection
@@ -130,6 +130,19 @@
                 </div>
               </div>
             </li>
+
+            <li>
+              <i class="fa  fa-flask bg-green"></i>
+
+              <div class="timeline-item">
+
+                <h3 class="timeline-header"><a >Laboratoire</a></h3>
+
+                <div class="timeline-body">
+                  {{$equipe->labo->nom}}
+                </div>
+              </div>
+            </li>
             <!-- END timeline item -->
             <!-- timeline item -->
             <li>
@@ -154,7 +167,7 @@
               <h3 class="timeline-header"><a >Résumé</a></h3>
 
                 <div class="timeline-body">
-                    <?php echo strip_tags($equipe->resume, '<b><a><i>') ?>
+                    <?php echo strip_tags($equipe->resume, '<b><a><i><u>') ?>
                 </div>
               </div>
             </li>
@@ -189,10 +202,16 @@
                       <div class="col-md-9 inputGroupContainer">
                         <div class="input-group" style="width: 70%">
                           <select class="form-control" name="labo">
-                            <option></option>
 
                             @foreach($labos as $l)
-                              <option value="{{$l->id}}">$l->nom</option>
+
+                              @if($l->id==$equipe->labo_id)
+                                <?php $selected="selected" ?>
+                              @else
+                                <?php $selected="" ?>
+                              @endif
+
+                              <option value="{{$l->id}}" <?php echo $selected ?>>{{$l->nom}}</option>
                             @endforeach
                           </select>
 
@@ -243,7 +262,7 @@
                       </div>
 
                       <div class="form-group">
-                          <label class="col-md-3 control-label">Photo*</label>
+                          <label class="col-md-3 control-label">Photo</label>
 
                               <div class="col-md-9 inputGroupContainer">
                                 <div id='actualite-upload' style="background-image:url('{{asset($equipe->photo)}}')">

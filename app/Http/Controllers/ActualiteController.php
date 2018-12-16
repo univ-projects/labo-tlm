@@ -25,7 +25,8 @@ class ActualiteController extends Controller
    public function index()
   {
       $actualites = Actualite::all();
-      $labo = Parametre::find('1');
+
+      $labo = $this->getCurrentLabo();
 
       // if( Auth::user()->role->nom == 'admin')
       //     {
@@ -46,7 +47,8 @@ class ActualiteController extends Controller
   public function details($id)
   {
       $actualite = Actualite::find($id);
-      $labo = Parametre::find('1');
+
+      $labo = $this->getCurrentLabo();
 
 
 
@@ -59,7 +61,8 @@ class ActualiteController extends Controller
 
   public function create()
   {
-      $labo = Parametre::find('1');
+  $labo = $this->getCurrentLabo();
+
       // if( Auth::user()->role->nom == 'admin')
       //     {
 
@@ -73,7 +76,9 @@ class ActualiteController extends Controller
   public function store(actualiteRequest $request)
   {
       $actualite = new actualite();
-      $labo = Parametre::find('1');
+
+$labo = $this->getCurrentLabo();
+
       if($request->hasFile('img')){
           $file = $request->file('img');
           $file_name = time().'.'.$file->getClientOriginalExtension();
@@ -101,7 +106,8 @@ class ActualiteController extends Controller
   {
 
       $actualite = Actualite::find($id);
-      $labo = Parametre::find('1');
+
+    $labo = $this->getCurrentLabo();
 
       if(Auth::user()->role->nom == 'admin' || Auth::user()->id===$actualite->auteurUser->id ){
         return view('actualite.edit')->with([
@@ -121,7 +127,8 @@ class ActualiteController extends Controller
   {
 
       $actualite = Actualite::find($id);
-      $labo = Parametre::find('1');
+
+$labo = $this->getCurrentLabo();
 
       if($request->hasFile('img')){
           $file = $request->file('img');

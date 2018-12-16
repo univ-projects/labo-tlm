@@ -156,6 +156,17 @@
               	  </div>
                   @endif
 
+									@if($membre->equipe_id)
+								<div class="row" style="margin-top: 10px">
+								<div class="col-md-3">
+									<strong><i class="fa fa-flask  margin-r-5"></i>Laboratoire</strong>
+								 </div>
+									<div class="col-md-9">
+										<a href="{{url('laboratoires/'.$membre->equipe->labo_id.'/details')}}">{{$membre->equipe->labo['nom']}}</a>
+									</div>
+								</div>
+								@endif
+
                   @if($membre->equipe_id)
                 <div class="row" style="margin-top: 10px">
                 <div class="col-md-3">

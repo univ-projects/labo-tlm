@@ -26,7 +26,7 @@ class ProjetController extends Controller
 	//permet de lister les articles
     public function index(){
     	$projets = Projet::all();
-        $labo =  Parametre::find('1');
+      $labo = $this->getCurrentLabo();
         // $membres = Projet::find($id)->users()->orderBy('name')->get();
 
     	return view('projet.index' , ['projets' => $projets] ,['labo'=>$labo]);
@@ -35,7 +35,7 @@ class ProjetController extends Controller
 
     public function details($id)
     {
-        $labo =  Parametre::find('1');
+        $labo = $this->getCurrentLabo();
         $projet = Projet::find($id);
         $membres = Projet::find($id)->users()->orderBy('name')->get();
         $membres_ext =DB::table('projets')
@@ -58,7 +58,7 @@ class ProjetController extends Controller
     //affichage de formulaire de creation d'articles
 	 public function create()
      {
-        $labo =  Parametre::find('1');
+        $labo = $this->getCurrentLabo();
         $partenaires=Partenaire::all();
 
         if( Auth::user()->role->nom == 'admin')
@@ -80,7 +80,7 @@ class ProjetController extends Controller
 	 public function store(projetRequest $request){
 
 	 	$projet = new Projet();
-        $labo =  Parametre::find('1');
+      $labo = $this->getCurrentLabo();
 
 	 	if($request->hasFile('detail')){
 
@@ -145,7 +145,7 @@ class ProjetController extends Controller
 
 	 	$projet = Projet::find($id);
 	 	 $membres = User::all();
-    $labo =  Parametre::find('1');
+    $labo = $this->getCurrentLabo();
     $contacts = Contact::all();
 		$partenaires = Partenaire::all();
 
@@ -166,7 +166,7 @@ class ProjetController extends Controller
     public function update(projetRequest $request , $id){
 
     	$projet = Projet::find($id);
-        $labo =  Parametre::find('1');
+      $labo = $this->getCurrentLabo();
 
     	if($request->hasFile('detail')){
 

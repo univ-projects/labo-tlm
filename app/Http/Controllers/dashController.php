@@ -17,7 +17,7 @@ class dashController extends Controller
 
     public function index()
     {
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
         // $membres = User::get()->cont();
         // $membres = User::select(DB::raw('count(DISTINCT name) as name_count'))->get();
         $membres = DB::table('users')->distinct('id')->count();

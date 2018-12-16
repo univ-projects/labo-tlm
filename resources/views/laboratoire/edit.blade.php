@@ -1,17 +1,17 @@
 @extends('layouts.master')
 
- @section('title','LRI | Détails labo')
+ @section('title',"EasyLab | $laboDetail->achronymes")
 
 @section('header_page')
 
        <h1>
         Laboratoires
-        <small>Détails</small>
+        <small>{{$laboDetail->achronymes}}</small>
       </h1>
         <ol class="breadcrumb">
           <li><a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
           <li><a href="{{url('laboratoires')}}">laboratoires</a></li>
-          <li class="active">Détails</li>
+          <li class="active">{{$laboDetail->achronymes}}</li>
         </ol>
 
 @endsection
@@ -101,16 +101,16 @@
             <div class="col-md-8">
       <div class="nav-tabs-custom">
        <ul class="nav nav-tabs">
-              <li class="active"><a href="#apropos" data-toggle="tab">A propos</a></li>
-              @if(Auth::user()->role->nom == 'admin' )
+              <li ><a href="#apropos" data-toggle="tab">A propos</a></li>
+              @if( Auth::user()->role->nom == 'admin' || Auth::user()->role->nom == 'directeur')
 
-              <li><a href="#modifier" data-toggle="tab">Modifier</a></li>
+              <li class="active"><a href="#modifier" data-toggle="tab">Modifier</a></li>
               @endif
             </ul>
 
       <div class="tab-content">
 
-        <div class="active tab-pane" id="apropos">
+        <div class="tab-pane" id="apropos">
           <div class="box-body">
           <!-- The time line -->
           <ul class="timeline" style="padding-top: 30px;">
@@ -140,11 +140,14 @@
 
                 <h3 class="timeline-header no-border"><a>Directeur du laboratoire </a></h3>
                 <div class="timeline-body">
-                 <a href="{{url('membres/'.$laboDetail->directeur.'/details')}}">
-									 @if(isset($laboDetail->directeu))
-									 {{$laboDetail->directeu->name}} {{$laboDetail->directeu->prenom}}
-									@endif
-                  </a>
+
+                  									 @if(isset($laboDetail->directeu))
+                  									    <a href="{{url('membres/'.$laboDetail->directeur.'/details')}}">
+                                           {{$laboDetail->directeu->name}} {{$laboDetail->directeu->prenom}}
+                                         </a>
+                                     @else
+                                     <b> Pas encore désigné </b>
+                  									@endif
                 </div>
               </div>
             </li>
@@ -157,7 +160,7 @@
               <h3 class="timeline-header"><a >A propos</a></h3>
 
                 <div class="timeline-body">
-                  {{$laboDetail->apropos}}
+                  <?php echo strip_tags($laboDetail->apropos, '<b><a><i><u>') ?>
                 </div>
               </div>
             </li>
@@ -171,8 +174,8 @@
         </div>
       </div>
 
-      <div class="tab-pane" id="modifier">
-          <form class="well form-horizontal" action="{{url('laboratoires/'. $laboDetail->id) }} " method="post"  id="contact_form">
+      <div class="active  tab-pane" id="modifier">
+          <form class="well form-horizontal" action="{{url('laboratoires/'. $laboDetail->id) }} " method="post"  id="contact_form" enctype="multipart/form-data">
             <input type="hidden" name="_method" value="PUT">
               {{ csrf_field() }}
               <fieldset>
@@ -181,7 +184,7 @@
                         <label class="col-md-3 control-label">Intitulé *</label>
                         <div class="col-md-9 inputGroupContainer">
                           <div class="input-group" style="width: 70%">
-                            <input  name="intitule" class="form-control" value="{{$laboDetail->nom}}" type="text">
+                            <input  name="nom" class="form-control" value="{{$laboDetail->nom}}" type="text">
                           </div>
                         </div>
                       </div>
@@ -212,7 +215,7 @@
 		                      <label class="col-md-3 control-label">A propos (*)</label>
 		                      <div class="col-md-9 inputGroupContainer @if($errors->get('apropos')) has-error @endif" >
 		                        <div style="width: 70%">
-		                          <textarea name="apropos" class="form-control" rows="3" placeholder="Entrez ...">{{$laboDetail->apropos}}</textarea>
+		                          <textarea name="apropos" class="form-control" rows="3" placeholder="Entrez ..." id="txt">{{$laboDetail->apropos}}</textarea>
 
 		                            <span class="help-block">
 		                                @if($errors->get('apropos'))
@@ -233,12 +236,12 @@
 		                            <select name="directeur" class="form-control select2" style="width:300px">
 		                              <option></option>
 		                               @foreach($membres as $membre)
-																	 @if($membre->id===$laboDetail->directeur)
+																	 @if($membre->user_id==$laboDetail->directeur)
 																			<?php $a='selected'; ?>
 																		@else
 																			<?php $a=''; ?>
 																		@endif
-		                              	<option value="{{$membre->id}}">{{$membre->name}} {{$membre->prenom}}</option>
+		                              	<option value="{{$membre->user_id}}" <?php echo $a ?>>{{$membre->name}} {{$membre->prenom}}</option>
 		                               @endforeach
 		                            </select>
 
@@ -280,30 +283,93 @@
       </div>
     </div>
 
-            <div class="col-md-4">
-              <!-- USERS LIST -->
-              <div class="box box-primary">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Membres de l'équipe</h3>
+    <div class="col-md-4">
+      <!-- USERS LIST -->
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Logo du {{$laboDetail->achronymes}}</h3>
 
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <ul class="users-list clearfix">
-                    @foreach($membres as $membre)
-                    <li>
-                      <img src="{{asset($membre->photo)}}" alt="User Image">
-                      <a class="users-list-name" href="{{url('membres/'.$membre->id.'/details')}}">{{$membre->name}}</a>
-                      <span class="users-list-date">{{$membre->prenom}}</span>
-                    </li>
-                    @endforeach
-                  </ul>
-                  <!-- /.users-list -->
-                </div>
-                <!-- /.box-body -->
-              </div>
-              <!--/.box -->
-            </div>
+        </div>
+        <!-- /.box-header -->
+
+
+        <div class="box-body no-padding" style="text-align:center">
+          <img src="{{$laboDetail->logo}}" alt="{{$laboDetail->achronymes}}" width="200px" height="200px">
+          <!-- /.users-list -->
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!--/.box -->
+    </div>
+
+    <div class="col-md-4">
+      <!-- USERS LIST -->
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Equipes du {{$laboDetail->achronymes}}</h3>
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          @if(reset($equipes))
+          <ul class="users-list clearfix">
+            @foreach($equipes as $equipe)
+            <li>
+              <a  href="{{url('equipes/'.$equipe->id.'/details')}}">
+                <img src="{{asset($equipe->photo)}}" alt="Equipe Image" height="100px" width="100px">
+                <span class="users-list-name"> {{$equipe->achronymes}}</span>
+              </a>
+            </li>
+            @endforeach
+          </ul>
+          @else
+            <b>Aucune équipe pour l'instant</b>
+          @endif
+          <!-- /.users-list -->
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!--/.box -->
+    </div>
+
+
+
+
+<div class="col-md-4">
+  <!-- USERS LIST -->
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Membres du {{$laboDetail->achronymes}}</h3>
+
+    </div>
+    <!-- /.box-header -->
+
+
+    <div class="box-body no-padding">
+      @if(reset($membres))
+      <ul class="users-list clearfix">
+        @foreach($membres as $membre)
+        <li>
+          <a  href="{{url('membres/'.$membre->user_id.'/details')}}">
+            <img src="{{asset($membre->photo_user)}}" alt="User Image">
+            <span class="users-list-name"> {{$membre->name}}</span>
+            <span class="users-list-date">{{$membre->prenom}}</span>
+          </a>
+        </li>
+        @endforeach
+      </ul>
+      @else
+        <b>Aucun membres pour l'instant</b>
+      @endif
+      <!-- /.users-list -->
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!--/.box -->
+</div>
+
+
+
 
             <!-- timeLine start -->
 

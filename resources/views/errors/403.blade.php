@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    {{$labo->nom}} | Erreur 403
+    EasyLab | Erreur 403
 @endsection
 
 @section('header_page')

@@ -127,7 +127,7 @@
             <div class="tab-content">
 
               <div class="active tab-pane" id="activity">
-            <form class="well form-horizontal" action=" {{url('membres/'. $membre->id) }} " method="post"  id="contact_form">
+            <form class="well form-horizontal" action=" {{url('membres/'. $membre->id) }} " method="post"  id="contact_form" enctype="multipart/form-data">
 
               <input type="hidden" name="_method" value="PUT">
               {{ csrf_field() }}
