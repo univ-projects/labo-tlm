@@ -166,6 +166,57 @@
                 </a>
               </li>
 
+              @if(isset($labo->id))
+              <li {{{ (Request::is('laboratoires/'.$labo->id.'/details') ? 'class=active' : '') }}}>
+                <a href="{{url('laboratoires/'.$labo->id.'/details')}}">
+                  <i class="fa fa-flask"></i> <span>{{$labo->achronymes}}</span>
+                </a>
+              </li>
+              @endif
+
+              <li class="treeview {{{ (Request::is('parametre/*') ? 'active' : '') }}} {{{ (Request::is('parametre') ? 'active' : '') }}}">
+                <a href="#">
+                  <i class="fa fa-gears"></i> <span>Laboratoires</span>
+                  <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li {{{ (Request::is('labos-trombinoscope/*') ? 'class=active' : '') }}} {{{ (Request::is('labos-trombinoscope') ? 'class=active' : '') }}}>
+                    <a href="{{url('labos-trombinoscope')}}"><i class="fa fa-id-badge"></i> Trombinoscope</a>
+                  </li>
+                  <li {{{ (Request::is('laboratoires/*') ? 'class=active' : '') }}} {{{ (Request::is('laboratoires') ? 'class=active' : '') }}}>
+                    <a href="{{url('laboratoires')}}"><i class="fa fa-list"></i> Liste</a>
+                  </li>
+                </ul>
+              </li>
+
+              @if(Auth::user()->role->nom == 'admin' )
+              <li {{{ (Request::is('materiels/*') ? 'class=active' : '') }}} {{{ (Request::is('materiels') ? 'class=active' : '') }}}>
+                <a href="{{url('materiels')}}">
+                  <i class="fa fa-flask"></i>
+                  <span>Matériels</span>
+                </a>
+              </li>
+              @endif
+
+              <li class="treeview {{{ (Request::is('partenaires/*') ? 'class=active' : '') }}} {{{ (Request::is('partenaires') ? 'class=active' : '') }}} {{{ (Request::is('contacts/*') ? 'class=active' : '') }}} {{{ (Request::is('contacts') ? 'class=active' : '') }}}">
+                <a href="#">
+                  <i class="fa fa-handshake-o"></i> <span>Partenaires</span>
+                  <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li {{{ (Request::is('partenaires/*') ? 'class=active' : '') }}} {{{ (Request::is('partenaires') ? 'class=active' : '') }}}>
+                    <a href="{{url('partenaires')}}"><i class="fa fa-id-badge"></i> Liste des partenaires</a>
+                  </li>
+                  <li {{{ (Request::is('contacts/*') ? 'class=active' : '') }}} {{{ (Request::is('contacts') ? 'class=active' : '') }}}>
+                    <a href="{{url('contacts')}}"><i class="fa fa-list"></i> Liste des contacts</a>
+                  </li>
+                </ul>
+              </li>
+
               <!-- <li {{{ (Request::is('equipes/*') ? 'class=active' : '') }}} {{{ (Request::is('equipes') ? 'class=active' : '') }}}>
                 <a href="{{url('equipes')}}">
                   <i class="fa fa-group"></i>
@@ -214,62 +265,19 @@
                 <a href="{{url('actualites')}}">
                   <i class="fa fa-newspaper-o"></i>
                   <span>Actualités</span></a>
-                </li>
+              </li>
 
                 <li {{{ (Request::is('evenements/*') ? 'class=active' : '') }}} {{{ (Request::is('evenements') ? 'class=active' : '') }}}>
                   <a href="{{url('evenements')}}">
                     <i class="fa fa-calendar"></i>
                     <span>Evènements</span></a>
-                  </li>
-
-
-                  <li class="treeview {{{ (Request::is('partenaires/*') ? 'class=active' : '') }}} {{{ (Request::is('partenaires') ? 'class=active' : '') }}} {{{ (Request::is('contacts/*') ? 'class=active' : '') }}} {{{ (Request::is('contacts') ? 'class=active' : '') }}}">
-                    <a href="#">
-                      <i class="fa fa-handshake-o"></i> <span>Partenaires</span>
-                      <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                          </span>
-                    </a>
-                    <ul class="treeview-menu">
-                      <li {{{ (Request::is('partenaires/*') ? 'class=active' : '') }}} {{{ (Request::is('partenaires') ? 'class=active' : '') }}}>
-                        <a href="{{url('partenaires')}}"><i class="fa fa-id-badge"></i> Liste des partenaires</a>
-                      </li>
-                      <li {{{ (Request::is('contacts/*') ? 'class=active' : '') }}} {{{ (Request::is('contacts') ? 'class=active' : '') }}}>
-                        <a href="{{url('contacts')}}"><i class="fa fa-list"></i> Liste des contacts</a>
-                      </li>
-                    </ul>
-                  </li>
-
-
-              @if(Auth::user()->role->nom == 'admin' )
-              <li {{{ (Request::is('materiels/*') ? 'class=active' : '') }}} {{{ (Request::is('materiels') ? 'class=active' : '') }}}>
-                <a href="{{url('materiels')}}">
-                  <i class="fa fa-flask"></i>
-                  <span>Matériels</span>
-                </a>
-              </li>
-              @endif
-
-
-
-
-
-                <li class="treeview {{{ (Request::is('parametre/*') ? 'active' : '') }}} {{{ (Request::is('parametre') ? 'active' : '') }}}">
-                  <a href="#">
-                    <i class="fa fa-gears"></i> <span>Laboratoires</span>
-                    <span class="pull-right-container">
-                          <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li {{{ (Request::is('labos-trombinoscope/*') ? 'class=active' : '') }}} {{{ (Request::is('labos-trombinoscope') ? 'class=active' : '') }}}>
-                      <a href="{{url('labos-trombinoscope')}}"><i class="fa fa-id-badge"></i> Trombinoscope</a>
-                    </li>
-                    <li {{{ (Request::is('laboratoires/*') ? 'class=active' : '') }}} {{{ (Request::is('laboratoires') ? 'class=active' : '') }}}>
-                      <a href="{{url('laboratoires')}}"><i class="fa fa-list"></i> Liste</a>
-                    </li>
-                  </ul>
                 </li>
+
+
+
+
+
+
 
                   @if(Auth::user()->role->nom == 'admin' || Auth::user()->role->nom == 'directeur')
                 <li class="treeview {{{ (Request::is('parametre/*') ? 'active' : '') }}} {{{ (Request::is('parametre') ? 'active' : '') }}}{{{ (Request::is('trombinoscope/*') ? 'active' : '') }}} {{{ (Request::is('trombinoscope') ? 'active' : '') }}}">
@@ -277,7 +285,7 @@
                     <i class="fa fa-user"></i> <span>Paramètres</span>
                     <span class="pull-right-container">
                           <i class="fa fa-angle-left pull-right"></i>
-                        </span>
+                      </span>
                   </a>
                   <ul class="treeview-menu">
                     <li {{{ (Request::is('trombinoscope/*') ? 'class=active' : '') }}} {{{ (Request::is('trombinoscope') ? 'class=active' : '') }}}>

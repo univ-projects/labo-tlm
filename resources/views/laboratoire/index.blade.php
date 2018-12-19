@@ -100,39 +100,42 @@
                               <i class="fa fa-eye"></i>
                             </a>
 
+                            @if(Auth::user()->role->nom == 'admin' || (Auth::user()->role->nom == 'directeur' && Auth::user()->id==$laboratoire->directeur))
+
+
                             <a href="{{url('laboratoires/'.$laboratoire->id.'/edit')}}" class="btn btn-default">
                               <i class="fa fa-edit"></i>
                             </a>
 
 
                              <a href="#supprimer{{ $laboratoire->id }}Modal" role="button" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                      <div class="modal fade" id="supprimer{{ $laboratoire->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $laboratoire->id }}ModalLabel" aria-hidden="true">
-                          <div class="modal-dialog">
-                              <div class="modal-content">
-                                  <div class="modal-header">
-                                    <!--   <h5 class="modal-title" id="supprimer{{ $laboratoire->id }}ModalLabel">Supprimer</h5> -->
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                      </button>
-                                  </div>
-                                  <div class="modal-body text-center">
-                                      Voulez-vous vraiment effectuer la suppression ?
-                                  </div>
-                                  <div class="modal-footer">
-                                      <form class="form-inline" action="{{ url('laboratoires/'.$laboratoire->id)}}"  method="POST">
-                                          @method('DELETE')
-                                          @csrf
-                                      <button type="button" class="btn btn-light" data-dismiss="modal">Non</button>
-                                          <button type="submit" class="btn btn-danger">Oui</button>
-                                      </form>
+                              <div class="modal fade" id="supprimer{{ $laboratoire->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $laboratoire->id }}ModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                            <!--   <h5 class="modal-title" id="supprimer{{ $laboratoire->id }}ModalLabel">Supprimer</h5> -->
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                                          </div>
+                                          <div class="modal-body text-center">
+                                              Voulez-vous vraiment effectuer la suppression ?
+                                          </div>
+                                          <div class="modal-footer">
+                                              <form class="form-inline" action="{{ url('laboratoires/'.$laboratoire->id)}}"  method="POST">
+                                                  @method('DELETE')
+                                                  @csrf
+                                              <button type="button" class="btn btn-light" data-dismiss="modal">Non</button>
+                                                  <button type="submit" class="btn btn-danger">Oui</button>
+                                              </form>
+                                          </div>
+                                      </div>
                                   </div>
                               </div>
-                          </div>
-                      </div>
-
+                              @endif
 
                         </form>
-                    </div>
+                      </div>
                     </td>
                   </tr>
                   @endforeach

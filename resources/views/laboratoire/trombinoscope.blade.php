@@ -34,10 +34,11 @@
             <!-- /.box-header -->
           <div class="box-body">
 
-
+						@if(Auth::user()->role->nom == 'admin')
             <div class=" pull-right" style="padding-bottom: 20px">
                 <a href="{{url('laboratoires/create')}}" type="button" class="btn btn-block btn-success btn-lg"><i class="fa fa-plus"></i> <i class="fa fa-group"></i> Nouveau laboratoire</a>
             </div>
+						@endif
 
 
             <div class="row" >
@@ -48,7 +49,7 @@
                 <div class="col-xs-6">
                   <div class="box box-widget widget-user">
                     <div class="box-tools pull-right">
-                      @if(Auth::user()->role->nom == 'admin' )
+                      	 @if(Auth::user()->role->nom == 'admin' || (Auth::user()->role->nom == 'directeur' && Auth::user()->id==$lab->directeur))
 
                  <!--      <form action="{{ url('laboratoires/'.$lab->id)}}" method="post">
 
@@ -64,10 +65,11 @@
                           <div class="modal-dialog">
                               <div class="modal-content">
                                   <div class="modal-header">
-                                    <!--   <h5 class="modal-title" id="supprimer{{ $lab->id }}ModalLabel">Supprimer</h5> -->
+
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                       </button>
+
                                   </div>
                                   <div class="modal-body text-center">
                                       Voulez-vous vraiment effectuer la suppression ?
@@ -152,7 +154,7 @@
 																	@endforeach
 																	@if($zeroMembre)
 																		0
-																	@endif	
+																	@endif
 
 															</h5>
 																<span class="description-text">Membres</span>
@@ -171,6 +173,7 @@
 
 
               @endforeach
+
             </div>
           </div>
             <!-- /.box-body -->

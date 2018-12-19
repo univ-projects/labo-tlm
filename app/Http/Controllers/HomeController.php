@@ -25,13 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
         $membres = DB::table('users')->distinct('id')->count();
     $equipes = DB::table('equipes')->distinct('id')->count();
     $articles = DB::table('articles')->distinct('id')->count();
     $theses = DB::table('theses')->distinct('id')->where('date_soutenance',null)->count();
 
-         
+
         return view('dashboard')->with([
             'membres' => $membres,
             'equipes' => $equipes,

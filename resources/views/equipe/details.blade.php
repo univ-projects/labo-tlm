@@ -102,7 +102,7 @@
       <div class="nav-tabs-custom">
        <ul class="nav nav-tabs">
               <li class="active"><a href="#apropos" data-toggle="tab">A propos</a></li>
-              @if(Auth::user()->role->nom == 'admin' )
+              @if(Auth::user()->role->nom == 'admin' || (Auth::user()->role->nom == 'directeur' && Auth::user()->id==$laboDetail->directeur) || (Auth::user()->id==$equipe->chef_id))
 
               <li><a href="#modifier" data-toggle="tab">Modifier</a></li>
               @endif

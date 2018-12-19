@@ -77,6 +77,7 @@ class ParametreController extends Controller
                'nbrEquipes' => $nbrEquipes,
                'nbrMembres'=>$nbrMembres,
                'equipes' =>$equipes,
+               'labo'=>$labo
 
            ]);;
 
@@ -90,7 +91,7 @@ class ParametreController extends Controller
 
        $equipe = Equipe::find($id);
        $membres = DB::table('users')
-            ->select( DB::raw('users.id as user_id,equipes.id,users.equipe_id,equipes.labo_id,parametres.id,name,prenom,users.photo as photo_user'))
+            ->select( DB::raw('*,users.id as user_id,equipes.id,users.equipe_id,equipes.labo_id,equipes.intitule as team,parametres.id,name,prenom,users.photo as photo_user'))
              ->leftjoin('equipes', 'equipes.id', '=', 'users.equipe_id')
               ->leftjoin('parametres', 'parametres.id', '=', 'equipes.labo_id')
               ->where('labo_id', $id)
@@ -98,9 +99,14 @@ class ParametreController extends Controller
        $laboDetail = Parametre::find($id);
 
        $equipes = DB::table('parametres')
+
             ->leftjoin('equipes', 'equipes.labo_id', '=', 'parametres.id')
+            ->leftjoin('users', 'users.id', '=', 'equipes.chef_id')
+             ->select(DB::raw('*,equipes.photo as team_photo'))
             ->where('labo_id',$id)
             ->get();
+
+            // $equipes=Equipe::all();
 
 
        return view('laboratoire.details')->with([
@@ -129,7 +135,7 @@ class ParametreController extends Controller
             ->where('labo_id',$id)
             ->get();
 
-       if( Auth::user()->role->nom == 'admin' || Auth::user()->role->nom == 'directeur')
+         if(Auth::user()->role->nom == 'admin' || (Auth::user()->role->nom == 'directeur' && Auth::user()->id==$laboratoire->directeur))
            {
                return view('laboratoire.edit')->with([
                    'equipes' => $equipes,
@@ -176,7 +182,11 @@ class ParametreController extends Controller
        $labo->logo = '/uploads/photo/labos/'.$file_name_logo;
 
 
-       $labo->save();
+       if($labo->save()){
+         $user = User::find($request->input('directeur'));
+         $user->role_id=3;//directeur
+         $user->save();
+       }
 
        return redirect('laboratoires/'.$id.'/details');
 
@@ -200,6 +210,7 @@ class ParametreController extends Controller
     {
 
       $newLab = new Parametre();
+
 
       $labo = $this->getCurrentLabo();
 
@@ -231,7 +242,11 @@ class ParametreController extends Controller
         $newLab->photo = '/uploads/photo/labos/'.$file_name_img;
         $newLab->logo = '/uploads/photo/labos/'.$file_name_logo;
 
-        $newLab->save();
+        if($newLab->save()){
+          $user = User::find($request->input('directeur'));
+          $user->role_id=3;//directeur
+          $user->save();
+        }
 
         return redirect('laboratoires');
 
