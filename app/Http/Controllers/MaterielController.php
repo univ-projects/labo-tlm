@@ -30,15 +30,23 @@ class MaterielController extends Controller
   {
       // $materiels = Materiel::all();
       $labo = $this->getCurrentLabo();
-      $materiels = Category::all();
+
       // print_r($materiels);die();
 
-      if( Auth::user()->role->nom == 'admin')
+        if(Auth::user()->role->nom == 'admin' || Auth::user()->role->nom == 'directeur')
           {
+              $laboratoires=Parametre::all();
             //  return view('materiel.index', ['materiels' => $materiels],['labo'=>$labo]);
+            if (Auth::user()->role->nom == 'admin') {
+                $materiels = Category::all();
+            }
+            else{
+                $materiels = Category::where('laboratoire',Auth::user()->equipe->labo->id)->get();
+            }
               return view('materiel.index')->with([
                   'materiels' => $materiels,
                   'labo'=>$labo,
+                  'laboratoires'=>$laboratoires
               ]);;
           }
           else{
@@ -53,9 +61,11 @@ class MaterielController extends Controller
   {
       // $materiel = Materiel::find($id);
       $materiel = Category::find($id);
+
+
       $labo = $this->getCurrentLabo();
       $proprietaires = User::all();
-        $equipes = Equipe::all();
+      $equipes=Equipe::all();
       $exemplaires = Materiel::where('category_id', $id)->get();
       // print_r($materiel->category);die();
       $affectations = DB::table('affecter')
@@ -99,6 +109,13 @@ class MaterielController extends Controller
       if( Auth::user()->role->nom == 'admin')
           {
               $proprietaires = User::all();
+              $laboratoires = Parametre::all();
+              return view('materiel.create')->with([
+                  'proprietaires'=>$proprietaires,
+                  'labo'=>$labo,
+                  'laboratoires'=>$laboratoires
+
+              ]);
               return view('materiel.create' , ['proprietaires' => $proprietaires],['labo'=>$labo]);
           }
           else{
@@ -122,6 +139,7 @@ class MaterielController extends Controller
 
 
           $materiel->libelle = $request->input('libelle');
+          $materiel->laboratoire = $request->input('laboratoire');
           $materiel->quantity = $request->input('quantite');
           $qte=$materiel->quantity;
           $materiel->description = $request->input('description');
@@ -417,12 +435,20 @@ class MaterielController extends Controller
     //        'status' => 'success',
     //        'type' => $request->type_proprietaire,
     //    );
+      $cat=Category::find($request->category);
+
+
        if($request->type_proprietaire=="equipe"){
           // $response=Materiel::where('proprietaire', NULL)->get();
-          $response=Equipe::all();
+          $response=Equipe::where('labo_id',$cat['laboratoire'])->get();
        }
        else {
-         $response=User::all();
+         $response = User::join('equipes', function ($join) {
+                     $join->on('users.equipe_id', '=', 'equipes.id');
+                 })
+                  ->where('equipes.labo_id', '=', $cat['laboratoire'])
+                 ->get();
+         //$response=User::where('equipe->labo_id',$request->category)->get();
        }
 
        if(isset($response)){
@@ -463,5 +489,213 @@ class MaterielController extends Controller
 
        return response()->json($output);
   }
+
+
+
+
+public function postMateriels(Request $request)
+  {
+    if($request->labo_selected!=0)
+        $response=Parametre::find($request->labo_selected);
+    else
+        $response=Parametre::all();
+
+  $output='';
+  $labId=$request->labo_selected;
+
+
+    $materiels=Category::all();
+
+
+    foreach($materiels as $materiel){
+      if( $materiel->laboratory->id==$labId || $labId==0){
+          $output.="  <tr><td><img src=\"";
+          $output.=asset($materiel->photo);
+          $output.="\" alt=\"";
+          $output.=$materiel->libelle;
+          $output.="\" name=\"\" width=\"250px\" height=\"200px\">";
+          $output.="</td><td>";
+          $output.=$materiel->libelle;
+          $output.="</td><td style=\"250px\">";
+          $output.=str_limit($materiel->description, $limit = 60, $end = '...');
+
+
+          $output.='</td>
+          <td style="text-align:center">';
+          $output.=$materiel->quantity;
+            $output.="<div class=\" pull-right\">
+              <a href=\"#add";
+              $output.= $materiel->id ;
+              $output.="Modal\" role=\"button\" data-toggle=\"modal\"><i class=\"fa fa-plus margin-r-5\" style=\"color:green\"></i></a>
+              <div class=\"modal fade\" id=\"add";
+              $output.= $materiel->id ;
+              $output.="Modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"add";
+              $output.= $materiel->id ;
+              $output.="ModalLabel\" aria-hidden=\"true\">
+               <div class=\"modal-dialog\">
+                   <div class=\"modal-content\">
+                       <div class=\"modal-header\">
+
+                         <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">
+                             <span aria-hidden=\"true\">&times;</span>
+                         </button>
+                     </div>
+                     <div class=\"modal-body text-center\">
+                         <h2>Ajouter un exemplaire de ce materiel</h2>
+                     </div>
+                     <div class=\"modal-footer\">
+                         <form class=\"well\" action=\"";
+                         $output.= url('exemplaires/'.$materiel->id);
+                         $output.="\"  method=\"POST\" >";
+                         $output.=csrf_field() ;
+                         $output.="
+                              <fieldset style=\"text-align:center\" id=\"";
+                              $output.=$materiel->id;
+                              $output.="  \">
+
+
+                                <div class=\"form-group\">
+                                    <label class=\"col-md-3 control-label\">Numéro * </label>
+                                      <div class=\"col-md-9\">";
+
+                                      $output.="
+                                        <div class=\"input-group\">
+                                        <span class=\"input-group-addon\"><i class=\"fa fa-lg fa-barcode\"></i></span>
+                                        <input name=\"numero\" placeholder=\"numéro\" class=\"form-control\"  type=\"text\" value=\"";
+                                        $output.=old('numero');
+                                          $output.="\">
+
+                                        </div>
+                                        <span class=\"help-block\">";
+
+                                      $output.="</span>
+                                      </div>
+                                  </div>
+
+                                <div class=\"form-group\">
+                                    <label class=\"col-md-3 control-label\">Type proprietaire </label>
+                                      <div class=\"col-md-9 selectContainer\">
+                                        <div class=\"input-group\">
+                                          <span class=\"input-group-addon\"><i class=\"fa fa-lg fa-user\"></i></span>
+                                          <select name=\"type_proprietaire\" class=\"form-control proprietaire_type\">
+                                            <option value=\"\" selected></option>
+                                            <option value=\"membre\">Membre</option>
+                                            <option value=\"equipe\">Equipe</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </div>
+
+
+                                <div class=\"form-group\" id=\"proprietaire_result";
+                                $output.=$materiel->id;
+                                $output.="\">
+
+                                </div>
+
+                            </fieldset>
+
+
+
+                              <div class=\"row\" style=\"text-align:center;padding-top: 30px; \">
+                                   <button type=\"button\" class=\"btn btn-light\" data-dismiss=\"modal\">Annuler</button>
+                                   <button type=\"submit\" class=\" btn btn-lg btn-primary\"><i class=\"fa fa-check\"></i> Ajouter</button>
+                              </div>
+
+
+                         </form>
+                     </div>
+                 </div>
+             </div>
+            </div>
+            </div>
+
+          </td>
+          ";
+
+        //  if( Auth::user()->role->nom == 'admin'){
+          $output.='  <td style="text-align:center">
+              <a href="';
+              $output.=url('laboratoires/'.$materiel->laboratory->id.'/details');
+              $output.="\">";
+              $output.=$materiel->laboratory->achronymes;
+              $output.="</a>
+            </td>
+            ";
+        //  }
+        $output.='  <td>
+            <div class="btn-group">
+
+              <form action="';
+              $output.= url('materiels/'.$materiel->id);
+              $output.='" method="post">';
+                  $output.=csrf_field();
+                  $output.=method_field('DELETE');
+                  $output.='
+                  <a href="';
+                  $output.= url('materiels/'.$materiel->id.'/details');
+                  $output.='" class="btn btn-info">
+                    <i class="fa fa-eye"></i>
+                  </a>';
+                   if(Auth::user()->role->nom == 'admin' || Auth::user()->role->nom == 'directeur'){
+                      $output.='<a href="';
+                      $output.=url('materiels/'.$materiel->id.'/edit');
+                      $output.='" class="btn btn-default">
+                        <i class="fa fa-edit"></i>
+                      </a>';
+                    }
+                  if(Auth::user()->role->nom != 'membre' ){
+                        $output.='
+                         <a href="#supprimer';
+                         $output.= $materiel->id ;
+                         $output.='Modal" role="button" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                         <div class="modal fade" id="supprimer';
+                         $output.= $materiel->id ;
+                         $output.='Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer';
+                         $output.= $materiel->id;
+                         $output.='ModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                                  <div class="modal-body text-center">
+                                      Voulez-vous vraiment effectuer la suppression ?
+                                  </div>
+                                  <div class="modal-footer">
+                                      <form class="form-inline" action="';
+                                      $output.= url('materiels/'.$materiel->id);
+                                      $output.='"  method="POST">;
+                                          @method(\'DELETE\');
+                                          @csrf;
+
+                                      <button type="button" class="btn btn-light" data-dismiss="modal">Non</button>
+                                          <button type="submit" class="btn btn-danger">Oui</button>
+                                      </form>
+                                  </div>
+                              </div>
+                          </div>
+                  </div>';
+
+                }
+
+                  $output.='
+
+              </form>
+          </div>
+          </td>
+        </tr>';
+
+      }
+    }
+
+       return response()->json($output);
+
+
+  }
+
 
 }

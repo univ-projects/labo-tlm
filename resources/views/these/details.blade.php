@@ -62,8 +62,9 @@
                     <strong><i class="fa fa-user margin-r-5"></i> Encadreur</strong>
                   </div>
                   <div class="col-md-9">
-                    <li> {{ $these->encadreur_int}}</li>
-                    <!-- <li> {{ $these->contact->nom}}{{ $these->contact->prenom }}</li> -->
+                    @if($these->encadreur)
+                        <li>  <a href="url('membres/'.$these->encadreur->id.'/details')">  {{ $these->encadreur->name }} {{ $these->encadreur->prenom }}</a></li>
+                    @endif
                   </div>
 
                   <strong><i class="margin-r-5"></i></strong>
@@ -73,8 +74,12 @@
                     <strong><i class="fa fa-user margin-r-5"></i> Coencadreur</strong>
                   </div>
                   <div class="col-md-9">
-                    <li> {{ $these->coencadreur_int }}</li>
-                    <li> {{ $these->contact->nom }}{{ $these->contact->prenom }}</li>
+                    @if($these->coencadreur_intern)
+                        <li>  <a href="{{url('membres/'.$these->coencadreur_intern->id.'/details')}}">  {{ $these->coencadreur_intern->name }} {{ $these->coencadreur_intern->prenom }}</a></li>
+                    @endif
+                    @if($these->contact)
+                      <li> <a href="{{url('contacts/'.$these->contact->id.'/details')}}"> {{ $these->contact->nom }} {{ $these->contact->prenom }}</a></li>
+                    @endif
                   </div>
 
                   <strong><i class="margin-r-5"></i></strong>

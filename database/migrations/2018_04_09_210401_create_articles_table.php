@@ -24,12 +24,8 @@ class CreateArticlesTable extends Migration
             $table->string('journal',45)->nullable();
             $table->integer('ISSN')->nullable();
             $table->integer('ISBN')->nullable();
-            $table->string('mois',10)->nullable();
-            $table->integer('annee')->nullable();
             $table->string('doi' ,100)->nullable();
-            $table->string('membres_ext' ,100)->nullable();
             $table->string('detail')->nullable();
-            $table->integer('deposer')->nullable();
             $table->timestamps();
         });
 

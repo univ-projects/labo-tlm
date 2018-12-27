@@ -19,4 +19,9 @@ class Article extends Model
      {
          return $this->belongsToMany('App\Contact');
      }
+     public function deposer()
+   {
+       return $this->belongsTo('App\User','publicateur');
+   }
+
 }

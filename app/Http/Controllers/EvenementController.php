@@ -22,7 +22,7 @@ class EvenementController extends Controller
   //permet de lister les evenements
     public function index(){
 
-      $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
       $listevents = Evenement::all();
       return view('evenement.index' , ['evenements' => $listevents] ,['labo'=>$labo]);
 
@@ -30,20 +30,25 @@ class EvenementController extends Controller
 
     public function details($id)
     {
-      $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
     $evenement = Evenement::find($id);
     $participants = Evenement::find($id)->users()->orderBy('name')->get();
+    if($evenement){
 
-    return view('evenement.details')->with([
-      'evenement' => $evenement,
-      'participants'=>$participants,
-      'labo'=>$labo,
-    ]);;
+      return view('evenement.details')->with([
+        'evenement' => $evenement,
+        'participants'=>$participants,
+        'labo'=>$labo,
+      ]);;
+    }
+    else {
+        return view('errors.404');
+      }
     }
 
     public function create()
     {
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
         // if( Auth::user()->role->nom == 'admin')
         //     {
 
@@ -57,7 +62,8 @@ class EvenementController extends Controller
     public function store(evenementRequest $request)
     {
         $evenement = new Evenement();
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
+
         if($request->hasFile('img')){
             $file = $request->file('img');
             $file_name = time().'.'.$file->getClientOriginalExtension();
@@ -94,7 +100,8 @@ class EvenementController extends Controller
     {
 
         $evenement = evenement::find($id);
-        $labo = Parametre::find('1');
+        if($evenement){
+        $labo = $this->getCurrentLabo();
 
         if(Auth::user()->role->nom == 'admin' || Auth::user()->id===$evenement->auteurUser->id ){
           return view('evenement.edit')->with([
@@ -106,6 +113,10 @@ class EvenementController extends Controller
         else{
            return view('errors.403',['labo'=>$labo]);
         }
+      }
+      else {
+          return view('errors.404');
+        }
 
 
     }
@@ -114,7 +125,8 @@ class EvenementController extends Controller
     {
 
         $evenement = evenement::find($id);
-        $labo = Parametre::find('1');
+          $labo = $this->getCurrentLabo();
+          if($evenement){
 
         if($request->hasFile('img')){
             $file = $request->file('img');
@@ -146,6 +158,10 @@ class EvenementController extends Controller
 
       //  return redirect('evenements/'.$id.'/details');
       return redirect('evenements');
+    }
+    else {
+        return view('errors.404');
+      }
 
     }
 
@@ -154,8 +170,13 @@ class EvenementController extends Controller
     {
 
               $evenement = Evenement::find($id);
+              if($evenement){
               $evenement->delete();
               return redirect('evenements');
+            }
+            else {
+                return view('errors.404');
+              }
 
     }
 
@@ -163,7 +184,7 @@ class EvenementController extends Controller
     public function participe($id)
     {
         $participant = new EvenementUser();
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
 
         $participant->user_id=Auth::user()->id;
         $participant->evenement_id=$id;

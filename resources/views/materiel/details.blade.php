@@ -136,6 +136,20 @@
                   </div>
                   </div>
 
+									@if(isset($materiel->laboratory))
+									<div class="row" style="margin-top: 10px">
+										<div class="col-md-3">
+											<strong><i class="fa fa-lg fa-flask  margin-r-5"></i>Laboratoire </strong>
+										</div>
+										<div class="col-md-9">
+											<p class="text-muted">
+												<a href="{{url('laboratoires/'.$materiel->laboratory['id'].'/details')}}"> {{$materiel->laboratory['achronymes']}}</a>
+											</p>
+										</div>
+									</div>
+									@endif
+
+
 
 
                   <div class="row" style="margin-top: 10px">
@@ -301,7 +315,7 @@
 																 <form class="well form-horizontal" action="{{ url('exemplaires/'.$catId)}}"  method="POST">
 																	   {{ csrf_field() }}
 																		  <fieldset>
-
+																				<input type="hidden" id="categoryId" value="{{$materiel->id}}">
 																				<div class="form-group">
 																						<label class="col-md-3 control-label">Numéro * </label>
 																							<div class="col-md-9 selectContainer @if($errors->get('numero')) has-error @endif">
@@ -507,6 +521,7 @@
 																								 @method('PUT')
 																								 @csrf
 																								 <fieldset style="text-align:center">
+																									 	<input type="hidden" id="categoryId2" value="{{$materiel->category_id}}">
 
 																											 	<div class="form-group col-md-12" >
 		 																											<label class="col-md-3 control-label">Numéro * </label>
@@ -644,7 +659,7 @@
           <!-- /.nav-tabs-custom -->
         </div>
       </div>
-
+			
 			<script type="text/javascript">
 					document.getElementById('materiel-photo').addEventListener('change', readURL, true);
 					function readURL(){

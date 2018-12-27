@@ -1,7 +1,4 @@
 
-@extends('layouts.master')
-<div class="error-page">
-
 
 
       <style media="screen">
@@ -243,12 +240,11 @@
            <hr>
            <div class='_1'>PAGE NON TROUVEE</div>
            <div class='_2' style="margin-bottom:50px"></div>
-           @if(isset(Auth::user()->id))
-            <a class='btn' href='{{url("dashboard")}}' style="padding:25px"> <i class="fa fa-home"></i> REVENIR AU DASHBOARD</a>
-           @else
-            <a class='btn' href='{{url("dashboard")}}' style="padding:25px"> <i class="fa fa-home"></i> PAGE D'ACCEUIL</a>
-           @endif
+           @if(Request::is('front/*'))
+                <a class='btn' href='{{url("front")}}' style="padding:25px"> <i class="fa fa-home"></i> PAGE D'ACCEUIL</a>
+                @else
+                <a class='btn' href='{{url("dashboard")}}' style="padding:25px"> <i class="fa fa-home"></i> REVENIR AU DASHBOARD</a>
+                @endif
+
+
        </div>
-
-
-</div>

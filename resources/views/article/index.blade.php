@@ -42,12 +42,14 @@
                 <a href="{{url('articles/create')}}" type="button" class="btn btn-block btn-success btn-lg"><i class="fa fa-plus"> Nouvel article</i></a>
               </div>
 
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="example3" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>Type</th>
-                  <th>Titre</th>
-                  <th>Année</th>
+                  <th style="width:300px">Titre</th>
+                  <th>Publié par</th>
+                  <th>Membres</th>
+                  <th style="width:90px">Date</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
@@ -56,7 +58,23 @@
                   <tr>
                     <td>{{$article->type}}</td>
                     <td>{{$article->titre}}</td>
-                    <td>{{$article->annee}}</td>
+                    <td> <a href="{{url('membres/'.$article->deposer->id.'/details')}}">
+                      {{$article->deposer->name}} {{$article->deposer->prenom}}</a></td>
+                    <td>
+                      @foreach ($article->users as $user)
+                      <ul>
+                          <li><a href="{{url('membres/'.$user->id.'/details')}}">{{ $user->name }} {{ $user->prenom }}</a></li>
+                      </ul>
+                    @endforeach
+                    @foreach ($article->contacts as $user)
+                    <ul>
+                        <li><a href="{{url('contacts/'.$user->id.'/details')}}">{{ $user->nom }} {{ $user->prenom }}</a>
+                          <a href="{{url('partenaires/'.$user->partenaire_id.'/details')}}">(éxterne)</a>
+                        </li>
+                    </ul>
+                    @endforeach
+                    </td>
+                    <td>{{$article->date}}</td>
                     <td>
                       <div class="btn-group">
                         <form action="{{ url('articles/'.$article->id)}}" method="post">
@@ -67,12 +85,12 @@
                         <a href="{{ url('articles/'.$article->id.'/details')}}" class="btn btn-info">
                             <i class="fa fa-eye"></i>
                         </a>
-                        @if(Auth::user()->role->nom == 'admin' || Auth::user()->id == $article->deposer )
+                        @if(Auth::user()->role->nom == 'admin' || Auth::user()->id == $article->publicateur )
                         <a href="{{ url('articles/'.$article->id.'/edit')}}" class="btn btn-default">
                           <i class="fa fa-edit"></i>
                         </a>
                         @endif
-                        @if( Auth::user()->role->nom != 'membre' || Auth::user()->id == $article->deposer )
+                        @if( Auth::user()->role->nom != 'membre' || Auth::user()->id == $article->publicateur )
                         <!-- <button type="submit" class="btn btn-danger ">
                             <i class="fa fa-trash-o"></i>
                         </button> -->
@@ -115,7 +133,7 @@
                   <th>Titre</th>
                   <th>Type</th>
 
-                  <th>Année</th>
+                  <th>Date</th>
                   <th>Actions</th>
                 </tr>
                 </tfoot>

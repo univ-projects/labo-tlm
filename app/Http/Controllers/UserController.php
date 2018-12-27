@@ -25,17 +25,28 @@ class UserController extends Controller
     {
         $membres = User::all();
         $labo = $this->getCurrentLabo();
+        $laboratoires=Parametre::all();
 
-        return view('membre.index' , ['membres' => $membres],['labo'=>$labo]);
+        return view('membre.index')->with([
+          'laboratoires' => $laboratoires,
+          'membres'=>$membres,
+          'labo'=>$labo
+        ]);
     }
 
     public function trombi()
     {
-        // $membres = User::all()->orderBy('name');
-        $labo = $this->getCurrentLabo();
-        $membres = DB::table('users')->distinct('id')->orderBy('name')->get();
+      // $membres = User::all()->orderBy('name');
+      $labo = $this->getCurrentLabo();
+      $membres = DB::table('users')->distinct('id')->orderBy('name')->get();
+      $laboratoires=Parametre::all();
 
-        return view('membre.trombinoscope', ['membres' => $membres],['labo'=>$labo]);
+      return view('membre.trombinoscope')->with([
+        'laboratoires' => $laboratoires,
+        'membres'=>$membres,
+        'labo'=>$labo
+      ]);
+
     }
 
     public function details($id)
@@ -45,14 +56,18 @@ class UserController extends Controller
         $roles = Role::all();
         $labo = $this->getCurrentLabo();
 
+        if($membre){
+          return view('membre.details')->with([
+              'membre' => $membre,
+              'equipes' => $equipes,
+              'roles' => $roles,
+              'labo'=>$labo,
 
-        return view('membre.details')->with([
-            'membre' => $membre,
-            'equipes' => $equipes,
-            'roles' => $roles,
-            'labo'=>$labo,
-
-        ]);;
+          ]);
+        }
+        else {
+          return view('errors.404');
+        }
     }
 
     public function create()
@@ -113,6 +128,7 @@ class UserController extends Controller
         $roles = Role::all();
         $labo = $this->getCurrentLabo();
 
+        if($membre){
         if(Auth::user()->role->nom == 'admin' || Auth::user()->id===$membre->id ){
           return view('membre.edit')->with([
               'membre' => $membre,
@@ -125,6 +141,10 @@ class UserController extends Controller
         else{
            return view('errors.403',['labo'=>$labo]);
         }
+      }
+      else {
+        return view('errors.404');
+      }
 
     }
 
@@ -132,6 +152,7 @@ class UserController extends Controller
     {
 
         $membre = User::find($id);
+        if($membre){
         $labo = $this->getCurrentLabo();
 
         if($request->hasFile('img')){
@@ -170,6 +191,10 @@ class UserController extends Controller
         $membre->save();
 
         return redirect('membres/'.$id.'/details');
+      }
+      else {
+        return view('errors.404');
+      }
 
     }
 
@@ -178,10 +203,162 @@ class UserController extends Controller
     {
         if( Auth::user()->role->nom == 'admin')
             {
-        $membre = User::find($id);
-        $membre->delete();
-        return redirect('membres');
+              $membre = User::find($id);
+              if($membre){
+                $membre->delete();
+                return redirect('membres');
+              }
+              else {
+                return view('errors.404');
+              }
             }
     }
+
+
+
+
+    public function postMembres1(Request $request)
+    {
+      if($request->labo_selected!=0)
+          $response=Parametre::find($request->labo_selected);
+      else
+          $response=Parametre::all();
+
+          $output='';
+          $labId=$request->labo_selected;
+
+                $membres=User::all();
+
+            foreach($membres as $membre){
+              if($membre->equipe->labo_id==$labId || $labId==0){
+                $output.='<tr>
+                  <td>';
+                  $output.=$membre->name;
+                  $output.='</td>
+                  <td>';
+                  $output.=$membre->prenom;
+                  $output.='</td>
+                  <td><a href="laboratoires/';
+                  $output.=$membre->equipe->labo_id;
+                  $output.='/details">';
+                    $output.=$membre->equipe->labo['achronymes'];
+                  $output.='</a></td>
+                  <td> <a href="equipes/';
+                  $output.=$membre->equipe_id;
+                  $output.='/details">';
+                     $output.=$membre->equipe->achronymes;
+                  $output.='</a></td>
+                  <td>';
+                  $output.=$membre->email;
+                  $output.='</td>
+                  <td>';
+                  $output.=$membre->grade;
+                  $output.='</td>
+                  <td>
+                    <div class="btn-group">
+
+                      <form action="';
+                      $output.= url('membres/'.$membre->id);
+                      $output.='" method="post">';
+                          $output.=csrf_field();
+                          $output.=method_field('DELETE');
+
+                          $output.='<a href="';
+                          $output.=url('membres/'.$membre->id.'/details');
+                          $output.='" class="btn btn-info">
+                            <i class="fa fa-eye"></i>
+                          </a>';
+                           if(Auth::id() == $membre->id || Auth::user()->role->nom == 'admin' ){
+                            $output.='<a href="';
+                            $output.=url('membres/'.$membre->id.'/edit');
+                            $output.='" class="btn btn-default">
+                              <i class="fa fa-edit"></i>
+                            </a>';
+                          }
+                          if(Auth::id() != $membre->id && Auth::user()->role->nom != 'membre' ){
+
+
+                            $output.='<a href="#supprimer';
+                            $output.= $membre->id;
+                            $output.='Modal" role="button" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                    <div class="modal fade" id="supprimer';
+                    $output.= $membre->id;
+                    $output.='Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer';
+                    $output.= $membre->id ;
+                    $output.='ModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    Voulez-vous vraiment effectuer la suppression ?
+                                </div>
+                                <div class="modal-footer">
+                                    <form class="form-inline" action="';
+                                    $output.= url('membres/'.$membre->id);
+                                    $output.='"  method="POST">
+                                        @method(\'DELETE\')
+                                        @csrf
+                                    <button type="button" class="btn btn-light" data-dismiss="modal">Non</button>
+                                        <button type="submit" class="btn btn-danger">Oui</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+
+                  }
+                  $output.='    </form>
+                  </div>
+                  </td>
+                </tr>';
+            }
+          }
+
+         return response()->json($output);
+
+
+    }
+
+    public function postMembres2(Request $request)
+    {
+      if($request->labo_selected!=0)
+          $response=Parametre::find($request->labo_selected);
+      else
+          $response=Parametre::all();
+
+          $output='';
+          $labId=$request->labo_selected;
+
+                $membres=User::all();
+
+          foreach($membres as $membre){
+            if($membre->equipe->labo_id==$labId || $labId==0){
+            $output.='<div class="col-md-2 col-sm-4 col-xs-6" style="padding-top: 30px;" >';
+            $output.='<a href="';
+            $output.=url('membres/'.$membre->id.'/details');
+            $output.='">
+               <img style="height: 200px width:200px; " class="img-thumbnail img-responsive img-circle" src="';
+               $output.=asset($membre->photo);
+               $output.='" alt="User profile picture" title="';
+               $output.='('.$membre->name.') ('.$membre->prenom.')';
+               $output.='"></a></div>';
+
+            }
+          }
+
+         return response()->json($output);
+
+
+    }
+
+
+
+
+
+
 
 }

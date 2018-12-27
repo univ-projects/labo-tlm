@@ -72,6 +72,7 @@ class PartenaireController extends Controller
       $labo = $this->getCurrentLabo();
       $labos= Parametre::all();
       $partenaire = Partenaire::find($id);
+      if($partenaire){
       $contacts= Contact::where('partenaire_id', $id)->get();
 
       return view('partenaire.details')->with([
@@ -80,6 +81,10 @@ class PartenaireController extends Controller
           'labo'=>$labo,
           'labos'=>$labos
       ]);
+    }
+    else {
+      return view('errors.404');
+    }
   }
 
   public function store(partenaireRequest $request)
@@ -117,6 +122,7 @@ class PartenaireController extends Controller
   {
       $labo = $this->getCurrentLabo();
       $partenaire = Partenaire::find($id);
+      if($partenaire){
 
       if($request->hasFile('img')){
               $file = $request->file('img');
@@ -139,7 +145,10 @@ class PartenaireController extends Controller
           $partenaire->save();
 
           return redirect('partenaires/'.$id.'/details');
-
+        }
+        else {
+          return view('errors.404');
+        }
 
   }
 
@@ -147,7 +156,12 @@ class PartenaireController extends Controller
   {
 
       $partenaire = Partenaire::find($id);
-      $partenaire->delete();
-      return redirect('partenaires');
+      if($partenaire){
+        $partenaire->delete();
+        return redirect('partenaires');
+    }
+    else {
+      return view('errors.404');
+    }
   }
 }

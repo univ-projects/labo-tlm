@@ -61,6 +61,7 @@ class EquipeController extends Controller
         $labo = $this->getCurrentLabo();
           $labos= Parametre::all();
         $equipe = Equipe::find($id);
+        if($equipe){
         $membres = User::where('equipe_id', $id)->get();
 
         return view('equipe.details')->with([
@@ -69,6 +70,10 @@ class EquipeController extends Controller
             'labo'=>$labo,
             'labos'=>$labos
         ]);
+      }
+      else {
+        return view('errors.404');
+      }
     }
 
     public function store(equipeRequest $request)
@@ -105,7 +110,7 @@ class EquipeController extends Controller
     {
         $labo = $this->getCurrentLabo();
         $equipe = Equipe::find($id);
-
+        if($equipe){
         if( Auth::user()->role->nom == 'admin')
             {
 
@@ -134,6 +139,10 @@ class EquipeController extends Controller
         else{
                 return view('errors.403',['labo'=>$labo]);
             }
+          }
+          else {
+            return view('errors.404');
+          }
 
     }
 
@@ -142,8 +151,12 @@ class EquipeController extends Controller
         if( Auth::user()->role->nom == 'admin')
             {
         $equipe = Equipe::find($id);
-        $equipe->delete();
-        return redirect('equipes');
+        if($equipe){
+          $equipe->delete();
+          return redirect('equipes');
+        }else {
+          return view('errors.404');
+        }
         }
     }
 

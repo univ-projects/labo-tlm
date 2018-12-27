@@ -51,12 +51,15 @@ class ActualiteController extends Controller
       $labo = $this->getCurrentLabo();
 
 
+      if($actualite)
+        return view('actualite.details')->with([
+            'actualite' => $actualite,
+            'labo'=>$labo,
 
-      return view('actualite.details')->with([
-          'actualite' => $actualite,
-          'labo'=>$labo,
-
-      ]);;
+        ]);
+        else {
+          return view('errors.404');
+        }
   }
 
   public function create()
@@ -109,6 +112,7 @@ $labo = $this->getCurrentLabo();
 
     $labo = $this->getCurrentLabo();
 
+    if($actualite){
       if(Auth::user()->role->nom == 'admin' || Auth::user()->id===$actualite->auteurUser->id ){
         return view('actualite.edit')->with([
             'actualite' => $actualite,
@@ -119,6 +123,10 @@ $labo = $this->getCurrentLabo();
       else{
          return view('errors.403',['labo'=>$labo]);
       }
+    }
+    else {
+        return view('errors.404');
+      }
 
 
   }
@@ -127,7 +135,7 @@ $labo = $this->getCurrentLabo();
   {
 
       $actualite = Actualite::find($id);
-
+if($actualite){
 $labo = $this->getCurrentLabo();
 
       if($request->hasFile('img')){
@@ -157,6 +165,10 @@ $labo = $this->getCurrentLabo();
 
     //  return redirect('actualites/'.$id.'/details');
     return redirect('actualites');
+  }
+  else {
+    return view('errors.404');
+  }
 
   }
 
@@ -165,9 +177,14 @@ $labo = $this->getCurrentLabo();
   {
       if( Auth::user()->role->nom == 'admin')
           {
-      $actualite = Actualite::find($id);
-      $actualite->delete();
-      return redirect('actualites');
+            $actualite = Actualite::find($id);
+            if($actualite){
+                $actualite->delete();
+                return redirect('actualites');
+              }
+              else {
+                return view('errors.404');
+              }
           }
   }
 }

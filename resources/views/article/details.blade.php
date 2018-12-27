@@ -163,7 +163,7 @@
                  </div>
                   <div class="col-md-9">
                     <p class="text-muted">
-                      {{ $article->mois }}, {{ $article->annee }}
+                      {{ $article->date }}
                     </p>
                   </div>
                 </div>

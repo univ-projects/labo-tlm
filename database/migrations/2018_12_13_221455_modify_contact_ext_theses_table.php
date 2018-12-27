@@ -26,7 +26,7 @@ class ModifyContactExtThesesTable extends Migration
      */
     public function down()
     {
-      Schema::table('contacts', function (Blueprint $table) {
+      Schema::table('theses', function (Blueprint $table) {
           // $table->dropForeign(['coencadreur_extern']);
           $table->dropColumn('coencadreur_ex');
       });

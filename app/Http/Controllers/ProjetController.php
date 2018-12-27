@@ -37,6 +37,7 @@ class ProjetController extends Controller
     {
         $labo = $this->getCurrentLabo();
         $projet = Projet::find($id);
+        if($projet){
         $membres = Projet::find($id)->users()->orderBy('name')->get();
         $membres_ext =DB::table('projets')
               ->leftjoin('project_contact', 'projets.id', '=', 'project_contact.project_id')
@@ -53,6 +54,10 @@ class ProjetController extends Controller
             'labo'=>$labo,
             'membres_ext'=>$membres_ext
         ]);;
+      }
+      else {
+          return view('errors.404');
+        }
     }
 
     //affichage de formulaire de creation d'articles
@@ -144,6 +149,7 @@ class ProjetController extends Controller
 	 public function edit($id){
 
 	 	$projet = Projet::find($id);
+    if($projet){
 	 	 $membres = User::all();
     $labo = $this->getCurrentLabo();
     $contacts = Contact::all();
@@ -159,13 +165,17 @@ class ProjetController extends Controller
             'partenaires'=>$partenaires,
             'contacts'=>$contacts
         ]);;
-
+      }
+      else {
+          return view('errors.404');
+        }
     }
 
     //modifier et inserer
     public function update(projetRequest $request , $id){
 
     	$projet = Projet::find($id);
+      if($projet){
       $labo = $this->getCurrentLabo();
 
     	if($request->hasFile('detail')){
@@ -226,18 +236,24 @@ class ProjetController extends Controller
 
 
 	 	return redirect('projets');
-
+    }
+    else {
+        return view('errors.404');
+      }
     }
     //supprimer un article
     public function destroy($id){
 
     	$projet = Projet::find($id);
-
+      if($projet){
         $this->authorize('delete', $projet);
 
         $projet->delete();
         return redirect('projets');
-
+      }
+      else {
+          return view('errors.404');
+        }
     }
 
 
