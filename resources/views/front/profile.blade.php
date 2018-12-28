@@ -1,29 +1,7 @@
 
 @extends('layouts.profile')
 @section('content')
-<header id="header_wrapper">
-  <div class="container">
-    <div class="header_box">
 
-	  <nav class="navbar navbar-inverse" role="navigation">
-      <div class="navbar-header">
-        <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        </div>
-	    <div id="main-nav" class="collapse navbar-collapse navStyle">
-			<ul class="nav navbar-nav" id="mainNav">
-		<!--	  <li class="active"><a href="#hero_section" class="scroll-link">Home</a></li> -->
-			  <li><a href="#aboutUs" class="scroll-link">A propos</a></li>
-			<!--  <li><a href="#service" class="scroll-link">Skills</a></li> -->
-			  <li><a href="#Portfolio" class="scroll-link">Projets</a></li>
-			 <!-- <li><a href="#clients" class="scroll-link">Experience</a></li> -->
-			  <li><a href="#team" class="scroll-link">Equipe</a></li>
-			  <li><a href="#contact" class="scroll-link">Contact</a></li>
-			</ul>
-      </div>
-	 </nav>
-    </div>
-  </div>
-</header>
 <!--Header_section-->
 
 <section id="aboutUs"><!--Aboutus-->
@@ -36,7 +14,7 @@
 	  <div class="row">
 						<div class="col-lg-12 about-us">
 							<div class="row">
-							<div class="col-md-6"> <img class="img-responsive" src="https://yt3.ggpht.com/a-/AN66SAya6c5_YkRHZ-7QnD0gDcDbF--nrO7vnBQ-Mw=s900-mo-c-c0xffffffff-rj-k-no" align=""> </div><!-- /.col-md-6 -->
+							<div class="col-md-6"> <img class="img-responsive" src="{{asset($membre->photo)}}" align=""> </div><!-- /.col-md-6 -->
 								<div class="col-md-6">
 							<!--	<h3>I Design Awesome Web Apps</h3> -->
 									<p>
@@ -119,7 +97,7 @@
 
 
       <figure style="position: absolute; left: 0px; top: 0px; transform: translate3d(1011px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four  android  prototype web isotope-item effect-oscar">
-        <div class="portfolio_img"> <img src="https://yt3.ggpht.com/a-/AN66SAya6c5_YkRHZ-7QnD0gDcDbF--nrO7vnBQ-Mw=s900-mo-c-c0xffffffff-rj-k-no" alt="Portfolio 1"> </div>
+        <div class="portfolio_img"> <img src="{{asset($articl->photo)}}" alt="Portfolio 1"> </div>
          <figcaption>
         <div>
           <a href="../project.html" class="fancybox">
@@ -135,7 +113,7 @@
           <!-- Projet -->
 @foreach ($projets as $projet)
       <figure style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four  design isotope-item effect-oscar">
-        <div class="portfolio_img"> <img src="https://yt3.ggpht.com/a-/AN66SAya6c5_YkRHZ-7QnD0gDcDbF--nrO7vnBQ-Mw=s900-mo-c-c0xffffffff-rj-k-no" alt="Portfolio 1"> </div>
+        <div class="portfolio_img"> <img src="{{asset($projet->photo)}}" alt="Portfolio 1"> </div>
        <figcaption>
 				<div>
 				  <a href="../project.html" class="fancybox">
@@ -172,15 +150,13 @@
 		<div id="team" name="team">
   <div class="container">
     <div class="row centered">
-
-      <a href="profil.html" style="color:black">
-            <div class="col-md-3 centered"> <img class="img img-circle lt-box" src="img/team01.jpg" height="120px" width="120px" alt="">
-              <div class="rt-box"><h4><strong>Rosy Illue</strong></h4>
-              <p>Lorem ipsum dolor sit amet, consectetur Morbi sagittis, sem quisci ipsum gravida tortor.</p><br/>
-      		</div>
-          </div>
-          </a>
-
+            @foreach($avecs as $avec)
+      <a href="{{$avec->id}}">  <div class="col-md-4 centered"> <img class="img img-circle lt-box" src="{{asset($avec->photo)}}" height="120px" width="120px" alt="">
+            <div class="rt-box"><h4><strong>{{$avec->name}}  {{$avec->prenom}}</strong></h4>
+                  <p>{{$avec->grade}}</p><br/>
+		        </div>
+          </div></a>
+       @endforeach
 
   </div>
   <!-- row -->

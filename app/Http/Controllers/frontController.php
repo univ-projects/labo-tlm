@@ -44,7 +44,7 @@ class frontController extends Controller
     }
 
     public function profile($id){
-      $labo = Parametre::find('1');
+      $labo = Parametre::find('3');
       $membre = User::find($id);
       $article = DB::table('articles')
             ->join('article_user', 'articles.id', '=', 'article_user.article_id')
@@ -55,30 +55,18 @@ class frontController extends Controller
               ->join('projet_user', 'projets.id', '=', 'projet_user.projet_id')
               ->where('projet_user.user_id',$id)
               ->get();
-              $arrayName = array();
-              foreach ($projet as $p) {
-                  array_push($arra,$p['project_id']);
-              }
 
-      $with_projet =  DB::table('users')
-              ->join('projet_user', 'users.id', '=', 'projet_user.user_id')
-              ->where('projet_user.user_id',$id)
-
-              ->get();
-
-
-      $res=array();
-      array_push($res,$with_projet);
-      array_push($res,$with_article);
+     $avecs=  DB::select("SELECT * FROM users WHERE id IN (SELECT user_id FROM projet_user where projet_id in (SELECT projet_id FROM projet_user WHERE user_id = (SELECT id from users where id = $id)))");
 
 
 
       return view('front.profile')->with([
 
-          'membre' => $membre,
+          'membre' =>$membre,
           'labo'=>$labo,
           'article'=>$article,
           'projets'=>$projet,
+          'avecs'=>$avecs,
       ]);
     }
 
@@ -158,7 +146,13 @@ class frontController extends Controller
 
       public function projetdetail($id){
         $projet = Projet::find($id);
+        $membres = DB::table('users')
+                ->join('projet_user', 'users.id', '=', 'projet_user.user_id')
+                ->where('projet_user.projet_id',$id)
+                ->select('users.*')
+                ->get();
         return view('front.projetdetail')->with([
+          'membres'=>$membres,
           'projet'=>$projet,
         ]);
       }
