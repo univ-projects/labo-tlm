@@ -107,6 +107,7 @@
                 @endif
                 <li><a href="#teams" data-toggle="tab">Equipes</a></li>
                 <li><a href="#membres" data-toggle="tab">Membres</a></li>
+                <li><a href="#stats" data-toggle="tab">Statitiques</a></li>
 
             </ul>
 
@@ -455,11 +456,23 @@
 
         </div>
 
+        <div class="tab-pane" id="stats">
+          <div class="box-body">
+            <div class="chart">
+              <canvas id="pieChart" style="height:230px"></canvas>
+            </div>
+          </div>
+        </div>
+
       </div>
       </div>
     </div>
 
-    <div class="col-md-4">
+<div class="col-md-4" style="padding:0px">
+
+
+
+    <div class="col-md-12">
       <!-- USERS LIST -->
       <div class="box box-primary">
         <div class="box-header with-border">
@@ -479,7 +492,7 @@
     </div>
 
 
-    		<div class="col-md-4">
+    <div class="col-md-12"  >
     			<!-- USERS LIST -->
     			<div class="box box-primary">
     				<div class="box-header with-border">
@@ -512,7 +525,7 @@
 
 
 
-		<div class="col-md-4">
+		<div class="col-md-12">
 			<!-- USERS LIST -->
 			<div class="box box-primary">
 				<div class="box-header with-border">
@@ -577,6 +590,7 @@
 			<!--/.box -->
 		</div>
 
+</div>
 
 
             <!-- timeLine start -->
@@ -613,4 +627,9 @@
 				}
 		</script>
 
+@endsection
+
+@section('scripts')
+<script src="{{url( 'js/Chart.min.js' )}}"></script>
+  <script src="{{url( 'js/create-charts2.js' )}}"></script>
 @endsection

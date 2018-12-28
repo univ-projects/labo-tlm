@@ -10,6 +10,11 @@ use App\User;
 use App\Equipe;
 use Auth;
 
+
+use App\These;
+use App\Article;
+use Carbon\Carbon; //for date comparaison
+
 class ParametreController extends Controller
 {
     public function __construct()
@@ -117,7 +122,6 @@ class ParametreController extends Controller
           'laboDetail'=> $laboDetail,
        ]);
      }
-   }
    else {
        return view('errors.404');
      }
@@ -127,20 +131,24 @@ class ParametreController extends Controller
    {
      $labo = $this->getCurrentLabo();
 
-       $equipe = Equipe::find($id);
-       $membres = DB::table('users')
-            ->select( DB::raw('users.id as user_id,equipes.id,users.equipe_id,equipes.labo_id,parametres.id,name,prenom,users.photo as photo_user'))
-             ->leftjoin('equipes', 'equipes.id', '=', 'users.equipe_id')
-              ->leftjoin('parametres', 'parametres.id', '=', 'equipes.labo_id')
-              ->where('labo_id', $id)
-              ->get();
-       $laboDetail = Parametre::find($id);
-       if($laboDetail){
-
-       $equipes = DB::table('parametres')
-            ->leftjoin('equipes', 'equipes.labo_id', '=', 'parametres.id')
-            ->where('labo_id',$id)
+     $equipe = Equipe::find($id);
+     $membres = DB::table('users')
+          ->select( DB::raw('*,users.id as user_id,equipes.id,users.equipe_id,equipes.labo_id,equipes.intitule as team,parametres.id,name,prenom,users.photo as photo_user'))
+           ->leftjoin('equipes', 'equipes.id', '=', 'users.equipe_id')
+            ->leftjoin('parametres', 'parametres.id', '=', 'equipes.labo_id')
+            ->where('labo_id', $id)
             ->get();
+     $laboDetail = Parametre::find($id);
+     if($laboDetail){
+
+     $equipes = DB::table('parametres')
+
+          ->leftjoin('equipes', 'equipes.labo_id', '=', 'parametres.id')
+          ->leftjoin('users', 'users.id', '=', 'equipes.chef_id')
+           ->select(DB::raw('*,equipes.photo as team_photo'))
+          ->where('labo_id',$id)
+          ->get();
+
 
          if(Auth::user()->role->nom == 'admin' || (Auth::user()->role->nom == 'directeur' && Auth::user()->id==$laboratoire->directeur))
            {
@@ -280,5 +288,32 @@ class ParametreController extends Controller
               }
 
     }
+
+
+
+
+
+
+    //Stats
+
+    function getArticleTypeCount() {
+
+      $typeCount = array(
+        'publications' => Article::where('type','Publication(Revue)')->get()->count(),
+        'brevets' => Article::where('type','Brevet')
+                            ->get()->count(),
+        'posters'=>Article::where('type','Poster')
+                            ->get()->count(),
+        'articles'=>Article::where('type','Article court')
+                            ->orWhere('type','Article long')
+                            ->get()->count(),
+        'livres' =>Article::where('type','Chapitre d\'un livre')
+                            ->orWhere('type','Livre')
+                            ->get()->count(),
+      );
+
+      return $typeCount;
+
+      }
 
 }

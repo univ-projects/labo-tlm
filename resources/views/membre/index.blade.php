@@ -52,11 +52,32 @@
                       </div>
                 </div>
 
+                <div class="box box-primary">
+                  <div class="box-header with-border">
+                    <h3 class="box-title">Statistiques générales (Membres)</h3>
+
+                    <div class="box-tools pull-right">
+                      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                  </div>
+                  <div class="box-body">
+                    <div class="chart">
+                      <canvas id="lineChart" style="height:230px"></canvas>
+                    </div>
+                  </div>
+
+                </div>
+
               @if(Auth::user()->role->nom == 'admin' )
               <div class=" pull-right">
                 <a href="{{url('membres/create')}}" type="button" class="btn btn-block btn-success btn-lg"><i class="fa fa-user-plus"></i> Nouveau membre</a>
               </div>
                @endif
+
+
+
 <!--
                <div>
                  <button href="{{('excel')}}">Excel</button>
