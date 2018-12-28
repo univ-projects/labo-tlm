@@ -288,14 +288,15 @@
                         </div>
                   </div>
 
+
                   <div class="form-group ">
-                        <label class="col-xs-3 control-label">Mois (*)</label>
-                        <div class="col-xs-9 inputGroupContainer @if($errors->get('mois')) has-error @endif">
+                        <label class="col-xs-3 control-label">Date (*)</label>
+                        <div class="col-xs-9 inputGroupContainer @if($errors->get('date')) has-error @endif">
                           <div style="width: 70%">
-                            <input type="text" name="mois" class="form-control pull-right" value="{{old('mois')}}">
+                            <input type="date" name="date" class="form-control pull-right" value="{{old('date')}}">
                             <span class="help-block">
-                                @if($errors->get('mois'))
-                                  @foreach($errors->get('mois') as $message)
+                                @if($errors->get('date'))
+                                  @foreach($errors->get('date') as $message)
                                     <li> {{ $message }} </li>
                                   @endforeach
                                 @endif
@@ -305,21 +306,7 @@
                   </div>
 
 
-                   <div class="form-group ">
-                        <label class="col-xs-3 control-label">Année (*)</label>
-                        <div class="col-xs-9 inputGroupContainer @if($errors->get('annee')) has-error @endif">
-                          <div style="width: 70%">
-                            <input type="text" name="annee" class="form-control pull-right" value="{{old('annee')}}">
-                            <span class="help-block">
-                                @if($errors->get('annee'))
-                                  @foreach($errors->get('annee') as $message)
-                                    <li> {{ $message }} </li>
-                                  @endforeach
-                                @endif
-                            </span>
-                          </div>
-                        </div>
-                  </div>
+              
 
                   <div class="form-group">
                       <label class="col-md-3 control-label">Photo</label>

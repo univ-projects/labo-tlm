@@ -34,6 +34,26 @@
 
             <!-- /.box-header -->
             <div class="box-body">
+
+              <div class="form-group">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lg fa-flask"></i></span>
+                        <select name="theses_labo_select" class="form-control theses_labo_select">
+                          <option value="0">Tout</option>
+                          @foreach($laboratoires as $lab)
+                            @if($lab->id==Auth::user()->equipe->labo_id)
+                              <option value="{{$lab->id}}" selected>{{$lab->nom}}</option>
+                              @else
+                              <option value="{{$lab->id}}">{{$lab->nom}}</option>
+                            @endif
+
+                          @endforeach
+                        </select>
+                      </div>
+                </div>
+
+
+
               @if(Auth::user()->role->nom == 'admin' )
               <div class=" pull-right">
               <a href="{{url('theses/create')}}" type="button" class="btn btn-block btn-success btn-lg"><i class="fa fa-plus"></i> Nouvelle thèse</a>
@@ -51,18 +71,29 @@
                   <th>Actions</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="theses_table">
                   @foreach($theses as $these)
+                  @if($these->user->equipe->labo_id==Auth::user()->equipe->labo_id)
                   <tr>
                     <td>{{$these->titre}}</td>
                     <td>{{$these->sujet}}</td>
-                    <td>{{$these->user->name}} {{$these->user->prenom}}</td>
+                    <td><a href="{{url('membres/'.$these->user->id.'/details')}}">
+                      {{$these->user->name}} {{$these->user->prenom}}</a></td>
                     <td>
-                      <li>{{$these->encadreur_int}}</li>
+                      @if($these->encadreur)
+                        <li> <a href="{{url('membres/'.$these->encadreur->id.'/details')}}">
+                          {{$these->encadreur->name}} {{$these->encadreur->prenom}}</a> </li>
+                      @endif
                     </td>
                     <td>
-                        <li>{{$these->coencadreur_int}}</li>
-                    
+                      @if($these->coencadreur_intern)
+                        <li><a href="{{url('membres/'.$these->coencadreur_intern->id.'/details')}}">
+                          {{$these->coencadreur_intern->name}} {{$these->coencadreur_intern->prenom}}</a></li>
+                      @endif
+                      @if($these->contact)
+                        <li><a href="{{url('contacts/'.$these->contact->id.'/details')}}">
+                          {{$these->contact->nom}} {{$these->contact->prenom}}</a></li>
+                      @endif
                       </td>
                     <td>{{$these->date_soutenance}}</td>
                     <td>
@@ -113,6 +144,7 @@
                     </div>
                     </td>
                   </tr>
+                  @endif
                   @endforeach
                  </tbody>
                 <tfoot>

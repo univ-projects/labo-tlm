@@ -47,8 +47,8 @@ class dashController extends Controller
         return array_reverse($years);
     	}
 
-      function getYearlyarticleCount( $year) {
-    		$yearly_article_count = Article::where( 'annee', $year )->get()->count();
+      function getYearlyArticleCount( $year) {
+    		$yearly_article_count = Article::whereYear('date', $year )->get()->count();
     		return $yearly_article_count;
     	}
       function getYearlyTheseCount( $year) {
@@ -66,7 +66,7 @@ class dashController extends Controller
     		if ( ! empty( $year_array ) ) {
     			foreach ( $year_array as $year ){
 
-    				$yearly_article_count = $this->getYearlyarticleCount( $year );
+    				$yearly_article_count = $this->getYearlyArticleCount( $year );
     				array_push( $yearly_article_count_array, $yearly_article_count );
             $yearly_these_count = $this->getYearlyTheseCount( $year );
             array_push( $yearly_these_count_array, $yearly_these_count );

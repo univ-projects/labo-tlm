@@ -34,6 +34,7 @@ $labo = $this->getCurrentLabo();
   public function details($id)
   {
     $contact = Contact::find($id);
+    if($contact){
     $partenaires = Partenaire::all();
     $labo = $this->getCurrentLabo();
 
@@ -68,6 +69,10 @@ $labo = $this->getCurrentLabo();
         'participants'=>$participants
 
     ]);;
+  }
+  else {
+    return view('errors.404');
+  }
 
 
   }
@@ -123,6 +128,7 @@ $labo = $this->getCurrentLabo();
   public function edit($id)
   {
     $contact = Contact::find($id);
+    if($contact){
     $partenaires = Partenaire::all();
     $labo = $this->getCurrentLabo();
 
@@ -146,6 +152,10 @@ $labo = $this->getCurrentLabo();
         'participants'=>$participants
 
     ]);;
+  }
+  else {
+    return view('errors.404');
+  }
 
 
   }
@@ -154,6 +164,7 @@ $labo = $this->getCurrentLabo();
   {
   $labo = $this->getCurrentLabo();
       $contact = Contact::find($id);
+      if($contact){
 
       if($request->hasFile('img')){
               $file = $request->file('img');
@@ -175,7 +186,10 @@ $labo = $this->getCurrentLabo();
           $contact->save();
 
           return redirect('contacts/'.$id.'/details');
-
+        }
+        else {
+          return view('errors.404');
+        }
 
   }
 
@@ -184,8 +198,12 @@ $labo = $this->getCurrentLabo();
   {
 
       $contact = Contact::find($id);
+      if($contact){
       $contact->delete();
       return redirect('contacts');
+    }else {
+      return view('errors.404');
+    }
 
   }
 

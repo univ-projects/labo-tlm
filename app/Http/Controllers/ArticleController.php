@@ -42,6 +42,7 @@ class ArticleController extends Controller
 			$labo = $this->getCurrentLabo();
 
 	 	$article = Article::find($id);
+		if($article){
 	 	$membres = Article::find($id)->users()->orderBy('name')->get();
 		$membres_ext =DB::table('articles')
 					->leftjoin('article_contact', 'articles.id', '=', 'article_contact.article_id')
@@ -60,6 +61,10 @@ class ArticleController extends Controller
 			'membres_ext'=>$membres_ext
 	 	]);;
     }
+		else {
+			return view('errors.404');
+		}
+	}
 
     //affichage de formulaire de creation d'articles
 	 public function create()
@@ -122,10 +127,13 @@ class ArticleController extends Controller
 	 	$article->journal = $request->input('journal');
 	 	$article->ISSN = $request->input('issn');
 	 	$article->ISBN = $request->input('isbn');
-	 	$article->mois = $request->input('mois');
-	 	$article->annee = $request->input('annee');
-		$article->photo = 'uploads/photo/articles/'.$file_name;
+		$article->photo = 'uploads/photo/article/'.$file_name;
 	 	$article->doi = $request->input('doi');
+		$badDate=explode('/',$request->input('date'));
+		$badDate=array_reverse($badDate);
+		$goodDate=implode('-',$badDate);
+		$article->date=$goodDate;
+
 		// $membres_ext =  $request->input('membres_ext');
 	 	// $article->membres_ext = $request->input('membres_ext');
 	 	$article->deposer = Auth::user()->id;
@@ -163,6 +171,7 @@ class ArticleController extends Controller
 	 public function edit($id){
 
 	 	$article = Article::find($id);
+		if($article){
 	 	$membres = User::all();
 $labo = $this->getCurrentLabo();
 		$contacts = Contact::all();
@@ -178,11 +187,16 @@ $labo = $this->getCurrentLabo();
 			'partenaires'=>$partenaires
 	 	]);;
     }
+		else {
+			return view('errors.404');
+		}
+	}
 
     //modifier et inserer
     public function update(articleRequest $request ,$id){
 
     	$article = Article::find($id);
+			if($article){
 		$labo = $this->getCurrentLabo();
 
     	$article->type = $request->input('type');
@@ -194,9 +208,11 @@ $labo = $this->getCurrentLabo();
 	 	$article->journal = $request->input('journal');
 	 	$article->ISSN = $request->input('issn');
 	 	$article->ISBN = $request->input('isbn');
-	 	$article->mois = $request->input('mois');
-	 	$article->annee = $request->input('annee');
 	 	$article->doi = $request->input('doi');
+		$badDate=explode('/',$request->input('date'));
+		$badDate=array_reverse($badDate);
+		$goodDate=implode('-',$badDate);
+		$article->date=$goodDate;
 
 	 	if($request->hasFile('detail')){
 
@@ -250,17 +266,25 @@ $labo = $this->getCurrentLabo();
 
 
 	 	return redirect('articles');
+			}
+			else {
+				return view('errors.404');
+			}
     }
 
     //supprimer un article
     public function destroy($id){
 
     	$article = Article::find($id);
-
+			if($article){
 	 	$this->authorize('delete', $article);
 
         $article->delete();
         return redirect('articles');
+			}
+			else {
+				return view('errors.404');
+			}
 
     }
 

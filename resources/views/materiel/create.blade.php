@@ -115,7 +115,7 @@
                         <label class="col-md-3 control-label">Libéllé *</label>
                         <div class="col-md-9 inputGroupContainer @if($errors->get('libelle')) has-error @endif">
                           <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lg fa-flask"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-lg fa-tag"></i></span>
                             <input  name="libelle" placeholder="Libéllé" class="form-control"  type="text" value="{{old('libelle')}}">
                            </div>
                             <span class="help-block">
@@ -129,11 +129,32 @@
                       </div>
 
                       <div class="form-group ">
+                        <label class="col-md-3 control-label">Laboratoire</label>
+                        <div class="col-md-9 inputGroupContainer @if($errors->get('laboratoire')) has-error @endif">
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lg fa-flask "></i></span>
+                            <select name="laboratoire" class="form-control">
+                              @foreach($laboratoires as $lab)
+                                <option value="{{$lab->id}}">{{$lab->nom}}</option>
+                              @endforeach
+                             </select>
+                           </div>
+                            <span class="help-block">
+                                @if($errors->get('laboratoire'))
+                                  @foreach($errors->get('laboratoire') as $message)
+                                    <li> {{ $message }} </li>
+                                  @endforeach
+                                @endif
+                            </span>
+                        </div>
+                      </div>
+
+                      <div class="form-group ">
                         <label class="col-md-3 control-label">Quantité</label>
                         <div class="col-md-9 inputGroupContainer @if($errors->get('quantite')) has-error @endif">
                           <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lg fa-flask"></i></span>
-                            <input type="number" name="quantite"  min="0" class="form-control"  type="text" value="@if(isset(old('quantite'))){{old('quantite')}} @else 0 @endif" >
+                            <span class="input-group-addon"><i class="fa fa-lg fa-sort-amount-asc "></i></span>
+                            <input type="number" name="quantite"  min="0" class="form-control"  type="text" value="0" >
                            </div>
                             <span class="help-block">
                                 @if($errors->get('quantite'))

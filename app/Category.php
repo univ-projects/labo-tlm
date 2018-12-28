@@ -10,4 +10,8 @@ class Category extends Model
    {
        return $this->hasMany('App\Materiel','category_id');
    }
+   public function laboratory()
+    {
+        return $this->belongsTo('App\Parametre','laboratoire');
+    }
 }

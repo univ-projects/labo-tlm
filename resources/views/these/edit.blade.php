@@ -95,32 +95,27 @@
                         <div class="col-xs-9 inputGroupContainer">
                           <div style="width: 70%">
                             <select name="encadreur_int" class="form-control select2">
-                              <option>{{$these->encadreur_int}}</option>
                               @foreach($membres as $membre)
-                              <option value="{{$membre->name}} {{$membre->prenom}}">{{$membre->name}} {{$membre->prenom}}</option>
+                                <?php $selected=($membre->id==$these->encadreur_int)?'selected':'';  ?>
+                                <option value="{{$membre->id}}" <?php echo $selected ?>>{{$membre->name}} {{$membre->prenom}}</option>
+                                <?php $selected=''; ?>
                                @endforeach
                             </select>
                           </div>
                         </div>
                   </div>
 
-                   <div class="form-group ">
-                        <label class="col-xs-3 control-label">Encadreur externe</label>
-                        <div class="col-xs-9 inputGroupContainer">
-                          <div style="width: 70%">
-                            <input name="encadreur_ext" name="titre" class="form-control" placeholder="Nom" type="text" value="{{ $these->encadreur_ext}}">
-                          </div>
-                        </div>
-                  </div>
+
 
                   <div class="form-group ">
                         <label class="col-xs-3 control-label">CoEncadreur (membre interne)</label>
                         <div class="col-xs-9 inputGroupContainer">
                           <div style="width: 70%">
                             <select name="coencadreur_int" class="form-control select2">
-                              <option>{{$these->encadreur_ext}}</option>
                               @foreach($membres as $membre)
-                              <option value="{{$membre->name}} {{$membre->prenom}}">{{$membre->name}} {{$membre->prenom}}</option>
+                                <?php $selected=($membre->id==$these->coencadreur_int)?'selected':'';  ?>
+                                  <option value="{{$membre->id}}" <?php echo $selected ?>>{{$membre->name}} {{$membre->prenom}}</option>
+                                <?php $selected=''; ?>
                                @endforeach
                             </select>
                           </div>
@@ -132,7 +127,6 @@
                         <div class="col-xs-9 inputGroupContainer">
                           <div style="width: 70%">
                             <select name="partenaire" class="form-control edit_partenaire_type3">
-                              <option></option>
                                @foreach($partenaires as $partenaire)
                               <option value="{{$partenaire->id}}">{{$partenaire->nom}}</option>
                                @endforeach
@@ -146,20 +140,14 @@
                     <div class="col-xs-9 inputGroupContainer ">
                       <div style="width: 70%">
                         <select name="membres_ext" class="form-control " id="edit_contact_result3">
-
+                          @if($these->contact)
+                            <option value="{{$these->contact->id}}">{{$these->contact->nom}}{{$these->contact->prenom}}</option>
+                          @endif
                         </select>
                       </div>
                     </div>
                    </div>
 
-                  <div class="form-group ">
-                        <label class="col-xs-3 control-label">CoEncadreur externe</label>
-                        <div class="col-xs-9 inputGroupContainer">
-                          <div style="width: 70%">
-                            <input name="coencadreur_ext" class="form-control" placeholder="Nom" type="text" value="{{ $these->coencadreur_ext }}">
-                          </div>
-                        </div>
-                  </div>
 
                    <div class="form-group ">
                         <label class="col-xs-3 control-label">Date d'inscription</label>

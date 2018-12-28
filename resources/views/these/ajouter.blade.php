@@ -100,22 +100,14 @@
                             <select name="encadreur_int" class="form-control select2">
                               <option></option>
                                @foreach($membres as $membre)
-                              <option value="{{$membre->name}} {{$membre->prenom}}">{{$membre->name}} {{$membre->prenom}}</option>
+                              <option value="{{$membre->id}}">{{$membre->name}} {{$membre->prenom}}</option>
                                @endforeach
                             </select>
                           </div>
                         </div>
                   </div>
 
-                  <div class="form-group ">
-                        <label class="col-xs-3 control-label">Encadreur externe</label>
-                        <div class="col-xs-9 inputGroupContainer">
-                          <div style="width: 70%">
-                            <input  name="encadreur_ext" class="form-control" placeholder="Nom" type="text" value="{{old('encadreur_ext')}}">
-                          </div>
-                          <span>*Vous devrez obligatoirement remplir un des champs(encadreur interne ou externe)</span>
-                        </div>
-                  </div>
+
 
                   <div class="form-group ">
                         <label class="col-xs-3 control-label">CoEncadreur (membre interne)</label>
@@ -124,7 +116,7 @@
                             <select name="coencadreur_int" class="form-control select2">
                               <option></option>
                                @foreach($membres as $membre)
-                              <option value="{{$membre->name}} {{$membre->prenom}}">{{$membre->name}} {{$membre->prenom}}</option>
+                              <option value="{{$membre->id}}">{{$membre->name}} {{$membre->prenom}}</option>
                                @endforeach
                             </select>
                           </div>
@@ -156,17 +148,7 @@
                     </div>
                    </div>
 
-                  <div class="form-group ">
-                        <label class="col-xs-3 control-label">CoEncadreur externe</label>
-                        <div class="col-xs-9 inputGroupContainer">
-                          <div style="width: 70%">
-                            <input  name="coencadreur_ext" class="form-control" placeholder="Nom" type="text" value="{{old('coencadreur_ext')}}">
-                          </div>
 
-                          <span>*Vous devrez obligatoirement remplir un des champs(coencadreur interne ou externe)</span>
-
-                        </div>
-                  </div>
 
 
                    <div class="form-group ">

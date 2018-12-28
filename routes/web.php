@@ -63,6 +63,8 @@ Route::get('chartjs', 'dashController@getMonthlyArticleTheseData');
 Route::get('dashboard','dashController@index');
 
 
+
+
 // Route::get('parametre','ParametreController@create');
 // Route::post('parametre','ParametreController@store');
 
@@ -80,6 +82,7 @@ Route::resource('theses', 'TheseController',[
     'only' => ['index', 'create','edit','update','destroy']
 ]);
 Route::post('/postajaxPartenaireContact3','TheseController@postType');
+Route::post('/postajaxTheses','TheseController@postTheses');
 
 
 
@@ -100,6 +103,8 @@ Route::get('trombinoscope','UserController@trombi');
 Route::resource('membres', 'UserController',[
     'only' => ['index', 'create','store','edit','update','destroy']
 ]);
+Route::post('/postajaxMembres1','UserController@postMembres1');
+Route::post('/postajaxMembres2','UserController@postMembres2');
 
 
 
@@ -131,6 +136,7 @@ Route::delete('exemplaires/{id}/{catId}','MaterielController@deleteExemplaire');
 Route::put('exemplaires/{id}/{catId}','MaterielController@editExemplaire');
 
 Route::post('/postajaxTypeProprietaire','MaterielController@postType');
+Route::post('/postajaxMateriels','MaterielController@postMateriels');
 
 
 

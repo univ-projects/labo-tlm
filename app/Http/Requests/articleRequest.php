@@ -25,12 +25,11 @@ class articleRequest extends FormRequest
     {
         return [
             'titre' => 'required|min:3',
-            'resume' => 'required|min:10',  
-            'type' => 'required', 
+            'resume' => 'required|min:10',
+            'type' => 'required',
             'ville' => 'required',
-            'pays' => 'required',   
-            'mois' => 'required',  
-            'annee' => 'required' 
+            'pays' => 'required',
+            'date' => 'required'
 
              ];
     }

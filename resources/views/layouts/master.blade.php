@@ -58,8 +58,10 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+@if (Auth::user())
+  <div class="wrapper">
 
   <header class="main-header" style="position: fixed; width: 100%">
     <!-- Logo -->
@@ -191,7 +193,7 @@
                 </ul>
               </li>
 
-              @if(Auth::user()->role->nom == 'admin' )
+              @if(Auth::user()->role->nom == 'admin' || Auth::user()->role->nom == 'directeur')
               <li {{{ (Request::is('materiels/*') ? 'class=active' : '') }}} {{{ (Request::is('materiels') ? 'class=active' : '') }}}>
                 <a href="{{url('materiels')}}">
                   <i class="fa fa-flask"></i>
@@ -279,7 +281,7 @@
 
 
 
-                  @if(Auth::user()->role->nom == 'admin' || Auth::user()->role->nom == 'directeur')
+                  @if(Auth::user()->role->nom == 'admin')
                 <li class="treeview {{{ (Request::is('parametre/*') ? 'active' : '') }}} {{{ (Request::is('parametre') ? 'active' : '') }}}{{{ (Request::is('trombinoscope/*') ? 'active' : '') }}} {{{ (Request::is('trombinoscope') ? 'active' : '') }}}">
                   <a href="#">
                     <i class="fa fa-user"></i> <span>Paramètres</span>
@@ -344,7 +346,7 @@
 
   <div class="control-sidebar-bg"></div>
   <!-- ./wrapper -->
-
+@endif
 
 
 <!-- jQuery 3 -->
@@ -671,27 +673,32 @@
 <script type="text/javascript">
 $(document).ready(function(){
   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
   $('.proprietaire_type').change(function(){
+    var category=$(this).parent().parent().parent().parent().attr('id')
+    alert(category);
+
+
     if($(this).val() != '')
     {
 
       var type_proprietaire = $(this).val();
+      var changedDiv="#proprietaire_result"+category;
 
 
       $.ajax({
         url: '/postajaxTypeProprietaire',
         type: 'POST',
                       /* send the csrf-token and the input to the controller */
-          data: {_token: CSRF_TOKEN, type_proprietaire:type_proprietaire},
+          data: {_token: CSRF_TOKEN, type_proprietaire:type_proprietaire,category:category},
           dataType: 'JSON',
           success: function (data) {
-                        $('#proprietaire_result').html(data);
-
-                    }
+            setTimeout(function(){   $(changedDiv).html(data); }, 50);
+          }
       })
     }
     else{
-      $('#proprietaire_result').html('');
+        setTimeout(function(){   $(changedDiv).html(''); }, 50);
     }
   });
 });
@@ -701,6 +708,7 @@ $(document).ready(function(){
 $(document).ready(function(){
   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
   $('.edit_proprietaire_type').change(function(){
+      var category=$("#categoryId2").val();
     if($(this).val() != '')
     {
 
@@ -711,7 +719,7 @@ $(document).ready(function(){
         url: '/postajaxTypeProprietaire',
         type: 'POST',
                       /* send the csrf-token and the input to the controller */
-          data: {_token: CSRF_TOKEN, type_proprietaire:type_proprietaire},
+          data: {_token: CSRF_TOKEN, type_proprietaire:type_proprietaire,category:category},
           dataType: 'JSON',
           success: function (data) {
                         $('.edit_proprietaire_result').html(data);
@@ -868,7 +876,7 @@ $(document).ready(function(){
     {
 
       var type_partenaire = $(this).val();
-          alert(type_partenaire);
+
 
 
       $.ajax({
@@ -924,6 +932,144 @@ $(document).ready(function(){
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+  $('.theses_labo_select').change(function(){
+
+
+    if($(this).val() != '')
+    {
+
+      var labo_selected = $(this).val();
+
+
+
+      $.ajax({
+        url: '/postajaxTheses',
+        type: 'POST',
+                      /* send the csrf-token and the input to the controller */
+          data: {_token: CSRF_TOKEN,labo_selected:labo_selected},
+          dataType: 'JSON',
+          success: function (data) {
+                        $('#theses_table').html(data);
+
+                    }
+      })
+    }
+    else{
+      $('#theses_table').html('');
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+  $('.materiels_labo_select').change(function(){
+
+
+
+    if($(this).val() != '')
+    {
+
+      var labo_selected = $(this).val();
+
+
+
+      $.ajax({
+        url: '/postajaxMateriels',
+        type: 'POST',
+                      /* send the csrf-token and the input to the controller */
+          data: {_token: CSRF_TOKEN,labo_selected:labo_selected},
+          dataType: 'JSON',
+          success: function (data) {
+                        $('#materiels_table').html(data);
+
+                    }
+      })
+    }
+    else{
+      $('#materiels_table').html('');
+    }
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+  $('.membres1_labo_select').change(function(){
+
+
+    if($(this).val() != '')
+    {
+
+      var labo_selected = $(this).val();
+
+
+
+      $.ajax({
+        url: '/postajaxMembres1',
+        type: 'POST',
+                      /* send the csrf-token and the input to the controller */
+          data: {_token: CSRF_TOKEN,labo_selected:labo_selected},
+          dataType: 'JSON',
+          success: function (data) {
+                        $('#membres1_table').html(data);
+
+                    }
+      })
+    }
+    else{
+      $('#membres1_table').html('');
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+  $('.membres2_labo_select').change(function(){
+
+
+    if($(this).val() != '')
+    {
+
+      var labo_selected = $(this).val();
+
+
+
+      $.ajax({
+        url: '/postajaxMembres2',
+        type: 'POST',
+                      /* send the csrf-token and the input to the controller */
+          data: {_token: CSRF_TOKEN,labo_selected:labo_selected},
+          dataType: 'JSON',
+          success: function (data) {
+
+                        //setTimeout(function(){    $('#membres2_table').html(data)},5550);
+                        $('#membres2_table').html(data);
+
+                    }
+      })
+    }
+    else{
+      //  setTimeout(function(){    $('#membres2_table').html('')},5550);
+        $('#membres2_table').html('');
+    }
+  });
+});
+</script>
+
+
 
 
 <script type="text/javascript">
@@ -931,4 +1077,5 @@ $(document).ready(function(){
 </script>
 
 </body>
+
 </html>

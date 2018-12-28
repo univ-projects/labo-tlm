@@ -25,16 +25,26 @@ class TheseController extends Controller
     public function index()
     {
         $theses = These::all();
+        $laboratoires=Parametre::all();
         $labo = $this->getCurrentLabo();
 
-        return view('these.index' , ['theses' => $theses] , ['labo'=>$labo]);
+        return view('these.index')->with([
+          'laboratoires' => $laboratoires,
+          'theses'=>$theses,
+          'labo'=>$labo
+        ]);
     }
 
     public function details($id)
     {
         $these = These::find($id);
+        if($these){
         $labo = $this->getCurrentLabo();
         return view('these.details', ['these' => $these], ['labo'=>$labo]);
+      }
+      else {
+          return view('errors.404');
+        }
     }
 
     public function create()
@@ -61,7 +71,7 @@ class TheseController extends Controller
 
     public function store(theseRequest $request)
     {
-        $labo = Parametre::find('1');
+        $labo = $this->getCurrentLabo();
         $these = new These();
 
          if($request->hasFile('detail')){
@@ -82,7 +92,6 @@ class TheseController extends Controller
         $these->date_debut =$request->input('date_debut');
 
         $these->date_soutenance = $request->input('date_soutenance');
-        $these->encadreur_ext = $request->input('encadreur_ext');
         $these->encadreur_int = $request->input('encadreur_int');
         $these->coencadreur_ext = $request->input('membres_ext');
         $these->coencadreur_int = $request->input('coencadreur_int');
@@ -98,10 +107,11 @@ class TheseController extends Controller
 
     public function edit($id)
     {
-        $labo = Parametre::find('1');
+      $labo = $this->getCurrentLabo();
         //if(Auth::id() == $membre->id || Auth::user()->role->nom == 'admin')
             {
         $these = These::find($id);
+        if($these){
         $membres = User::all();
         $partenaires=Partenaire::all();
 
@@ -113,12 +123,17 @@ class TheseController extends Controller
             'partenaires'=>$partenaires,
             'labo'=>$labo,
         ]);;
-            }
+      }
+      else {
+          return view('errors.404');
+        }
+      }
     }
     public function update(theseRequest $request , $id)
     {
         $these = These::find($id);
-        $labo = Parametre::find('1');
+        if($these){
+        $labo = $this->getCurrentLabo();
 
          if($request->hasFile('detail')){
 
@@ -133,7 +148,6 @@ class TheseController extends Controller
         $these->sujet = $request->input('sujet');
         $these->date_debut = $request->input('date_debut');
         $these->date_soutenance = $request->input('date_soutenance');
-        $these->encadreur_ext = $request->input('encadreur_ext');
         $these->encadreur_int = $request->input('encadreur_int');
         $these->coencadreur_ext = $request->input('membres_ext');
         $these->coencadreur_int = $request->input('coencadreur_int');
@@ -142,6 +156,10 @@ class TheseController extends Controller
         $these->save();
 
         return redirect('theses');
+      }
+      else {
+          return view('errors.404');
+        }
 
     }
 
@@ -183,11 +201,133 @@ class TheseController extends Controller
     {
 
         $these = These::find($id);
-
+        if($these){
         $this->authorize('delete', $these);
 
         $these->delete();
         return redirect('theses');
+       }
+        else {
+            return view('errors.404');
+          }
     }
+
+
+    public function postTheses(Request $request)
+    {
+      if($request->labo_selected!=0)
+          $response=Parametre::find($request->labo_selected);
+      else
+          $response=Parametre::all();
+
+          $output='';
+          $labId=$request->labo_selected;
+
+                $theses=These::all();
+
+            foreach($theses as $these){
+              if($these->user->equipe->labo_id==$labId || $labId==0){
+                  $output.="  <tr><td>";
+                  $output.=$these->titre;
+                  $output.="</td><td>";
+                  $output.=$these->sujet;
+                  $output.="</td><td>";
+                  $output.=$these->name.' ';
+                  $output.=$these->prenom;
+                  $output.="</td>
+                  <td>";
+                  if($these->encadreur) {
+                    $output.=  "<li> <a href=\"";
+                    $output.=url('membres/'.$these->encadreur->id.'/details');
+                    $output.="\">";
+                    $output.=  $these->encadreur->name.' '.$these->encadreur->prenom;
+                    $output.=  "</a></li>";
+                  }
+                  $output.="</td>
+                  <td>";
+                  if($these->coencadreur_intern) {
+                    $output.=  "<li> <a href=\"";
+                    $output.=url('membres/'.$these->coencadreur_intern->id.'/details');
+                    $output.="\">";
+                    $output.=  $these->coencadreur_intern->name.' '.$these->coencadreur_intern->prenom;
+                    $output.=  "</li>";
+                  }
+                  if($these->contact) {
+                    $output.=  "<li> <a href=\"";
+                    $output.=url('contacts/'.$these->contact->id.'/details');
+                    $output.="\">";
+                    $output.=  $these->contact->nom.' '.$these->contact->prenom;
+                    $output.=  "</li>";
+                  }
+
+                  $output.='</td>
+                  <td>';
+                  $output.=$these->date_soutenance;
+                  $output.='</td>
+                  <td>
+
+                    <form action="';
+                    $output.= url('theses/'.$these->id);
+                    $output.=' method="post">';
+
+                    $output.=  csrf_field();
+                    $output.=  method_field('DELETE');
+                  $output.='  <a href=" ';
+                    $output.=url('theses/'.$these->id.'/details');
+                    $output.='" class="btn btn-info">
+                      <i class="fa fa-eye"></i>
+                    </a>';
+                    if(Auth::id() == $these->user_id || Auth::user()->role->nom == 'admin' ){
+                    $output.='<a href="';
+                    $output.= url('theses/'.$these->id.'/edit');
+                    $output.='"class="btn btn-default">
+                      <i class="fa fa-edit"></i>
+                    </a>';
+                    }
+                     if(Auth::id() != $these->user_id && Auth::user()->role->nom != 'membre' ){
+
+                    $output.= "<a href=\"#supprimer $these->id Modal\" role=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\"><i class=\"fa fa-trash-o\"></i></a>
+                    <div class=\"modal fade\" id=\"supprimer $these->id Modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"supprimer $these->id ModalLabel\" aria-hidden=\"true\">";
+                    $output.='
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    Voulez-vous vraiment effectuer la suppression ?
+                                </div>
+                                <div class="modal-footer">
+                                    <form class="form-inline" action="';
+                                    $output.= url('theses/'.$these->id);
+                                    $output.='"  method="POST">
+                                        @method(\'DELETE\')
+                                        @csrf
+                                    <button type="button" class="btn btn-light" data-dismiss="modal">Non</button>
+                                        <button type="submit" class="btn btn-danger">Oui</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+                  }
+                  $output.='
+                    </form>
+                  </div>
+                  </td>
+                </tr>
+              ';
+            }
+          }
+
+         return response()->json($output);
+
+
+    }
+
+
+
 
 }

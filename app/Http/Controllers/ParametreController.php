@@ -97,6 +97,7 @@ class ParametreController extends Controller
               ->where('labo_id', $id)
               ->get();
        $laboDetail = Parametre::find($id);
+       if($laboDetail){
 
        $equipes = DB::table('parametres')
 
@@ -115,6 +116,11 @@ class ParametreController extends Controller
            'labo'=>$labo,
           'laboDetail'=> $laboDetail,
        ]);
+     }
+   }
+   else {
+       return view('errors.404');
+     }
    }
 
    public function edit($id)
@@ -129,6 +135,7 @@ class ParametreController extends Controller
               ->where('labo_id', $id)
               ->get();
        $laboDetail = Parametre::find($id);
+       if($laboDetail){
 
        $equipes = DB::table('parametres')
             ->leftjoin('equipes', 'equipes.labo_id', '=', 'parametres.id')
@@ -147,6 +154,10 @@ class ParametreController extends Controller
              else{
                  return view('errors.403',['labo'=>$labo]);
              }
+           }
+           else {
+               return view('errors.404');
+             }
    }
 
    public function update(Request $request,$id)
@@ -154,6 +165,7 @@ class ParametreController extends Controller
 
      $labo = Parametre::find($id);
 
+     if($labo){
          $labo->nom = $request->input('nom');
         $labo->achronymes = $request->input('achronymes');
         $labo->directeur = $request->input('directeur');
@@ -189,7 +201,10 @@ class ParametreController extends Controller
        }
 
        return redirect('laboratoires/'.$id.'/details');
-
+     }
+     else {
+         return view('errors.404');
+       }
    }
 
     public function create()
@@ -256,8 +271,13 @@ class ParametreController extends Controller
     {
 
               $laboratoire = Parametre::find($id);
+              if($laboratoire){
               $laboratoire->delete();
               return redirect('laboratoires');
+            }
+            else {
+                return view('errors.404');
+              }
 
     }
 

@@ -16,16 +16,32 @@
 @endsection
 
 @section('asidebar')
-    
+
 @endsection
 
 @section('content')
 
 
                 <legend><center><h2><b>TROMBINOSCOPE</b></h2></center></legend><br>
+                <div class="form-group">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-lg fa-flask"></i></span>
+                          <select name="membres2_labo_select" class="form-control membres2_labo_select">
+                            <option value="0">Tout</option>
+                            @foreach($laboratoires as $lab)
+                              @if($lab->id==Auth::user()->equipe->labo_id)
+                                <option value="{{$lab->id}}" selected>{{$lab->nom}}</option>
+                                @else
+                                <option value="{{$lab->id}}">{{$lab->nom}}</option>
+                              @endif
+
+                            @endforeach
+                          </select>
+                        </div>
+                  </div>
     <div class="row">
       <div class="col-md-12">
-        <div style="padding-top: 30px">
+        <div style="padding-top: 30px" id="membres2_table">
 
          @foreach($membres as $membre)
             <div class="col-md-2 col-sm-4 col-xs-6" style="padding-top: 30px;" >

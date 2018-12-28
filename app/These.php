@@ -18,4 +18,12 @@ class These extends Model
    {
        return $this->belongsTo('App\Contact','coencadreur_ext');
    }
+   public function encadreur()
+  {
+      return $this->belongsTo('App\User','encadreur_int');
+  }
+  public function coencadreur_intern()
+ {
+     return $this->belongsTo('App\User','coencadreur_int');
+ }
 }
