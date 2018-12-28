@@ -62,7 +62,7 @@
 				<div class="container">
 					<div class="header-bar">
 						<a href="{{url('laboratoires/')}}" class="branding">
-							<img src="public/images/img/logo-univ_tlemcen.png" alt="" class="logo">
+							<img src="{{asset('images/images/img/logo-univ_tlemcen.png')}}" alt="" class="logo">
 							<div class="logo-type">
 								<h1 class="site-title">Université Abou Bekr Belkaid</h1>
 								<small class="site-description">Laboratoires de recherche</small>
@@ -87,12 +87,13 @@
 
 
 							<ul class="menu">
-								<li class="home menu-item current-menu-item"><a href="{{url('laboratoires/')}}"><img src="public/images/icons/home-icon.png" alt="Home"></a></li>
-								<li class="menu-item"><a href="{{url('laboratoires/A-propos')}}">A propos</a></li>
-								<li class="menu-item"><a href="{{url('laboratoires/actualites')}}">Actualités</a></li>
-								<li class="menu-item "><a href="{{url('laboratoires/Nos-laboratoires')}}">Laboratoires</a></li>
-								<li class="menu-item "><a href="{{url('laboratoires/Evenements')}}">Evénements</a></li>
-								<li class="menu-item"><a href="{{url('laboratoires/Contact')}}">Contact</a></li>
+								<li class="home menu-item current-menu-item"><a href="{{url('front')}}"><img src="{{ asset('images/images/icons/home-icon.png') }}" alt="Home"/></a></li>
+								<li class="menu-item"><a href="{{url('front/A-propos')}}">A propos</a></li>
+								<li class="menu-item"><a href="{{url('front/actualites')}}">Actualités</a></li>
+								<li class="menu-item "><a href="{{url('front/equipes')}}">Equipe</a></li>
+									<li class="menu-item "><a href="{{url('front/projets')}}">Projet</a></li>
+								<li class="menu-item "><a href="{{url('front/Evenements')}}">Evénements</a></li>
+								<li class="menu-item"><a href="{{url('front/Contact')}}">Contact</a></li>
 							</ul>
 						</nav>
 

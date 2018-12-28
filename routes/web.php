@@ -24,19 +24,20 @@ Route::get('/', function () {
 Route::prefix('front')->group(function () {
 
   Route::get('/', function () {
-      return view('acceuil');
+      return view('front.acceuil');
   });
-  Route::get('A-propos', function () {
-      return view('about');
-  });
+Route::get('A-propos','frontController@apropo');
 
   Route::get('actualites','frontController@acctualite');
   // Route::get('actualites', function () {
   //     return view('front/actualites');
   // });
-  Route::get('Nos-laboratoires', function () {
-      return view('labos');
-  });
+Route::get('equipes','frontController@equipe');
+
+Route::get('projets','frontController@projet');
+
+Route::get('projets/{id}','frontController@projetdetail');
+
   Route::get('Evenements', function () {
       return view('events');
   });
@@ -44,9 +45,15 @@ Route::prefix('front')->group(function () {
       return view('contact');
   });
 
+  Route::get('test', function () {
+      return view('front.test');
+  });
+
   Route::get('actualite/{id}','frontController@actualite');
 
   Route::get('profile/{id}','frontController@profile');
+  Route::get('equipes/{id}','frontController@equipedetail');
+
 
 });
 
