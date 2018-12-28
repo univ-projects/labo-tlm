@@ -1,5 +1,5 @@
 @extends('layouts.front')
-
+@extends('layouts.actualitescript')
 <!--@section('title','Acceuil')    hadi ta3ach -->
 
 @section('content')

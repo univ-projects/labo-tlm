@@ -10,8 +10,11 @@ use App\Http\Requests\actualiteRequest;
 use App\Parametre;
 use App\Actualite;
 use App\article;
+use App\these;
 use App\User;
 use App\ArticleUser;
+use App\Equipe;
+use App\Projet;
 
 class frontController extends Controller
 {
@@ -78,4 +81,86 @@ class frontController extends Controller
           'projets'=>$projet,
       ]);
     }
+
+      public function apropo(){
+       $actualites = Actualite::all();
+       $membre = User::all();
+       $membre = $membre->count();
+       $labosum = Parametre::all();
+       $labosum = $labosum->count();
+
+       $article = Article::all();
+       $these = These::all();
+       $article = $article->count();
+       $these = $these->count();
+       $pub = $article + $these ;
+
+        $labo = Parametre::find('3');
+          return view('front.apropo')->with([
+              'labo'=>$labo,
+              'labosum'=>$labosum,
+              'pub'=>$pub,
+              'membre'=>$membre,
+          ]);
+      }
+
+      public function equipe(){
+        $equipes = Equipe::where('labo_id',3)->get();
+        $chef = DB::table('users')
+                ->join('equipes', 'users.id', '=', 'equipes.chef_id')
+                ->where('equipes.labo_id',3)
+                ->select('users.*')
+                ->get();
+        $membres = DB::table('users')
+                ->join('equipes', 'users.equipe_id', '=', 'equipes.id')
+                ->where('equipes.labo_id',3)
+                ->select('users.*')
+              //  ->groupBy('equipe_id')
+                ->get();
+
+
+
+        return view('front.equipe')->with([
+          'equipes'=>$equipes,
+          'chef'=>$chef,
+          'membres'=>$membres,
+        ]);
+      }
+
+      public function equipedetail($id){
+        $equipe = Equipe::find($id);
+        $chef = DB::table('users')
+                ->join('equipes', 'users.id', '=', 'equipes.chef_id')
+                ->where('equipes.id',$id)
+                ->select('users.*')
+                ->get();
+        $membres = DB::table('users')
+                ->join('equipes', 'users.equipe_id', '=', 'equipes.id')
+                ->where('equipes.id',$id)
+                ->select('users.*')
+                ->get();
+
+        return view('front.equipedetail')->with([
+          'equipe'=>$equipe,
+          'chef'=>$chef,
+          'membres'=>$membres,
+        ]);
+      }
+
+      public function projet(){
+          $projets = Projet::all();
+        return view('front.projet')->with([
+          'projets'=>$projets,
+
+        ]);
+
+      }
+
+      public function projetdetail($id){
+        $projet = Projet::find($id);
+        return view('front.projetdetail')->with([
+          'projet'=>$projet,
+        ]);
+      }
+
 }
