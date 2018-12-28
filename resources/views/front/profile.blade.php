@@ -181,7 +181,7 @@
             <input class="input-text" type="text" name="" value="Nom complet" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
             <input class="input-text" type="text" name="" value="E-mail" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
             <textarea class="input-text text-area" cols="0" rows="0" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">Votre Message </textarea>
-            <input class="input-btn col-md-4" type="submit" value="envoyer le message" >
+          <a href="mailto:{{$membre->email}}">  <input class="input-btn col-md-4" type="submit" value="envoyer le message" ></a>
           </div>
         </div>
       </div>
