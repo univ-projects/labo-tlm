@@ -145,8 +145,8 @@ section .section-title {
             background-position: center;
             background-size:cover;">
       <div class="container">
-        <h2 class="page-title">V´eriﬁcation de contrats logiciels</h2>
-        <small>équipe Geni Logiciel</small>
+        <h2 class="page-title">{{$projet->intitule}}</h2>
+        <small>{{$equipe[0]->intitule}}</small>
       </div>
     </div>
 
@@ -167,7 +167,7 @@ section .section-title {
               <li><strong>Date:</strong> 06/10/14</li>
               <li><strong>Client:</strong> Lorem ipsum</li>
               <li><strong>Manager:</strong> Howard Brown</li>
-              <li><strong>Equipe:</Jessica Smith, Tom Fisher, Sarah Branson, Ted Marks</li>
+              <li><strong>Equipe: {{$equipe[0]->intitule}}</li>
               <li><strong>But:</strong> Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</li>
 
             </ul>
@@ -251,7 +251,7 @@ section .section-title {
           <div class="col medium-10 small-12 large-10">
             <div class="team">
               <div class="w3-content w3-display-container">
-            <a href="{{asset($projet->detail)}}" download>  <button class="btn"><i class="fa fa-download"></i> Download</button> </a>  
+            <a href="{{asset($projet->detail)}}" download>  <button class="btn"><i class="fa fa-download"></i> Download</button> </a>
 
 </div>
 

@@ -20,7 +20,7 @@ class frontController extends Controller
 {
     public function acctualite(){
       $actualites = Actualite::all();
-      $labo = Parametre::find('1');
+      $labo = Parametre::find('3');
 
 
 
@@ -146,6 +146,7 @@ class frontController extends Controller
 
       public function projetdetail($id){
         $projet = Projet::find($id);
+        $equipe = DB::select("SELECT * from equipes where id in (select equipe_id from users where id in (select user_id from projet_user where projet_id = $id))");
         $membres = DB::table('users')
                 ->join('projet_user', 'users.id', '=', 'projet_user.user_id')
                 ->where('projet_user.projet_id',$id)
@@ -154,15 +155,31 @@ class frontController extends Controller
         return view('front.projetdetail')->with([
           'membres'=>$membres,
           'projet'=>$projet,
+          'equipe'=>$equipe,
         ]);
       }
 
       public function contact(){
-        $labo = Parametre::find(30);
+        $labo = Parametre::find(3);
 
         return view('front.contact')->with([
           'labo'=>$labo,
         ]);
       }
+
+      public function articledetail($id){
+        $projet = Article::find($id);
+        $labo = Parametre::find('3');
+        $par = DB::select("SELECT * from users where id = (select publicateur from articles where id = $id)");
+
+
+        return view('front.articledetail')->with([
+          'projet'=>$projet,
+          'labo'=>$labo,
+          'par'=>$par,
+                  ]);
+      }
+
+
 
 }
