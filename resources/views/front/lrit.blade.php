@@ -5,12 +5,18 @@
 @section('content')
 
 
+  <div class="page-head" data-bg-image="" style="border-top: 2px solid #edf2f4;border-bottom: 2px solid #edf2f4;margin-bottom:25px;padding:0px;" >
+    <a href="#"><img src="public/images/images/img/labo-info.jpg" alt=""></a>
+  </div>
 
   <main class="main-content">
 
 
     <div class="fullwidth-block">
       <div class="container">
+        <?php $i=-1; ?>
+        @foreach($actualites as $actualite )
+        <?php $i++; ?>
         <h2 class="section-title">Articles récents</h2>
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6  py-0 pl-3 pr-1 featcard" >
@@ -18,10 +24,10 @@
              <div class="carousel-inner">
                   <div class="carousel-item active">
                     	  <div class="card bg-dark text-white">
-                          <img  src="public/images/img/labo-post5.jpg" height="400px" alt="">
+                          <img  src="{{asset($actualite->photo)}}" height="400px" alt="">
                           <div class="card-img-overlay d-flex linkfeat">
                             <a href="article2.html" class="align-self-end">
-                              <h4 class="card-title">APPEL À COMMUNICATION ICOSIP2015</h4>
+                              <h4 class="card-title"><?php echo $actualite->titre ?></h4>
                               <p class="textfeat" style="display: none;">
                                 The 2015 International Conference on Advanced Communication Systems and Signal Processing (ICOSIP 2015) will be held in the beautiful city of Tlemcen...
                             </p>
@@ -131,6 +137,7 @@
               </div>
                   </div>
           </div>
+          @endforeach
 
 
 
