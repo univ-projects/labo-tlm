@@ -157,4 +157,12 @@ class frontController extends Controller
         ]);
       }
 
+      public function contact(){
+        $labo = Parametre::find(30);
+
+        return view('front.contact')->with([
+          'labo'=>$labo,
+        ]);
+      }
+
 }

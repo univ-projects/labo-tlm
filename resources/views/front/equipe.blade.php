@@ -20,7 +20,7 @@
 									<img src="{{asset($equipe->photo)}}" alt="" class="img img-responsive rounded-circle" width="150px" height="150px">
 								</a>
 						</div>
-						<a href="profil/{{$chef[$i]->id}}" class="col-md-12" style="margin-bottom:20px;color:black;">
+						<a href="profile/{{$chef[$i]->id}}" class="col-md-12" style="margin-bottom:20px;color:black;">
 							<small >Chef d'équipe: Mr {{$chef[$i]->name}} {{$chef[$i]->prenom }} </small>
 						</a>
             <p>
@@ -32,7 +32,7 @@
 <?php $j=0; ?>
                   @foreach($membres as $membre)
                 <?php  if($membre->equipe_id == $equipe->id && $j<6): ?>
-                <a href="profil/{{$membre->id}}"  data-toggle="tooltip" data-placement="top" title="{{$membre->name}} {{$membre->prenom}}"><img src="{{asset($membre->photo)}}" alt="" width="50px" height="50px"  class="img img-responsive rounded-circle"></a>
+                <a href="profile/{{$membre->id}}"  data-toggle="tooltip" data-placement="top" title="{{$membre->name}} {{$membre->prenom}}"><img src="{{asset($membre->photo)}}" alt="" width="50px" height="50px"  class="img img-responsive rounded-circle"></a>
               <?php $j++; endif; ?>
                   @endforeach
                     <?php if($j>5): ?>

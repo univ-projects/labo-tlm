@@ -54,6 +54,7 @@ Route::get('projets/{id}','frontController@projetdetail');
   Route::get('profile/{id}','frontController@profile');
   Route::get('equipes/{id}','frontController@equipedetail');
 
+  Route::get('Contact','frontController@contact');
 
 });
 

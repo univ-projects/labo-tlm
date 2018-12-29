@@ -186,7 +186,7 @@ section .section-title {
 
     <section id="team" class="pb-5">
         <div class="container">
-            <h5 class="section-title h1">OUR TEAM</h5>
+            <h5 class="section-title h1">Equipe de Recherche</h5>
             <div class="row">
                 <!-- Team member -->
                 @foreach($membres as $membre)
@@ -206,7 +206,7 @@ section .section-title {
                             <div class="backside">
                                 <div class="card">
                                     <div class="card-body text-center mt-4">
-                                        <a href="profil/{{$membre->id}}">   <h4 class="card-title">{{$membre->name}} {{$membre->prenom}}</h4></a> 
+                                        <a href="profil/{{$membre->id}}">   <h4 class="card-title">{{$membre->name}} {{$membre->prenom}}</h4></a>
                                         <p class="card-text">Docteur à Abou Bakr Belkaid University of Tlemcen</p>
                                         <ul class="list-inline">
                                             <li class="list-inline-item">
@@ -245,40 +245,17 @@ section .section-title {
 
     <div class="fullwidth-block">
       <div class="container">
-
+            <h5 class="section-title h1">telecharger details</h5>
         <div class="row">
 
           <div class="col medium-10 small-12 large-10">
             <div class="team">
               <div class="w3-content w3-display-container">
-<img class="mySlides" src="public/images/projects/project1.jpg" style="width:100%">
-<img class="mySlides" src="public/images/projects/project2.jpg" style="width:100%">
-<img class="mySlides" src="public/images/projects/project3.jpg" style="width:100%">
+            <a href="{{asset($projet->detail)}}" download>  <button class="btn"><i class="fa fa-download"></i> Download</button> </a>  
 
-
-<button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-<button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
 </div>
 
-<script>
-var slideIndex = 1;
-showDivs(slideIndex);
 
-function plusDivs(n) {
-showDivs(slideIndex += n);
-}
-
-function showDivs(n) {
-var i;
-var x = document.getElementsByClassName("mySlides");
-if (n > x.length) {slideIndex = 1}
-if (n < 1) {slideIndex = x.length}
-for (i = 0; i < x.length; i++) {
- x[i].style.display = "none";
-}
-x[slideIndex-1].style.display = "block";
-}
-</script>
             </div>
           </div>
         </div>
