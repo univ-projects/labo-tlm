@@ -49,6 +49,10 @@ Route::get('projets/{id}','frontController@projetdetail');
       return view('front.test');
   });
 
+  Route::get('lrit', function () {
+      return view('front.lrit');
+  });
+
   Route::get('actualite/{id}','frontController@actualite');
 
   Route::get('profile/{id}','frontController@profile');
