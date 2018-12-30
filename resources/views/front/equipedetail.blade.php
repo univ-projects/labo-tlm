@@ -175,7 +175,7 @@ section .section-title {
                 <h3>Chef d'équipe</h3>
                 <div class="row">
 
-                  <a href="{{url('front/profile/$equipe->chef_id')}}" style="color:black">
+                  <a href="../profile/{{$equipe->chef_id}}" style="color:black">
                     <div class="col-md-4">
                       <img src="{{asset($chef[0]->photo)}}" alt="" width="60px" height="60px" class="img img-responsivee" style="border-radius:20px">
                     </div>
@@ -231,6 +231,9 @@ section .section-title {
             <div class="row">
                 <!-- Team member -->
                 @foreach($membres as $membre)
+                <?php if ($equipe->chef_id != $membre->id): ?>
+
+
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
                         <div class="mainflip">
@@ -238,8 +241,8 @@ section .section-title {
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <p><img class=" img-fluid" src="{{asset($membre->photo)}}" alt="card image"></p>
-                                        <h4 class="card-title">{{$membre->name}} {{$membre->prenom}}</h4>
-                                        <p class="card-text">Docteur à Abou Bakr Belkaid University of Tlemcen</p>
+                                      <h4 class="card-title">{{$membre->name}} {{$membre->prenom}}</h4>
+                                        <p class="card-text">{{$membre->grade}}</p>
                                         <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                                     </div>
                                 </div>
@@ -247,8 +250,8 @@ section .section-title {
                             <div class="backside">
                                 <div class="card">
                                     <div class="card-body text-center mt-4">
-                                        <h4 class="card-title">{{$membre->name}} {{$membre->prenom}}</h4>
-                                        <p class="card-text">Docteur à Abou Bakr Belkaid University of Tlemcen</p>
+                                    <a href="../../profile/{{$membre->id}}"><h4 class="card-title">{{$membre->name}} {{$membre->prenom}}</h4></a>
+                                        <p class="card-text">{{$membre->grade}} à Abou Bakr Belkaid University of Tlemcen</p>
                                         <ul class="list-inline">
                                             <li class="list-inline-item">
                                                 <a class="social-icon text-xs-center" target="_blank" href="#">
@@ -277,6 +280,7 @@ section .section-title {
                         </div>
                     </div>
                 </div>
+<?php endif; ?>
                   @endforeach
                 <!-- ./Team member -->
 

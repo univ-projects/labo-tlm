@@ -20,7 +20,7 @@ class frontController extends Controller
 {
     public function acctualite(){
       $actualites = Actualite::all();
-      $labo = Parametre::find('1');
+      $labo = Parametre::find('3');
 
 
 
@@ -44,7 +44,7 @@ class frontController extends Controller
     }
 
     public function profile($id){
-      $labo = Parametre::find('1');
+      $labo = Parametre::find('3');
       $membre = User::find($id);
       $article = DB::table('articles')
             ->join('article_user', 'articles.id', '=', 'article_user.article_id')
@@ -55,30 +55,18 @@ class frontController extends Controller
               ->join('projet_user', 'projets.id', '=', 'projet_user.projet_id')
               ->where('projet_user.user_id',$id)
               ->get();
-              $arrayName = array();
-              foreach ($projet as $p) {
-                  array_push($arra,$p['project_id']);
-              }
 
-      $with_projet =  DB::table('users')
-              ->join('projet_user', 'users.id', '=', 'projet_user.user_id')
-              ->where('projet_user.user_id',$id)
-
-              ->get();
-
-
-      $res=array();
-      array_push($res,$with_projet);
-      array_push($res,$with_article);
+     $avecs=  DB::select("SELECT * FROM users WHERE id IN (SELECT user_id FROM projet_user where projet_id in (SELECT projet_id FROM projet_user WHERE user_id = (SELECT id from users where id = $id)))");
 
 
 
       return view('front.profile')->with([
 
-          'membre' => $membre,
+          'membre' =>$membre,
           'labo'=>$labo,
           'article'=>$article,
           'projets'=>$projet,
+          'avecs'=>$avecs,
       ]);
     }
 
@@ -158,9 +146,40 @@ class frontController extends Controller
 
       public function projetdetail($id){
         $projet = Projet::find($id);
+        $equipe = DB::select("SELECT * from equipes where id in (select equipe_id from users where id in (select user_id from projet_user where projet_id = $id))");
+        $membres = DB::table('users')
+                ->join('projet_user', 'users.id', '=', 'projet_user.user_id')
+                ->where('projet_user.projet_id',$id)
+                ->select('users.*')
+                ->get();
         return view('front.projetdetail')->with([
+          'membres'=>$membres,
           'projet'=>$projet,
+          'equipe'=>$equipe,
         ]);
       }
+
+      public function contact(){
+        $labo = Parametre::find(3);
+
+        return view('front.contact')->with([
+          'labo'=>$labo,
+        ]);
+      }
+
+      public function articledetail($id){
+        $projet = Article::find($id);
+        $labo = Parametre::find('3');
+        $par = DB::select("SELECT * from users where id = (select publicateur from articles where id = $id)");
+
+
+        return view('front.articledetail')->with([
+          'projet'=>$projet,
+          'labo'=>$labo,
+          'par'=>$par,
+                  ]);
+      }
+
+
 
 }

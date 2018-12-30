@@ -42,7 +42,7 @@
           <p>
             Le LRI, Laboratoire Mixte de Recherche de l'Université de Tlemcen, est un laboratoire de recherche en informatique ...
           </p>
-          <a href="labo.html" class="button">Visiter le laboratoire !</a>
+          <a href="{{url('front/lrit')}}" class="button">Visiter le laboratoire !</a>
         </div>
       </div>
       <!-- hidden items -->

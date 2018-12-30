@@ -5,6 +5,7 @@
 @section('content')
 
 
+
 <main class="main-content">
 				<div class="fullwidth-block">
 					<div class="container">
@@ -20,7 +21,8 @@
 								<h2 class="entry-title"><a href="">{{$actualite->titre}}</a></h2>
 								<small class="date">{{$actualite->auteur}}</small>
 								<p>
-                  {{$actualite->contenu}}
+
+										<?php echo strip_tags($actualite->contenu, '<b><a><i><img>' ?>
 								</p>
 							</div>
 

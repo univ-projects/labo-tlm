@@ -1,3 +1,4 @@
+@extends('layouts.front')
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -8,25 +9,20 @@
     <link href="{{asset('labo/bower_components/profile/css/font-awesome.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('labo/bower_components/profile/css/animate.css')}}" rel="stylesheet" type="text/css">
 
-
+    <script type="text/javascript" src="{{asset('labo/bower_components/profile/js/jquery-1.11.0.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('labo/bower_components/profile/js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('labo/bower_components/profile/js/jquery-scrolltofixed.js')}}"></script>
+    <script type="text/javascript" src="{{asset('labo/bower_components/profile/js/jquery.nav.js')}}"></script>
+    <script type="text/javascript" src="{{asset('labo/bower_components/profile/js/jquery.easing.1.3.js')}}"></script>
+    <script type="text/javascript" src="{{asset('labo/bower_components/profile/js/jquery.isotope.js')}}"></script>
+    <script src="{{asset('labo/bower_components/profile/js/fancybox/jquery.fancybox.pack.js')}}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{asset('labo/bower_components/profile/js/wow.js')}}"></script>
+    <script type="text/javascript" src="{{asset('labo/bower_components/profile/js/custom.js')}}"></script>
 
 
     <title></title>
   </head>
   <body>
-@yield('content')
+
   </body>
 </html>
-
-
-
-
-<script type="text/javascript" src="{{asset('labo/bower_components/profile/js/jquery-1.11.0.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('labo/bower_components/profile/js/bootstrap.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('labo/bower_components/profile/js/jquery-scrolltofixed.js')}}"></script>
-<script type="text/javascript" src="{{asset('labo/bower_components/profile/js/jquery.nav.js')}}"></script>
-<script type="text/javascript" src="{{asset('labo/bower_components/profile/js/jquery.easing.1.3.js')}}"></script>
-<script type="text/javascript" src="{{asset('labo/bower_components/profile/js/jquery.isotope.js')}}"></script>
-<script src="{{asset('labo/bower_components/profile/js/fancybox/jquery.fancybox.pack.js')}}" type="text/javascript"></script>
-<script type="text/javascript" src="{{asset('labo/bower_components/profile/js/wow.js')}}"></script>
-<script type="text/javascript" src="{{asset('labo/bower_components/profile/js/custom.js')}}"></script>

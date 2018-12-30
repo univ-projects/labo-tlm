@@ -38,6 +38,9 @@ Route::get('projets','frontController@projet');
 
 Route::get('projets/{id}','frontController@projetdetail');
 
+Route::get('articles/{id}','frontController@articledetail');
+
+
   Route::get('Evenements', function () {
       return view('events');
   });
@@ -49,11 +52,30 @@ Route::get('projets/{id}','frontController@projetdetail');
       return view('front.test');
   });
 
+  Route::get('lrit', function () {
+      return view('front.lrit');
+  });
+
   Route::get('actualite/{id}','frontController@actualite');
 
   Route::get('profile/{id}','frontController@profile');
   Route::get('equipes/{id}','frontController@equipedetail');
 
+  Route::get('Contact','frontController@contact');
+  Route::get('search',function(){
+    $q = Input::get ( 'search' );
+    $articles = DB::select("SELECT * from articles where titre LIKE '%$q%' and deleted_at IS NULL ");
+    $projets = DB::select("SELECT * from projets where intitule LIKE '%$q%' and deleted_at IS NULL");
+    $users = DB::select("SELECT * from users where name LIKE '%$q%'  OR prenom LIKE '%$q%'");
+        return view('front.search')->with([
+          'q'=>$q,
+          'articles'=>$articles,
+          'projets'=>$projets,
+          'users'=>$users,
+
+      ]);
+
+});
 
 });
 

@@ -78,8 +78,8 @@
 										<button class="login btn btn-circle " onclick="window.location.href='login.html'" style="border-radius: 20px;width:120px;">Se connecter</button>
 									</div>
 									<div class="col-md-5 col-xs-12" >
-										<form class="example" action="recherche.html" style="margin:0;max-width:300px;">
-											<input type="text" placeholder="Rechercher..." name="search2" required>
+										<form class="example" action="{{url('front/search')}}" style="margin:0;max-width:300px;">
+											<input type="text" placeholder="Rechercher..." name="search" required>
 											<button type="submit"><i class="fa fa-search"></i></button>
 										</form>
 									</div>
