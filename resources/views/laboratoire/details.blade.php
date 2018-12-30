@@ -372,6 +372,24 @@
         </div>
 
         <div class="tab-pane" id="membres">
+          <input type="hidden" id="labId" value="{{$laboDetail->id}}">
+                         <div class="box box-primary">
+                           <div class="box-header with-border">
+                             <h3 class="box-title">Statistiques (Membres du {{$laboDetail->achronymes}})</h3>
+
+                             <div class="box-tools pull-right">
+                               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                               </button>
+                               <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                             </div>
+                           </div>
+                           <div class="box-body">
+                             <div class="chart">
+                               <canvas id="lineChart" style="height:230px"></canvas>
+                             </div>
+                           </div>
+
+                         </div>
           <table id="example3" class="table table-bordered table-striped">
             <thead>
               <tr>
@@ -631,5 +649,6 @@
 
 @section('scripts')
 <script src="{{url( 'js/Chart.min.js' )}}"></script>
-  <script src="{{url( 'js/create-charts2.js' )}}"></script>
+  <script src="{{url( 'js/create-charts22.js' )}}"></script>
+    <script src="{{url( 'js/create-charts33.js' )}}"></script>
 @endsection

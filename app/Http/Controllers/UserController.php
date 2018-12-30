@@ -23,7 +23,8 @@ class UserController extends Controller
 
      public function index()
     {
-        $membres = User::all();
+        $membres = User::join('equipes','equipes.id','=','users.equipe_id')
+        ->where('labo_id',Auth::user()->equipe->labo->id)->get();
         $labo = $this->getCurrentLabo();
         $laboratoires=Parametre::all();
 
@@ -227,11 +228,25 @@ class UserController extends Controller
           $output='';
           $labId=$request->labo_selected;
 
-                $membres=User::all();
+          $membres=User::all();
+
+          $output.='
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>Nom</th>
+                      <th>Prénom</th>
+                      <th>Laboratoire</th>
+                      <th>Equipe</th>
+                      <th>Email</th>
+                      <th>Grade</th>
+                      <th>Action</th>
+                    </tr>
+                    </thead>';
 
             foreach($membres as $membre){
               if($membre->equipe->labo_id==$labId || $labId==0){
-                $output.='<tr>
+                $output.='     <tr>
                   <td>';
                   $output.=$membre->name;
                   $output.='</td>
@@ -314,10 +329,21 @@ class UserController extends Controller
                   $output.='    </form>
                   </div>
                   </td>
-                </tr>';
+                </tr> ';
             }
           }
-
+          $output.=' <tfoot>
+            <tr>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Laboratoire</th>
+              <th>Equipe</th>
+              <th>Email</th>
+              <th>Grade</th>
+              <th>Action</th>
+            </tr>
+            </tfoot>
+          </table>';
          return response()->json($output);
 
 
@@ -355,9 +381,7 @@ class UserController extends Controller
 
     }
 
-
-
-
+  
 
 
 

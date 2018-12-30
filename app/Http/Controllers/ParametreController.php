@@ -296,18 +296,45 @@ class ParametreController extends Controller
 
     //Stats
 
-    function getArticleTypeCount() {
+    function getArticleTypeCount($id) {
+
+      $labo_membres = Equipe::join('users','equipes.id','=','users.equipe_id')
+                            ->join('article_user','users.id','=','article_user.user_id')
+                            ->join('articles','articles.id','=','article_user.article_id')
+                            ->where('labo_id',$id)
+                            ->where('articles.type','Publication(Revue)')->get()->count();
+
 
       $typeCount = array(
-        'publications' => Article::where('type','Publication(Revue)')->get()->count(),
-        'brevets' => Article::where('type','Brevet')
+        'publications' => Equipe::join('users','equipes.id','=','users.equipe_id')
+                              ->join('article_user','users.id','=','article_user.user_id')
+                              ->join('articles','articles.id','=','article_user.article_id')
+                              ->where('labo_id',$id)
+                              ->where('articles.type','Publication(Revue)')->get()->count(),
+        'brevets' => Equipe::join('users','equipes.id','=','users.equipe_id')
+                              ->join('article_user','users.id','=','article_user.user_id')
+                              ->join('articles','articles.id','=','article_user.article_id')
+                              ->where('labo_id',$id)
+                              ->where('type','Brevet')
                             ->get()->count(),
-        'posters'=>Article::where('type','Poster')
+        'posters'=>Equipe::join('users','equipes.id','=','users.equipe_id')
+                              ->join('article_user','users.id','=','article_user.user_id')
+                              ->join('articles','articles.id','=','article_user.article_id')
+                              ->where('labo_id',$id)
+                            ->where('type','Poster')
                             ->get()->count(),
-        'articles'=>Article::where('type','Article court')
+        'articles'=>Equipe::join('users','equipes.id','=','users.equipe_id')
+                              ->join('article_user','users.id','=','article_user.user_id')
+                              ->join('articles','articles.id','=','article_user.article_id')
+                              ->where('labo_id',$id)
+                              ->where('type','Article court')
                             ->orWhere('type','Article long')
                             ->get()->count(),
-        'livres' =>Article::where('type','Chapitre d\'un livre')
+        'livres' =>Equipe::join('users','equipes.id','=','users.equipe_id')
+                              ->join('article_user','users.id','=','article_user.user_id')
+                              ->join('articles','articles.id','=','article_user.article_id')
+                              ->where('labo_id',$id)
+                            ->where('type','Chapitre d\'un livre')
                             ->orWhere('type','Livre')
                             ->get()->count(),
       );
@@ -315,5 +342,80 @@ class ParametreController extends Controller
       return $typeCount;
 
       }
+
+
+      function getAllYears(){
+
+        $years=array();
+        for ($i=0; $i < 10 ; $i++) {
+          $year = date("Y");
+          array_push($years, $year -$i);
+        }
+        return array_reverse($years);
+      }
+
+      function getYearlyMembreCount( $year,$grade,$id) {
+        $yearly_membre_count = User::join('equipes','equipes.id','=','users.equipe_id')
+                              ->whereYear('users.created_at','=', $year )
+                              ->where('grade',$grade)
+                              ->where('labo_id',$id)
+                              ->get()->count();
+        return $yearly_membre_count;
+      }
+
+
+    function getMonthlyMembre($id) {
+
+        $yearly_maa_count_array = array();
+        $yearly_mab_count_array = array();
+        $yearly_mca_count_array = array();
+        $yearly_mcb_count_array = array();
+        $yearly_doctorant_count_array = array();
+        $yearly_professeur_count_array = array();
+
+        $year_array = $this->getAllYears();
+
+        if ( ! empty( $year_array ) ) {
+          foreach ( $year_array as $year ){
+
+            $yearly_maa_count = $this->getYearlyMembreCount( $year ,'MAA',$id);
+            array_push($yearly_maa_count_array, $yearly_maa_count );
+
+            $yearly_mab_count = $this->getYearlyMembreCount( $year ,'MAB',$id);
+            array_push($yearly_mab_count_array, $yearly_mab_count );
+            $yearly_mca_count = $this->getYearlyMembreCount( $year ,'MCA',$id);
+            array_push($yearly_mca_count_array, $yearly_mca_count );
+            $yearly_mcb_count = $this->getYearlyMembreCount( $year ,'MCB',$id);
+            array_push($yearly_mcb_count_array, $yearly_mcb_count );
+            $yearly_doctorant_count = $this->getYearlyMembreCount( $year ,'Doctorant',$id);
+            array_push($yearly_doctorant_count_array, $yearly_doctorant_count );
+            $yearly_professeur_count = $this->getYearlyMembreCount( $year ,'Professeur',$id);
+            array_push($yearly_professeur_count_array, $yearly_professeur_count );
+
+
+          }
+        }
+
+        // $max_no = max( $yearly_maa_count_array )+max( $yearly_mab_count_array )+max( $yearly_mca_count_array )
+        // + max( $yearly_mcb_count_array )+max( $yearly_doctorant_count_array )+max( $yearly_professeur_count_array );
+        // $max = round(( $max_no + 10/2 ) / 10 ) * 10;
+      $max=round(max(array(max( $yearly_maa_count_array ),max( $yearly_mab_count_array ),max( $yearly_mca_count_array )
+      , max( $yearly_mcb_count_array ),max( $yearly_doctorant_count_array ),max( $yearly_professeur_count_array ))));
+      if($max==0)
+        $max=5;
+        $yearly_membre_count = array(
+          'months' => $year_array,
+          'maa_count_data' => $yearly_maa_count_array,
+          'mab_count_data'=> $yearly_mab_count_array,
+          'mca_count_data'=> $yearly_mca_count_array,
+          'mcb_count_data'=> $yearly_mcb_count_array,
+          'doctorant_count_data'=> $yearly_doctorant_count_array,
+          'professeur_count_data'=> $yearly_professeur_count_array,
+          'max' => $max,
+        );
+
+        return   $yearly_membre_count;
+
+        }
 
 }

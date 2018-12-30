@@ -173,9 +173,13 @@ class dashController extends Controller
               }
             }
 
-            $max_no = max( $yearly_maa_count_array )+max( $yearly_mab_count_array )+max( $yearly_mca_count_array )
-            + max( $yearly_mcb_count_array )+max( $yearly_doctorant_count_array )+max( $yearly_professeur_count_array );
-            $max = round(( $max_no + 10/2 ) / 10 ) * 10;
+            // $max_no = max( $yearly_maa_count_array )+max( $yearly_mab_count_array )+max( $yearly_mca_count_array )
+            // + max( $yearly_mcb_count_array )+max( $yearly_doctorant_count_array )+max( $yearly_professeur_count_array );
+            // $max = round(( $max_no + 10/2 ) / 10 ) * 10;
+            $max=round(max(array(max( $yearly_maa_count_array ),max( $yearly_mab_count_array ),max( $yearly_mca_count_array )
+            , max( $yearly_mcb_count_array ),max( $yearly_doctorant_count_array ),max( $yearly_professeur_count_array ))));
+            if($max==0)
+              $max=5;
             $yearly_membre_count = array(
               'months' => $year_array,
               'maa_count_data' => $yearly_maa_count_array,

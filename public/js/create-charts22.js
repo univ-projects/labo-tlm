@@ -1,3 +1,4 @@
+labId=document.getElementById("labId").value;
 ( function ( $ ) {
 
 	var charts = {
@@ -12,7 +13,7 @@
 
 		ajaxGetarticleMonthlyData: function () {
 			// var urlPath =  'http://' + window.location.hostname + '/chartjs';
-				var urlPath =  '/chartjs2';
+				var urlPath =  '/chartjs2/'+labId;
 			var request = $.ajax( {
 				method: 'GET',
 				url: urlPath

@@ -1,3 +1,4 @@
+labId=document.getElementById("labId").value;
 ( function ( $ ) {
 
 	var charts = {
@@ -12,7 +13,7 @@
 
 		ajaxGetarticleMonthlyData: function () {
 			// var urlPath =  'http://' + window.location.hostname + '/chartjs';
-				var urlPath =  '/chartjs3';
+				var urlPath =  '/chartjs3/'+labId;
 			var request = $.ajax( {
 				method: 'GET',
 				url: urlPath
@@ -59,7 +60,7 @@
 			fill: false,
 				data: response.mcb_count_data // The response got from the ajax request containing data for the completed jobs in the corresponding months}
 			}
-			var doctorantData={	label: "Doctorant",
+			var doctorantData={	label: "doctorant",
 			backgroundColor: "lime",
 			borderColor: "limeGreen",
 			borderWidth: 1,

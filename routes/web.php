@@ -70,7 +70,8 @@ Route::get('dashboard','dashController@index');
 // Route::get('parametre','ParametreController@create');
 // Route::post('parametre','ParametreController@store');
 
-Route::get('chartjs2', 'ParametreController@getArticleTypeCount');
+Route::get('chartjs2/{id}', 'ParametreController@getArticleTypeCount');
+Route::get('chartjs3/{id}', 'ParametreController@getMonthlyMembre');
 Route::get('laboratoires/{id}/details','ParametreController@details');
 Route::get('labos-trombinoscope','ParametreController@trombi');
 Route::resource('laboratoires', 'ParametreController',[
