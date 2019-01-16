@@ -17,67 +17,76 @@ use Illuminate\Support\Facades\Input;
 |
 */
 
-Route::get('/', function () {
+
+Route::get('/connexion', function () {
     return view('auth/login');
 });
 
-Route::prefix('front')->group(function () {
+Route::get('/', function () {
+  return view('front.acceuil');
+});
+
+Route::prefix('EasyLab')->group(function () {
 
   Route::get('/', function () {
       return view('front.acceuil');
   });
-Route::get('A-propos','frontController@apropo');
+  Route::get('A-propos','frontController@apropo');
 
   Route::get('actualites','frontController@acctualite');
   // Route::get('actualites', function () {
   //     return view('front/actualites');
   // });
-Route::get('equipes','frontController@equipe');
+  Route::get('equipes','frontController@equipe');
 
-Route::get('projets','frontController@projet');
+  Route::get('projets','frontController@projet');
 
-Route::get('projets/{id}','frontController@projetdetail');
+  Route::get('projets/{id}','frontController@projetdetail');
 
-Route::get('articles/{id}','frontController@articledetail');
+  Route::get('articles/{id}','frontController@articledetail');
+
+  Route::get('Evenements/{id}','frontController@event');
+  Route::get('Evenements','frontController@events');
+  Route::get('getEvents','frontController@getEvents');
 
 
-  Route::get('Evenements', function () {
-      return view('events');
-  });
-  Route::get('Contact', function () {
-      return view('contact');
-  });
 
-  Route::get('test', function () {
-      return view('front.test');
-  });
+    Route::get('Contact', function () {
+        return view('contact');
+    });
 
-  Route::get('lrit', function () {
-      return view('front.lrit');
-  });
+    Route::get('test', function () {
+        return view('front.test');
+    });
 
-  Route::get('actualite/{id}','frontController@actualite');
+    Route::get('lrit', function () {
+        return view('front.lrit');
+    });
 
-  Route::get('profile/{id}','frontController@profile');
-  Route::get('equipes/{id}','frontController@equipedetail');
+    Route::get('actualite/{id}','frontController@actualite');
 
-  Route::get('Contact','frontController@contact');
-  Route::get('search',function(){
-    $q = Input::get ( 'search' );
-    $articles = DB::select("SELECT * from articles where titre LIKE '%$q%' and deleted_at IS NULL ");
-    $projets = DB::select("SELECT * from projets where intitule LIKE '%$q%' and deleted_at IS NULL");
-    $users = DB::select("SELECT * from users where name LIKE '%$q%'  OR prenom LIKE '%$q%'");
-        return view('front.search')->with([
-          'q'=>$q,
-          'articles'=>$articles,
-          'projets'=>$projets,
-          'users'=>$users,
+    Route::get('profile/{id}','frontController@profile');
+    Route::get('equipes/{id}','frontController@equipedetail');
 
-      ]);
+    Route::get('Contact','frontController@contact');
+    Route::get('search',function(){
+      $q = Input::get ( 'search' );
+      $articles = DB::select("SELECT * from articles where titre LIKE '%$q%' and deleted_at IS NULL ");
+      $projets = DB::select("SELECT * from projets where intitule LIKE '%$q%' and deleted_at IS NULL");
+      $users = DB::select("SELECT * from users where name LIKE '%$q%'  OR prenom LIKE '%$q%'");
+          return view('front.search')->with([
+            'q'=>$q,
+            'articles'=>$articles,
+            'projets'=>$projets,
+            'users'=>$users,
+
+        ]);
 
 });
 
 });
+
+
 
 
 // Route::get('chartjs', 'dashController@chartjs');
@@ -184,6 +193,9 @@ Route::resource('evenements', 'EvenementController',[
 ]);
 
 
+Route::resource('stages', 'StageController',[
+    'only' => ['index', 'create','store','edit','update','destroy']
+]);
 
 
 Route::get('partenaires/{id}/details','PartenaireController@details');
@@ -204,7 +216,7 @@ Route::resource('contacts', 'ContactController',[
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'dashController@index')->name('home');
 
 
 

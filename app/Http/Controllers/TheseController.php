@@ -232,8 +232,12 @@ class TheseController extends Controller
                   $output.="</td><td>";
                   $output.=$these->sujet;
                   $output.="</td><td>";
-                  $output.=$these->name.' ';
-                  $output.=$these->prenom;
+                  $output.="<a href=\"";
+                  $output.=url('membres/'.$these->user->id.'/details');
+                  $output.="\">";
+                  $output.=  $these->user->name.' '.$these->user->prenom;
+                  $output.=  "</a>";
+
                   $output.="</td>
                   <td>";
                   if($these->encadreur) {

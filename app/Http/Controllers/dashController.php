@@ -55,7 +55,7 @@ class dashController extends Controller
     		return $yearly_article_count;
     	}
       function getYearlyTheseCount( $year) {
-        $yearly_these_count = These::whereYear( 'date_debut', $year )
+        $yearly_these_count = These::whereYear( 'date_soutenance', $year )
                             ->where('date_soutenance','<',Carbon::now())
                             ->get()->count();
         return $yearly_these_count;
@@ -63,9 +63,9 @@ class dashController extends Controller
 
       function getYearlyThesardCount( $year) {
           $yearly_thesard_count=  These::where(function ($query) use($year) {
-              $query->whereYear( 'date_debut', $year );
-              })->where(function ($query) {
-                  $query->where('date_soutenance','>',Carbon::now())
+              $query->whereYear( 'date_debut','<=', $year );
+              })->where(function ($query) use($year) {
+                  $query->whereYear('date_soutenance','>',$year)
                         ->orWhereNull('date_soutenance');
               })
               ->get()
@@ -134,7 +134,7 @@ class dashController extends Controller
 
 
           function getYearlyMembreCount( $year,$grade) {
-            $yearly_membre_count = User::whereYear('created_at','=', $year )
+            $yearly_membre_count = User::whereYear('created_at','<=', $year )
                                   ->where('grade',$grade)
                                   ->get()->count();
             return $yearly_membre_count;

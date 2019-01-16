@@ -1,6 +1,7 @@
 @extends('layouts.front')
 @extends('layouts.actualitescript')
-<!--@section('title','Acceuil')    hadi ta3ach -->
+@section('title','Actualités')
+ <!-- hadi ta3 titre ta3 la fenetre -->
 
 @section('content')
 
@@ -15,12 +16,12 @@
             <div class="project">
               <div class="project-content">
                 <figure class="featured-image"><img src="{{asset($actualite->photo)}}" alt="{{$actualite->titre}}"></figure>
-                <h2 class="entry-title"><a href="article2.html">{{$actualite->titre}}</a></h2>
+                <h2 class="entry-title"><a href="{{url('EasyLab/actualite/'.$actualite->id)}}">{{$actualite->titre}}</a></h2>
                 <small class="date">19-02-2018</small>
                 <p>
                   <?php echo str_limit(strip_tags($actualite->contenu, '<b><a><i><img>'), $limit = 100, $end = '...') ?>
                 </p>
-                <a href="{{ url('front/actualite/'.$actualite->id)}}" class="button">Voir plus</a>
+                <a href="{{ url('EasyLab/actualite/'.$actualite->id)}}" class="button">Voir plus</a>
               </div>
             </div>
             <?php $i++; ?>
@@ -29,12 +30,12 @@
                 <div class="project">
                   <div class="project-content">
                     <figure class="featured-image"><img src="asset({{$actualite->photo}})" alt="{{$actualite->titre}}"></figure>
-                    <h2 class="entry-title"><a href="article2.html">{{$actualite->titre}}</a></h2>
+                    <h2 class="entry-title"><a href="{{url('EasyLab/actualite/'.$actualite->id)}}">{{$actualite->titre}}</a></h2>
                     <small class="date">19-02-2018</small>
                     <p>
                       <?php echo str_limit(strip_tags($actualite->contenu, '<b><a><i><img>'), $limit = 100, $end = '...') ?>
                     </p>
-                    <a href="{{url('front/article')}}" class="button">Voir plus</a>
+                    <a href="{{url('EasyLab/actualite/'.$actualite->id)}}" class="button">Voir plus</a>
                   </div>
                 </div>
               </div>

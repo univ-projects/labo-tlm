@@ -179,7 +179,7 @@
                   @foreach($laboratoires as $lab)
                     <div class="col-md-3 ">
                       <div class="team">
-                        <a href="profile/profil.html" style="color:#000">
+                        <a href="{{url('laboratoires/'.$lab->id.'/details')}}" style="color:#000">
                           <img src="{{asset($lab->logo)}}" alt="{{$lab->achronymes}}" class="team-image">
                           <h3 class="team-name" style="text-align:center">{{$lab->achronymes}}</h3>
                         </a>

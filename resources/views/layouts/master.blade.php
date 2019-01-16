@@ -242,6 +242,14 @@
                   </li>
                 </ul>
               </li>
+              @if(Auth::user()->role->nom == 'admin' || Auth::user()->role->nom == 'directeur')
+              <li {{{ (Request::is('stages/*') ? 'class=active' : '') }}} {{{ (Request::is('stages') ? 'class=active' : '') }}}>
+                <a href="{{url('stages')}}">
+                  <i class="fa fa-plane"></i>
+                  <span>Stages</span>
+                </a>
+              </li>
+              @endif
 
               <li {{{ (Request::is('theses/*') ? 'class=active' : '') }}} {{{ (Request::is('theses') ? 'class=active' : '') }}}>
                 <a href="{{url('theses')}}">
@@ -493,6 +501,43 @@
        "firstDay": 1
     }
   });
+  $('#event-date2').daterangepicker({
+
+
+  locale: {
+    format: 'YYYY-MM-DD',
+    "separator": " A ",
+     "applyLabel": "Confirmer",
+     "cancelLabel": "Annuler",
+     "fromLabel": "De",
+     "toLabel": "A",
+     "customRangeLabel": "Modifier",
+     "daysOfWeek": [
+         "Dim",
+         "Lun",
+         "Mar",
+         "Mer",
+         "Jeu",
+         "Ven",
+         "Sam"
+     ],
+     "monthNames": [
+         "Janvier",
+         "Février",
+         "Mars",
+         "Avril",
+         "Mai",
+         "Juin",
+         "Juillet",
+         "Août",
+         "Septembre",
+         "Octobre",
+         "Novembre",
+         "Décembre"
+     ],
+     "firstDay": 1
+  }
+});
 
     //iCheck for checkbox and radio inputs
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
@@ -676,7 +721,7 @@ $(document).ready(function(){
 
   $('.proprietaire_type').change(function(){
     var category=$(this).parent().parent().parent().parent().attr('id')
-    alert(category);
+  
 
 
     if($(this).val() != '')

@@ -75,10 +75,10 @@
 							<div class="row" style="padding:0;">
 									<div class="col-md-5 col-xs-12" style="padding:0;margin:0 0 0 50px">
 										<button class="login btn" onclick="window.location.href='register.html'" href="register.html" style="border-radius: 20px;width:120px">S'inscrire</button>
-										<button class="login btn btn-circle " onclick="window.location.href='login.html'" style="border-radius: 20px;width:120px;">Se connecter</button>
+										<a class="login btn btn-circle " href="{{url('/connexion')}}" style="border-radius: 20px;width:120px;">Se connecter</a>
 									</div>
 									<div class="col-md-5 col-xs-12" >
-										<form class="example" action="{{url('front/search')}}" style="margin:0;max-width:300px;">
+										<form class="example" action="{{url('EasyLab/search')}}" style="margin:0;max-width:300px;">
 											<input type="text" placeholder="Rechercher..." name="search" required>
 											<button type="submit"><i class="fa fa-search"></i></button>
 										</form>
@@ -87,13 +87,13 @@
 
 
 							<ul class="menu">
-								<li class="home menu-item current-menu-item"><a href="{{url('front')}}"><img src="{{ asset('images/images/icons/home-icon.png') }}" alt="Home"/></a></li>
-								<li class="menu-item"><a href="{{url('front/A-propos')}}">A propos</a></li>
-								<li class="menu-item"><a href="{{url('front/actualites')}}">Actualités</a></li>
-								<li class="menu-item "><a href="{{url('front/equipes')}}">Equipe</a></li>
-									<li class="menu-item "><a href="{{url('front/projets')}}">Projet</a></li>
-								<li class="menu-item "><a href="{{url('front/Evenements')}}">Evénements</a></li>
-								<li class="menu-item"><a href="{{url('front/Contact')}}">Contact</a></li>
+								<li class="home menu-item current-menu-item"><a href="{{url('EasyLab')}}"><img src="{{ asset('images/images/icons/home-icon.png') }}" alt="Home"/></a></li>
+								<li class="menu-item"><a href="{{url('EasyLab/A-propos')}}">A propos</a></li>
+								<li class="menu-item"><a href="{{url('EasyLab/actualites')}}">Actualités</a></li>
+								<li class="menu-item "><a href="{{url('EasyLab/equipes')}}">Equipe</a></li>
+									<li class="menu-item "><a href="{{url('EasyLab/projets')}}">Projet</a></li>
+								<li class="menu-item "><a href="{{url('EasyLab/Evenements')}}">Evénements</a></li>
+								<li class="menu-item"><a href="{{url('EasyLab/Contact')}}">Contact</a></li>
 							</ul>
 						</nav>
 
@@ -201,10 +201,15 @@
 
 		</div>
 
-		<script src="public/js/jquery-3.3.1.min.js"></script>
-		<script src="public/js/bootstrap4js.js"></script>
-		<script src="public/js/plugins.js"></script>
-		<script src="public/js/app.js"></script>
+
+
+		<script src="{{ asset('labo/bower_components/jquery/dist/jquery-3.3.1.min.js') }}"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js" ></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/locale/fr.js"></script>
+		<script src="{{ asset('labo/bower_components/bootstrap/dist/js/bootstrap4js.js') }}"></script>
+		<script src="{{ asset('labo/bower_components/plugins.js')}}"></script>
+		<script src="{{ asset('labo/bower_components/app.js')}}"></script>
 
 	</body>
 
@@ -320,5 +325,17 @@ $(document).ready(function() {
 
 
 
+
+
+
+
+
+
+
+
+
+<script src="{{ asset('labo/bower_components/fullcalendar/dist/scriptCalendar.js') }}"></script>
+
+@yield('script')
 
 </html>

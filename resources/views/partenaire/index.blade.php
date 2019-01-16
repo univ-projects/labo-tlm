@@ -109,7 +109,8 @@
                           <div class="description-block">
                             <h5 class="description-header">
 
-														{{$notZero=true}}
+														{{$nbrs->total}}
+
                              <?php $notZero=true; ?>
 
                           </h5>
