@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 @extends('layouts.front')
 
-<!--@section('title','Acceuil')    hadi ta3ach -->
+@section('title','A-propo')    
 
 @section('content')
 

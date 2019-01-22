@@ -22,16 +22,7 @@ Route::get('/connexion', function () {
     return view('auth/login');
 });
 
-<<<<<<< HEAD
 Route::prefix('front')->group(function () {
-=======
-Route::get('/', function () {
-  return view('front.acceuil');
-});
-
-Route::prefix('EasyLab')->group(function () {
-
->>>>>>> 9f4e911c54eef96e4f3567e7e0cff0ae6a9196e0
   Route::get('/', function () {
       return view('front.multilab');
   });
@@ -43,17 +34,12 @@ Route::prefix('EasyLab')->group(function () {
 
     ]);
   });
-<<<<<<< HEAD
 Route::get('{lab}/A-propos','frontController@apropo');
-=======
-  Route::get('A-propos','frontController@apropo');
->>>>>>> 9f4e911c54eef96e4f3567e7e0cff0ae6a9196e0
 
   Route::get('{lab}/actualites','frontController@acctualite');
   // Route::get('actualites', function () {
   //     return view('front/actualites');
   // });
-<<<<<<< HEAD
 Route::get('{lab}/equipes','frontController@equipe');
 
 Route::get('{lab}/projets','frontController@projet');
@@ -61,36 +47,23 @@ Route::get('{lab}/projets','frontController@projet');
 Route::get('{lab}/projets/{id}','frontController@projetdetail');
 
 Route::get('{lab}/articles/{id}','frontController@articledetail');
-=======
-  Route::get('equipes','frontController@equipe');
-
-  Route::get('projets','frontController@projet');
-
-  Route::get('projets/{id}','frontController@projetdetail');
-
-  Route::get('articles/{id}','frontController@articledetail');
->>>>>>> 9f4e911c54eef96e4f3567e7e0cff0ae6a9196e0
 
   Route::get('Evenements/{id}','frontController@event');
   Route::get('Evenements','frontController@events');
   Route::get('getEvents','frontController@getEvents');
 
-<<<<<<< HEAD
   Route::get('Evenements', function () {
       return view('events');
   });
   Route::get('{lab}/Contact', function () {
       return view('contact');
   });
-=======
->>>>>>> 9f4e911c54eef96e4f3567e7e0cff0ae6a9196e0
 
 
     Route::get('Contact', function () {
         return view('contact');
     });
 
-<<<<<<< HEAD
   Route::get('{lab}/actualites/{id}','frontController@actualite');
 
   Route::get('{lab}/profile/{id}','frontController@profile');
@@ -107,18 +80,7 @@ Route::get('{lab}/articles/{id}','frontController@articledetail');
           'articles'=>$articles,
           'projets'=>$projets,
           'users'=>$users,
-          'lab'=>$lab,
-=======
-    Route::get('test', function () {
-        return view('front.test');
-    });
-
-    Route::get('lrit', function () {
-        return view('front.lrit');
-    });
-
-    Route::get('actualite/{id}','frontController@actualite');
->>>>>>> 9f4e911c54eef96e4f3567e7e0cff0ae6a9196e0
+          'lab'=>$lab,  ]); });
 
     Route::get('profile/{id}','frontController@profile');
     Route::get('equipes/{id}','frontController@equipedetail');

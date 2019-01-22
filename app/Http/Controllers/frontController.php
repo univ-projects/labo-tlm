@@ -57,19 +57,19 @@ class frontController extends Controller
       $article = DB::table('articles')
             ->join('article_user', 'articles.id', '=', 'article_user.article_id')
             ->where('article_user.user_id',$id)
+          //  ->select('articles.*')
             ->get();
 
       $projet = DB::table('projets')
               ->join('projet_user', 'projets.id', '=', 'projet_user.projet_id')
               ->where('projet_user.user_id',$id)
+            //  ->select('projets.*')
               ->get();
 
      $avecs=  DB::select("SELECT * FROM users WHERE id IN (SELECT user_id FROM projet_user where projet_id in (SELECT projet_id FROM projet_user WHERE user_id = (SELECT id from users where id = $id)))");
 
 
-
-      return view('front.profile')->with([
-
+     return view('front.profile')->with([
           'membre' =>$membre,
           'labo'=>$labo,
           'article'=>$article,
@@ -80,11 +80,6 @@ class frontController extends Controller
     }
 
       public function apropo($lab){
-
-
-
-
-
 
        $membre =DB::table('users')
              ->join('equipes', 'users.equipe_id', '=', 'equipes.id')
