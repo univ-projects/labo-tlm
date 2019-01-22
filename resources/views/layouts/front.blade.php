@@ -78,7 +78,7 @@
 										<button class="login btn btn-circle " onclick="window.location.href='login.html'" style="border-radius: 20px;width:120px;">Se connecter</button>
 									</div>
 									<div class="col-md-5 col-xs-12" >
-										<form class="example" action="{{url('front/search')}}" style="margin:0;max-width:300px;">
+										<form class="example" action="{{url('front/'.$lab.'/search')}}" style="margin:0;max-width:300px;">
 											<input type="text" placeholder="Rechercher..." name="search" required>
 											<button type="submit"><i class="fa fa-search"></i></button>
 										</form>
@@ -87,13 +87,13 @@
 
 
 							<ul class="menu">
-								<li class="home menu-item current-menu-item"><a href="{{url('front')}}"><img src="{{ asset('images/images/icons/home-icon.png') }}" alt="Home"/></a></li>
-								<li class="menu-item"><a href="{{url('front/A-propos')}}">A propos</a></li>
-								<li class="menu-item"><a href="{{url('front/actualites')}}">Actualités</a></li>
-								<li class="menu-item "><a href="{{url('front/equipes')}}">Equipe</a></li>
-									<li class="menu-item "><a href="{{url('front/projets')}}">Projet</a></li>
-								<li class="menu-item "><a href="{{url('front/Evenements')}}">Evénements</a></li>
-								<li class="menu-item"><a href="{{url('front/Contact')}}">Contact</a></li>
+								<li class="home menu-item {{{ (Request::is('front') ? 'current-menu-item' : '') }}} {{{ (Request::is('front') ? 'current-menu-item' : '') }}}"><a href="{{url('front/'.$lab)}}"><img src="{{ asset('images/images/icons/home-icon.png') }}" alt="Home"/></a></li>
+								<li class="menu-item {{{ (Request::is('front/A-propos/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/A-propos') ? 'current-menu-item' : '') }}}"><a href="{{url('front/'.$lab.'/A-propos')}}">A propos</a></li>
+								<li class="menu-item {{{ (Request::is('front/actualites/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/actualites') ? 'current-menu-item' : '') }}}"><a href="{{url('front/'.$lab.'/actualites')}}">Actualités</a></li>
+								<li class="menu-item {{{ (Request::is('front/equipes/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/equipes') ? 'current-menu-item' : '') }}} "><a href="{{url('front/'.$lab.'/equipes')}}">Equipe</a></li>
+									<li class="menu-item {{{ (Request::is('front/projets/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/projets') ? 'current-menu-item' : '') }}} "><a href="{{url('front/'.$lab.'/projets')}}">Projet</a></li>
+								<li class="menu-item {{{ (Request::is('front/Evenements/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/Evenements') ? 'current-menu-item' : '') }}} "><a href="{{url('front/'.$lab.'/Evenements')}}">Evénements</a></li>
+								<li class="menu-item {{{ (Request::is('front/Contact/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/Contact') ? 'current-menu-item' : '') }}}"><a href="{{url('front/'.$lab.'/Contact')}}">Contact</a></li>
 							</ul>
 						</nav>
 
