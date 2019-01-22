@@ -241,7 +241,7 @@ $labo = $this->getCurrentLabo();
 	 	$members =  $request->input('membre');
         $article_user = ArticleUser::where('article_id',$id);
         $article_user->delete();
-
+				if($members){
         foreach ($members as $key => $value) {
             $article_user = new ArticleUser();
             $article_user->article_id = $article->id;
@@ -249,6 +249,7 @@ $labo = $this->getCurrentLabo();
             $article_user->save();
 
          }
+			 }
 				 $membres_ext=$request->input('membres_ext');
 				 $article_contact = ArticleContact::where('article_id',$id);
 				 $article_contact->delete();

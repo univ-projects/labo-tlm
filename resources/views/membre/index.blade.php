@@ -52,15 +52,18 @@
                       </div>
                 </div>
 
+
+
               @if(Auth::user()->role->nom == 'admin' )
               <div class=" pull-right">
                 <a href="{{url('membres/create')}}" type="button" class="btn btn-block btn-success btn-lg"><i class="fa fa-user-plus"></i> Nouveau membre</a>
               </div>
                @endif
-<!--
-               <div>
-                 <button href="{{('excel')}}">Excel</button>
-               </div> -->
+      </div>
+      <div id="membres1_table">
+
+
+
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -73,7 +76,7 @@
                   <th>Action</th>
                 </tr>
                 </thead>
-                <tbody id="membres1_table">
+                <tbody >
                   @foreach($membres as $membre)
                   <tr>
                     <td>{{$membre->name}}</td>
@@ -151,6 +154,8 @@
                 </tr>
                 </tfoot>
               </table>
+
+        </div>
             </div>
             <!-- /.box-body -->
           </div>
@@ -159,4 +164,12 @@
 
     </div>
 
+@endsection
+
+
+@section('scripts')
+<script src="{{url( 'js/Chart.min.js' )}}"></script>
+  <script src="{{url( 'js/create-charts.js' )}}"></script>
+    <script src="{{url( 'js/create-charts2.js' )}}"></script>
+      <script src="{{url( 'js/create-charts3.js' )}}"></script>
 @endsection

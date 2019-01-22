@@ -101,11 +101,14 @@
             <div class="col-md-8">
       <div class="nav-tabs-custom">
        <ul class="nav nav-tabs">
-              <li ><a href="#apropos" data-toggle="tab">A propos</a></li>
-              @if( Auth::user()->role->nom == 'admin' || Auth::user()->role->nom == 'directeur')
+              <li><a href="#apropos" data-toggle="tab">A propos</a></li>
+                @if(Auth::user()->role->nom == 'admin' || (Auth::user()->role->nom == 'directeur' && Auth::user()->id==$laboDetail->directeur))
+                  <li class="active"><a href="#modifier" data-toggle="tab">Modifier</a></li>
+                @endif
+                <li><a href="#teams" data-toggle="tab">Equipes</a></li>
+                <li><a href="#membres" data-toggle="tab">Membres</a></li>
+                <li><a href="#stats" data-toggle="tab">Statitiques</a></li>
 
-              <li class="active"><a href="#modifier" data-toggle="tab">Modifier</a></li>
-              @endif
             </ul>
 
       <div class="tab-content">
@@ -141,13 +144,14 @@
                 <h3 class="timeline-header no-border"><a>Directeur du laboratoire </a></h3>
                 <div class="timeline-body">
 
-                  									 @if(isset($laboDetail->directeu))
-                  									    <a href="{{url('membres/'.$laboDetail->directeur.'/details')}}">
-                                           {{$laboDetail->directeu->name}} {{$laboDetail->directeu->prenom}}
-                                         </a>
-                                     @else
-                                     <b> Pas encore désigné </b>
-                  									@endif
+									 @if(isset($laboDetail->directeu))
+									    <a href="{{url('membres/'.$laboDetail->directeur.'/details')}}">
+                         {{$laboDetail->directeu->name}} {{$laboDetail->directeu->prenom}}
+                       </a>
+                   @else
+                   <b> Pas encore désigné </b>
+									@endif
+                  </a>
                 </div>
               </div>
             </li>
@@ -172,9 +176,9 @@
             </li>
           </ul>
         </div>
-      </div>
+        </div>
 
-      <div class="active  tab-pane" id="modifier">
+        <div class="tab-pane active" id="modifier">
           <form class="well form-horizontal" action="{{url('laboratoires/'. $laboDetail->id) }} " method="post"  id="contact_form" enctype="multipart/form-data">
             <input type="hidden" name="_method" value="PUT">
               {{ csrf_field() }}
@@ -279,11 +283,196 @@
               </div>
             </form>
       </div>
+
+        <div class="tab-pane" id="teams">
+          <table id="example2" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th><i class="fa fa-lg fa-tag margin-r-5"></i>Intitule</th>
+                <th><i class="fa fa-lg fa-tag margin-r-5"></i>Achronymes</th>
+                <th><i class="fa fa-lg fa-user margin-r-5"></i>Chef</th>
+                <th><i class="fa fa-lg fa-users margin-r-5"></i>Membres</th>
+                <th><i class="fa fa-lg fa-message margin-r-5"></i>Description</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($equipes as $equipe)
+              <tr>
+                <td>{{$equipe->nom}}</td>
+                <td>{{$equipe->achronymes}}</td>
+                <td><a href="{{url('membres/'.$equipe->chef_id.'/details')}}">{{$equipe->name}} {{$equipe->prenom}}</a> </td>
+                <td></td>
+                <td style="width:250px"><?php echo str_limit(strip_tags($equipe->resume, '<b><a><i>'), $limit = 60, $end = '...') ?></td>
+
+                <td>
+                  <div class="btn-group">
+
+                    <form action="{{ url('equipes/'.$equipe->id)}}" method="post">
+                        {{csrf_field()}}
+                        {{method_field('DELETE')}}
+
+                        <a href="{{ url('equipes/'.$equipe->id.'/details')}}" class="btn btn-info">
+                          <i class="fa fa-eye"></i>
+                        </a>
+
+                        @if(Auth::user()->role->nom == 'admin' || (Auth::user()->role->nom == 'directeur' && Auth::user()->id==$laboDetail->directeur) || (Auth::user()->id==$equipe->chef_id))
+
+
+                        <a href="{{url('equipes/'.$equipe->equipe_id.'/details')}}" class="btn btn-default">
+                          <i class="fa fa-edit"></i>
+                        </a>
+
+
+                         <a href="#supprimer{{ $equipe->id }}Modal" role="button" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                          <div class="modal fade" id="supprimer{{ $equipe->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $equipe->id }}ModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                      </div>
+                                      <div class="modal-body text-center">
+                                          Voulez-vous vraiment effectuer la suppression ?
+                                      </div>
+                                      <div class="modal-footer">
+                                          <form class="form-inline" action="{{ url('equipes/'.$equipe->id)}}"  method="POST">
+                                              @method('DELETE')
+                                              @csrf
+                                          <button type="button" class="btn btn-light" data-dismiss="modal">Non</button>
+                                              <button type="submit" class="btn btn-danger">Oui</button>
+                                          </form>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          @endif
+
+                    </form>
+                  </div>
+                </td>
+              </tr>
+              @endforeach
+
+            </tbody>
+            <tfoot>
+              <tr>
+                <th><i class="fa fa-lg fa-tag margin-r-5"></i>Intitule</th>
+                <th><i class="fa fa-lg fa-tag margin-r-5"></i>Achronymes</th>
+                <th><i class="fa fa-lg fa-user margin-r-5"></i>Chef</th>
+                <th><i class="fa fa-lg fa-users margin-r-5"></i>Membres</th>
+                <th><i class="fa fa-lg fa-message margin-r-5"></i>Description</th>
+                <th>Action</th>
+              </tr>
+            </tfoot>
+          </table>
+
+        </div>
+
+        <div class="tab-pane" id="membres">
+          <table id="example3" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th><i class="fa fa-lg fa-user margin-r-5"></i>Nom</th>
+                <th><i class="fa fa-lg fa-user margin-r-5"></i>Prénom</th>
+                <th><i class="fa fa-lg fa-users margin-r-5"></i>Equipe</th>
+                <th><i class="fa fa-lg fa-email margin-r-5"></i>Email</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($membres as $membre)
+              <tr>
+                <td>{{$membre->name}}</td>
+                <td>{{$membre->prenom}}</td>
+                <td><a href="{{url('equipes/'.$membre->equipe_id.'/details')}}">{{$membre->team}}</a> </td>
+                <td>{{$membre->email}}</td>
+
+
+                <td>
+                  <div class="btn-group">
+
+                    <form action="{{ url('membres/'.$membre->id)}}" method="post">
+                        {{csrf_field()}}
+                        {{method_field('DELETE')}}
+
+                        <a href="{{ url('membres/'.$membre->id.'/details')}}" class="btn btn-info">
+                          <i class="fa fa-eye"></i>
+                        </a>
+
+                        @if(Auth::user()->role->nom == 'admin' || (Auth::user()->role->nom == 'directeur' && Auth::user()->id==$laboDetail->directeur) || (Auth::user()->id==$membre->id))
+
+
+                        <a href="{{url('membres/'.$membre->id.'/edit')}}" class="btn btn-default">
+                          <i class="fa fa-edit"></i>
+                        </a>
+
+
+                         <a href="#supprimer{{ $membre->id }}Modal" role="button" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                          <div class="modal fade" id="supprimer{{ $membre->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $membre->id }}ModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                      </div>
+                                      <div class="modal-body text-center">
+                                          Voulez-vous vraiment effectuer la suppression ?
+                                      </div>
+                                      <div class="modal-footer">
+                                          <form class="form-inline" action="{{ url('membres/'.$membre->id)}}"  method="POST">
+                                              @method('DELETE')
+                                              @csrf
+                                          <button type="button" class="btn btn-light" data-dismiss="modal">Non</button>
+                                              <button type="submit" class="btn btn-danger">Oui</button>
+                                          </form>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          @endif
+
+                    </form>
+                  </div>
+                </td>
+              </tr>
+              @endforeach
+
+            </tbody>
+            <tfoot>
+              <tr>
+                <th><i class="fa fa-lg fa-user margin-r-5"></i>Nom</th>
+                <th><i class="fa fa-lg fa-user margin-r-5"></i>Prénom</th>
+                <th><i class="fa fa-lg fa-users margin-r-5"></i>Equipe</th>
+                <th><i class="fa fa-lg fa-email margin-r-5"></i>Email</th>
+                <th>Action</th>
+              </tr>
+            </tfoot>
+          </table>
+
+        </div>
+
+        <div class="tab-pane" id="stats">
+          <div class="box-body">
+            <div class="chart">
+              <canvas id="pieChart" style="height:230px"></canvas>
+            </div>
+          </div>
+        </div>
+
       </div>
       </div>
     </div>
 
-    <div class="col-md-4">
+<div class="col-md-4" style="padding:0px">
+
+
+
+    <div class="col-md-12">
       <!-- USERS LIST -->
       <div class="box box-primary">
         <div class="box-header with-border">
@@ -302,73 +491,106 @@
       <!--/.box -->
     </div>
 
-    <div class="col-md-4">
-      <!-- USERS LIST -->
-      <div class="box box-primary">
-        <div class="box-header with-border">
-          <h3 class="box-title">Equipes du {{$laboDetail->achronymes}}</h3>
 
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body no-padding">
-          @if(reset($equipes))
-          <ul class="users-list clearfix">
-            @foreach($equipes as $equipe)
-            <li>
-              <a  href="{{url('equipes/'.$equipe->id.'/details')}}">
-                <img src="{{asset($equipe->photo)}}" alt="Equipe Image" height="100px" width="100px">
-                <span class="users-list-name"> {{$equipe->achronymes}}</span>
-              </a>
-            </li>
+    <div class="col-md-12"  >
+    			<!-- USERS LIST -->
+    			<div class="box box-primary">
+    				<div class="box-header with-border">
+    					<h3 class="box-title">Equipes du {{$laboDetail->achronymes}}</h3>
+
+    				</div>
+    				<!-- /.box-header -->
+    				<div class="box-body no-padding">
+              @if(reset($equipes))
+    					<ul class="users-list clearfix">
+    						@foreach($equipes as $equipe)
+    						<li>
+                  <a  href="{{url('equipes/'.$equipe->id.'/details')}}">
+      							<img src="{{asset($equipe->team_photo)}}" alt="Equipe Image" height="100px" width="100px">
+      				  		<span class="users-list-name"> {{$equipe->achronymes}}</span>
+                  </a>
+    						</li>
+    						@endforeach
+    					</ul>
+              @else
+                <b>Aucune équipe pour l'instant</b>
+              @endif
+    					<!-- /.users-list -->
+    				</div>
+    				<!-- /.box-body -->
+    			</div>
+    			<!--/.box -->
+    		</div>
+
+
+
+
+		<div class="col-md-12">
+			<!-- USERS LIST -->
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">Membres du {{$laboDetail->achronymes}}</h3>
+
+				</div>
+				<!-- /.box-header -->
+
+
+        <style media="screen">
+          .other-users{
+            border: 1px solid #69acc7;
+            border-radius: 7px;
+            padding: 10px 0 10px 0;
+          }
+      </style>
+
+				<div class="box-body no-padding">
+          <?php $i=0; ?>
+          @if(reset($membres))
+					<ul class="users-list clearfix">
+						@foreach($membres as $membre)
+              <?php if ($i<6): ?>
+
+    						<li>
+                  <a  href="{{url('membres/'.$membre->user_id.'/details')}}">
+      							<img src="{{asset($membre->photo_user)}}" alt="User Image">
+      				  		<span class="users-list-name"> {{$membre->name}}</span>
+      							<span class="users-list-date">{{$membre->prenom}}</span>
+                  </a>
+    						</li>
+
+              <?php $i++; endif; ?>
+              @if($i>=6)
+              <?php $j=0;$list=""; ?>
+                @foreach($membres as $m)
+                  <?php $j++; ?>
+                  @if($j>6)
+                    <?php $list.="$m->name $m->prenom </br>" ?>
+                  @endif
+                @endforeach
+                @if($j>6)
+                  <span class="other-users" data-toggle="tooltip" data-placement="bottom"
+                                title="{{$list}}"
+                          data-html="true"
+                          style="color:#67acc9">
+                               + {{$j-6}} autres membres
+
+                  </span>
+                  @endif
+                  @break
+              @endif
             @endforeach
-          </ul>
+					</ul>
           @else
-            <b>Aucune équipe pour l'instant</b>
+            <b>Aucun membres pour l'instant</b>
           @endif
-          <!-- /.users-list -->
-        </div>
-        <!-- /.box-body -->
-      </div>
-      <!--/.box -->
-    </div>
+					<!-- /.users-list -->
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!--/.box -->
+		</div>
 
-
-
-
-<div class="col-md-4">
-  <!-- USERS LIST -->
-  <div class="box box-primary">
-    <div class="box-header with-border">
-      <h3 class="box-title">Membres du {{$laboDetail->achronymes}}</h3>
-
-    </div>
-    <!-- /.box-header -->
-
-
-    <div class="box-body no-padding">
-      @if(reset($membres))
-      <ul class="users-list clearfix">
-        @foreach($membres as $membre)
-        <li>
-          <a  href="{{url('membres/'.$membre->user_id.'/details')}}">
-            <img src="{{asset($membre->photo_user)}}" alt="User Image">
-            <span class="users-list-name"> {{$membre->name}}</span>
-            <span class="users-list-date">{{$membre->prenom}}</span>
-          </a>
-        </li>
-        @endforeach
-      </ul>
-      @else
-        <b>Aucun membres pour l'instant</b>
-      @endif
-      <!-- /.users-list -->
-    </div>
-    <!-- /.box-body -->
-  </div>
-  <!--/.box -->
 </div>
-
-
 
 
             <!-- timeLine start -->
@@ -405,4 +627,11 @@
 				}
 		</script>
 
+@endsection
+
+
+
+@section('scripts')
+<script src="{{url( 'js/Chart.min.js' )}}"></script>
+  <script src="{{url( 'js/create-charts2.js' )}}"></script>
 @endsection

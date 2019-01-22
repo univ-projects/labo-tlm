@@ -9,6 +9,7 @@ use Illuminate\Http\UploadedFile;
 use App\Http\Requests\actualiteRequest;
 use App\Parametre;
 use App\Actualite;
+use App\Evenement;
 use App\article;
 use App\these;
 use App\User;
@@ -221,6 +222,37 @@ class frontController extends Controller
           'par'=>$par,
           'lab'=>$lab,
                   ]);
+      }
+
+
+      public function events(){
+          $events = Evenement::all();
+        return view('front.events')->with([
+          'events'=>$events,
+
+        ]);
+      }
+
+      public function event($id){
+        $evenement = Evenement::find($id);
+        $participants = Evenement::find($id)->users()->orderBy('name')->get();
+        if($evenement){
+
+          return view('front.event')->with([
+            'evenement' => $evenement,
+            'participants'=>$participants,
+
+          ]);;
+        }
+      }
+
+      public function getEvents(){
+        //  $events = Evenement::all();
+        $events=  DB::table('evenements')
+           ->select( array('id', 'titre as title', 'from as start','to as end',DB::raw('LEFT(contenu, 20) as details')) )
+           ->get();
+      return $events;
+
       }
 
 

@@ -17,11 +17,21 @@ use Illuminate\Support\Facades\Input;
 |
 */
 
-Route::get('/', function () {
+
+Route::get('/connexion', function () {
     return view('auth/login');
 });
 
+<<<<<<< HEAD
 Route::prefix('front')->group(function () {
+=======
+Route::get('/', function () {
+  return view('front.acceuil');
+});
+
+Route::prefix('EasyLab')->group(function () {
+
+>>>>>>> 9f4e911c54eef96e4f3567e7e0cff0ae6a9196e0
   Route::get('/', function () {
       return view('front.multilab');
   });
@@ -33,12 +43,17 @@ Route::prefix('front')->group(function () {
 
     ]);
   });
+<<<<<<< HEAD
 Route::get('{lab}/A-propos','frontController@apropo');
+=======
+  Route::get('A-propos','frontController@apropo');
+>>>>>>> 9f4e911c54eef96e4f3567e7e0cff0ae6a9196e0
 
   Route::get('{lab}/actualites','frontController@acctualite');
   // Route::get('actualites', function () {
   //     return view('front/actualites');
   // });
+<<<<<<< HEAD
 Route::get('{lab}/equipes','frontController@equipe');
 
 Route::get('{lab}/projets','frontController@projet');
@@ -46,23 +61,36 @@ Route::get('{lab}/projets','frontController@projet');
 Route::get('{lab}/projets/{id}','frontController@projetdetail');
 
 Route::get('{lab}/articles/{id}','frontController@articledetail');
+=======
+  Route::get('equipes','frontController@equipe');
 
+  Route::get('projets','frontController@projet');
 
+  Route::get('projets/{id}','frontController@projetdetail');
+
+  Route::get('articles/{id}','frontController@articledetail');
+>>>>>>> 9f4e911c54eef96e4f3567e7e0cff0ae6a9196e0
+
+  Route::get('Evenements/{id}','frontController@event');
+  Route::get('Evenements','frontController@events');
+  Route::get('getEvents','frontController@getEvents');
+
+<<<<<<< HEAD
   Route::get('Evenements', function () {
       return view('events');
   });
   Route::get('{lab}/Contact', function () {
       return view('contact');
   });
+=======
+>>>>>>> 9f4e911c54eef96e4f3567e7e0cff0ae6a9196e0
 
-  Route::get('test', function () {
-      return view('front.test');
-  });
 
-  Route::get('lrit', function () {
-      return view('front.lrit');
-  });
+    Route::get('Contact', function () {
+        return view('contact');
+    });
 
+<<<<<<< HEAD
   Route::get('{lab}/actualites/{id}','frontController@actualite');
 
   Route::get('{lab}/profile/{id}','frontController@profile');
@@ -80,16 +108,46 @@ Route::get('{lab}/articles/{id}','frontController@articledetail');
           'projets'=>$projets,
           'users'=>$users,
           'lab'=>$lab,
+=======
+    Route::get('test', function () {
+        return view('front.test');
+    });
 
-      ]);
+    Route::get('lrit', function () {
+        return view('front.lrit');
+    });
+
+    Route::get('actualite/{id}','frontController@actualite');
+>>>>>>> 9f4e911c54eef96e4f3567e7e0cff0ae6a9196e0
+
+    Route::get('profile/{id}','frontController@profile');
+    Route::get('equipes/{id}','frontController@equipedetail');
+
+    Route::get('Contact','frontController@contact');
+    Route::get('search',function(){
+      $q = Input::get ( 'search' );
+      $articles = DB::select("SELECT * from articles where titre LIKE '%$q%' and deleted_at IS NULL ");
+      $projets = DB::select("SELECT * from projets where intitule LIKE '%$q%' and deleted_at IS NULL");
+      $users = DB::select("SELECT * from users where name LIKE '%$q%'  OR prenom LIKE '%$q%'");
+          return view('front.search')->with([
+            'q'=>$q,
+            'articles'=>$articles,
+            'projets'=>$projets,
+            'users'=>$users,
+
+        ]);
 
 });
 
 });
+
+
 
 
 // Route::get('chartjs', 'dashController@chartjs');
 Route::get('chartjs', 'dashController@getMonthlyArticleTheseData');
+Route::get('chartjs2', 'dashController@getArticleTypeCount');
+Route::get('chartjs3', 'dashController@getMonthlyMembre');
 Route::get('dashboard','dashController@index');
 
 
@@ -98,11 +156,14 @@ Route::get('dashboard','dashController@index');
 // Route::get('parametre','ParametreController@create');
 // Route::post('parametre','ParametreController@store');
 
+Route::get('chartjs2/{id}', 'ParametreController@getArticleTypeCount');
+Route::get('chartjs3/{id}', 'ParametreController@getMonthlyMembre');
 Route::get('laboratoires/{id}/details','ParametreController@details');
 Route::get('labos-trombinoscope','ParametreController@trombi');
 Route::resource('laboratoires', 'ParametreController',[
     'only' => ['index', 'create','store','edit','update','destroy']
 ]);
+
 
 
 
@@ -187,6 +248,9 @@ Route::resource('evenements', 'EvenementController',[
 ]);
 
 
+Route::resource('stages', 'StageController',[
+    'only' => ['index', 'create','store','edit','update','destroy']
+]);
 
 
 Route::get('partenaires/{id}/details','PartenaireController@details');
@@ -207,41 +271,9 @@ Route::resource('contacts', 'ContactController',[
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'dashController@index')->name('home');
 
 
-Route::get('/statistics',function(){
-
-	$year = date('Y');
-	 $a1 = DB::table('articles')->distinct('id')->where('annee',$year)->count();
-	 $a2 = DB::table('articles')->distinct('id')->where('annee',$year-1)->count();
-	 $a3 = DB::table('articles')->distinct('id')->where('annee',$year-2)->count();
-	 $a4 = DB::table('articles')->distinct('id')->where('annee',$year-3)->count();
-	 $a5 = DB::table('articles')->distinct('id')->where('annee',$year-4)->count();
-	 $a6 = DB::table('articles')->distinct('id')->where('annee',$year-5)->count();
-	 $a7 = DB::table('articles')->distinct('id')->where('annee',$year-6)->count();
-
-	 $b1 = DB::table('theses')->where(DB::raw("DATE_FORMAT(STR_TO_DATE(date_debut,'%m/%d/%Y'),'%Y')"),$year)->count();
-	 $b2 = DB::table('theses')->where(DB::raw("DATE_FORMAT(STR_TO_DATE(date_debut,'%m/%d/%Y'),'%Y')"),$year-1)->count();
-	 $b3 = DB::table('theses')->where(DB::raw("DATE_FORMAT(STR_TO_DATE(date_debut,'%m/%d/%Y'),'%Y')"),$year-2)->count();
-	 $b4 = DB::table('theses')->where(DB::raw("DATE_FORMAT(STR_TO_DATE(date_debut,'%m/%d/%Y'),'%Y')"),$year-3)->count();
-	 $b5 = DB::table('theses')->where(DB::raw("DATE_FORMAT(STR_TO_DATE(date_debut,'%m/%d/%Y'),'%Y')"),$year-4)->count();
-	 $b6 = DB::table('theses')->where(DB::raw("DATE_FORMAT(STR_TO_DATE(date_debut,'%m/%d/%Y'),'%Y')"),$year-5)->count();
-	 $b7 = DB::table('theses')->where(DB::raw("DATE_FORMAT(STR_TO_DATE(date_debut,'%m/%d/%Y'),'%Y')"),$year-6)->count();
-
-	 //$date = new Carbon( $these->date_debut );
-
-	 //$t1 = DB::table('theses')->distinct('id')->where(,$year)->count();
-
-    $annee = [$year-6,$year-5,$year-4,$year-3,$year-2,$year-1,$year];
-    $article = [$a7, $a6, $a5,$a4,$a3,$a2,$a1];
-    $these = [$b7, $b6, $b5,$b4,$b3,$b2,$b1];
-
-	return response()->json(["annee"=>$annee,
-							 "article"=> $article,
-							 "these"=> $these
-							]);
-});
 
 Route::any('/search',function(){
 

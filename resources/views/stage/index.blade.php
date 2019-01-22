@@ -1,16 +1,16 @@
 
 @extends('layouts.master')
 
-@section('title','LRI | Liste des évenements')
+@section('title','LRI | Liste des stages')
 
 @section('header_page')
       <h1>
-        Evenements
+        stages
         <small>Liste</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href="{{url('evenements')}}">Evenements</a></li>
+        <li><a href="{{url('stages')}}">Stages</a></li>
         <li class="active">Liste</li>
       </ol>
 
@@ -27,7 +27,7 @@
           <div class="container" style="padding-top: 30px">
           <div class="row" style="padding-bottom: 20px">
             <div class="box-header col-xs-9">
-              <h3 class="box-title">Liste des évenements</h3>
+              <h3 class="box-title">Liste des Stages</h3>
             </div>
 
           </div>
@@ -37,7 +37,7 @@
             <div class="box-body">
 
               <div class=" pull-right">
-                <a href="{{url('evenements/create')}}" type="button" class="btn btn-block btn-success btn-lg"><i class="fa fa-plus"></i> Nouveau évènement</a>
+                <a href="{{url('stages/create')}}" type="button" class="btn btn-block btn-success btn-lg"><i class="fa fa-plus"></i> Nouveau stage</a>
               </div>
 
 <!--
@@ -47,8 +47,11 @@
               <table id="example3" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Titre</th>
-                  <th>Auteur</th>
+                  @if(Auth::user()->role->nom == 'admin')
+                    <th>Laboratoire</th>
+                  @endif
+                  <th>Participant</th>
+                  <th>Partenaire</th>
                   <th>Date d'ajout</th>
                   <th>Etat</th>
                   <th>De</th>
@@ -57,46 +60,45 @@
                 </tr>
                 </thead>
                 <tbody>
-                  @foreach($evenements as $evenement)
+                  @foreach($stages as $stage)
                   <tr>
-                    <td>{{$evenement->titre}}</td>
-                    <td>
-                      @if($evenement->auteurUser)
-                        <a href="{{url('membres/'.$evenement->auteur.'/details')}}">@if(Auth::user()->id===$evenement->auteurUser->id)Moi @else {{$evenement->auteurUser->name}} {{$evenement->auteurUser->prenom}} @endif</a>
-                      @endif
-                    </td>
-                    <td>@if($evenement->created_at==$evenement->updated_at) {{$evenement->created_at}} @else {{$evenement->updated_at}} @endif</td>
-                    <td><span class="label  @if($evenement->status) label-success @else label-default @endif">@if($evenement->status) En ligne @else Hors-ligne @endif</span></td>
-                    <td>{{$evenement->from}}</td>
-                    <td>{{$evenement->to}}</td>
+                    @if(Auth::user()->role->nom == 'admin')
+                      <td>{{$stage->participant->equipe->labo['achronymes']}}</td>
+                    @endif
+                    <td><a href="{{url('membres/'.$stage->participant.'/details')}}">{{$stage->participant->name}} {{$stage->participant->prenom}}</a></td>
+                    <td><a href="{{url('partenaires/'.$stage->partenaire.'/details')}}">{{$stage->partenaire->nom}}</a></td>
+                    <td>@if($stage->created_at==$stage->updated_at) {{$stage->created_at}} @else {{$stage->updated_at}} @endif</td>
+                      <td><span class="label  @if($stage->to<date('Y-m-d')) label-success @else label-default @endif">@if($stage->to<date('Y-m-d')) Stage terminé @else En stage @endif</span></td>
+                    <td>{{$stage->from}}</td>
+                    <td>{{$stage->to}}</td>
 
 
                     <td>
                       <div class="btn-group">
 
-                        <form action="{{ url('evenements/'.$evenement->id)}}" method="post">
+                        <form action="{{ url('stages/'.$stage->id)}}" method="post">
                             {{csrf_field()}}
                             {{method_field('DELETE')}}
 
-                            <a href="{{ url('evenements/'.$evenement->id.'/details')}}" class="btn btn-info">
+                            <a href="{{ url('stages/'.$stage->id.'/details')}}" class="btn btn-info">
                               <i class="fa fa-eye"></i>
                             </a>
-                             @if(Auth::user()->role->nom == 'admin' || Auth::user()->id===$evenement->auteurUser->id )
-                            <a href="{{url('evenements/'.$evenement->id.'/edit')}}" class="btn btn-default">
+                               @if(Auth::user()->role->nom == 'admin' || (Auth::user()->role->nom == 'directeur' && Auth::user()->id==$stage->participant->equipe->labo->directeur))
+                            <a href="{{url('stages/'.$stage->id.'/edit')}}" class="btn btn-default">
                               <i class="fa fa-edit"></i>
                             </a>
                             @endif
-                             @if(Auth::user()->role->nom == 'admin' || Auth::user()->id===$evenement->auteurUser->id )
+                            @if(Auth::user()->role->nom == 'admin' || (Auth::user()->role->nom == 'directeur' && Auth::user()->id==$stage->participant->equipe->labo->directeur))
                             <!-- <button  type="submit" class="btn btn-danger ">
                                 <i class="fa fa-trash-o"></i>
                             </button> -->
 
-                             <a href="#supprimer{{ $evenement->id }}Modal" role="button" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                      <div class="modal fade" id="supprimer{{ $evenement->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $evenement->id }}ModalLabel" aria-hidden="true">
+                             <a href="#supprimer{{ $stage->id }}Modal" role="button" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                      <div class="modal fade" id="supprimer{{ $stage->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $stage->id }}ModalLabel" aria-hidden="true">
                           <div class="modal-dialog">
                               <div class="modal-content">
                                   <div class="modal-header">
-                                    <!--   <h5 class="modal-title" id="supprimer{{ $evenement->id }}ModalLabel">Supprimer</h5> -->
+                                    <!--   <h5 class="modal-title" id="supprimer{{ $stage->id }}ModalLabel">Supprimer</h5> -->
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                       </button>
@@ -105,7 +107,7 @@
                                       Voulez-vous vraiment effectuer la suppression ?
                                   </div>
                                   <div class="modal-footer">
-                                      <form class="form-inline" action="{{ url('evenements/'.$evenement->id)}}"  method="POST">
+                                      <form class="form-inline" action="{{ url('stages/'.$stage->id)}}"  method="POST">
                                           @method('DELETE')
                                           @csrf
                                       <button type="button" class="btn btn-light" data-dismiss="modal">Non</button>
@@ -126,8 +128,11 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Titre</th>
-                  <th>Auteur</th>
+                  @if(Auth::user()->role->nom == 'admin')
+                    <th>Laboratoire</th>
+                  @endif
+                  <th>Participant</th>
+                  <th>Partenaire</th>
                   <th>Date d'ajout</th>
                   <th>Etat</th>
                   <th>De</th>

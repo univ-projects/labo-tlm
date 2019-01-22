@@ -34,10 +34,11 @@
 
             <!-- /.box-header -->
             <div class="box-body">
-
+              @if(Auth::user()->role->nom == 'admin')
               <div class=" pull-right">
                 <a href="{{url('laboratoires/create')}}" type="button" class="btn btn-block btn-success btn-lg"><i class="fa fa-user-plus"></i> Nouveau laboratoire</a>
               </div>
+              @endif
 
 <!--
                <div>

@@ -5,8 +5,8 @@
 @section('header_page')
 
       <h1>
-        évènements
-        <small>Nouveau</small>
+        Evènements
+        <small>Modifier</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
