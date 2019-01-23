@@ -2,7 +2,7 @@
 
 @extends('layouts.front')
 
-<!--@section('title','Acceuil')    hadi ta3ach -->
+@section('title','Equipes')
 
 @section('content')
 
@@ -250,7 +250,7 @@ section .section-title {
                             <div class="backside">
                                 <div class="card">
                                     <div class="card-body text-center mt-4">
-                                    <a href="../../profile/{{$membre->id}}"><h4 class="card-title">{{$membre->name}} {{$membre->prenom}}</h4></a>
+                                    <a href="../profile/{{$membre->id}}"><h4 class="card-title">{{$membre->name}} {{$membre->prenom}}</h4></a>
                                         <p class="card-text">{{$membre->grade}} à Abou Bakr Belkaid University of Tlemcen</p>
                                         <ul class="list-inline">
                                             <li class="list-inline-item">

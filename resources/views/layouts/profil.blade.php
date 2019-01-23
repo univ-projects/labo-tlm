@@ -1,44 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.profile')
+<link href="{{asset('labo/bower_components/profile/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{{asset('labo/bower_components/profile/js/fancybox/jquery.fancybox.css')}}" type="text/css" media="screen" />
+<link href="{{asset('labo/bower_components/profile/css/style.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('labo/bower_components/profile/css/font-awesome.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('labo/bower_components/profile/css/animate.css')}}" rel="stylesheet" type="text/css">
 
-  <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Profil</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="vendor/devicons/css/devicons.min.css" rel="stylesheet">
-    <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/resume.min.css" rel="stylesheet">
-
-  </head>
-
-  <body id="page-top">
-
-    
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for this template -->
-    <script src="js/resume.min.js"></script>
-
-  </body>
-
-</html>
+<script type="text/javascript" src="{{asset('labo/bower_components/profile/js/jquery-1.11.0.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('labo/bower_components/profile/js/bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('labo/bower_components/profile/js/jquery-scrolltofixed.js')}}"></script>
+<script type="text/javascript" src="{{asset('labo/bower_components/profile/js/jquery.nav.js')}}"></script>
+<script type="text/javascript" src="{{asset('labo/bower_components/profile/js/jquery.easing.1.3.js')}}"></script>
+<script type="text/javascript" src="{{asset('labo/bower_components/profile/js/jquery.isotope.js')}}"></script>
+<script src="{{asset('labo/bower_components/profile/js/fancybox/jquery.fancybox.pack.js')}}" type="text/javascript"></script>
+<script type="text/javascript" src="{{asset('labo/bower_components/profile/js/wow.js')}}"></script>
+<script type="text/javascript" src="{{asset('labo/bower_components/profile/js/custom.js')}}"></script>

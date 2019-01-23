@@ -1,5 +1,6 @@
 
-@extends('layouts.profile')
+@extends('layouts.profil')
+@section('title','Profile')
 @section('content')
 
 <!--Header_section-->

@@ -1,7 +1,6 @@
 @extends('layouts.front')
 
-<!--@section('title','Acceuil')    hadi ta3ach -->
-
+@section('title','Projets')
 @section('content')
 
 <div class="site-content">

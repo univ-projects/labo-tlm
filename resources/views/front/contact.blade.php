@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-<!--@section('title','Acceuil')    hadi ta3ach -->
+@section('title','Contact')  
 
 @section('content')
 

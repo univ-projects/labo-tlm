@@ -22,48 +22,65 @@ Route::get('/connexion', function () {
     return view('auth/login');
 });
 
-Route::get('/', function () {
-  return view('front.acceuil');
-});
-
-Route::prefix('EasyLab')->group(function () {
-
+Route::prefix('front')->group(function () {
   Route::get('/', function () {
-      return view('front.acceuil');
+      return view('front.multilab');
   });
-  Route::get('A-propos','frontController@apropo');
 
-  Route::get('actualites','frontController@acctualite');
+
+  Route::get('/{lab}', function ($lab) {
+      return view('front.acceuil')->with([
+        'lab'=>$lab,
+
+    ]);
+  });
+Route::get('{lab}/A-propos','frontController@apropo');
+
+  Route::get('{lab}/actualites','frontController@acctualite');
   // Route::get('actualites', function () {
   //     return view('front/actualites');
   // });
-  Route::get('equipes','frontController@equipe');
+Route::get('{lab}/equipes','frontController@equipe');
 
-  Route::get('projets','frontController@projet');
+Route::get('{lab}/projets','frontController@projet');
 
-  Route::get('projets/{id}','frontController@projetdetail');
+Route::get('{lab}/projets/{id}','frontController@projetdetail');
 
-  Route::get('articles/{id}','frontController@articledetail');
+Route::get('{lab}/articles/{id}','frontController@articledetail');
 
   Route::get('Evenements/{id}','frontController@event');
   Route::get('Evenements','frontController@events');
   Route::get('getEvents','frontController@getEvents');
 
+  Route::get('Evenements', function () {
+      return view('events');
+  });
+  Route::get('{lab}/Contact', function () {
+      return view('contact');
+  });
 
 
     Route::get('Contact', function () {
         return view('contact');
     });
 
-    Route::get('test', function () {
-        return view('front.test');
-    });
+  Route::get('{lab}/actualites/{id}','frontController@actualite');
 
-    Route::get('lrit', function () {
-        return view('front.lrit');
-    });
+  Route::get('{lab}/profile/{id}','frontController@profile');
+  Route::get('{lab}/equipes/{id}','frontController@equipedetail');
 
-    Route::get('actualite/{id}','frontController@actualite');
+  Route::get('{lab}/Contact','frontController@contact');
+  Route::get('{lab}/search',function($lab){
+    $q = Input::get ( 'search' );
+    $articles = DB::select("SELECT * from articles where titre LIKE '%$q%' and deleted_at IS NULL ");
+    $projets = DB::select("SELECT * from projets where intitule LIKE '%$q%' and deleted_at IS NULL");
+    $users = DB::select("SELECT * from users where name LIKE '%$q%'  OR prenom LIKE '%$q%'");
+        return view('front.search')->with([
+          'q'=>$q,
+          'articles'=>$articles,
+          'projets'=>$projets,
+          'users'=>$users,
+          'lab'=>$lab,  ]); });
 
     Route::get('profile/{id}','frontController@profile');
     Route::get('equipes/{id}','frontController@equipedetail');

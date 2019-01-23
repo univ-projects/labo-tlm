@@ -78,7 +78,7 @@
 										<a class="login btn btn-circle " href="{{url('/connexion')}}" style="border-radius: 20px;width:120px;">Se connecter</a>
 									</div>
 									<div class="col-md-5 col-xs-12" >
-										<form class="example" action="{{url('EasyLab/search')}}" style="margin:0;max-width:300px;">
+										<form class="example" action="{{url('front/'.$lab.'/search')}}" style="margin:0;max-width:300px;">
 											<input type="text" placeholder="Rechercher..." name="search" required>
 											<button type="submit"><i class="fa fa-search"></i></button>
 										</form>
@@ -87,13 +87,13 @@
 
 
 							<ul class="menu">
-								<li class="home menu-item current-menu-item"><a href="{{url('EasyLab')}}"><img src="{{ asset('images/images/icons/home-icon.png') }}" alt="Home"/></a></li>
-								<li class="menu-item"><a href="{{url('EasyLab/A-propos')}}">A propos</a></li>
-								<li class="menu-item"><a href="{{url('EasyLab/actualites')}}">Actualités</a></li>
-								<li class="menu-item "><a href="{{url('EasyLab/equipes')}}">Equipe</a></li>
-									<li class="menu-item "><a href="{{url('EasyLab/projets')}}">Projet</a></li>
-								<li class="menu-item "><a href="{{url('EasyLab/Evenements')}}">Evénements</a></li>
-								<li class="menu-item"><a href="{{url('EasyLab/Contact')}}">Contact</a></li>
+								<li class="home menu-item {{{ (Request::is('front') ? 'current-menu-item' : '') }}} {{{ (Request::is('front') ? 'current-menu-item' : '') }}}"><a href="{{url('front/'.$lab)}}"><img src="{{ asset('images/images/icons/home-icon.png') }}" alt="Home"/></a></li>
+								<li class="menu-item {{{ (Request::is('front/'.$lab.'/A-propos/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/'.$lab.'/A-propos') ? 'current-menu-item' : '') }}}"><a href="{{url('front/'.$lab.'/A-propos')}}">A propos</a></li>
+								<li class="menu-item {{{ (Request::is('front/'.$lab.'/actualites/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/'.$lab.'/actualites') ? 'current-menu-item' : '') }}}"><a href="{{url('front/'.$lab.'/actualites')}}">Actualités</a></li>
+								<li class="menu-item {{{ (Request::is('front/'.$lab.'/equipes/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/'.$lab.'/equipes') ? 'current-menu-item' : '') }}} "><a href="{{url('front/'.$lab.'/equipes')}}">Equipe</a></li>
+									<li class="menu-item {{{ (Request::is('front/'.$lab.'/projets/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/'.$lab.'/projets') ? 'current-menu-item' : '') }}} "><a href="{{url('front/'.$lab.'/projets')}}">Projet</a></li>
+								<li class="menu-item {{{ (Request::is('front/'.$lab.'/Evenements/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/'.$lab.'/Evenements') ? 'current-menu-item' : '') }}} "><a href="{{url('front/'.$lab.'/Evenements')}}">Evénements</a></li>
+								<li class="menu-item {{{ (Request::is('front/'.$lab.'/Contact/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/'.$lab.'/Contact') ? 'current-menu-item' : '') }}}"><a href="{{url('front/'.$lab.'/Contact')}}">Contact</a></li>
 							</ul>
 						</nav>
 
@@ -321,18 +321,6 @@ $(document).ready(function() {
   });
 
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
 
 <script src="{{ asset('labo/bower_components/fullcalendar/dist/scriptCalendar.js') }}"></script>
 

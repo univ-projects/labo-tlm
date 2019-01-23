@@ -1,7 +1,7 @@
 @extends('layouts.front')
 @extends('layouts.projetdetail')
 
-<!--@section('title','Acceuil')    hadi ta3ach -->
+@section('title','Article')
 
 @section('content')
 

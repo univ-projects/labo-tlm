@@ -1,6 +1,6 @@
 @extends('layouts.front')
 @extends('layouts.search')
-
+@section('title','Resultas de Recherche')
 @section('content')
 <div class="container">
 
