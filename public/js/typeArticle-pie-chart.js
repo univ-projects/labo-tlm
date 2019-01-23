@@ -12,7 +12,7 @@
 
 		ajaxGetarticleMonthlyData: function () {
 			// var urlPath =  'http://' + window.location.hostname + '/chartjs';
-				var urlPath =  '/chartjs2';
+				var urlPath =  '/typeArticle-dash';
 			var request = $.ajax( {
 				method: 'GET',
 				url: urlPath

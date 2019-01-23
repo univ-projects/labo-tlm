@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\DB;
 use App\Http\Requests\parametreRequest;
+use App\Http\Requests\applicationRequest;
 use App\Parametre;
+use App\Application;
 use App\User;
+use App\Projet;
 use App\Equipe;
 use Auth;
 
@@ -54,6 +57,7 @@ class ParametreController extends Controller
 
    }
 
+
    public function trombi()
    {
        // $membres = User::all()->orderBy('name');
@@ -89,6 +93,105 @@ class ParametreController extends Controller
    }
 
 
+   public function parametre()
+   {
+
+       $app = Application::find('1');
+
+     $labo = $this->getCurrentLabo();
+
+     if($app){
+       if(Auth::user()->role->nom == 'admin'  ){
+         return view('parametre.parametre')->with([
+             'app' => $app,
+             'labo'=>$labo,
+
+         ]);;
+       }
+       else{
+          return view('errors.403',['labo'=>$labo]);
+       }
+     }
+     else {
+         return view('errors.404');
+       }
+   }
+
+   public function updateApp(applicationRequest $request,$id )
+   {
+
+       $app = Application::find($id);
+ if($app){
+ $labo = $this->getCurrentLabo();
+
+       if($request->hasFile('img')){
+           $file = $request->file('img');
+           $file_name = time().'.'.$file->getClientOriginalExtension();
+           $file->move(public_path('/uploads/photo/actualites'),$file_name);
+         }
+
+
+
+         $app->titre = $request->input('titre');
+         $app->apropos = $request->input('apropos');
+
+
+       if (isset($file_name)) {
+           $app->photo = 'uploads/photo/parametres/'.$file_name;
+       }
+       $app->save();
+
+     //  return redirect('actualites/'.$id.'/details');
+     return redirect('dashboard');
+   }
+   else {
+     return view('errors.404');
+   }
+
+   }
+
+
+   public function role()
+  {
+      $membres = User::all();
+
+
+      $labo = $this->getCurrentLabo();
+
+      $labos = Parametre::all();
+      $equipes=Equipe::all();
+
+
+      $nbrEquipes = DB::table('equipes')
+               ->select( DB::raw('count(*) as total,labo_id'))
+               ->groupBy('labo_id')
+               ->get();
+
+     $nbrMembres = DB::table('users')
+               ->select( DB::raw('count(*) as total,labo_id'))
+               ->leftjoin('equipes', 'equipes.id', '=', 'users.equipe_id')
+               ->groupBy('labo_id')
+               ->get();
+
+               if(Auth::user()->role->nom == 'admin' )
+                 {
+                   return view('parametre.role')->with([
+                                 'laboratoires' => $labos,
+                                 'nbrEquipes' => $nbrEquipes,
+                                 'nbrMembres'=>$nbrMembres,
+                                 'equipes'=>$equipes,
+                                 'labo'=>$labo,
+                             ]);;
+
+                   }
+                   else{
+                       return view('errors.403',['labo'=>$labo]);
+                   }
+
+  }
+
+
+
    public function details($id)
    {
 
@@ -108,7 +211,7 @@ class ParametreController extends Controller
 
             ->leftjoin('equipes', 'equipes.labo_id', '=', 'parametres.id')
             ->leftjoin('users', 'users.id', '=', 'equipes.chef_id')
-             ->select(DB::raw('*,equipes.photo as team_photo'))
+             ->select(DB::raw('*,equipes.photo as team_photo,equipes.id as equipe_id'))
             ->where('labo_id',$id)
             ->get();
 
@@ -184,22 +287,19 @@ class ParametreController extends Controller
              $file = $request->file('img');
              $file_name_img = time().'.'.$file->getClientOriginalExtension();
              $file->move(public_path('/uploads/photo/labos'),$file_name_img);
+              $labo->photo = '/uploads/photo/labos/'.$file_name_img;
+         }
 
-         }
-         else{
-             $file_name_img="laboImgDefault.png";
-         }
          if($request->hasFile('logo')){
              $file = $request->file('logo');
              $file_name_logo = time().'.'.$file->getClientOriginalExtension();
              $file->move(public_path('/uploads/photo/labos'),$file_name_logo);
-         }
-         else{
-             $file_name_logo="laboImgDefault.png";
+              $labo->logo = '/uploads/photo/labos/'.$file_name_logo;
          }
 
-       $labo->photo = '/uploads/photo/labos/'.$file_name_img;
-       $labo->logo = '/uploads/photo/labos/'.$file_name_logo;
+
+
+
 
 
        if($labo->save()){
@@ -327,16 +427,18 @@ class ParametreController extends Controller
                               ->join('article_user','users.id','=','article_user.user_id')
                               ->join('articles','articles.id','=','article_user.article_id')
                               ->where('labo_id',$id)
-                              ->where('type','Article court')
-                            ->orWhere('type','Article long')
-                            ->get()->count(),
+                              ->where(function ($query) {
+                                $query->where('articles.type','Article court')
+                                  ->orWhere('articles.type','Article long');
+                              })->get()->count(),
         'livres' =>Equipe::join('users','equipes.id','=','users.equipe_id')
                               ->join('article_user','users.id','=','article_user.user_id')
                               ->join('articles','articles.id','=','article_user.article_id')
                               ->where('labo_id',$id)
-                            ->where('type','Chapitre d\'un livre')
-                            ->orWhere('type','Livre')
-                            ->get()->count(),
+                              ->where(function ($query) {
+                                $query->where('articles.type','Livre')
+                                  ->orWhere('articles.type','Chapitre d\'un livre');
+                              })->get()->count(),
       );
 
       return $typeCount;
@@ -356,7 +458,7 @@ class ParametreController extends Controller
 
       function getYearlyMembreCount( $year,$grade,$id) {
         $yearly_membre_count = User::join('equipes','equipes.id','=','users.equipe_id')
-                              ->whereYear('users.created_at','=', $year )
+                              ->whereYear('users.created_at','<=', $year )
                               ->where('grade',$grade)
                               ->where('labo_id',$id)
                               ->get()->count();
@@ -417,5 +519,141 @@ class ParametreController extends Controller
         return   $yearly_membre_count;
 
         }
+
+        function getMembersLaboEquipeCount($labId) {
+
+            $laboMembersCount = array();
+            $equipes=Equipe::where('labo_id',$labId)->get();
+
+            foreach ($equipes as $e) {
+              $lMembersCount=User::where('equipe_id',$e['id'])->get()->count();
+              $laboMembersCount[$e['achronymes']] = $lMembersCount;
+
+            }
+
+            return $laboMembersCount;
+
+          }
+
+
+        function getYearlyArticleCount( $year,$equipeId) {
+
+          $yearly_article_count = Article::select(DB::raw('DISTINCT articles.id'))->join('article_user','article_user.article_id','=','articles.id')
+          ->join('users','article_user.user_id','=','users.id')
+          ->where('equipe_id',$equipeId)
+          ->whereYear('date', $year )->get()->count();
+          return $yearly_article_count;
+        }
+
+        function getYearlyProjetCount( $year,$equipeId) {
+
+          $yearly_article_count = Projet::select(DB::raw('DISTINCT projets.id'))->join('projet_user','projet_user.projet_id','=','projets.id')
+          ->join('users','projet_user.user_id','=','users.id')
+          ->where('equipe_id',$equipeId)
+          ->whereYear( 'date_debut','<=', $year )
+          ->where(function ($query) use($year) {
+               if($year==Carbon::now()->year){
+                $year=Carbon::now();
+                $query->where('date_fin','>',$year)
+                      ->orWhereNull('date_fin');
+              }
+              else {
+                $query->whereYear('date_fin','>',$year)
+                      ->orWhereNull('date_fin');
+              }
+              })
+          ->get()->count();
+          return $yearly_article_count;
+        }
+
+
+
+        function getMonthlyArticle($labId) {
+
+          $yearly_article_count_array = array();
+
+          $year_array = $this->getAllYears();
+          $equipes=Equipe::where('labo_id',$labId)->get();//get All equipes of lab
+
+            $articleEquipeCount=array();
+            $max_no=0;
+
+          if ( !empty( $year_array ) AND !empty( $equipes )) {
+            foreach ($equipes as $e) {
+              $yearly_article_count_array=array();
+              foreach ( $year_array as $year ){
+
+
+                $yearly_article_count = $this->getYearlyArticleCount( $year,$e->id );
+                // array_push($articleEquipeCount,array($e->achronymes=>$yearly_article_count));
+                  array_push($yearly_article_count_array,$yearly_article_count);
+                // $laboMembersCount[$e->equipe] = $lMembersCount;
+              }
+               $articleEquipeCount[$e->achronymes]= $yearly_article_count_array;
+               $max_no += max( $articleEquipeCount[$e->achronymes] );
+            }
+          }
+
+
+          $max = round(( $max_no + 10/2 ) / 10 ) * 10;
+
+          $yearly_article_data_array = array(
+            'months' => $year_array,
+             'article_count_data'=>$articleEquipeCount,
+          //  'article_count_data' => $yearly_article_count_array,
+            'max' => $max,
+          );
+
+          return $yearly_article_data_array;
+
+          }
+
+
+
+          function getMonthlyProjet($labId) {
+
+            $yearly_article_count_array = array();
+
+            $year_array = $this->getAllYears();
+            $equipes=Equipe::where('labo_id',$labId)->get();//get All equipes of lab
+
+              $articleEquipeCount=array();
+              $max_no=0;
+
+            if ( !empty( $year_array ) AND !empty( $equipes )) {
+              foreach ($equipes as $e) {
+                $yearly_article_count_array=array();
+                foreach ( $year_array as $year ){
+
+
+                  $yearly_article_count = $this->getYearlyProjetCount( $year,$e->id );
+                  // array_push($articleEquipeCount,array($e->achronymes=>$yearly_article_count));
+                    array_push($yearly_article_count_array,$yearly_article_count);
+                  // $laboMembersCount[$e->equipe] = $lMembersCount;
+                }
+                 $articleEquipeCount[$e->achronymes]= $yearly_article_count_array;
+                 $max_no += max( $articleEquipeCount[$e->achronymes] );
+              }
+            }
+
+
+            $max = round(( $max_no + 10/2 ) / 10 ) * 10;
+
+            $yearly_article_data_array = array(
+              'months' => $year_array,
+               'projet_count_data'=>$articleEquipeCount,
+              'max' => $max,
+            );
+
+            return $yearly_article_data_array;
+
+            }
+
+
+
+
+
+
+
 
 }

@@ -261,18 +261,7 @@
 		                        </div>
 		                  </div>
 
-		                  <div class="form-group" >
-		                      <label class="col-md-3 control-label">Photo</label>
-
-		                          <div class="col-md-9 inputGroupContainer" >
-		                            <div id='labo-photo-upload' style="background-image:url('{{asset($laboDetail->photo)}}')">
-		                              <div class="hvr-profile-img">
-		                                <input type="file" name="img" id='labo-photo'  class="upload w180" title="Dimensions 180 X 180" id="imag">
-		                              </div>
-		                              <i class="fa fa-camera"> <h4>Importer une photo</h4></i>
-		                            </div>
-		                          </div>
-		                  </div>
+		  
 
 
               </fieldset>
@@ -308,11 +297,11 @@
                 <td>
                   <div class="btn-group">
 
-                    <form action="{{ url('equipes/'.$equipe->id)}}" method="post">
+                    <form action="{{ url('equipes/'.$equipe->equipe_id)}}" method="post">
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
 
-                        <a href="{{ url('equipes/'.$equipe->id.'/details')}}" class="btn btn-info">
+                        <a href="{{ url('equipes/'.$equipe->equipe_id.'/details')}}" class="btn btn-info">
                           <i class="fa fa-eye"></i>
                         </a>
 
@@ -324,8 +313,8 @@
                         </a>
 
 
-                         <a href="#supprimer{{ $equipe->id }}Modal" role="button" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                          <div class="modal fade" id="supprimer{{ $equipe->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $equipe->id }}ModalLabel" aria-hidden="true">
+                         <a href="#supprimer{{ $equipe->equipe_id }}Modal" role="button" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                          <div class="modal fade" id="supprimer{{ $equipe->equipe_id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $equipe->equipe_id }}ModalLabel" aria-hidden="true">
                               <div class="modal-dialog">
                                   <div class="modal-content">
                                       <div class="modal-header">
@@ -338,7 +327,7 @@
                                           Voulez-vous vraiment effectuer la suppression ?
                                       </div>
                                       <div class="modal-footer">
-                                          <form class="form-inline" action="{{ url('equipes/'.$equipe->id)}}"  method="POST">
+                                          <form class="form-inline" action="{{ url('equipes/'.$equipe->equipe_id)}}"  method="POST">
                                               @method('DELETE')
                                               @csrf
                                           <button type="button" class="btn btn-light" data-dismiss="modal">Non</button>
@@ -477,9 +466,28 @@
         <div class="tab-pane" id="stats">
           <div class="box-body">
             <div class="chart">
+              <canvas id="pieChart2" style="height:230px"></canvas>
+            </div>
+          </div>
+
+          <div class="box-body">
+            <div class="chart">
               <canvas id="pieChart" style="height:230px"></canvas>
             </div>
           </div>
+
+          <div class="box-body">
+            <div class="chart">
+              <canvas id="barChartArticle" style="height:230px"></canvas>
+            </div>
+          </div>
+
+          <div class="box-body">
+            <div class="chart">
+              <canvas id="barChartProjet" style="height:230px"></canvas>
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -523,7 +531,7 @@
     					<ul class="users-list clearfix">
     						@foreach($equipes as $equipe)
     						<li>
-                  <a  href="{{url('equipes/'.$equipe->id.'/details')}}">
+                  <a  href="{{url('equipes/'.$equipe->equipe_id.'/details')}}">
       							<img src="{{asset($equipe->team_photo)}}" alt="Equipe Image" height="100px" width="100px">
       				  		<span class="users-list-name"> {{$equipe->achronymes}}</span>
                   </a>
@@ -649,6 +657,9 @@
 
 @section('scripts')
 <script src="{{url( 'js/Chart.min.js' )}}"></script>
-  <script src="{{url( 'js/create-charts22.js' )}}"></script>
-    <script src="{{url( 'js/create-charts33.js' )}}"></script>
+  <script src="{{url( 'js/laboTypeArticle-pie-chart.js' )}}"></script>
+    <script src="{{url( 'js/laboMemberEquipe-pie-chart.js' )}}"></script>
+    <script src="{{url( 'js/laboGradeMember-line-chart.js' )}}"></script>
+    <script src="{{url( 'js/laboArticleEquipe-bar-chart.js' )}}"></script>
+    <script src="{{url( 'js/laboProjetEquipe-bar-chart.js' )}}"></script>
 @endsection

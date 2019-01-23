@@ -106,11 +106,13 @@
 
               <li><a href="#modifier" data-toggle="tab">Modifier</a></li>
               @endif
+              <li><a href="#stats" data-toggle="tab">Statitiques</a></li>
             </ul>
 
       <div class="tab-content">
 
         <div class="active tab-pane" id="apropos">
+            <input type="hidden" id="equipeId" value="{{$equipe->id}}">
           <div class="box-body">
           <!-- The time line -->
           <ul class="timeline" style="padding-top: 30px;">
@@ -293,8 +295,32 @@
               </div>
             </form>
       </div>
+
+      <div class="tab-pane" id="stats">
+        <div class="box-body">
+          <div class="chart">
+            <canvas id="equipeThese-bar-chart" style="height:230px"></canvas>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="chart">
+            <canvas id="stackedChartArticle" style="height:230px"></canvas>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="chart">
+            <canvas id="pieChart" style="height:230px"></canvas>
+          </div>
+        </div>
+      </div>
+
+
+
+
       </div>
       </div>
+
+
     </div>
 
     <div class="col-md-4">
@@ -313,7 +339,7 @@
       <!--/.box -->
     </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4" style="float:right">
               <!-- USERS LIST -->
               <div class="box box-primary">
                 <div class="box-header with-border">
@@ -359,5 +385,13 @@
           }
         }
   </script>
+
+@endsection
+
+@section('scripts')
+<script src="{{url( 'js/Chart.min.js' )}}"></script>
+  <script src="{{url( 'js/equipeThese-bar-chart.js' )}}"></script>
+  <script src="{{url( 'js/equipeTypeArticle-stacked-chart.js' )}}"></script>
+  <script src="{{url( 'js/equipeTypeArticle-pie-chart.js' )}}"></script>
 
 @endsection

@@ -217,6 +217,42 @@
                     </div>
                    </div>
 
+                   <div class="form-group ">
+                        <label class="col-xs-3 control-label">Date début (*)</label>
+                        <div class="col-xs-9 inputGroupContainer @if($errors->get('date_debut')) has-error @endif">
+                          <div style="width: 70%">
+                            <!-- <input name="date_debut" type="text" class="form-control pull-right" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask id="datepicker" value="{{old('date_debut')}}"> -->
+                            <input type="date" name="date_debut" class="form-control pull-right" value="{{$projet->date_debut}}">
+                            <span class="help-block">
+                                @if($errors->get('date_debut'))
+                                  @foreach($errors->get('date_debut') as $message)
+                                    <li> {{ $message }} </li>
+                                  @endforeach
+                                @endif
+                            </span>
+
+                          </div>
+                        </div>
+                  </div>
+
+                  <div class="form-group ">
+                       <label class="col-xs-3 control-label">Date fin</label>
+                       <div class="col-xs-9 inputGroupContainer @if($errors->get('date_fin')) has-error @endif">
+                         <div style="width: 70%">
+                           <!-- <input name="date_debut" type="text" class="form-control pull-right" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask id="datepicker" value="{{old('date_debut')}}"> -->
+                           <input type="date" name="date_fin" class="form-control pull-right" value="{{old('date_fin')}}">
+                           <span class="help-block">
+                               @if($errors->get('date_fin'))
+                                 @foreach($errors->get('date_fin') as $message)
+                                   <li> {{ $message }} </li>
+                                 @endforeach
+                               @endif
+                           </span>
+
+                         </div>
+                       </div>
+                 </div>
+
 
                    <div class="form-group">
                        <label class="col-md-3 control-label">Photo</label>

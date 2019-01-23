@@ -107,13 +107,14 @@ class ProjetController extends Controller
 	 	$projet->intitule = $request->input('intitule');
 	 	$projet->resume = $request->input('resume');
 	 	$projet->type = $request->input('type');
-    $projet->type = $request->input('type');
+
     $projet->photo = 'uploads/photo/projets/'.$file_name;
 	 	// $projet->partenaires = $request->input('partenaires');
 	 	$projet->lien = $request->input('lien');
         $projet->chef_id = $request->input('chef_id');
 
-
+        $projet->date_debut = $request->input('date_debut');
+        $projet->date_fin = $request->input('date_fin');
 
 
 	 	$projet->save();
@@ -204,6 +205,8 @@ class ProjetController extends Controller
         $projet->photo = 'uploads/photo/projets/'.$file_name;
         $projet->lien = $request->input('lien');
         $projet->chef_id = $request->input('chef_id');
+        $projet->date_debut = $request->input('date_debut');
+        $projet->date_fin = $request->input('date_fin');
 
 	 	$projet->save();
 

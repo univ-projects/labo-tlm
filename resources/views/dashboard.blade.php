@@ -123,6 +123,7 @@
               <a href="{{url('theses')}}" class="small-box-footer">Détails <i class="fa fa-arrow-circle-right"></i></a>
            </div>
         </div>
+
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-red">
@@ -142,28 +143,50 @@
                           <!-- ./col -->
   </div>
 
-  <div class="box box-success">
-    <div class="box-header with-border">
-      <h3 class="box-title">Statistiques générales (thèses,thèsards,articles)</h3>
 
-      <div class="box-tools pull-right">
-        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-        </button>
-        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+  <div class="row">
+
+    <div class="col-md-8">
+      <div class="box box-success" class="col-md-8">
+        <div class="box-header with-border">
+          <h3 class="box-title">Statistiques générales (Membres)</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="chart">
+            <canvas id="lineChart" style="height:230px"></canvas>
+          </div>
+        </div>
+
       </div>
     </div>
-    <div class="box-body">
-      <div class="chart">
-        <canvas id="barChart" style="height:230px"></canvas>
+
+    <div class="col-md-4">
+      <div class="box box-success" class="col-md-8">
+        <div class="box-header with-border">
+          <h3 class="box-title">Statistiques générales (Membres)</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="chart">
+            <canvas id="pieChart2" style="height:230px"></canvas>
+          </div>
+        </div>
+
       </div>
     </div>
-
-
 
   </div>
-
-
-
 
   <section class="web_disigner" style="padding:30px">
     <div class="web_disigner_contain">
@@ -222,61 +245,59 @@
       </div>
     </div>
     </div>
-
   </section>
 
+  <div class="row">
 
+    <div class="col-md-8">
+      <div class="box box-success" class="col-md-8">
+        <div class="box-header with-border">
+          <h3 class="box-title">Statistiques générales (Thèses)</h3>
 
-
-<div class="row">
-
-  <div class="col-md-8">
-    <div class="box box-success" class="col-md-8">
-      <div class="box-header with-border">
-        <h3 class="box-title">Statistiques générales (Membres)</h3>
-
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-          </button>
-          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
         </div>
-      </div>
-      <div class="box-body">
-        <div class="chart">
-          <canvas id="lineChart" style="height:230px"></canvas>
+        <div class="box-body">
+          <div class="chart">
+            <canvas id="barChart" style="height:230px"></canvas>
+          </div>
         </div>
-      </div>
 
+      </div>
     </div>
+
+    <div class="col-md-4">
+      <div class="box box-success" class="col-md-8">
+        <div class="box-header with-border">
+          <h3 class="box-title">Statistiques générales (Type d'article)</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="chart">
+            <canvas id="pieChart" style="height:230px"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 
-  <div class="col-md-4">
-    <div class="box box-success" class="col-md-8">
-      <div class="box-header with-border">
-        <h3 class="box-title">Statistiques générales (Type d'article)</h3>
-
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-          </button>
-          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-        </div>
-      </div>
-      <div class="box-body">
-        <div class="chart">
-          <canvas id="pieChart" style="height:230px"></canvas>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-</div>
 
 @endsection
 
 @section('scripts')
 <script src="{{url( 'js/Chart.min.js' )}}"></script>
-  <script src="{{url( 'js/create-charts.js' )}}"></script>
-    <script src="{{url( 'js/create-charts2.js' )}}"></script>
-      <script src="{{url( 'js/create-charts3.js' )}}"></script>
+  <script src="{{url( 'js/these-bar-chart.js' )}}"></script>
+    <script src="{{url( 'js/typeArticle-pie-chart.js' )}}"></script>
+      <script src="{{url( 'js/gradeMember-line-chart.js' )}}"></script>
+        <script src="{{url( 'js/laboMember-pie-chart.js' )}}"></script>
 @endsection

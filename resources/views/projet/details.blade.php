@@ -59,6 +59,28 @@
                     </p>
                   </div>
                 </div>
+                <div class="row container">
+                  <div class="col-md-3">
+                    <strong>Date début</strong>
+                  </div>
+                  <div class="col-md-9">
+                    <p class="text-muted">
+                      {{$projet->date_debut}}
+                    </p>
+                  </div>
+                </div>
+                @if(isset($projet->date_fin))
+                <div class="row container">
+                  <div class="col-md-3">
+                    <strong>Date fin</strong>
+                  </div>
+                  <div class="col-md-9">
+                    <p class="text-muted">
+                      {{$projet->date_fin}}
+                    </p>
+                  </div>
+                </div>
+                @endif
 
 
 

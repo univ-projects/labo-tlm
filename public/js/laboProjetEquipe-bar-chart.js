@@ -1,3 +1,4 @@
+labId=document.getElementById("labId").value;
 ( function ( $ ) {
 
 	var charts = {
@@ -6,13 +7,13 @@
 			Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 			Chart.defaults.global.defaultFontColor = '#292b2c';
 
-			this.ajaxGetarticleMonthlyData();
+			this.ajaxGetprojetMonthlyData();
 
 		},
 
-		ajaxGetarticleMonthlyData: function () {
+		ajaxGetprojetMonthlyData: function () {
 			// var urlPath =  'http://' + window.location.hostname + '/chartjs';
-				var urlPath =  '/chartjs';
+				var urlPath =  '/laboProjetEquipe-bar-chart/'+labId;
 			var request = $.ajax( {
 				method: 'GET',
 				url: urlPath
@@ -29,36 +30,65 @@
 		 */
 		createCompletedJobsChart: function ( response ) {
 
-			var ctx = document.getElementById("barChart");
-			var articleData={	label: "Articles",
+			var ctx = document.getElementById("barChartProjet");
 
-				backgroundColor: "lightblue",
-				borderColor: "blue",
-				borderWidth: 1,
+			function getRandomColor() {
+				var letters = '0123456789ABCDEF';
+				var color = '#';
+				for (var i = 0; i < 6; i++) {
+					color += letters[Math.floor(Math.random() * 16)];
+				}
+				return color;
+			}
+			var datasets = [];
+			var labels= [];
+			var backgrounds=[];
+			var data=[];
+			var projetData=[];
 
-				data: response.article_count_data // The response got from the ajax request containing data for the completed jobs in the corresponding months}
+			for (key in response.projet_count_data) {
+				// data.push(response[key]);
+				// labels.push(key);
+				// backgrounds.push(getRandomColor());
+				// var escData=[];
+				// for (var key2 in response.projet_count_data) {
+				// 		escData.push();
+				// }
+				 projetData.push({	label: key,
+
+					backgroundColor: getRandomColor(),
+
+					borderWidth: 1,
+
+					data: response.projet_count_data[key], // The response got from the ajax request containing data for the completed jobs in the corresponding months}
+				});
 			}
-			var theseData={	label: "Thèses",
-			backgroundColor: "lightgreen",
-			borderColor: "green",
-			borderWidth: 1,
-				data: response.these_count_data // The response got from the ajax request containing data for the completed jobs in the corresponding months}
-			}
-			var thesardData={	label: "Thèsard",
-			backgroundColor: "lightsalmon",
-			borderColor: "red",
-			borderWidth: 1,
-				data: response.thesard_count_data // The response got from the ajax request containing data for the completed jobs in the corresponding months}
-			}
+			console.log(projetData);
+
+			// var theseData={	label: "Thèses",
+			// backgroundColor: "lightgreen",
+			// borderColor: "green",
+			// borderWidth: 1,
+			// 	data: response.these_count_data // The response got from the ajax request containing data for the completed jobs in the corresponding months}
+			// }
+			// var thesardData={	label: "Thèsard",
+			// backgroundColor: "lightsalmon",
+			// borderColor: "red",
+			// borderWidth: 1,
+			// 	data: response.thesard_count_data // The response got from the ajax request containing data for the completed jobs in the corresponding months}
+			// }
 
 			var myLineChart = new Chart(ctx, {
 				type: 'bar',
 				data: {
 					labels: response.months, // The response got from the ajax request containing all month names in the database
-					datasets: [articleData, theseData,thesardData],
+					datasets: projetData,
 				},
 				options: {
-
+					title: {
+						display: true,
+						text: 'Nombre de projets par équipe (en cours)'
+					},
 					scales: {
 						xAxes: [{
 							time: {

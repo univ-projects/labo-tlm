@@ -90,19 +90,28 @@ Route::prefix('EasyLab')->group(function () {
 
 
 // Route::get('chartjs', 'dashController@chartjs');
-Route::get('chartjs', 'dashController@getMonthlyArticleTheseData');
-Route::get('chartjs2', 'dashController@getArticleTypeCount');
-Route::get('chartjs3', 'dashController@getMonthlyMembre');
+Route::get('theses-dash', 'dashController@getMonthlyTheseData');
+Route::get('typeArticle-dash', 'dashController@getArticleTypeCount');
+Route::get('gradeMember-dash', 'dashController@getMonthlyMembre');
+Route::get('laboMember-dash', 'dashController@getMembersLaboCount');
+
+
 Route::get('dashboard','dashController@index');
 
+Route::get('roles','ParametreController@role');
+Route::get('parametres','ParametreController@parametre');
+Route::put('parametres/{id}','ParametreController@updateApp');
 
 
 
 // Route::get('parametre','ParametreController@create');
 // Route::post('parametre','ParametreController@store');
+Route::get('laboMemberEquipe-pie-chart/{id}', 'ParametreController@getMembersLaboEquipeCount');
+Route::get('laboTypeArticle-pie-chart/{id}', 'ParametreController@getArticleTypeCount');
+Route::get('laboGradeMember-line-chart/{id}', 'ParametreController@getMonthlyMembre');
+Route::get('laboArticleEquipe-bar-chart/{id}', 'ParametreController@getMonthlyArticle');
+Route::get('laboProjetEquipe-bar-chart/{id}', 'ParametreController@getMonthlyProjet');
 
-Route::get('chartjs2/{id}', 'ParametreController@getArticleTypeCount');
-Route::get('chartjs3/{id}', 'ParametreController@getMonthlyMembre');
 Route::get('laboratoires/{id}/details','ParametreController@details');
 Route::get('labos-trombinoscope','ParametreController@trombi');
 Route::resource('laboratoires', 'ParametreController',[
@@ -145,7 +154,9 @@ Route::post('/postajaxMembres2','UserController@postMembres2');
 
 
 
-
+Route::get('equipeThese-bar-chart/{id}', 'EquipeController@getMonthlyTheseData');
+Route::get('equipeTypeArticle-stacked-chart/{id}', 'EquipeController@getMonthlyArticleData');
+Route::get('equipeTypeArticle-pie-chart/{id}', 'EquipeController@getArticleTypeCount');
 Route::get('equipes/{id}/details','EquipeController@details');
 Route::resource('equipes', 'EquipeController',[
     'only' => ['index', 'create','store','update','destroy']

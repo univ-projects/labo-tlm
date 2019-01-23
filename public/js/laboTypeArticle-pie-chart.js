@@ -13,7 +13,7 @@ labId=document.getElementById("labId").value;
 
 		ajaxGetarticleMonthlyData: function () {
 			// var urlPath =  'http://' + window.location.hostname + '/chartjs';
-				var urlPath =  '/chartjs2/'+labId;
+				var urlPath =  '/laboTypeArticle-pie-chart/'+labId;
 			var request = $.ajax( {
 				method: 'GET',
 				url: urlPath

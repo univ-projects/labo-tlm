@@ -12,14 +12,13 @@
 
 		ajaxGetarticleMonthlyData: function () {
 			// var urlPath =  'http://' + window.location.hostname + '/chartjs';
-				var urlPath =  '/chartjs3';
+				var urlPath =  '/theses-dash';
 			var request = $.ajax( {
 				method: 'GET',
 				url: urlPath
 		} );
 
 			request.done( function ( response ) {
-				console.log( response );
 				charts.createCompletedJobsChart( response );
 			});
 		},
@@ -29,59 +28,39 @@
 		 */
 		createCompletedJobsChart: function ( response ) {
 
-			var ctx = document.getElementById("lineChart");
-			var maaData={	label: "MAA",
-
-				backgroundColor: "lightblue",
-				borderColor: "blue",
-				borderWidth: 1,
-				fill: false,
-				data: response.maa_count_data // The response got from the ajax request containing data for the completed jobs in the corresponding months}
-			}
-			var mabData={	label: "MAB",
+			var ctx = document.getElementById("barChart");
+			// var articleData={	label: "Articles",
+			//
+			// 	backgroundColor: "lightblue",
+			// 	borderColor: "blue",
+			// 	borderWidth: 1,
+			//
+			// 	data: response.article_count_data // The response got from the ajax request containing data for the completed jobs in the corresponding months}
+			// }
+			var theseData={	label: "Thèses",
 			backgroundColor: "lightgreen",
 			borderColor: "green",
 			borderWidth: 1,
-			fill: false,
-				data: response.mab_count_data // The response got from the ajax request containing data for the completed jobs in the corresponding months}
+				data: response.these_count_data // The response got from the ajax request containing data for the completed jobs in the corresponding months}
 			}
-			var mcaData={	label: "MCA",
+			var thesardData={	label: "Thèsard",
 			backgroundColor: "lightsalmon",
 			borderColor: "red",
 			borderWidth: 1,
-			fill: false,
-				data: response.mca_count_data // The response got from the ajax request containing data for the completed jobs in the corresponding months}
-			}
-			var mcbData={	label: "MCB",
-			backgroundColor: "yellow",
-			borderColor: "yellowgreen",
-			borderWidth: 1,
-			fill: false,
-				data: response.mcb_count_data // The response got from the ajax request containing data for the completed jobs in the corresponding months}
-			}
-			var doctorantData={	label: "Doctorant",
-			backgroundColor: "lime",
-			borderColor: "limeGreen",
-			borderWidth: 1,
-			fill: false,
-				data: response.doctorant_count_data // The response got from the ajax request containing data for the completed jobs in the corresponding months}
-			}
-			var professeurData={	label: "Professeur",
-			backgroundColor: "steelblue",
-			borderColor: "SlateBlue ",
-			borderWidth: 1,
-			fill: false,
-				data: response.professeur_count_data // The response got from the ajax request containing data for the completed jobs in the corresponding months}
+				data: response.thesard_count_data // The response got from the ajax request containing data for the completed jobs in the corresponding months}
 			}
 
 			var myLineChart = new Chart(ctx, {
-				type: 'line',
+				type: 'bar',
 				data: {
 					labels: response.months, // The response got from the ajax request containing all month names in the database
-					datasets: [maaData, mabData,mcaData,mcbData,doctorantData,professeurData],
+					datasets: [theseData,thesardData],
 				},
 				options: {
-
+					title: {
+	          display: true,
+	          text: 'Membres du laboratoire par équipe'
+	        },
 					scales: {
 						xAxes: [{
 							time: {

@@ -65,15 +65,22 @@ class dashController extends Controller
           $yearly_thesard_count=  These::where(function ($query) use($year) {
               $query->whereYear( 'date_debut','<=', $year );
               })->where(function ($query) use($year) {
-                  $query->whereYear('date_soutenance','>',$year)
-                        ->orWhereNull('date_soutenance');
+                if($year==Carbon::now()->year){
+                 $year=Carbon::now();
+                 $query->where('date_soutenance','>',$year)
+                       ->orWhereNull('date_soutenance');
+               }
+               else {
+                 $query->whereYear('date_soutenance','>',$year)
+                       ->orWhereNull('date_soutenance');
+               }
               })
               ->get()
               ->count();
           return $yearly_thesard_count;
       }
 
-    	function getMonthlyArticleTheseData() {
+    	function getMonthlyTheseData() {
 
     		$yearly_article_count_array = array();
         $yearly_these_count_array = array();
@@ -94,7 +101,7 @@ class dashController extends Controller
     			}
     		}
 
-    		$max_no = max( $yearly_article_count_array )+max( $yearly_these_count_array )+max( $yearly_thesard_count_array );
+    		$max_no =max( $yearly_these_count_array )+max( $yearly_thesard_count_array );
     		$max = round(( $max_no + 10/2 ) / 10 ) * 10;
     		$yearly_article_these_data_array = array(
     			'months' => $year_array,
@@ -130,6 +137,22 @@ class dashController extends Controller
 
           }
 
+
+          function getMembersLaboCount() {
+
+              $laboMembersCount = array();
+              $labos=Parametre::all();
+
+              foreach ($labos as $l) {
+                $lMembersCount=User::join('equipes','equipes.id','=','users.equipe_id')
+                  ->where('equipes.labo_id',$l['id'])->get()->count();
+                $laboMembersCount[$l['achronymes']] = $lMembersCount;
+
+              }
+
+              return $laboMembersCount;
+
+            }
 
 
 
