@@ -18,9 +18,7 @@ use Illuminate\Support\Facades\Input;
 */
 
 
-Route::get('/connexion', function () {
-    return view('auth/login');
-});
+
 
 Route::prefix('front')->group(function () {
   Route::get('/', function () {
@@ -48,9 +46,9 @@ Route::get('{lab}/projets/{id}','frontController@projetdetail');
 
 Route::get('{lab}/articles/{id}','frontController@articledetail');
 
-  Route::get('Evenements/{id}','frontController@event');
-  Route::get('Evenements','frontController@events');
-  Route::get('getEvents','frontController@getEvents');
+  Route::get('{lab}/Evenements/{id}','frontController@event');
+  Route::get('{lab}/Evenements','frontController@events');
+  Route::get('{lab}/getEvents','frontController@getEvents');
 
   Route::get('Evenements', function () {
       return view('events');
@@ -101,6 +99,12 @@ Route::get('{lab}/articles/{id}','frontController@articledetail');
 
 });
 
+
+Route::get('/{lab}/connexion', function ($lab) {
+    return view('auth/login')->with([
+      'lab'=>$lab,  ]);
+});
+
 });
 
 
@@ -141,7 +145,7 @@ Route::resource('laboratoires', 'ParametreController',[
 Route::post('theses','TheseController@store')->middleware('thesecond');
 Route::get('theses/{id}/details','TheseController@details');
 Route::resource('theses', 'TheseController',[
-    'only' => ['index', 'create','edit','update','destroy']
+    'only' => ['index', 'create','store','edit','update','destroy']
 ]);
 Route::post('/postajaxPartenaireContact3','TheseController@postType');
 Route::post('/postajaxTheses','TheseController@postTheses');
@@ -167,6 +171,7 @@ Route::resource('membres', 'UserController',[
 ]);
 Route::post('/postajaxMembres1','UserController@postMembres1');
 Route::post('/postajaxMembres2','UserController@postMembres2');
+Route::post('/postajaxMembres3','UserController@postMembres3');
 
 
 

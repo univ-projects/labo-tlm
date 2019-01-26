@@ -23,7 +23,8 @@ class UserController extends Controller
 
      public function index()
     {
-        $membres = User::join('equipes','equipes.id','=','users.equipe_id')
+        $membres = User::select(DB::raw('*,equipes.id as teamId,users.id as userId'))
+        ->join('equipes','equipes.id','=','users.equipe_id')
         ->where('labo_id',Auth::user()->equipe->labo->id)->get();
         $labo = $this->getCurrentLabo();
         $laboratoires=Parametre::all();
@@ -40,6 +41,9 @@ class UserController extends Controller
       // $membres = User::all()->orderBy('name');
       $labo = $this->getCurrentLabo();
       $membres = DB::table('users')->distinct('id')->orderBy('name')->get();
+      $membres = User::select(DB::raw('*,equipes.id as teamId,users.id as userId,users.photo as photoUser'))
+      ->join('equipes','equipes.id','=','users.equipe_id')
+      ->where('labo_id',Auth::user()->equipe->labo->id)->get();
       $laboratoires=Parametre::all();
 
       return view('membre.trombinoscope')->with([
@@ -74,10 +78,17 @@ class UserController extends Controller
     public function create()
     {
         $labo = $this->getCurrentLabo();
+        $laboratoires=Parametre::all();
+
         if( Auth::user()->role->nom == 'admin')
             {
                 $equipes = Equipe::all();
-                return view('membre.create' , ['equipes' => $equipes],['labo'=>$labo]);
+
+                return view('membre.create')->with([
+                    'laboratoires' => $laboratoires,
+                    'equipes' => $equipes,
+                    'labo'=>$labo,
+                ]);;
             }
             else{
                 return view('errors.403',['labo'=>$labo]);
@@ -160,10 +171,9 @@ class UserController extends Controller
             $file = $request->file('img');
             $file_name = time().'.'.$file->getClientOriginalExtension();
             $file->move(public_path('/uploads/photo/users'),$file_name);
+              $membre->photo = 'uploads/photo/users/'.$file_name;
           }
-          else{
-              $file_name="userDefault.png";
-          }
+
 
         $membre->name = $request->input('name');
         $membre->prenom = $request->input('prenom');
@@ -187,7 +197,7 @@ class UserController extends Controller
             {
           $membre->role_id = $request->role_id;
             }
-          $membre->photo = 'uploads/photo/users/'.$file_name;
+
 
         $membre->save();
 
@@ -230,39 +240,48 @@ class UserController extends Controller
 
           $membres=User::all();
 
-          $output.='
-                  <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                      <th>Nom</th>
-                      <th>Prénom</th>
-                      <th>Laboratoire</th>
-                      <th>Equipe</th>
-                      <th>Email</th>
-                      <th>Grade</th>
-                      <th>Action</th>
-                    </tr>
-                    </thead>';
+          // $output.='
+          //         <table id="example1" class="table table-bordered table-striped">
+          //           <thead>
+          //           <tr>
+          //             <th>Nom</th>
+          //             <th>Prénom</th>
+          //             <th>Laboratoire</th>
+          //             <th>Equipe</th>
+          //             <th>Email</th>
+          //             <th>Grade</th>
+          //             <th>Action</th>
+          //           </tr>
+          //           </thead> <tbody> ';
 
             foreach($membres as $membre){
-              if($membre->equipe->labo_id==$labId || $labId==0){
-                $output.='     <tr>
+              if((isset($membre->equipe->labo_id) && $membre->equipe->labo_id==$labId ) || $labId==0){
+
+                $output.='    <tr>
                   <td>';
                   $output.=$membre->name;
                   $output.='</td>
                   <td>';
                   $output.=$membre->prenom;
                   $output.='</td>
-                  <td><a href="laboratoires/';
+                  <td>';
+                  if($membre->equipe){
+                  $output.='<a href="laboratoires/';
                   $output.=$membre->equipe->labo_id;
                   $output.='/details">';
                     $output.=$membre->equipe->labo['achronymes'];
-                  $output.='</a></td>
-                  <td> <a href="equipes/';
+                  $output.='</a>';
+                }
+                  $output.='</td>
+                  <td> ';
+                    if($membre->equipe){
+                  $output.='<a href="equipes/';
                   $output.=$membre->equipe_id;
                   $output.='/details">';
                      $output.=$membre->equipe->achronymes;
-                  $output.='</a></td>
+                  $output.='</a>';
+                }
+                  $output.='</td>
                   <td>';
                   $output.=$membre->email;
                   $output.='</td>
@@ -283,14 +302,16 @@ class UserController extends Controller
                           $output.='" class="btn btn-info">
                             <i class="fa fa-eye"></i>
                           </a>';
-                           if(Auth::id() == $membre->id || Auth::user()->role->nom == 'admin' ){
+
+                             if(Auth::id() == $membre->id || Auth::user()->role->nom == 'admin' ||
+                              ( Auth::user()->role->nom == 'directeur' && isset($membre->equipe->labo->directeur) && Auth::user()->id==$membre->equipe->labo->directeur) )
+                              {
                             $output.='<a href="';
                             $output.=url('membres/'.$membre->id.'/edit');
                             $output.='" class="btn btn-default">
                               <i class="fa fa-edit"></i>
                             </a>';
-                          }
-                          if(Auth::id() != $membre->id && Auth::user()->role->nom != 'membre' ){
+
 
 
                             $output.='<a href="#supprimer';
@@ -332,18 +353,18 @@ class UserController extends Controller
                 </tr> ';
             }
           }
-          $output.=' <tfoot>
-            <tr>
-              <th>Nom</th>
-              <th>Prénom</th>
-              <th>Laboratoire</th>
-              <th>Equipe</th>
-              <th>Email</th>
-              <th>Grade</th>
-              <th>Action</th>
-            </tr>
-            </tfoot>
-          </table>';
+          // $output.='</tbody>  <tfoot>
+          //   <tr>
+          //     <th>Nom</th>
+          //     <th>Prénom</th>
+          //     <th>Laboratoire</th>
+          //     <th>Equipe</th>
+          //     <th>Email</th>
+          //     <th>Grade</th>
+          //     <th>Action</th>
+          //   </tr>
+          //   </tfoot>
+          // </table>';
          return response()->json($output);
 
 
@@ -362,7 +383,7 @@ class UserController extends Controller
                 $membres=User::all();
 
           foreach($membres as $membre){
-            if($membre->equipe->labo_id==$labId || $labId==0){
+            if((isset($membre->equipe->labo_id) && $membre->equipe->labo_id==$labId )|| $labId==0){
             $output.='<div class="col-md-2 col-sm-4 col-xs-6" style="padding-top: 30px;" >';
             $output.='<a href="';
             $output.=url('membres/'.$membre->id.'/details');
@@ -381,7 +402,45 @@ class UserController extends Controller
 
     }
 
-  
+
+    public function postMembres3(Request $request)
+    {
+      if($request->labo_selected!=0)
+          {
+
+          $output='';
+          $labId=$request->labo_selected;
+
+          $equipes=Equipe::where('labo_id',$labId)->get();
+          $output.='<div class="form-group">
+            <label class="col-md-3 control-label">Equipe </label>
+              <div class="col-md-9 selectContainer">
+                <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                    <select name="equipe" class="form-control selectpicker">
+                      <option></option>';
+
+          foreach($equipes as $e){
+                        $output.='<option value="';
+                        $output.=$e->id;
+                        $output.='">';
+                        $output.=$e->intitule;
+                        $output.='</option>';
+                      }
+
+                    $output.='  </select>
+                  </div>
+                </div>
+          </div>';
+
+
+
+         return response()->json($output);
+       }
+
+    }
+
+
 
 
 

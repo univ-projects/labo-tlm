@@ -103,9 +103,15 @@ class EquipeController extends Controller
         $equipe->chef_id = $request->input('chef_id');
         $equipe->photo = 'uploads/photo/equipes/'.$file_name;
 
-        $equipe->save();
+        if($equipe->save()){
+          if($equipe->chef_id){
+            $member=User::find($equipe->chef_id);
+            $member->equipe_id=$equipe->id;
+            $member->save();
+          }
+        }
 
-        return redirect('equipes');
+        return redirect('laboratoires');
 
     }
 
@@ -121,7 +127,7 @@ class EquipeController extends Controller
                   $file = $request->file('img');
                   $file_name = time().'.'.$file->getClientOriginalExtension();
                   $file->move(public_path('/uploads/photo/equipes'),$file_name);
-
+                  $equipe->photo = 'uploads/photo/equipes/'.$file_name;
               }
               else{
                   $file_name="materielDefault.png";
@@ -133,7 +139,7 @@ class EquipeController extends Controller
             $equipe->achronymes = $request->input('achronymes');
             $equipe->axes_recherche = $request->input('axes_recherche');
             $equipe->chef_id = $request->input('chef_id');
-            $equipe->photo = 'uploads/photo/equipes/'.$file_name;
+
 
             $equipe->save();
 
@@ -151,16 +157,15 @@ class EquipeController extends Controller
 
     public function destroy($id)
     {
-        if( Auth::user()->role->nom == 'admin')
-            {
+
         $equipe = Equipe::find($id);
         if($equipe){
           $equipe->delete();
-          return redirect('equipes');
+          return redirect('laboratoires');
         }else {
           return view('errors.404');
         }
-        }
+
     }
 
 
@@ -178,48 +183,47 @@ class EquipeController extends Controller
 
 
     function getYearlyTheseCount( $year ,$equipeId) {
-      $yearly_these_count = These::whereYear( 'date_soutenance', $year )
+      $yearly_these_count = These::join('users','users.id','=','theses.user_id')
+                          ->where('users.equipe_id',$equipeId)
+                          ->whereYear( 'date_soutenance', $year )
                           ->where('date_soutenance','<',Carbon::now())
                           ->get()->count();
       return $yearly_these_count;
     }
 
     function getYearlyThesardCount( $year,$equipeId) {
-        $yearly_thesard_count=  These::join('users','users.id','=','theses.user_id')
+      $yearly_thesard_count=  These::join('users','users.id','=','theses.user_id')
         ->where('users.equipe_id',$equipeId)
-        ->where(function ($query) use($year) {
-          if($year==Carbon::now()->year){
-           $year=Carbon::now();
-           $query->where('date_debut','<=',$year);
-         }
-         else{$query->whereYear('date_debut','<=',$year);}
-            // $query->whereYear( 'date_debut','<=', $year );
-            })->where(function ($query) use($year) {
-              if($year==Carbon::now()->year){
-               $year=Carbon::now();
-               $query->where('date_soutenance','>',$year)
-                     ->orWhereNull('date_soutenance');
-             }
-             else {
-               $query->whereYear('date_soutenance','>',$year)
-                     ->orWhereNull('date_soutenance');
-             }
-            })
-            ->get()
-            ->count();
+          ->where(function ($query) use($year) {
+          $query->whereYear( 'date_debut','<=', $year );
+          })->where(function ($query) use($year) {
+            if($year==Carbon::now()->year){
+             $year=Carbon::now();
+             $query->where('date_soutenance','>',$year)
+                   ->orWhereNull('date_soutenance');
+           }
+           else {
+             $query->whereYear('date_soutenance','>',$year)
+                   ->orWhereNull('date_soutenance');
+           }
+          })
+          ->get()
+          ->count();
+
+
         return $yearly_thesard_count;
     }
 
     function getYearlyArticleCount( $year,$equipeId,$type) {
       if($type!='Article' AND $type!='Livre'){
-        $yearly_article_count = Article::join('article_user','article_user.article_id','=','articles.id')
+        $yearly_article_count = Article::select(DB::raw('DISTINCT article_user.article_id'))->join('article_user','article_user.article_id','=','articles.id')
         ->join('users','article_user.user_id','=','users.id')
         ->where('users.equipe_id',$equipeId)
         ->where('articles.type',$type)
         ->whereYear('date', $year )->get()->count();
       }
       else if($type=='Article'){
-        $yearly_article_count=  Article::join('article_user','article_user.article_id','=','articles.id')
+        $yearly_article_count=  Article::select(DB::raw('DISTINCT article_user.article_id'))->join('article_user','article_user.article_id','=','articles.id')
         ->join('users','article_user.user_id','=','users.id')
         ->where('users.equipe_id',$equipeId)
         ->whereYear('date', $year )
@@ -230,7 +234,7 @@ class EquipeController extends Controller
 
       }
       else if($type=='Livre'){
-        $yearly_article_count=  Article::join('article_user','article_user.article_id','=','articles.id')
+        $yearly_article_count=  Article::select(DB::raw('DISTINCT article_user.article_id'))->join('article_user','article_user.article_id','=','articles.id')
         ->join('users','article_user.user_id','=','users.id')
         ->where('users.equipe_id',$equipeId)
         ->whereYear('date', $year )
@@ -301,26 +305,26 @@ class EquipeController extends Controller
       function getArticleTypeCount($equipeId) {
 
         $typeCount = array(
-          'publications' => Article::join('article_user','article_user.article_id','=','articles.id')
+          'publications' => Article::select(DB::raw('DISTINCT article_user.article_id'))->join('article_user','article_user.article_id','=','articles.id')
                           ->join('users','article_user.user_id','=','users.id')
                           ->where('users.equipe_id',$equipeId)
                           ->where('articles.type','Publication(Revue)')->get()->count(),
-          'brevets' => Article::join('article_user','article_user.article_id','=','articles.id')
+          'brevets' => Article::select(DB::raw('DISTINCT article_user.article_id'))->join('article_user','article_user.article_id','=','articles.id')
                           ->join('users','article_user.user_id','=','users.id')
                           ->where('users.equipe_id',$equipeId)
                           ->where('articles.type','Brevet')->get()->count(),
-          'posters'=>Article::join('article_user','article_user.article_id','=','articles.id')
+          'posters'=>Article::select(DB::raw('DISTINCT article_user.article_id'))->join('article_user','article_user.article_id','=','articles.id')
                           ->join('users','article_user.user_id','=','users.id')
                           ->where('users.equipe_id',$equipeId)
                           ->where('articles.type','Poster')->get()->count(),
-          'articles'=>Article::join('article_user','article_user.article_id','=','articles.id')
+          'articles'=>Article::select(DB::raw('DISTINCT article_user.article_id'))->join('article_user','article_user.article_id','=','articles.id')
                           ->join('users','article_user.user_id','=','users.id')
                           ->where('users.equipe_id',$equipeId)
                           ->where(function ($query) {
                             $query->where('articles.type','Article court')
                               ->orWhere('articles.type','Article long');
                           })->get()->count(),
-          'livres' =>Article::join('article_user','article_user.article_id','=','articles.id')
+          'livres' =>Article::select(DB::raw('DISTINCT article_user.article_id'))->join('article_user','article_user.article_id','=','articles.id')
                           ->join('users','article_user.user_id','=','users.id')
                           ->where('users.equipe_id',$equipeId)
                           ->where(function ($query) {

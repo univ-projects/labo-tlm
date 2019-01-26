@@ -167,12 +167,13 @@
 								</div>
 								@endif
 
-                  @if($membre->equipe_id)
+                  @if(isset($membre->equipe_id))
                 <div class="row" style="margin-top: 10px">
                 <div class="col-md-3">
                   <strong><i class="fa fa-group  margin-r-5"></i>Equipe</strong>
                  </div>
                   <div class="col-md-9">
+
                     <a href="{{url('equipes/'.$membre->equipe_id.'/details')}}">{{$membre->equipe->intitule}}</a>
                   </div>
                 </div>
@@ -378,7 +379,9 @@
                             <div class="col-md-9 selectContainer @if($errors->get('equipe')) has-error @endif">
                               <div class="input-group"  style="width: 40%">
                                   <select name="equipe_id" class="form-control selectpicker">
-                                    <option value="{{$membre->equipe_id}}">{{$membre->equipe->intitule}}</option>
+																		@if(isset($membre->equipe))
+                                    	<option value="{{$membre->equipe_id}}">{{$membre->equipe->intitule}}</option>
+																		@endif
                                     @foreach($equipes as $equipe)
                                     <option value="{{$equipe->id}}">{{$equipe->intitule}}</option>
                                     @endforeach

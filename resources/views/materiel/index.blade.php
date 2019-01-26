@@ -35,6 +35,7 @@
 
             <!-- /.box-header -->
             <div class="box-body">
+              @if(Auth::user()->role->nom == 'admin' )
               <div class="form-group">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-lg fa-flask"></i></span>
@@ -51,7 +52,7 @@
                         </select>
                       </div>
                 </div>
-              @if(Auth::user()->role->nom == 'admin' )
+
               <div class=" pull-right">
                 <a href="{{url('materiels/create')}}" type="button" class="btn btn-block btn-success btn-lg"><i class="fa fa-plus"></i> Nouveau materiel</a>
               </div>
@@ -213,7 +214,7 @@
                       </div>
 
                             @endif
-                          
+
 
 
                         </form>

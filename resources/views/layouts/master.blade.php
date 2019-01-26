@@ -759,6 +759,9 @@ $(document).ready(function(){
 
   $('.proprietaire_type').change(function(){
     var category=$(this).parent().parent().parent().parent().attr('id')
+    category=$('.catId').attr('id');
+    var matId=$(this).parent().parent().parent().parent().attr('id')
+
 
 
 
@@ -766,7 +769,7 @@ $(document).ready(function(){
     {
 
       var type_proprietaire = $(this).val();
-      var changedDiv="#proprietaire_result"+category;
+      var changedDiv="#proprietaire_result";
 
 
       $.ajax({
@@ -1147,6 +1150,39 @@ $(document).ready(function(){
     else{
       //  setTimeout(function(){    $('#membres2_table').html('')},5550);
         $('#membres2_table').html('');
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+  $('#laboEquipe').change(function(){
+
+
+    if($(this).val() != '')
+    {
+
+      var labo_selected = $(this).val();
+
+
+
+      $.ajax({
+        url: '/postajaxMembres3',
+        type: 'POST',
+                      /* send the csrf-token and the input to the controller */
+          data: {_token: CSRF_TOKEN,labo_selected:labo_selected},
+          dataType: 'JSON',
+          success: function (data) {
+                        $('#laboEquipeResult').html(data);
+
+                    }
+      })
+    }
+    else{
+      $('#laboEquipeResult').html('');
     }
   });
 });

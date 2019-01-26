@@ -220,15 +220,15 @@ class frontController extends Controller
       }
 
 
-      public function events(){
+      public function events($lab){
           $events = Evenement::all();
         return view('front.events')->with([
           'events'=>$events,
-
+          'lab'=>$lab
         ]);
       }
 
-      public function event($id){
+      public function event($id,$lab){
         $evenement = Evenement::find($id);
         $participants = Evenement::find($id)->users()->orderBy('name')->get();
         if($evenement){
@@ -236,16 +236,19 @@ class frontController extends Controller
           return view('front.event')->with([
             'evenement' => $evenement,
             'participants'=>$participants,
-
+            'lab'=>$lab
           ]);;
         }
       }
 
-      public function getEvents(){
+      public function getEvents($lab){
         //  $events = Evenement::all();
         $events=  DB::table('evenements')
-           ->select( array('id', 'titre as title', 'from as start','to as end',DB::raw('LEFT(contenu, 20) as details')) )
-           ->get();
+            ->join('users', 'users.id', '=', 'evenements.auteur')
+            ->join('equipes', 'users.equipe_id', '=', 'equipes.id')
+             ->select( array('evenements.id', 'titre as title', 'from as start','to as end',DB::raw('LEFT(contenu, 20) as details')) )
+             ->where('labo_id',$lab)
+             ->get();
       return $events;
 
       }

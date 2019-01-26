@@ -98,7 +98,6 @@ class TheseController extends Controller
         $these->user_id = $request->input('user_id');
 
 
-
         $these->save();
 
         return redirect('theses');
@@ -290,8 +289,8 @@ class TheseController extends Controller
                     }
                      if(Auth::id() != $these->user_id && Auth::user()->role->nom != 'membre' ){
 
-                    $output.= "<a href=\"#supprimer $these->id Modal\" role=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\"><i class=\"fa fa-trash-o\"></i></a>
-                    <div class=\"modal fade\" id=\"supprimer $these->id Modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"supprimer $these->id ModalLabel\" aria-hidden=\"true\">";
+                    $output.= "<a href=\"#supprimer$these->idModal\" role=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\"><i class=\"fa fa-trash-o\"></i></a>
+                    <div class=\"modal fade\" id=\"supprimer$these->idModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"supprimer$these->idModalLabel\" aria-hidden=\"true\">";
                     $output.='
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -306,10 +305,10 @@ class TheseController extends Controller
                                 <div class="modal-footer">
                                     <form class="form-inline" action="';
                                     $output.= url('theses/'.$these->id);
-                                    $output.='"  method="POST">
-                                        @method(\'DELETE\')
-                                        @csrf
-                                    <button type="button" class="btn btn-light" data-dismiss="modal">Non</button>
+                                    $output.='"  method="POST">';
+                                          $output.='<?php echo method(\'DELETE\');
+                                        echo csrf ?>';
+                                      $output.='<button type="button" class="btn btn-light" data-dismiss="modal">Non</button>
                                         <button type="submit" class="btn btn-danger">Oui</button>
                                     </form>
                                 </div>

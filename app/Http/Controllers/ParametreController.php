@@ -213,6 +213,7 @@ class ParametreController extends Controller
             ->leftjoin('users', 'users.id', '=', 'equipes.chef_id')
              ->select(DB::raw('*,equipes.photo as team_photo,equipes.id as equipe_id'))
             ->where('labo_id',$id)
+            ->whereNull('equipes.deleted_at')
             ->get();
 
             // $equipes=Equipe::all();
@@ -240,6 +241,7 @@ class ParametreController extends Controller
            ->leftjoin('equipes', 'equipes.id', '=', 'users.equipe_id')
             ->leftjoin('parametres', 'parametres.id', '=', 'equipes.labo_id')
             ->where('labo_id', $id)
+            ->whereNull('equipes.deleted_at')
             ->get();
      $laboDetail = Parametre::find($id);
      if($laboDetail){
@@ -253,7 +255,7 @@ class ParametreController extends Controller
           ->get();
 
 
-         if(Auth::user()->role->nom == 'admin' || (Auth::user()->role->nom == 'directeur' && Auth::user()->id==$laboratoire->directeur))
+         if(Auth::user()->role->nom == 'admin' || (isset($laboDetail->directeur) && Auth::user()->role->nom == 'directeur' && Auth::user()->id==$laboDetail->directeur))
            {
                return view('laboratoire.edit')->with([
                    'equipes' => $equipes,
@@ -406,39 +408,45 @@ class ParametreController extends Controller
 
 
       $typeCount = array(
-        'publications' => Equipe::join('users','equipes.id','=','users.equipe_id')
+        'publications' => Equipe::select(DB::raw('DISTINCT article_user.article_id'))->join('users','equipes.id','=','users.equipe_id')
                               ->join('article_user','users.id','=','article_user.user_id')
                               ->join('articles','articles.id','=','article_user.article_id')
                               ->where('labo_id',$id)
-                              ->where('articles.type','Publication(Revue)')->get()->count(),
-        'brevets' => Equipe::join('users','equipes.id','=','users.equipe_id')
+                              ->where('articles.type','Publication(Revue)')
+                              ->distinct('article_user.article_id')
+                              ->get()->count(),
+        'brevets' => Equipe::select(DB::raw('DISTINCT article_user.article_id'))->join('users','equipes.id','=','users.equipe_id')
                               ->join('article_user','users.id','=','article_user.user_id')
                               ->join('articles','articles.id','=','article_user.article_id')
                               ->where('labo_id',$id)
                               ->where('type','Brevet')
+                              ->distinct('article_user.article_id')
                             ->get()->count(),
-        'posters'=>Equipe::join('users','equipes.id','=','users.equipe_id')
+        'posters'=>Equipe::select(DB::raw('DISTINCT article_user.article_id'))->join('users','equipes.id','=','users.equipe_id')
                               ->join('article_user','users.id','=','article_user.user_id')
                               ->join('articles','articles.id','=','article_user.article_id')
                               ->where('labo_id',$id)
                             ->where('type','Poster')
+                            ->distinct('article_user.article_id')
                             ->get()->count(),
-        'articles'=>Equipe::join('users','equipes.id','=','users.equipe_id')
+        'articles'=>Equipe::select(DB::raw('DISTINCT article_user.article_id'))->join('users','equipes.id','=','users.equipe_id')
                               ->join('article_user','users.id','=','article_user.user_id')
                               ->join('articles','articles.id','=','article_user.article_id')
                               ->where('labo_id',$id)
                               ->where(function ($query) {
                                 $query->where('articles.type','Article court')
                                   ->orWhere('articles.type','Article long');
-                              })->get()->count(),
-        'livres' =>Equipe::join('users','equipes.id','=','users.equipe_id')
+                              })
+                              ->get()->count(),
+        'livres' =>Equipe::select(DB::raw('DISTINCT article_user.article_id'))->join('users','equipes.id','=','users.equipe_id')
                               ->join('article_user','users.id','=','article_user.user_id')
                               ->join('articles','articles.id','=','article_user.article_id')
                               ->where('labo_id',$id)
                               ->where(function ($query) {
                                 $query->where('articles.type','Livre')
                                   ->orWhere('articles.type','Chapitre d\'un livre');
-                              })->get()->count(),
+                              })->distinct('article_user.article_id')
+                              ->get()->count(),
       );
 
       return $typeCount;
@@ -461,6 +469,7 @@ class ParametreController extends Controller
                               ->whereYear('users.created_at','<=', $year )
                               ->where('grade',$grade)
                               ->where('labo_id',$id)
+
                               ->get()->count();
         return $yearly_membre_count;
       }
@@ -547,7 +556,8 @@ class ParametreController extends Controller
 
         function getYearlyProjetCount( $year,$equipeId) {
 
-          $yearly_article_count = Projet::select(DB::raw('DISTINCT projets.id'))->join('projet_user','projet_user.projet_id','=','projets.id')
+          $yearly_article_count = Projet::select(DB::raw('DISTINCT projets.id'))
+          ->join('projet_user','projet_user.projet_id','=','projets.id')
           ->join('users','projet_user.user_id','=','users.id')
           ->where('equipe_id',$equipeId)
           ->whereYear( 'date_debut','<=', $year )

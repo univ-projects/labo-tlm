@@ -35,13 +35,13 @@ class PartenaireController extends Controller
 
       $nbr_particip_proj = DB::table('contacts')
                 ->select( DB::raw('count(*) as total,partenaire_id'))
-                ->leftjoin('project_contact', 'contacts.id', '=', 'project_contact.contact_id')
+                ->join('project_contact', 'contacts.id', '=', 'project_contact.contact_id')
                 ->groupBy('partenaire_id')
                 ->get();
 
           $nbr_particip_article = DB::table('contacts')
                     ->select( DB::raw('count(*) as total,partenaire_id'))
-                    ->leftjoin('article_contact', 'contacts.id', '=', 'article_contact.contact_id')
+                    ->join('article_contact', 'contacts.id', '=', 'article_contact.contact_id')
                     ->groupBy('partenaire_id')
                     ->get();
 

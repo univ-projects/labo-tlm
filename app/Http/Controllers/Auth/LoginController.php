@@ -36,4 +36,9 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    //overide
+    public function showLoginForm($lab='') {
+      return redirect('front/3/connexion');
+    }
 }

@@ -25,7 +25,7 @@ class theseRequest extends FormRequest
     {
         return [
             'titre' => 'required|min:3',
-            'sujet' => 'required|min:10',
+            'sujet' => 'required|min:5',
             'user_id' => 'required',
             'date_debut' => 'required',
 

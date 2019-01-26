@@ -136,7 +136,7 @@ class ArticleController extends Controller
 
 		// $membres_ext =  $request->input('membres_ext');
 	 	// $article->membres_ext = $request->input('membres_ext');
-	 	$article->deposer = Auth::user()->id;
+	 	$article->publicateur = Auth::user()->id;
 
 
 	 	$article->save();
@@ -298,13 +298,16 @@ $labo = $this->getCurrentLabo();
 
 								 $cpt=0;
 								 $contacts=array();
+
 							foreach ($partenaires_ext as $key => $value) {
 								$contactsPartenaire=DB::table('contacts')
 														->where('partenaire_id',$value)
 														->get();
-								array_push($contacts,$contactsPartenaire);
+								foreach($contactsPartenaire as $c)
+									array_push($contacts,$c);
 							}
-							$contacts=reset($contacts);
+							// $contacts=reset($contacts);
+							// print_r($contacts);die();
 
 					 }
 

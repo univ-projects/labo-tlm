@@ -148,7 +148,7 @@
                   </div>
 
                   <div class="form-group">
-                      <label class="col-md-3 control-label">Achronymes</label>
+                      <label class="col-md-3 control-label">Achronymes *</label>
                       <div class="col-md-9 inputGroupContainer" >
                         <div style="width: 70%">
                           <input  name="achronymes" class="form-control" placeholder="intitule" type="text" value="{{old('achronymes')}}">
@@ -175,7 +175,7 @@
                   </div>
 
                   <div class="form-group ">
-                        <label class="col-xs-3 control-label">Chef de l'équipe (*)</label>
+                        <label class="col-xs-3 control-label">Chef de l'équipe </label>
                         <div class="col-xs-9 inputGroupContainer @if($errors->get('chef_id')) has-error @endif">
                           <div style="width: 70%">
                             <select name="chef_id" class="form-control select2">

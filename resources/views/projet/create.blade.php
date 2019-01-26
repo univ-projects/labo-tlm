@@ -145,16 +145,7 @@
 
                         <div class="col-xs-9 inputGroupContainer @if($errors->get('type')) has-error @endif">
                           <div style="width: 70%">
-                            <select name='type' class="form-control select" value="{{old('type')}}">*
-                              <option></option>
-                              <option>Poster</option>
-                              <option>Article court</option>
-                              <option>Article long</option>
-                              <option>Publication(Revue)</option>
-                              <option>Chapitre d'un livre</option>
-                              <option>Livre</option>
-                              <option>Brevet</option>
-                            </select>
+                            <input class="form-control" type="text" name="type" value="{{old('type')}}">
                             <span class="help-block">
                                 @if($errors->get('type'))
                                   @foreach($errors->get('type') as $message)

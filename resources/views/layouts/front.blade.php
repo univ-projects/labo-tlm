@@ -75,7 +75,7 @@
 							<div class="row" style="padding:0;">
 									<div class="col-md-5 col-xs-12" style="padding:0;margin:0 0 0 50px">
 										<button class="login btn" onclick="window.location.href='register.html'" href="register.html" style="border-radius: 20px;width:120px">S'inscrire</button>
-										<a class="login btn btn-circle " href="{{url('/connexion')}}" style="border-radius: 20px;width:120px;">Se connecter</a>
+										<a class="login btn btn-circle " href="{{url('front/'.$lab.'/connexion')}}" style="border-radius: 20px;width:120px;">Se connecter</a>
 									</div>
 									<div class="col-md-5 col-xs-12" >
 										<form class="example" action="{{url('front/'.$lab.'/search')}}" style="margin:0;max-width:300px;">

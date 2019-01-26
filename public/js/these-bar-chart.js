@@ -59,7 +59,7 @@
 				options: {
 					title: {
 	          display: true,
-	          text: 'Membres du laboratoire par équipe'
+	          text: 'Nombre de thèses soutenues / en cours'
 	        },
 					scales: {
 						xAxes: [{

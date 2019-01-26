@@ -66,8 +66,8 @@ class ProjetController extends Controller
         $labo = $this->getCurrentLabo();
         $partenaires=Partenaire::all();
 
-        if( Auth::user()->role->nom == 'admin')
-            {
+        // if( Auth::user()->role->nom == 'admin')
+        //     {
     	 	 $membres = User::all();
              $projet = Projet::all();
              return view('projet.create')->with([
@@ -75,10 +75,10 @@ class ProjetController extends Controller
                  'membres'=>$membres,
                  'labo'=>$labo,
              ]);;
-            }
-             else{
-                return view('errors.403',['labo'=>$labo]);
-            }
+            // }
+            //  else{
+            //     return view('errors.403',['labo'=>$labo]);
+            // }
     }
 
 
@@ -273,9 +273,10 @@ class ProjetController extends Controller
                 $contactsPartenaire=DB::table('contacts')
                             ->where('partenaire_id',$value)
                             ->get();
-                array_push($contacts,$contactsPartenaire);
+                  foreach($contactsPartenaire as $c)
+            						array_push($contacts,$c);
               }
-              $contacts=reset($contacts);
+
 
            }
 

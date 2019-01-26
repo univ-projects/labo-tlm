@@ -86,7 +86,7 @@ class MaterielController extends Controller
       // $affectations = Affecter::where($materiel->category, $id)->get();
       // print_r($affectations);die();
 
-      if(Auth::user()->role->nom == 'admin' ){
+      if(Auth::user()->role->nom == 'admin' || Auth::user()->role->nom=='directeur' ) {
         return view('materiel.details')->with([
             'materiel' => $materiel,
             'proprietaires'=>$proprietaires,
@@ -169,7 +169,7 @@ class MaterielController extends Controller
       $labo = $this->getCurrentLabo();
       $materiel = Category::find($id);
 
-      if(Auth::user()->role->nom == 'admin' ){
+      if(Auth::user()->role->nom == 'admin' || Auth::user()->role->nom=='directeur'){
         return view('materiel.edit')->with([
             'materiel' => $materiel,
             'proprietaires' => $proprietaires,
@@ -303,66 +303,6 @@ class MaterielController extends Controller
             }
           }
 
-    //
-    // if(  $materiel->save()){
-    //   if (isset($materiel->proprietaire)) {
-    //     if (isset($oldProprietaire) || !isset($oldProprietaireEquipe)) {
-    //       if($oldProprietaire!=$materiel->proprietaire){
-    //           if(isset($materiel->proprietaire)){
-    //               $affect = new Affecter();
-    //               $affect->materiel_id=$materiel->id;
-    //               $affect->user_id=$materiel->proprietaire;
-    //               $affect->from=$materiel->created_at;
-    //               $affect->save();
-    //             }
-    //             $affectUpdate=Affecter::where('materiel_id', $id)
-    //             ->where('user_id',$oldProprietaire)
-    //             ->get();
-    //             foreach ($affectUpdate as $affected) {
-    //               $affected->to=$materiel->updated_at;
-    //               $affected->save();
-    //             }
-    //       }
-    //     }
-    //   }
-    //   else if(isset($materiel->proprietaireEquipe)){
-    //     if (isset($oldProprietaireEquipe) || !isset($oldProprietaire)) {
-    //       if($oldProprietaireEquipe!=$materiel->proprietaireEquipe){
-    //           if(isset($materiel->proprietaireEquipe)){
-    //               $affect = new Affecter();
-    //               $affect->materiel_id=$materiel->id;
-    //               $affect->proprietaireEquipe=$materiel->proprietaireEquipe;
-    //               $affect->from=$materiel->created_at;
-    //               $affect->save();
-    //             }
-    //             $affectUpdate=Affecter::where('materiel_id', $id)
-    //             ->where('proprietaireEquipe',$oldProprietaireEquipe)
-    //             ->get();
-    //             foreach ($affectUpdate as $affected) {
-    //               $affected->to=$materiel->updated_at;
-    //               $affected->save();
-    //             }
-    //       }
-    //     }
-    //   }
-
-        // if($oldProprietaire!=$materiel->proprietaire){
-        //     if(isset($materiel->proprietaire)){
-        //       $affect = new Affecter();
-        //       $affect->materiel_id=$materiel->id;
-        //       $affect->user_id=$materiel->proprietaire;
-        //       $affect->from=$materiel->created_at;
-        //       $affect->save();
-        //     }
-        //   $affectUpdate=Affecter::where('materiel_id', $id)
-        //   ->where('user_id',$oldProprietaire)
-        //   ->get();
-        //   foreach ($affectUpdate as $affected) {
-        //     $affected->to=$materiel->updated_at;
-        //     $affected->save();
-        //   }
-        // }
-    //}
 
     return redirect('materiels/'.$catId.'/details');
 
@@ -443,7 +383,7 @@ class MaterielController extends Controller
           $response=Equipe::where('labo_id',$cat['laboratoire'])->get();
        }
        else {
-         $response = User::join('equipes', function ($join) {
+         $response = User::select(DB::raw('*,users.id as userId'))->join('equipes', function ($join) {
                      $join->on('users.equipe_id', '=', 'equipes.id');
                  })
                   ->where('equipes.labo_id', '=', $cat['laboratoire'])
@@ -475,7 +415,7 @@ class MaterielController extends Controller
                 }
                 else{
                   foreach ($response as $p) {
-                    $output.=" <option value=\"$p->id\">$p->name $p->prenom</option>";
+                    $output.=" <option value=\"$p->userId\">$p->name $p->prenom</option>";
                   }
                 }
 
@@ -637,14 +577,13 @@ public function postMateriels(Request $request)
                   $output.='" class="btn btn-info">
                     <i class="fa fa-eye"></i>
                   </a>';
-                   if(Auth::user()->role->nom == 'admin' || Auth::user()->role->nom == 'directeur'){
+                   if(Auth::user()->role->nom == 'admin' || (isset($materiel->category->laboratory->directeur) && Auth::user()->role->nom == 'directeur' && Auth::user()->id==$materiel->category->laboratory->directeur) ) {
                       $output.='<a href="';
                       $output.=url('materiels/'.$materiel->id.'/edit');
                       $output.='" class="btn btn-default">
                         <i class="fa fa-edit"></i>
                       </a>';
-                    }
-                  if(Auth::user()->role->nom != 'membre' ){
+
                         $output.='
                          <a href="#supprimer';
                          $output.= $materiel->id ;

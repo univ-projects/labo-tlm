@@ -1,4 +1,3 @@
-
 @extends('layouts.master')
 
 @section('title','LRI | Liste des membres')
@@ -60,7 +59,7 @@
               </div>
                @endif
       </div>
-      <div id="membres1_table">
+      <div >
 
 
 
@@ -76,7 +75,7 @@
                   <th>Action</th>
                 </tr>
                 </thead>
-                <tbody >
+                <tbody id="membres1_table">
                   @foreach($membres as $membre)
                   <tr>
                     <td>{{$membre->name}}</td>
@@ -92,29 +91,28 @@
                     <td>
                       <div class="btn-group">
 
-                        <form action="{{ url('membres/'.$membre->id)}}" method="post">
+                        <form action="{{ url('membres/'.$membre->userId)}}" method="post">
                             {{csrf_field()}}
                             {{method_field('DELETE')}}
 
-                            <a href="{{ url('membres/'.$membre->id.'/details')}}" class="btn btn-info">
+                            <a href="{{ url('membres/'.$membre->userId.'/details')}}" class="btn btn-info">
                               <i class="fa fa-eye"></i>
                             </a>
-                             @if(Auth::id() == $membre->id || Auth::user()->role->nom == 'admin' )
-                            <a href="{{url('membres/'.$membre->id.'/edit')}}" class="btn btn-default">
+                             @if(Auth::id() == $membre->userId || Auth::user()->role->nom == 'admin' || ( Auth::user()->role->nom == 'directeur' && isset($membre->equipe->labo->directeur) && Auth::user()->id==$membre->equipe->labo->directeur) )
+                            <a href="{{url('membres/'.$membre->userId.'/edit')}}" class="btn btn-default">
                               <i class="fa fa-edit"></i>
                             </a>
-                            @endif
-                            @if(Auth::id() != $membre->id && Auth::user()->role->nom != 'membre' )
+
                             <!-- <button  type="submit" class="btn btn-danger ">
                                 <i class="fa fa-trash-o"></i>
                             </button> -->
 
-                             <a href="#supprimer{{ $membre->id }}Modal" role="button" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                      <div class="modal fade" id="supprimer{{ $membre->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $membre->id }}ModalLabel" aria-hidden="true">
+                             <a href="#supprimer{{ $membre->userId }}Modal" role="button" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                      <div class="modal fade" id="supprimer{{ $membre->userId }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $membre->userId }}ModalLabel" aria-hidden="true">
                           <div class="modal-dialog">
                               <div class="modal-content">
                                   <div class="modal-header">
-                                    <!--   <h5 class="modal-title" id="supprimer{{ $membre->id }}ModalLabel">Supprimer</h5> -->
+                                    <!--   <h5 class="modal-title" id="supprimer{{ $membre->userId }}ModalLabel">Supprimer</h5> -->
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                       </button>
@@ -123,7 +121,7 @@
                                       Voulez-vous vraiment effectuer la suppression ?
                                   </div>
                                   <div class="modal-footer">
-                                      <form class="form-inline" action="{{ url('membres/'.$membre->id)}}"  method="POST">
+                                      <form class="form-inline" action="{{ url('membres/'.$membre->userId)}}"  method="POST">
                                           @method('DELETE')
                                           @csrf
                                       <button type="button" class="btn btn-light" data-dismiss="modal">Non</button>

@@ -26,7 +26,8 @@ class equipeRequest extends FormRequest
         return [
             'intitule'=> 'required|min:3',
             'resume' => 'required|min:10',
-            'chef_id' => 'required'
+            'labo' =>'required',
+            'achronymes' =>'required'
         ];
     }
 }

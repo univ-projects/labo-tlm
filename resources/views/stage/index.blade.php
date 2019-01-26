@@ -68,7 +68,7 @@
                     <td><a href="{{url('membres/'.$stage->participant.'/details')}}">{{$stage->participant->name}} {{$stage->participant->prenom}}</a></td>
                     <td><a href="{{url('partenaires/'.$stage->partenaire.'/details')}}">{{$stage->partenaire->nom}}</a></td>
                     <td>@if($stage->created_at==$stage->updated_at) {{$stage->created_at}} @else {{$stage->updated_at}} @endif</td>
-                      <td><span class="label  @if($stage->to<date('Y-m-d')) label-success @else label-default @endif">@if($stage->to<date('Y-m-d')) Stage terminé @else En stage @endif</span></td>
+                      <td><span class="label  @if($stage->to<date('Y-m-d')) label-success @elseif($stage->from>date('Y-m-d')) label-warning @else label-default @endif">@if($stage->to<date('Y-m-d')) Stage terminé @elseif($stage->from>date('Y-m-d')) Pas encore parti @else En stage @endif</span></td>
                     <td>{{$stage->from}}</td>
                     <td>{{$stage->to}}</td>
 

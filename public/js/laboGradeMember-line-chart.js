@@ -67,7 +67,7 @@ labId=document.getElementById("labId").value;
 			fill: false,
 				data: response.doctorant_count_data // The response got from the ajax request containing data for the completed jobs in the corresponding months}
 			}
-			var professeurData={	label: "Professeur",
+			var professeurData={label: "Professeur",
 			backgroundColor: "steelblue",
 			borderColor: "SlateBlue ",
 			borderWidth: 1,

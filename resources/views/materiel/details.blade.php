@@ -94,6 +94,7 @@
 
   #materiel-upload:hover .fa:after { height:100%; }
 </style>
+	<input type="hidden" class="catId" id="{{$catId}}">
 
 <div class="row">
         <div class="col-md-4">
@@ -295,6 +296,7 @@
 			          </div>
 
 
+
 								<div class="tab-pane" id="activity2">
 									<div class=" pull-right">
 
@@ -382,6 +384,7 @@
 										</thead>
 										<tbody>
 											@foreach($exemplaires as $materiel)
+
 											<tr>
 												<td>{{$materiel->numero}}</td>
 
@@ -445,10 +448,22 @@
 																														<div class="col-md-9">
 																															<p class="text-muted">
 																																@if($materiel->proprietaireUser)
-																																	{{ $materiel->proprietaireUser->name }} {{ $materiel->proprietaireUser->prenom }}
+																																<a href="{{ url('membres/'.$materiel->proprietaireUser->id.'/details')}}">
+																																	{{$materiel->proprietaireUser->name}} {{$materiel->proprietaireUser->prenom}}
+																																</a>
+																																@elseif($materiel->proprietaireEquipe)
+																																@foreach($equipes as $equipe)
+																																@if($equipe->id==$materiel->proprietaireEquipe)
+																																<a href="{{ url('equipes/'.$materiel->proprietaireEquipe.'/details')}}">
+																																	{{$equipe->intitule}}
+																																</a>
+																																<?php break; ?>
+																																@endif
+																																@endforeach
 																																@else
 																																	Non affecté
 																																@endif
+
 																															</p>
 																														</div>
 																													</div>
@@ -566,7 +581,7 @@
 																																<select name="proprietaire" class="form-control">
 																																	@if($materiel->proprietaireUser)
 																																		<option value="{{$materiel->proprietaire}}" selected>{{$materiel->proprietaireUser->name}} {{$materiel->proprietaireUser->prenom}}</option>
-																																		@elseif($materiel->proprietaireEquipe)
+																																		@elseif($materiel->proprietaire_equipe)
 																																		<option value="{{$materiel->proprietaireEquipe}}" selected>{{$materiel->proprietaire_equipe->intitule}}</option>
 																																	@endif
 																																		<option></option>
@@ -659,7 +674,7 @@
           <!-- /.nav-tabs-custom -->
         </div>
       </div>
-			
+
 			<script type="text/javascript">
 					document.getElementById('materiel-photo').addEventListener('change', readURL, true);
 					function readURL(){

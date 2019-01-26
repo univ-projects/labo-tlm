@@ -177,28 +177,23 @@
                       </div>
 
                       <div class="form-group">
-                          <label class="col-md-3 control-label">Equipe *</label>
-                            <div class="col-md-9 selectContainer @if($errors->get('equipe')) has-error @endif">
+                          <label class="col-md-3 control-label">Laboratoire </label>
+                            <div class="col-md-9 selectContainer">
                               <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                                  <select name="equipe" class="form-control selectpicker">
+                              <span class="input-group-addon"><i class="fa fa-flask"></i></span>
+                                  <select name="labo" class="form-control selectpicker" id="laboEquipe">
                                     <option></option>
-                                     @foreach($equipes as $equipe)
-                                    <option value="{{$equipe->id}}">{{$equipe->intitule}}</option>
+                                     @foreach($laboratoires as $l)
+                                    <option value="{{$l->id}}">{{$l->nom}}</option>
                                     @endforeach
                                   </select>
 
                               </div>
-
-                              <span class="help-block">
-                                @if($errors->get('equipe_id'))
-                                  @foreach($errors->get('equipe_id') as $message)
-                                    <li> {{ $message }} </li>
-                                  @endforeach
-                                @endif
-                            </span>
-
                             </div>
+                      </div>
+
+                      <div id="laboEquipeResult">
+                        
                       </div>
 
                       <div class="form-group">

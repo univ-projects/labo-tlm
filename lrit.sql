@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 23 Janvier 2019 à 16:59
+-- Généré le :  Sam 26 Janvier 2019 à 14:20
 -- Version du serveur :  5.7.14
 -- Version de PHP :  7.2.12
 
@@ -37,14 +37,6 @@ CREATE TABLE `actualites` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Contenu de la table `actualites`
---
-
-INSERT INTO `actualites` (`id`, `titre`, `contenu`, `photo`, `auteur`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Contrôle de Conformité des Laboratoires et des Unités de Recherche', 'Nous avons l’honneur de vous transmettre le programme de contrôle de conformité des structures de recherche (laboratoires et unités recherche). Une délégation de la GDGRSDT procédera durant la période du dimanche 15 Novembre au jeudi 19 Novembre 2015 au contrôle de conformité de votre laboratoire de recherche. Dans le cadre de la collaboration entre les enseignants chercheurs de l’université de Tlemcen et nos collègues Sud Coréens du ministère de l’agriculture à travers son agence KOPIA- Algérie représentée par son directeur le Dr Park Sang-Gu, la faculté SNV/STU a reçu une délégation d’experts Coréens le Dr Han Jae-Gu et le Dr Lee Chan-jung spécialistes de la valorisation des Champignons comestibles, pour présenter des conférences aux enseignants chercheurs, doctorants, producteurs de champignons en Algérie, ainsi qu’aux représentants de différentes institutions : chambre de commerce, INPV, Ministère de l’agriculture, parc national, conservation des forêts, etc.. le 9 mai 2017 à l’auditorium de la faculté.', 'uploads/photo/actualites/1542753041.jpg', 1, 0, '2018-11-20 21:30:41', '2018-11-20 21:30:41'),
-(3, 'Contrôle de Conformité des Laboratoires et des Unités de Recherche', '<i>N</i>ous<b> </b><u><b></b></u><b>avons</b><u></u><b> </b>l’honneur de vous transmettre le programme de contrôle de conformité des structures de recherche (laboratoires et unités recherche). Une délégation de la <b>GDGRSDT</b> procédera durant la période du dimanche 15 Novembre au jeudi 19 Novembre 2015 au contrôle de conformité de votre laboratoire de recherche. Dans le cadre de la collaboration entre les enseignants chercheurs de l’université de Tlemcen et nos collègues Sud Coréens du ministère de l’agriculture à travers son agence KOPIA- Algérie représentée par son directeur le Dr Park Sang-Gu, la faculté SNV/STU a reçu une délégation d’experts Coréens le Dr Han Jae-Gu et le Dr Lee Chan-jung spécialistes de la valorisation des Champignons comestibles, pour présenter des conférences aux enseignants chercheurs, doctorants, producteurs de champignons en Algérie, ainsi qu’aux représentants de différentes institutions : chambre de commerce, INPV, Ministère de l’agriculture, parc national, conservation des forêts, etc.. le 9 mai 2017 à l’auditorium de la faculté.<div><a target="_blank" rel="nofollow" href="https://www.facebook.com">https://www.facebook.com/</a> <br></div>', 'uploads/photo/actualites/1542754325.jpg', 1, 1, '2018-11-20 21:52:05', '2018-11-24 21:44:57');
-
 -- --------------------------------------------------------
 
 --
@@ -67,31 +59,24 @@ CREATE TABLE `affecter` (
 --
 
 INSERT INTO `affecter` (`id`, `proprietaireEquipe`, `materiel_id`, `user_id`, `from`, `to`, `created_at`, `updated_at`) VALUES
-(8, NULL, 24, 4, '2018-11-27 22:49:09', '2018-11-28 13:35:37', '2018-11-27 21:49:27', '2018-11-28 12:35:37'),
-(7, NULL, 24, 3, '2018-11-27 22:49:09', '2018-11-27 22:49:27', '2018-11-27 21:49:09', '2018-11-27 21:49:27'),
-(9, NULL, 25, 8, '2018-11-28 13:34:55', NULL, '2018-11-28 12:35:20', '2018-11-28 12:35:20'),
-(10, NULL, 24, 9, '2018-11-27 22:49:09', '2018-11-28 13:42:24', '2018-11-28 12:35:37', '2018-11-28 12:42:24'),
-(11, NULL, 26, 8, '2018-11-28 13:41:49', '2018-11-28 13:42:10', '2018-11-28 12:41:49', '2018-11-28 12:42:10'),
-(12, NULL, 24, 10, '2018-11-27 22:49:09', '2018-11-29 22:45:14', '2018-11-28 12:42:24', '2018-11-29 21:45:15'),
-(13, NULL, 27, 4, '2018-11-29 15:37:11', NULL, '2018-11-29 14:37:11', '2018-11-29 14:37:11'),
-(15, 1, 31, NULL, '2018-11-29 16:48:03', '2018-11-29 18:24:44', '2018-11-29 15:48:03', '2018-11-29 17:24:44'),
-(16, NULL, 31, 3, '2018-11-29 16:48:03', '2018-11-29 18:27:47', '2018-11-29 17:21:37', '2018-11-29 17:27:47'),
-(17, NULL, 31, 16, '2018-11-29 16:48:03', '2018-11-29 18:22:20', '2018-11-29 17:21:53', '2018-11-29 17:22:20'),
-(18, NULL, 31, 1, '2018-11-29 16:48:03', NULL, '2018-11-29 17:22:20', '2018-11-29 17:22:20'),
-(19, NULL, 31, 3, '2018-11-29 16:48:03', '2018-11-29 18:27:47', '2018-11-29 17:24:44', '2018-11-29 17:27:47'),
-(20, NULL, 31, 16, '2018-11-29 16:48:03', NULL, '2018-11-29 17:27:47', '2018-11-29 17:27:47'),
-(21, NULL, 32, 21, '2018-11-29 18:40:19', '2018-11-29 18:42:38', '2018-11-29 17:40:19', '2018-11-29 17:42:38'),
-(22, NULL, 32, 18, '2018-11-29 18:40:19', NULL, '2018-11-29 17:42:38', '2018-11-29 17:42:38'),
-(23, NULL, 32, 18, '2018-11-29 18:40:19', NULL, '2018-11-29 17:42:38', '2018-11-29 17:42:38'),
-(24, NULL, 33, 21, '2018-11-29 18:53:51', NULL, '2018-11-29 17:53:51', '2018-11-29 17:53:51'),
-(48, NULL, 39, 18, '2018-11-29 19:29:03', '2018-11-29 20:14:14', '2018-11-29 18:31:08', '2018-11-29 19:14:14'),
-(47, NULL, 39, 16, '2018-11-29 19:29:03', '2018-11-29 20:21:43', '2018-11-29 18:29:46', '2018-11-29 19:21:43'),
-(46, 4, 39, NULL, '2018-11-29 19:29:03', '2018-11-29 19:29:46', '2018-11-29 18:29:27', '2018-11-29 18:29:46'),
-(45, NULL, 39, 20, '2018-11-29 19:29:03', '2018-11-29 19:29:27', '2018-11-29 18:29:12', '2018-11-29 18:29:27'),
-(44, NULL, 39, 21, '2018-11-29 19:29:03', '2018-11-29 19:29:12', '2018-11-29 18:29:03', '2018-11-29 18:29:12'),
-(49, NULL, 39, 16, '2018-11-29 19:29:03', '2018-11-29 20:21:43', '2018-11-29 19:14:14', '2018-11-29 19:21:43'),
-(50, 2, 40, NULL, '2018-11-29 20:16:30', '2018-11-29 20:18:35', '2018-11-29 19:16:50', '2018-11-29 19:18:35'),
-(51, 4, 40, NULL, '2018-11-29 20:16:30', '2018-11-29 20:18:35', '2018-11-29 19:18:35', '2018-11-29 19:18:50'),
+(74, NULL, 61, 25, '2019-01-25 22:34:09', NULL, '2019-01-26 13:04:46', '2019-01-26 13:04:46'),
+(73, NULL, 76, 26, '2019-01-26 13:54:35', NULL, '2019-01-26 13:02:47', '2019-01-26 13:02:47'),
+(72, NULL, 76, 11, '2019-01-26 13:54:35', '2019-01-26 14:02:47', '2019-01-26 12:54:35', '2019-01-26 13:02:47'),
+(71, NULL, 61, 11, '2019-01-25 22:34:09', '2019-01-26 14:04:46', '2019-01-26 12:53:23', '2019-01-26 13:04:46'),
+(70, 11, 61, NULL, '2019-01-25 22:34:09', '2019-01-26 13:53:23', '2019-01-26 12:53:12', '2019-01-26 12:53:23'),
+(69, NULL, 61, 10, '2019-01-25 22:34:09', '2019-01-26 13:53:12', '2019-01-26 12:52:38', '2019-01-26 12:53:12'),
+(68, 10, 58, NULL, '2019-01-25 22:34:09', NULL, '2019-01-26 12:52:26', '2019-01-26 12:52:26'),
+(67, 2, 73, NULL, '2019-01-26 11:44:46', NULL, '2019-01-26 10:46:15', '2019-01-26 10:46:15'),
+(66, 1, 75, NULL, '2019-01-26 11:45:33', NULL, '2019-01-26 10:45:54', '2019-01-26 10:45:54'),
+(65, 9, 75, NULL, '2019-01-26 11:45:33', '2019-01-26 11:45:54', '2019-01-26 10:45:33', '2019-01-26 10:45:54'),
+(64, NULL, 57, 14, '2019-01-25 22:27:39', NULL, '2019-01-25 21:28:00', '2019-01-25 21:28:00'),
+(63, NULL, 57, 2, '2019-01-25 22:27:39', '2019-01-25 22:28:00', '2019-01-25 21:27:39', '2019-01-25 21:28:00'),
+(62, NULL, 52, 10, '2019-01-25 21:46:10', NULL, '2019-01-25 21:15:49', '2019-01-25 21:15:49'),
+(61, NULL, 52, 2, '2019-01-25 21:46:10', '2019-01-25 22:15:49', '2019-01-25 21:15:35', '2019-01-25 21:15:50'),
+(60, 2, 53, NULL, '2019-01-25 21:46:10', NULL, '2019-01-25 21:04:24', '2019-01-25 21:04:24'),
+(59, NULL, 53, 22, '2019-01-25 21:46:10', '2019-01-25 22:04:24', '2019-01-25 20:55:22', '2019-01-25 21:04:24'),
+(58, NULL, 53, 2, '2019-01-25 21:46:10', '2019-01-25 21:55:22', '2019-01-25 20:54:57', '2019-01-25 20:55:22'),
+(57, 1, 52, NULL, '2019-01-25 21:46:10', '2019-01-25 22:15:35', '2019-01-25 20:47:34', '2019-01-25 21:15:35'),
 (52, NULL, 24, 16, '2018-11-27 22:49:09', '2018-11-29 22:45:28', '2018-11-29 21:45:14', '2018-11-29 21:45:28'),
 (53, 2, 24, NULL, '2018-11-27 22:49:09', NULL, '2018-11-29 21:45:28', '2018-11-29 21:45:28'),
 (54, NULL, 26, 20, '2018-11-28 13:41:49', '2018-11-29 22:45:54', '2018-11-29 21:45:40', '2018-11-29 21:45:54'),
@@ -130,7 +115,7 @@ CREATE TABLE `articles` (
   `id` int(10) UNSIGNED NOT NULL,
   `publicateur` int(10) UNSIGNED DEFAULT NULL,
   `type` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `titre` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `titre` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `resume` varchar(400) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `lieu_ville` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `lieu_pays` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -152,22 +137,14 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`id`, `publicateur`, `type`, `titre`, `resume`, `lieu_ville`, `lieu_pays`, `conference`, `journal`, `ISSN`, `ISBN`, `doi`, `detail`, `created_at`, `updated_at`, `deleted_at`, `photo`, `date`) VALUES
-(1, 1, 'Publication(Revue)', 'Social Recommender Approach for Technology Enhanced Learning', 'Social Recommender Approach for Technology Enhanced Learning, International Journal of Learning Technlogy, In Press, Inderscience', 'paris', 'France', NULL, 'International Journal of Learning Technlogy', NULL, NULL, NULL, NULL, '2018-05-08 09:54:16', '2018-05-08 09:54:16', NULL, 'uploads/photo/articles/articleDefault.png', '2018-01-06'),
-(2, 1, 'Chapitre d\'un livre', 'A Reference Model for Educational Adaptive Web Applications', 'A Reference Model for Educational Adaptive Web Applications. in Intelligent and Adaptive Educational-Learning Systems, Springer Berlin Heidelberg', 'Berlin', 'Allemagne', NULL, NULL, NULL, NULL, NULL, NULL, '2018-05-08 10:02:48', '2018-05-08 10:37:58', NULL, 'uploads/photo/articles/articleDefault.png', '2018-01-06'),
-(3, 1, 'Article long', 'Approche pour la recommandation de ressources pédagogiques basée sur les liens sociaux', 'Approche pour la recommandation de ressources pédagogiques basée sur les liens sociaux, EIAH 2015', 'Agadir', 'Maroc', 'EIAH 2015', NULL, NULL, NULL, NULL, NULL, '2018-05-08 10:09:10', '2018-12-25 14:26:12', NULL, 'uploads/photo/articles/articleDefault.png', '2018-01-12'),
-(4, 1, 'Article court', 'Recommandation de ressources pédagogiques basée sur les relations sociales', 'Recommandation de ressources pédagogiques basée sur les relations sociales', 'Rochelle', 'France', 'RJCEIAH', NULL, NULL, NULL, NULL, NULL, '2018-05-08 10:13:19', '2018-05-08 10:13:19', NULL, 'uploads/photo/articles/articleDefault.png', '2018-01-06'),
-(6, 1, 'Poster', 'Recommandation de ressources pédagogiques dans les réseaux sociaux en ligne,', 'Recommandation de ressources pédagogiques dans les réseaux sociaux en ligne,', 'Chambéry', ', France.', NULL, NULL, NULL, NULL, NULL, NULL, '2018-05-09 05:13:27', '2018-05-09 05:13:27', NULL, 'uploads/photo/articles/articleDefault.png', '2018-01-06'),
-(7, 1, 'Poster', 'abc', 'aadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'Tlemcen', 'a', NULL, NULL, NULL, NULL, NULL, NULL, '2018-12-05 16:43:37', '2018-12-05 18:05:10', '2018-12-05 19:05:10', 'uploads/photo/articles/articleDefault.png', '2018-01-06'),
-(8, 1, 'Poster', 'abc', 'test\r\ntesttesttest\r\ntesttest\r\ntest', 'Tlemcen', 'a', NULL, NULL, NULL, NULL, NULL, NULL, '2018-12-05 18:01:05', '2018-12-05 18:05:02', '2018-12-05 19:05:02', 'uploads/photo/articles/articleDefault.png', '2018-01-06'),
-(10, 1, 'Poster', 'abc', 'test\r\ntesttesttest\r\ntesttest\r\ntest', 'Tlemcen', 'a', NULL, NULL, NULL, NULL, NULL, NULL, '2018-12-05 18:03:25', '2018-12-05 18:04:46', '2018-12-05 19:04:46', 'uploads/photo/articles/articleDefault.png', '2018-01-06'),
-(11, 1, 'Poster', 'abc', 'test\r\ntesttesttest\r\ntesttest\r\ntezfzezeeeeefez\r\ntest', 'Tlemcen', 'a', NULL, NULL, NULL, NULL, NULL, NULL, '2018-12-05 18:03:43', '2018-12-05 18:04:38', '2018-12-05 19:04:38', 'uploads/photo/articles/articleDefault.png', '2018-01-06'),
-(12, 1, 'Poster', 'article3', 'article3 resumé', 'Tlemcen', 'a', NULL, NULL, NULL, NULL, NULL, NULL, '2018-12-05 18:24:22', '2018-12-05 18:24:22', NULL, 'uploads/photo/articles/articleDefault.png', '2018-01-06'),
-(13, 1, 'Poster', 'article2', 'article2 resumé', 'Tlemcen', 'a', NULL, NULL, NULL, NULL, NULL, NULL, '2018-12-05 18:26:09', '2018-12-05 18:26:09', NULL, 'uploads/photo/articles/articleDefault.png', '2018-01-06'),
-(14, 1, 'Poster', 'article1', 'article1 resumé', 'Tlemcen', 'a', NULL, NULL, NULL, NULL, NULL, NULL, '2018-12-05 18:26:18', '2018-12-05 18:26:18', NULL, 'uploads/photo/articles/articleDefault.png', '2018-01-06'),
-(15, 1, 'Chapitre d\'un livre', 'Article test1', 'Article test Article test Article test Article testArticle testArticle testArticle testArticle testArticle test', 'Tlemcen', 'a', NULL, NULL, NULL, NULL, NULL, NULL, '2018-12-06 08:15:19', '2018-12-06 08:15:52', NULL, 'uploads/photo/articles/articleDefault.png', '2018-01-06'),
-(16, 1, 'Poster', 'test article', 'test article resumé', 'tlm', 'alg', NULL, NULL, NULL, NULL, NULL, NULL, '2018-12-09 15:48:44', '2018-12-09 15:58:11', NULL, 'uploads/photo/articles/1544374691.jpg', '2018-01-06'),
-(17, 1, 'Publication(Revue)', 'titre2', 'resume2', 'paris', 'France', NULL, 'International Journal of Learning Technlogy', NULL, NULL, NULL, NULL, '2018-05-08 09:54:16', '2018-05-08 09:54:16', NULL, 'uploads/photo/articles/articleDefault.png', '2018-01-06'),
-(18, 1, 'Poster', 'article test', 'article test article test article testarticle testarticle testarticle test', 'tlm', 'alg', NULL, NULL, NULL, NULL, NULL, NULL, '2018-12-25 13:43:46', '2018-12-25 13:43:46', NULL, 'uploads/photo/article/articleDefault.png', '2018-01-06');
+(19, 1, 'Article long', 'Real-time management of transportation disruptions in forestry, Computers & Industrial Engineering', 'Real-time management of transportation disruptions in forestry, Computers & Industrial Engineering', 'TLM', 'ALG', NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 08:51:24', '2019-01-26 09:21:12', NULL, 'uploads/photo/articles/articleDefault.png', '2017-02-15'),
+(20, 1, 'Article court', 'A generalized partite-graph method for transportation data association, Transportation Research C: Emerging Technologies', 'A generalized partite-graph method for transportation data association, Transportation Research C: Emerging Technologies', 'ORN', 'ALG', NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 09:28:43', '2019-01-26 09:28:43', NULL, 'uploads/photo/article/articleDefault.png', '2016-06-15'),
+(21, 1, 'Poster', 'Vehicle software updates distribution with SDN and cloud computing', 'Vehicle software updates distribution with SDN and cloud computing', 'TLM', 'ALG', NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 09:50:38', '2019-01-26 09:54:59', NULL, 'uploads/photo/articles/articleDefault.png', '2017-03-08'),
+(22, 1, 'Publication(Revue)', 'QOS des réseaux mesh', 'QOS des réseaux mesh', 'ORN', 'ALG', NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 09:54:21', '2019-01-26 09:54:21', NULL, 'uploads/photo/article/articleDefault.png', '2017-03-05'),
+(23, 1, 'Publication(Revue)', 'QOS dans les réseaux manet', 'QOS des réseaux mesh', 'Alg', 'ALG', NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 09:58:43', '2019-01-26 09:58:43', NULL, 'uploads/photo/article/articleDefault.png', '2016-01-12'),
+(24, 1, 'Livre', 'Travel demand corridors: Modelling approach and relevance in the planning process', 'Travel demand corridors: Modelling approach and relevance in the planning process', 'TLM', 'ALG', NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 10:00:26', '2019-01-26 10:00:26', NULL, 'uploads/photo/article/articleDefault.png', '2018-12-13'),
+(25, 1, 'Article court', 'l\'économie d\'énergie dans les réseaux mesh', 'Travel demand corridors: Modelling approach and relevance in the planning process', 'ORN', 'ALG', NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 10:02:01', '2019-01-26 10:02:01', NULL, 'uploads/photo/article/articleDefault.png', '2016-03-27'),
+(26, 1, 'Brevet', 'Eco-driving training and fuel consumption: Impact, heterogeneity and sustainability,', 'Eco-driving training and fuel consumption: Impact, heterogeneity and sustainability,', 'TLM', 'ALG', NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 10:04:47', '2019-01-26 10:04:47', NULL, 'uploads/photo/article/articleDefault.png', '2017-10-11');
 
 -- --------------------------------------------------------
 
@@ -188,13 +165,10 @@ CREATE TABLE `article_contact` (
 --
 
 INSERT INTO `article_contact` (`id`, `contact_id`, `article_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, '2018-12-05 23:00:00', NULL),
-(2, 1, 1, '2018-12-03 23:00:00', NULL),
-(3, 1, 14, '2018-12-05 18:26:18', '2018-12-05 18:26:18'),
-(4, 4, 14, '2018-12-05 18:26:18', '2018-12-05 18:26:18'),
-(17, 1, 3, '2018-12-25 14:26:12', '2018-12-25 14:26:12'),
-(15, 1, 18, '2018-12-25 13:43:46', '2018-12-25 13:43:46'),
-(14, 1, 15, '2018-12-06 08:30:13', '2018-12-06 08:30:13');
+(24, 8, 24, '2019-01-26 10:00:26', '2019-01-26 10:00:26'),
+(23, 6, 21, '2019-01-26 09:55:00', '2019-01-26 09:55:00'),
+(22, 8, 21, '2019-01-26 09:55:00', '2019-01-26 09:55:00'),
+(19, 6, 19, '2019-01-26 09:21:12', '2019-01-26 09:21:12');
 
 -- --------------------------------------------------------
 
@@ -215,21 +189,23 @@ CREATE TABLE `article_user` (
 --
 
 INSERT INTO `article_user` (`id`, `user_id`, `article_id`, `created_at`, `updated_at`) VALUES
-(1, 10, 1, '2018-05-08 09:54:16', '2018-05-08 09:54:16'),
-(8, 10, 2, '2018-05-08 10:38:00', '2018-05-08 10:38:00'),
-(11, 22, 6, '2018-05-09 05:13:27', '2018-05-09 05:13:27'),
-(12, 7, 7, '2018-12-05 16:43:37', '2018-12-05 16:43:37'),
-(13, 5, 8, '2018-12-05 18:01:05', '2018-12-05 18:01:05'),
-(15, 5, 10, '2018-12-05 18:03:25', '2018-12-05 18:03:25'),
-(16, 5, 11, '2018-12-05 18:03:43', '2018-12-05 18:03:43'),
-(17, 1, 12, '2018-12-05 18:24:22', '2018-12-05 18:24:22'),
-(18, 1, 13, '2018-12-05 18:26:09', '2018-12-05 18:26:09'),
-(19, 1, 14, '2018-12-05 18:26:18', '2018-12-05 18:26:18'),
-(36, 4, 15, '2018-12-06 08:30:13', '2018-12-06 08:30:13'),
-(42, 5, 16, '2018-12-09 15:58:11', '2018-12-09 15:58:11'),
-(44, 3, 4, '2018-12-10 14:20:05', '2018-12-10 14:20:05'),
-(45, 5, 18, '2018-12-25 13:43:46', '2018-12-25 13:43:46'),
-(47, 2, 3, '2018-12-25 14:26:12', '2018-12-25 14:26:12');
+(50, 4, 19, '2019-01-26 09:21:12', '2019-01-26 09:21:12'),
+(51, 10, 19, '2019-01-26 09:21:12', '2019-01-26 09:21:12'),
+(52, 3, 19, '2019-01-26 09:21:12', '2019-01-26 09:21:12'),
+(53, 2, 20, '2019-01-26 09:28:43', '2019-01-26 09:28:43'),
+(57, 20, 22, '2019-01-26 09:54:21', '2019-01-26 09:54:21'),
+(58, 2, 21, '2019-01-26 09:55:00', '2019-01-26 09:55:00'),
+(59, 10, 21, '2019-01-26 09:55:00', '2019-01-26 09:55:00'),
+(60, 18, 21, '2019-01-26 09:55:00', '2019-01-26 09:55:00'),
+(61, 3, 23, '2019-01-26 09:58:43', '2019-01-26 09:58:43'),
+(62, 7, 23, '2019-01-26 09:58:44', '2019-01-26 09:58:44'),
+(63, 8, 24, '2019-01-26 10:00:26', '2019-01-26 10:00:26'),
+(64, 11, 24, '2019-01-26 10:00:26', '2019-01-26 10:00:26'),
+(65, 19, 24, '2019-01-26 10:00:26', '2019-01-26 10:00:26'),
+(66, 7, 25, '2019-01-26 10:02:02', '2019-01-26 10:02:02'),
+(67, 9, 25, '2019-01-26 10:02:02', '2019-01-26 10:02:02'),
+(68, 21, 25, '2019-01-26 10:02:02', '2019-01-26 10:02:02'),
+(69, 18, 26, '2019-01-26 10:04:47', '2019-01-26 10:04:47');
 
 -- --------------------------------------------------------
 
@@ -253,10 +229,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `laboratoire`, `libelle`, `photo`, `description`, `quantity`, `created_at`, `updated_at`) VALUES
-(1, 3, 'DELL VOSTRO 3667 i3/4G/500GB/DVD/18.5', 'uploads/photo/materiels/1542666462.jpg', 'Catégorie : PCs de bureau & Unités centrales , Pc Fixe \r\n dell vostro 3667 i3/4g/500gb/18.5" kit clavier & souris intel® core™ i3 6100 3.7ghz processor 6eme generation memoire: ddr4 04gb disque', 4, NULL, '2018-12-25 09:39:09'),
-(7, 3, 'Microscope en métal Amscope M150C-I', 'uploads/photo/materiels/1545478384.jpg', 'Lentilles en verre optique - En métal - Sans fil - LED - Microscope pour étudiant en biologie', 4, '2018-12-22 10:33:04', '2018-12-22 13:08:38'),
-(4, 3, 'ARDUINO UNO', 'uploads/photo/materiels/1543256676.jpg', 'test', 3, '2018-11-26 17:24:36', '2018-12-03 14:33:42'),
-(8, 3, 'onduleur', 'uploads/photo/materiels/1545486970.jpg', 'Trust Onduleur 600 VA - Noir', 3, '2018-12-22 12:56:10', '2018-12-22 12:56:10');
+(10, 4, 'Lampes en verre flacons, béchers, esprit', 'uploads/photo/materiels/1548455649.jpg', 'Lampes en verre flacons, béchers, esprit', 9, '2019-01-25 21:34:09', '2019-01-26 12:54:35'),
+(11, 3, 'Onduleur line-interactive 700 VA / 230 V', 'uploads/photo/materiels/1548503086.jpg', 'L\'onduleur line-interactive APC Back-UPS 700VA fournit une alimentation par batterie temporaire, en cas de panne de courant. En plus de cela, il dispose d\'une fonction d\'analyse des pannes de batteries avec alerte précoce, permettant ainsi d\'effectuer à temps une maintenance préventive.', 10, '2019-01-26 10:44:46', '2019-01-26 10:45:33'),
+(9, 3, 'Arduino Uno SMD R3', 'uploads/photo/materiels/1548452770.jpg', 'The Arduino UNO is an open-source microcontroller board based on the Microchip ATmega328P microcontroller and developed by Arduino.cc.[2][3] The board is equipped with sets of digital and analog input/output (I/O)', 6, '2019-01-25 20:46:10', '2019-01-25 21:27:39');
 
 -- --------------------------------------------------------
 
@@ -283,8 +258,9 @@ CREATE TABLE `contacts` (
 --
 
 INSERT INTO `contacts` (`id`, `created_by`, `nom`, `prenom`, `photo`, `fonction`, `email`, `num_tel`, `partenaire_id`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'a', 'b', 'uploads/photo/contacts/1543947218.png', NULL, 'a@b.com', NULL, 1, NULL, '2018-12-04 17:13:38'),
-(4, NULL, 'a', 'b', 'uploads/photo/contacts/1543947218.png', NULL, 'a@b.com', NULL, 1, NULL, '2018-12-04 17:13:38');
+(6, 1, 'Potvin', 'Alexis', 'uploads/photo/contacts/1548495185.jpg', NULL, 'Alexis@potvin.com', NULL, 1, '2019-01-26 08:33:05', '2019-01-26 08:33:05'),
+(7, 1, 'Rhéaume', 'Parfait', 'uploads/photo/contacts/1548495688.jpg', NULL, 'Rheaume@parfait.com', '(555) 555-555-555', 1, '2019-01-26 08:41:28', '2019-01-26 08:41:28'),
+(8, 1, 'Mohammed', 'Chaouchi', 'uploads/photo/contacts/1548495785.jpg', NULL, 'chaouchi@mohammed', NULL, 2, '2019-01-26 08:43:05', '2019-01-26 08:43:05');
 
 -- --------------------------------------------------------
 
@@ -313,10 +289,9 @@ CREATE TABLE `equipes` (
 INSERT INTO `equipes` (`id`, `labo_id`, `chef_id`, `intitule`, `resume`, `achronymes`, `axes_recherche`, `photo`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 3, 2, 'EQUIPE SYSTÈMES COMMUNICANTS', 'La maitrise des systèmes d’informations, peut servir à développer certains services des réseaux comme le <b><i>e-learning</i></b>, la vente en ligne et la pertinence dans la recherche d’informations sur le web, entre autre la composition de services web, L\'équipe travaille aussi sur les antennes et leur performance qui va améliorer les performances en termes de débits des réseaux sans fil en optimisant la couche transmission.', 'ESC', NULL, 'uploads/photo/equipes/1544867465.png', '2018-05-02 17:24:49', '2018-12-15 08:51:05', NULL),
 (2, 3, 10, 'Système d\'information et connaissance', 'Dans les nouveaux contextes de traitement de l’information les données numériques sont devenues souvent:\r\n \r\n \r\nhétérogènes\r\nnon ou partiellement structurées\r\nvolumineuses\r\ndistribuées/réparties\r\ncréées en flux continue et rapide\r\n \r\n\r\n \r\nIl est devenu impératif de disposer de nouveaux modèles de:\r\n \r\nreprésentation,\r\ntransformation,\r\nrecherche,\r\nrecommandation,\r\néchange,\r\nsécurité,\r\nvisualisation\r\ninterprétation des données,\r\nqui soient appropriés à ces spécificités.', 'sidk', NULL, 'uploads/photo/equipes/1544867720.png', '2018-05-03 07:50:13', '2018-12-15 08:55:20', NULL),
-(3, NULL, 18, 'Réseau, services distribués et systèmes', '• formation sur l\'administration réseau (installation et configuration de tous les serveurs)\r\n• déploiement de réseaux\r\n• développement d\'applications réseaux\r\n• vidéosurveillance via un réseau wifi mesh\r\n• création, hébergement et maintenance de sites web\r\n• sécurisation d\'un réseau wifi avec un serveur d\'authentification radius professionnel pour les entreprises et les facultés\r\n• formation et déploiement d\'une solution de téléphonie sur ip utilisant l\'ipabx asterisk', 'RSDS', NULL, 'uploads/photo/equipes/1543534863.jpg', '2018-05-08 10:48:44', '2018-11-29 22:41:03', NULL),
-(4, NULL, 3, 'Ingénierie logicielle sécurisée', 'Omniprésence des systèmes informatiques dans la vie quotidienne\r\nSystèmes critiques : vérification du bon fonctionnement\r\n \r\nComplexité croissante des systèmes:\r\n-Conception et vérification complexes\r\n-Coûts et délais non maîtrisés\r\n \r\nIngénierie des exigences:\r\n-Modèles et langages pour la spécification des exigences\r\n-Méthodes et techniques pour valider et vérifier les exigences\r\n-Outils pour supporter la gestion traçabilité des exigences\r\n\r\nvérification &amp; Validation\r\n-Paradigme de correction par construction  \r\n-Combiner les différentes techniques de vérifications et de tests\r\n-Outils pour (semi-)automatiser le processus de vérification &amp; validation', 'ILS', NULL, 'uploads/photo/equipes/1543534987.jpg', '2018-05-08 11:11:11', '2018-11-29 22:43:07', NULL),
-(5, NULL, 21, 'Ingénierie logicielle sécurisée', 'Omniprésence des systèmes informatiques dans la vie quotidienne\r\nSystèmes critiques : vérification du bon fonctionnement\r\nComplexité croissante des systèmes:\r\n-Conception et vérification complexes\r\n-Coûts et délais non maîtrisés\r\nIngénierie des exigences:\r\n-Modèles et langages pour la spécification des exigences\r\n-Méthodes et techniques pour valider et vérifier les exigences\r\n-Outils pour supporter la gestion traçabilité des exigences\r\nvérification &amp; Validation\r\n-Paradigme de correction par construction  \r\n-Combiner les différentes techniques de vérifications et de tests\r\n-Outils pour (semi-)automatiser le processus de vérification &amp; validation', 'ILS', NULL, 'uploads/photo/equipes/1543535117.jpg', '2018-05-09 04:57:25', '2018-11-29 22:45:17', NULL),
-(7, NULL, 21, 'Génie Logiciel', '<p>genie <b>logiciel</b></p>', 'GL', '<p><u>axes&nbsp;</u><a target="_blank" rel="nofollow" href="https://www.univ-tlemcen.dz/fr">https://www.univ-tlemcen.dz/fr</a> </p>', 'uploads/photo/equipes/1543533579.jpg', '2018-11-29 22:19:39', '2018-11-29 22:19:39', NULL);
+(9, 3, 18, 'RESEAU,SERVICES ET SYSTÈMES DISTRIBUÉS', '<p>\r\n\r\n• formation sur l\'administration réseau (installation et configuration de tous les serveurs)<br>• déploiement de réseaux<br>• développement d\'applications réseaux<br>• vidéosurveillance via un réseau wifi mesh<br>• création, hébergement et maintenance de sites web<br>• sécurisation d\'un réseau wifi avec un serveur d\'authentification radius professionnel pour les entreprises et les facultés<br>• formation et déploiement d\'une solution de téléphonie sur ip utilisant l\'ipabx asterisk\r\n\r\n<br></p>', 'RSD', '<p>\r\n\r\n• qualité de service, économie d\'énergie et sécurité des réseaux sans fil (ghiloubi, belhocine)<br>• les réseaux véhiculaires (hamza cherif, sedjelmaci)<br>• la radio cognitive (bendaouad, belhabi)<br>• les réseaux de capteurs (benaissa, bengheni, benmansour)<br>• le cloud computing (settouti, bouizem, younsi) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \r\n\r\n<br></p>', 'uploads/photo/equipes/materielDefault.png', '2019-01-25 20:05:22', '2019-01-25 20:05:22', NULL),
+(10, 4, 25, 'Chimie organique, substances naturelles et analyse', '<p>Chimie organique, substances naturelles et analyse<br></p>', 'LRC', '<p>\r\n\r\nLa chimie analytique et de l’environnement sont des domaines de recherche importants au département de chimie. La métabolomique est au cœur des projets de recherche de la <a target="_blank" rel="nofollow" href="https://chimie.uqam.ca/corps-professoral/professeurs/professeur/sleno.lekha/">Pr Sleno</a>&nbsp;grâce à des techniques de chromatographie liquide et spectrométrie de masse de pointe, tandis que le <a target="_blank" rel="nofollow" href="https://chimie.uqam.ca/corps-professoral/professeurs/professeur/tra.huu/">Pr Van Tra</a>&nbsp;s’intéresse à l’analyse des contaminants de l’environnement et en milieu de travail. Pour sa part, le <a target="_blank" rel="nofollow" href="https://chimie.uqam.ca/corps-professoral/professeurs/professeur/belanger.daniel/">Pr. Bélanger</a>&nbsp;développe des outils électrochimiques pour le traitement de l’ammoniaque et du CO2. La <a target="_blank" rel="nofollow" href="https://chimie.uqam.ca/corps-professoral/professeurs/professeur/marcotte.isabelle/">Pr. Marcotte</a>&nbsp;s’intéresse à caractériser au niveau moléculaire l’interaction des contaminants avec les microalgues. Enfin, le <a target="_blank" rel="nofollow" href="https://chimie.uqam.ca/corps-professoral/professeurs/professeur/dewez.david/">Pr. Dewez</a>, étudie l’impact des contaminants organiques et métalliques sur le phytoplancton. Il s’intéresse non seulement à l’absorption et aux effets toxicologiques, mais également à la bioaccumulation et au potentiel d’utilisation des microalgues en phytoremédiation.\r\n\r\n<br></p>', 'uploads/photo/equipes/1548509337.jpg', '2019-01-26 12:15:18', '2019-01-26 12:33:49', NULL),
+(11, 4, NULL, 'Physique théorique', '<p>Physique théorique<br></p>', 'LRP', '<p>\n\ncollisions atomiques, principe variationnel de Schwinger, excitation atomique, sections efficaces, collisions ions multichargés-atomes, saturation des sections efficaces.\n\n<br></p>', 'uploads/photo/equipes/1548508631.jpg', '2019-01-26 12:17:11', '2019-01-26 12:17:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -400,22 +375,31 @@ CREATE TABLE `materiels` (
 --
 
 INSERT INTO `materiels` (`id`, `proprietaireEquipe`, `category_id`, `numero`, `proprietaire`, `created_at`, `updated_at`) VALUES
-(1, NULL, NULL, '1237', NULL, '2018-11-19 16:07:56', '2018-11-20 10:07:07'),
-(6, NULL, NULL, '45643', 11, '2018-11-19 21:25:13', '2018-11-20 08:57:07'),
-(26, 1, 4, '15432566726', NULL, '2018-11-28 12:41:49', '2018-11-29 21:45:54'),
-(24, 2, 4, '198', NULL, '2018-11-27 21:49:09', '2018-11-29 21:45:28'),
-(39, NULL, 1, '1', NULL, '2018-11-29 18:29:03', '2018-11-29 19:21:43'),
-(40, 4, 1, '2', NULL, '2018-11-29 19:16:30', '2018-11-29 19:18:35'),
-(41, NULL, 4, '15432566798', NULL, '2018-12-03 14:33:42', '2018-12-03 14:33:42'),
-(51, NULL, 1, '6', 3, '2018-12-25 09:39:09', '2018-12-25 09:39:09'),
-(43, NULL, 7, '15454783881', NULL, '2018-12-22 10:33:08', '2018-12-22 10:33:08'),
-(44, NULL, 7, '15454783882', NULL, '2018-12-22 10:33:08', '2018-12-22 10:33:08'),
-(45, NULL, 7, '15454783883', NULL, '2018-12-22 10:33:08', '2018-12-22 10:33:08'),
-(46, NULL, 7, '15454783884', NULL, '2018-12-22 10:33:08', '2018-12-22 10:33:08'),
-(47, NULL, 1, '454654', NULL, '2018-12-22 12:23:31', '2018-12-22 12:23:31'),
-(48, NULL, 8, '15454869710', NULL, '2018-12-22 12:56:11', '2018-12-22 12:56:11'),
-(49, NULL, 8, '15454869711', NULL, '2018-12-22 12:56:11', '2018-12-22 12:56:11'),
-(50, NULL, 8, '15454869712', NULL, '2018-12-22 12:56:11', '2018-12-22 12:56:11');
+(60, NULL, 10, '15484556492', NULL, '2019-01-25 21:34:09', '2019-01-25 21:34:09'),
+(59, NULL, 10, '15484556491', NULL, '2019-01-25 21:34:09', '2019-01-25 21:34:09'),
+(58, 10, 10, '15484556490', NULL, '2019-01-25 21:34:09', '2019-01-26 12:52:26'),
+(57, NULL, 9, '1234', 14, '2019-01-25 21:27:39', '2019-01-25 21:28:00'),
+(56, NULL, 9, '15484527704', NULL, '2019-01-25 20:46:10', '2019-01-25 20:46:10'),
+(55, NULL, 9, '15484527703', NULL, '2019-01-25 20:46:10', '2019-01-25 20:46:10'),
+(54, NULL, 9, '15484527702', NULL, '2019-01-25 20:46:10', '2019-01-25 20:46:10'),
+(53, 2, 9, '15484527701', NULL, '2019-01-25 20:46:10', '2019-01-25 21:04:24'),
+(52, NULL, 9, '15484527700', 10, '2019-01-25 20:46:10', '2019-01-25 21:15:49'),
+(61, NULL, 10, '15484556493', 25, '2019-01-25 21:34:09', '2019-01-26 13:04:46'),
+(62, NULL, 10, '15484556494', NULL, '2019-01-25 21:34:09', '2019-01-25 21:34:09'),
+(63, NULL, 10, '15484556495', NULL, '2019-01-25 21:34:09', '2019-01-25 21:34:09'),
+(64, NULL, 10, '15484556496', NULL, '2019-01-25 21:34:09', '2019-01-25 21:34:09'),
+(65, NULL, 10, '15484556497', NULL, '2019-01-25 21:34:09', '2019-01-25 21:34:09'),
+(66, NULL, 11, '15485030860', NULL, '2019-01-26 10:44:46', '2019-01-26 10:44:46'),
+(67, NULL, 11, '15485030861', NULL, '2019-01-26 10:44:46', '2019-01-26 10:44:46'),
+(68, NULL, 11, '15485030862', NULL, '2019-01-26 10:44:46', '2019-01-26 10:44:46'),
+(69, NULL, 11, '15485030863', NULL, '2019-01-26 10:44:46', '2019-01-26 10:44:46'),
+(70, NULL, 11, '15485030864', NULL, '2019-01-26 10:44:46', '2019-01-26 10:44:46'),
+(71, NULL, 11, '15485030865', NULL, '2019-01-26 10:44:46', '2019-01-26 10:44:46'),
+(72, NULL, 11, '15485030866', NULL, '2019-01-26 10:44:46', '2019-01-26 10:44:46'),
+(73, 2, 11, '15485030867', NULL, '2019-01-26 10:44:46', '2019-01-26 10:46:15'),
+(74, NULL, 11, '15485030868', NULL, '2019-01-26 10:44:46', '2019-01-26 10:44:46'),
+(75, 1, 11, '123456', NULL, '2019-01-26 10:45:33', '2019-01-26 10:45:54'),
+(76, NULL, 10, '1234123', 26, '2019-01-26 12:54:35', '2019-01-26 13:02:47');
 
 -- --------------------------------------------------------
 
@@ -510,7 +494,7 @@ CREATE TABLE `parametres` (
 
 INSERT INTO `parametres` (`id`, `directeur`, `nom`, `logo`, `created_at`, `updated_at`, `achronymes`, `photo`, `apropos`) VALUES
 (3, 10, 'Labo de recherche d\'informatique', '/uploads/photo/labos/1548259215.png', '2018-11-25 21:34:18', '2019-01-23 15:00:34', 'LRIT', '/uploads/photo/labos/laboImgDefault.png', 'La recherche <u>scientifique</u> constitue un enjeu déterminant au 21éme siècle eu égard aux défis technologiques et à la mondialisation qui sera le champ de confrontation entre les nations industrialisées et modernes, confrontation qui risque de reléguer au second plan les sociétés qui ne se donnent pas les moyens de se développer. Pour redynamiser les secteurs de la recherche, l\'Algérie a promulgué un ensemble de textes réglementaires et notamment la Loi n°98/11 du 22 Août 1998 portant loi d\'orientation et de programme à projection quinquennale 1998/2000, établi un plan national de la recherche scientifique (PNR) et institué un fonds national de la recherche scientifique et du développement technologique (FNR) chargé du financement de la recherche. En application de la Loi n° 98/11 sus-citée et du Décret exécutif n° 99/244 du 31/10/1999 fixant les règles de création, d\'organisation et de fonctionnement du laboratoire de recherche, tout enseignant chercheur ou chercheur associé peut introduire un dossier de proposition de création d\'un laboratoire de recherche. Le laboratoire de recherche est chargé de l\'exécution d\'un ou plusieurs thèmes de recherche scientifique et de développement technologique relatifs aux programmes nationaux de recherche (Art. 10 de la Loi 98/11). La proposition doit recevoir l\'aval du conseil scientifique de l\'établissement du rattachement.\r\n\r\nLe laboratoire de recherche a pour mission de réaliser des objectifs de recherche et de développement, exécuter des études et travaux de recherche et contribuer à l`acquisition du savoir, à l\'amélioration des connaissances, la formation pour et par la recherche et à la diffusion de l\'information scientifique et des résultats obtenus. Dirigé par un Directeur élu, il doit être constitué d\'au moins quatre équipes de recherche, chacune dirigée par un chercheur qualifié et constituée d\'au moins trois chercheurs. Le laboratoire de recherche est doté d\'un conseil de laboratoire chargé d`élaborer des programmes et d\'établir des états prévisionnels des recettes et des dépenses présentés par le directeur du laboratoire. Il est doté de l\'autonomie de gestion et soumis au contrôle financier à posteriori. Il est financé par les subventions du FNRSDT. Le laboratoire de recherche peut trouver ses propres sources de financement, dans le respect de la réglementation, en rapport avec ses activités de recherche par la conclusion de contrats de prestation de service avec des tiers. L`Université Abou Bekr Belkaid de Tlemcen contribué de manière concrète à la promotion de la recherche scientifique par le lancement de plusieurs projets de recherche et notamment la création de vingt laboratoires de recherche (créés durant l\'année 2000 par l\'arrêté n° 88 du 25/07/2000 -annexe1) et sept autres (créés durant l\'année 2001 par l\'arrêté n° 42 du 05/02/2001-annexe2) et cela dans divers thèmes de recherche scientifique tels que fixés par les programmes nationaux de recherche (PNR).'),
-(4, NULL, 'Laboratoire de chimie', '/uploads/photo/labos/laboImgDefault.png', '2018-12-15 22:15:15', '2018-12-15 22:15:15', 'LCT', '/uploads/photo/labos/laboLogoDefault.png', 'labo chimie');
+(4, 25, 'Laboratoire de chimie', '/uploads/photo/labos/1548510200.png', '2018-12-15 22:15:15', '2019-01-26 12:43:20', 'LCT', '/uploads/photo/labos/laboLogoDefault.png', 'labo chimie');
 
 -- --------------------------------------------------------
 
@@ -582,11 +566,9 @@ CREATE TABLE `project_contact` (
 --
 
 INSERT INTO `project_contact` (`id`, `contact_id`, `project_id`, `created_at`, `updated_at`) VALUES
-(7, 1, 1, '2018-12-06 09:33:17', '2018-12-06 09:33:17'),
-(8, 4, 1, '2018-12-06 09:33:17', '2018-12-06 09:33:17'),
-(3, 4, 6, '2018-12-06 08:59:34', '2018-12-06 08:59:34'),
-(11, 1, 7, '2018-12-09 15:37:56', '2018-12-09 15:37:56'),
-(9, 1, 8, '2018-12-09 15:23:26', '2018-12-09 15:23:26');
+(14, 8, 14, '2019-01-26 13:17:41', '2019-01-26 13:17:41'),
+(13, 8, 11, '2019-01-26 10:18:31', '2019-01-26 10:18:31'),
+(12, 7, 10, '2019-01-26 10:14:36', '2019-01-26 10:14:36');
 
 -- --------------------------------------------------------
 
@@ -597,7 +579,7 @@ INSERT INTO `project_contact` (`id`, `contact_id`, `project_id`, `created_at`, `
 CREATE TABLE `projets` (
   `id` int(10) UNSIGNED NOT NULL,
   `chef_id` int(10) UNSIGNED DEFAULT NULL,
-  `intitule` varchar(70) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `intitule` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `resume` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `type` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `partenaires` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -616,11 +598,11 @@ CREATE TABLE `projets` (
 --
 
 INSERT INTO `projets` (`id`, `chef_id`, `intitule`, `resume`, `type`, `partenaires`, `lien`, `detail`, `created_at`, `updated_at`, `deleted_at`, `photo`, `date_debut`, `date_fin`) VALUES
-(1, 2, 'la télésurveillance via un réseau wifi mesh', 'la télésurveillance via un réseau wifi mesh', 'Article long', NULL, 'https://mail.google.com/mail/u/0/#sent/15ca6f0fc20d43f6', '/uploads/projet/1525785953.pdf', '2018-05-08 11:25:53', '2018-05-08 11:25:53', NULL, 'uploads/photo/projets/projetDefault.png', '2018-11-01', NULL),
-(2, 18, 'la QOSd\'un lien satellite pour l\'accès internet', 'la QOSd\'un lien satellite pour l\'accès internet\r\n• un projet cnepru déposé au niveau de la dgrsdt et en attente de réponse', 'Livre', 'LRIT', 'https://mail.google.com/mail/u/0/#sent/15ca6f0fc20d43f6', '/uploads/projet/1525786052.pdf', '2018-05-08 11:27:32', '2019-01-22 20:21:19', NULL, 'uploads/photo/projets/projetDefault.png', '2018-12-02', NULL),
-(7, 2, 'projet test 1', 'test\r\nte\r\nte\r\nt\r\net\r\net\r\ne\r\nte\r\nte', 'Article court', NULL, NULL, NULL, '2018-12-06 09:08:39', '2018-12-09 15:37:56', NULL, 'uploads/photo/projets/projetDefault.png', '2019-01-01', NULL),
-(8, 4, 'projet test', 'projet test résumé', 'Poster', NULL, NULL, NULL, '2018-12-09 15:23:26', '2018-12-09 15:23:26', NULL, 'uploads/photo/projets/projetDefault.png', '2019-01-01', NULL),
-(9, 5, 'projettest', 'adadadaacda\r\nafafa', 'Brevet', NULL, NULL, NULL, '2019-01-22 20:10:11', '2019-01-22 20:10:41', NULL, 'uploads/photo/projets/projetDefault.png', '2019-01-22', '2019-01-24');
+(10, 2, 'Investigating the impact of quality management systems on business performance ,', 'Investigating the impact of quality management systems on business performance ,', 'Projet type', NULL, NULL, NULL, '2019-01-26 10:14:36', '2019-01-26 10:14:36', NULL, 'uploads/photo/projets/projetDefault.png', '2017-01-04', '2019-02-03'),
+(11, 4, 'Multi-commodity location-routing: Flow intercepting formulation and branch-and-cut algorithm', 'Multi-commodity location-routing: Flow intercepting formulation and branch-and-cut algorithm', 'projet type', NULL, NULL, NULL, '2019-01-26 10:18:31', '2019-01-26 10:18:31', NULL, 'uploads/photo/projets/projetDefault.png', '2016-01-13', '2018-12-20'),
+(12, 15, 'Erratum to: Approximating the length of Chinese postman tours,', 'Erratum to: Approximating the length of Chinese postman tours,', 'projet Type', NULL, NULL, NULL, '2019-01-26 10:20:39', '2019-01-26 10:20:39', NULL, 'uploads/photo/projets/projetDefault.png', '2019-01-26', '2019-01-31'),
+(13, 2, 'Node stability-based routing in wireless mesh networks', 'Node stability-based routing in wireless mesh networks', 'projet type', NULL, NULL, NULL, '2019-01-26 10:33:38', '2019-01-26 10:33:38', NULL, 'uploads/photo/projets/projetDefault.png', '2015-01-01', '2018-02-15'),
+(14, 25, 'Microscopie à contraste de phase', 'Microscopie à\r\ncontraste de\r\nphase', 'projet type', NULL, NULL, NULL, '2019-01-26 13:17:40', '2019-01-26 13:17:40', NULL, 'uploads/photo/projets/projetDefault.png', '2015-01-28', '2019-01-17');
 
 -- --------------------------------------------------------
 
@@ -641,19 +623,16 @@ CREATE TABLE `projet_user` (
 --
 
 INSERT INTO `projet_user` (`id`, `user_id`, `projet_id`, `created_at`, `updated_at`) VALUES
-(22, 1, 1, '2018-12-06 09:33:17', '2018-12-06 09:33:17'),
-(23, 3, 1, '2018-12-06 09:33:17', '2018-12-06 09:33:17'),
-(24, 7, 1, '2018-12-06 09:33:17', '2018-12-06 09:33:17'),
-(25, 2, 8, '2018-12-09 15:23:26', '2018-12-09 15:23:26'),
-(26, 3, 8, '2018-12-09 15:23:26', '2018-12-09 15:23:26'),
-(29, 3, 7, '2018-12-09 15:37:56', '2018-12-09 15:37:56'),
-(30, 4, 7, '2018-12-09 15:37:56', '2018-12-09 15:37:56'),
-(32, 3, 9, '2019-01-22 20:10:41', '2019-01-22 20:10:41'),
-(33, 2, 2, '2019-01-22 20:21:20', '2019-01-22 20:21:20'),
-(34, 16, 2, '2019-01-22 20:21:20', '2019-01-22 20:21:20'),
-(35, 18, 2, '2019-01-22 20:21:20', '2019-01-22 20:21:20'),
-(36, 19, 2, '2019-01-22 20:21:20', '2019-01-22 20:21:20'),
-(37, 20, 2, '2019-01-22 20:21:20', '2019-01-22 20:21:20');
+(38, 4, 10, '2019-01-26 10:14:36', '2019-01-26 10:14:36'),
+(39, 7, 10, '2019-01-26 10:14:36', '2019-01-26 10:14:36'),
+(40, 11, 11, '2019-01-26 10:18:31', '2019-01-26 10:18:31'),
+(41, 15, 11, '2019-01-26 10:18:31', '2019-01-26 10:18:31'),
+(42, 20, 11, '2019-01-26 10:18:31', '2019-01-26 10:18:31'),
+(43, 20, 12, '2019-01-26 10:20:39', '2019-01-26 10:20:39'),
+(44, 3, 13, '2019-01-26 10:33:38', '2019-01-26 10:33:38'),
+(45, 4, 13, '2019-01-26 10:33:38', '2019-01-26 10:33:38'),
+(46, 24, 14, '2019-01-26 13:17:40', '2019-01-26 13:17:40'),
+(47, 26, 14, '2019-01-26 13:17:40', '2019-01-26 13:17:40');
 
 -- --------------------------------------------------------
 
@@ -694,6 +673,15 @@ CREATE TABLE `stages` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Contenu de la table `stages`
+--
+
+INSERT INTO `stages` (`id`, `user_id`, `partenaire_id`, `description`, `from`, `to`, `created_at`, `updated_at`) VALUES
+(1, 24, 1, 'stage description 1 (laboratoire de paris)', '2019-01-26', '2019-02-04', '2019-01-26 10:38:03', '2019-01-26 10:38:03'),
+(2, 23, 2, 'Stage description 2 (hopital tlemcen)', '2019-01-03', '2019-01-10', '2019-01-26 10:38:41', '2019-01-26 10:38:41'),
+(3, 22, 1, 'Stage desciption 2 (laboratoire de paris)', '2019-02-06', '2019-02-20', '2019-01-26 10:39:18', '2019-01-26 10:39:18');
+
 -- --------------------------------------------------------
 
 --
@@ -723,10 +711,10 @@ CREATE TABLE `theses` (
 --
 
 INSERT INTO `theses` (`id`, `coencadreur_int`, `encadreur_int`, `coencadreur_ext`, `user_id`, `titre`, `sujet`, `mots_cle`, `date_debut`, `date_soutenance`, `detail`, `membre`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, NULL, NULL, NULL, 22, 'QOS des réseaux mesh', 'QOS des réseaux mesh', NULL, '2015-05-02', NULL, NULL, NULL, '2018-05-03 08:27:39', '2018-05-08 11:32:34', NULL),
-(3, NULL, NULL, NULL, 20, 'la QOS dans les réseaux manet', 'la QOS dans les réseaux manet', NULL, '2017-05-02', NULL, '/uploads/these/1525785786.pdf', NULL, '2018-05-08 11:23:06', '2018-05-08 11:23:06', NULL),
-(4, 3, 4, 1, 2, 'abc', 'testte sttesttes  ttesttest testtestte st  test', NULL, '2018-08-26', '2019-07-31', NULL, NULL, '2018-12-13 17:55:04', '2018-12-23 20:31:40', NULL),
-(5, 7, 2, NULL, 5, 'abc2', 'test2 test2 test2 test2 test2', NULL, '2018-12-23', '2019-01-16', NULL, NULL, '2018-12-23 21:29:35', '2018-12-23 21:29:35', NULL);
+(6, NULL, 4, NULL, 16, 'QOS des réseaux mesh', 'QOS des réseaux mesh', NULL, '2014-01-05', '2017-02-16', NULL, NULL, '2019-01-25 22:14:15', '2019-01-25 22:14:15', NULL),
+(7, NULL, 8, NULL, 7, 'QOS dans les réseaux manet', 'QOS dans les réseaux manet', NULL, '2015-03-08', '2018-04-15', NULL, NULL, '2019-01-26 08:13:39', '2019-01-26 08:13:39', NULL),
+(8, 3, 4, 6, 20, 'l\'économie d\'énergie dans les réseaux mesh', 'l\'économie d\'énergie dans les réseaux mesh', NULL, '2013-05-11', '2018-01-18', NULL, NULL, '2019-01-26 08:17:21', '2019-01-26 08:44:12', NULL),
+(9, NULL, NULL, NULL, 14, 'l\'économie d\'énergie dans les réseaux mesh', 'l\'économie d\'énergie dans les réseaux mesh', NULL, '2015-01-07', '2018-01-09', NULL, NULL, '2019-01-26 10:08:44', '2019-01-26 10:08:44', NULL);
 
 -- --------------------------------------------------------
 
@@ -775,28 +763,28 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `equipe_id`, `name`, `prenom`, `email`, `photo`, `date_naissance`, `grade`, `password`, `num_tel`, `autorisation_public_num_tel`, `autorisation_public_photo`, `autorisation_public_date_naiss`, `lien_rg`, `lien_linkedin`, `remember_token`, `created_at`, `updated_at`, `role_id`) VALUES
-(1, 1, 'Admin', 'Admin', 'admin@admin.com', 'uploads/photo/users/1544914261.png', '19/09/2060', 'MAA', '$2y$10$1YfcHqiZZhD/UG1SnEsVNOjUDeXE1/1JOFpu46vzur5LuRAZ7Onbi', '(054) 152-6396', NULL, NULL, NULL, NULL, NULL, 'VLyPvS52zV85VFnp2aqBxumZYxubDoONrfNH6cYzD1TtXBkkh9Mi14RsqAdj', '2018-04-30 16:29:22', '2018-12-15 21:51:01', 1),
+(1, 1, 'Admin', 'Admin', 'admin@admin.com', 'uploads/photo/users/1544914261.png', '19/09/2060', 'MCA', '$2y$10$o/L8EjG5jOpii6Ih1vLTme7zuJSuyHzkkT1XGY9I/5eMs9p/LhLv.', '(054) 152-6396', NULL, NULL, NULL, NULL, NULL, '5r83HtvQRI2jhIg6putJr2E27xNkR3gkjMByAmMOG27m4hsgTsOu6GXQDqxO', '2018-04-30 16:29:22', '2019-01-25 21:56:39', 1),
 (2, 1, 'MEKKIOUI', 'Zahera', 'mekkioui@zahera.com', 'uploads/photo/users/userDefault.png', '03/06/1972', 'Professeur', '$2y$10$p1jpG36vYZ4j8u7r.l6b4uM8Oi.dSH6E6LZK.fzoVNK2W2JkFDjZm', '(055) 632-9863', NULL, NULL, NULL, NULL, 'https://fr.linkedin.com/', 'sJmZTNIG0m3w9fcuQEO4kMQHyxjZaRG5aho3ypZjXGQ10hPJG28OTb4zS90q', '2018-05-02 17:37:52', '2018-05-02 18:03:13', 2),
 (3, 1, 'SMAHI', 'Ismail', 'smahi@ismail.com', 'uploads/photo/users/userDefault.png', '05/01/1976', 'MAA', '$2y$10$lYKy0vR6ZY5qOijusjBZjuI7cwhE7250U0YOszBst0MMFsumjNYlm', '(077) 961-2855', NULL, NULL, NULL, NULL, NULL, 'YiuxFb54aGEnFODjPbowByKMdOQ1D1LX7ar1SdQcUYEhUCDNaAvoHd7cXeM5', '2018-05-02 17:41:09', '2018-05-03 07:27:08', 1),
 (4, 1, 'BRIXI NIGASSA', 'Amine', 'brixinigassa@amine.com', 'uploads/photo/users/userDefault.png', '02/04/1965', 'MAB', '$2y$10$mowWYy77AyLMNotZAPKNQORwjHBQgwiiFyTOdSJBMtZYuhbBLX1GS', '(066) 958-3242', NULL, NULL, NULL, NULL, NULL, NULL, '2018-05-02 17:46:25', '2018-05-03 09:05:07', 2),
-(5, 1, 'CHAOUCH REMDANE', 'lAMIA', 'chaouchremdane@lamia.com', 'uploads/photo/users/userDefault.png', '08/03/1973', 'MAA', '$2y$10$jQSXvwUd41Ta6R/D9l10z.bh7bCMMgECpW2Er7SoaoGNfXN5Yjs/C', '(055) 219-9635', 0, 0, 0, 'https://www.google.dz/search?q=researchgate&oq=research&aqs=chrome.1.69i57j0j35i39l2j0l2.5052j1j7&sourceid=chrome&ie=UTF-8', 'https://fr.slideshare.net', NULL, '2018-05-03 07:32:24', '2018-05-03 07:32:24', 2),
 (7, 1, 'KHITRI', 'Souad', 'khitri@souad.com', 'uploads/photo/users/userDefault.png', '05/08/1970', 'MAA', '$2y$10$3fHbMuf9zawey.H27n4VZuHJ.zRy7iObqQh3tfujmwtU2HkvzzorW', '(012) 365-4789', 0, 0, 0, NULL, NULL, NULL, '2018-05-03 07:35:53', '2018-05-03 07:35:53', 2),
 (8, 1, 'MERAD BOUDIA', 'Djalal', 'meradboudia@djalal.com', 'uploads/photo/users/userDefault.png', '05/01/1970', 'MAA', '$2y$10$5wgscXFdZqe12zUi3G83putV2jcIjqYaGaDEjEBBwwTxzYtPNZKJO', '(023) 698-5477', 0, NULL, 0, NULL, NULL, NULL, '2018-05-03 07:40:34', '2018-05-03 07:40:34', 2),
-(9, 1, 'ETCHIALI', 'Abdelhak', 'etchiali@abdelhak.com', 'uploads/photo/users/img2.jpg', '05/01/1980', 'MAA', '$2y$10$kdv08t1w5luoun9tWWIANOFJUHNpW78xoFQatv1fm8u1MMvOcVoo.', '(012) 365-4789', 0, NULL, 0, NULL, NULL, '3LsCAfnOe4TLpeHuytmkc3tnmbLJtmOgXEDkzutyBT2PYdTw7geTWWsVhDYy', '2018-05-03 07:42:23', '2018-12-17 07:28:12', 3),
-(10, 2, 'CHIKH', 'Azeddine', 'chikh@azeddine.com', 'uploads/photo/users/1525341298.jpg', '12/12/1956', 'Professeur', '$2y$10$Wix1gRO/vmmsLXDgc38gKOY9xz9.2r7AzVJVY3uUJqA1DHlORbptK', '(012) 365-4782', 0, NULL, NULL, NULL, NULL, 'V938XvkeN7X6k1SmtpDJALzz7QOKJopMmxpnMy8mbEbo7DQMJ0rS5pbUsVxy', '2018-05-03 07:54:59', '2018-12-17 07:29:38', 3),
+(9, 1, 'ETCHIALI', 'Abdelhak', 'etchiali@abdelhak.com', 'uploads/photo/users/img2.jpg', '05/01/1980', 'MCA', '$2y$10$kdv08t1w5luoun9tWWIANOFJUHNpW78xoFQatv1fm8u1MMvOcVoo.', '(012) 365-4789', NULL, NULL, NULL, NULL, NULL, '3LsCAfnOe4TLpeHuytmkc3tnmbLJtmOgXEDkzutyBT2PYdTw7geTWWsVhDYy', '2018-05-03 07:42:23', '2019-01-25 21:58:28', 3),
+(10, 2, 'CHIKH', 'Azeddine', 'chikh@azeddine.com', 'uploads/photo/users/1525341298.jpg', '12/12/1956', 'Professeur', '$2y$10$Wix1gRO/vmmsLXDgc38gKOY9xz9.2r7AzVJVY3uUJqA1DHlORbptK', '(012) 365-4782', 0, NULL, NULL, NULL, NULL, '1VdqGNpZZSOkuiPnsWoFGGcusBfLCGaOaUOvx42hENmOaslsANiI6Bclydoc', '2018-05-03 07:54:59', '2018-12-17 07:29:38', 3),
 (11, 2, 'MAHFOUD', 'Houari', 'mahfouf@houari.com', 'uploads/photo/users/userDefault.png', '05/01/1969', 'MCA', '$2y$10$waXrpjmQAq/igaqOLQHyQu3vU/y1BLCBWx9UEFzzMWEsrWvnDEhyW', '(012) 369-6969', 0, NULL, 0, NULL, NULL, 'ACMkJuBbNjGa6vzCEfDTc48kVUanoq8sSdw427ekqBrS1aEqREn7MSjjUokN', '2018-05-03 08:01:55', '2018-05-03 08:01:55', 2),
 (12, 2, 'ELYEBDRI', 'Zeyneb', 'elyebdri@zeyneb.com', 'uploads/photo/users/userDefault.png', '08/03/1973', 'MAA', '$2y$10$2XW.9qkcIsR6a2h2nY68JeFmhXEpYjmDe7mmWXjkX28bCsq0gQdzG', '(012) 587-4936', 0, NULL, 0, NULL, NULL, NULL, '2018-05-03 08:03:44', '2018-05-03 08:03:44', 2),
-(13, 2, 'ILES', 'Nawel', 'iles@nawel.com', 'uploads/photo/users/userDefault.png', '12/12/1969', 'MAB', '$2y$10$o/L8EjG5jOpii6Ih1vLTme7zuJSuyHzkkT1XGY9I/5eMs9p/LhLv.', '(055) 542-9632', NULL, NULL, NULL, NULL, NULL, NULL, '2018-05-03 08:05:41', '2018-05-03 08:05:41', 2),
 (14, 2, 'KARA TERKI', 'Hadjira', 'karaterki@hadjira.com', 'uploads/photo/users/userDefault.png', '05/01/1970', 'MAA', '$2y$10$BVJvIYSbopKTCh/jy/iDbOwGtTS3aN5jW3TBp5rVuj/Z7iNQwjVEy', '(055) 542-3169', 0, NULL, NULL, NULL, NULL, NULL, '2018-05-03 08:07:51', '2018-05-03 08:07:51', 2),
-(15, 2, 'MATALLAH', 'Houcine', 'matallah@houcine.com', 'uploads/photo/users/userDefault.png', '05/01/1963', 'MAB', '$2y$10$8/jmqUehqdrG09PX0NTVZu7ZC4o/3JF1.PuGx0qbhYTQRtHmFm9pm', '(054) 226-8256', 0, NULL, 0, NULL, NULL, 'O3R348HoHKzsYqBUAxJnrVDcpqYoKr6yCKPX0oXqWquto04TRRvyYwtCuTnc', '2018-05-03 08:10:58', '2018-05-03 08:10:58', 2),
+(15, 2, 'MATALLAH', 'Houcine', 'matallah@houcine.com', 'uploads/photo/users/userDefault.png', '05/01/1963', 'Doctorant', '$2y$10$8/jmqUehqdrG09PX0NTVZu7ZC4o/3JF1.PuGx0qbhYTQRtHmFm9pm', '(054) 226-8256', NULL, NULL, NULL, NULL, NULL, 'O3R348HoHKzsYqBUAxJnrVDcpqYoKr6yCKPX0oXqWquto04TRRvyYwtCuTnc', '2018-05-03 08:10:58', '2019-01-25 21:53:45', 2),
 (16, 1, 'BENMOUSSAT', 'Chems Eddine', 'benmoussat@chemseddine.com', 'uploads/photo/users/userDefault.png', '05/01/1980', 'Doctorant', '$2y$10$Wix1gRO/vmmsLXDgc38gKOY9xz9.2r7AzVJVY3uUJqA1DHlORbptK', '(043) 629-6852', NULL, NULL, NULL, NULL, NULL, NULL, '2018-05-03 08:24:12', '2018-05-06 08:27:20', 2),
-(18, 3, 'DIDI', 'Fedoua', 'didi@fedoua.com', 'uploads/photo/users/1525783964.gif', '05/02/1970', 'MCA', '$2y$10$SK08b5FVriY3ZbmCx3XiU.../hdo1vTHqooXZMpYv9cyIweLhddny', '(055) 543-2698', 0, NULL, 0, NULL, NULL, 'pLhY0STEZPHJBtdGP14Wz8xs1g3cth4tRYkLJuIKNoBt2GNxrajR1pJ6qw1s', '2018-05-08 10:52:44', '2018-05-08 10:52:44', 2),
-(19, 3, 'MANA', 'Mohamed', 'mana@mohamed.com', 'uploads/photo/users/userDefault.png', '12/12/1970', 'MCA', '$2y$10$OWUFM23uVs.uPhQ06D5aD.CsABlysk9anrrIveNifbsoLw1kFr6qu', '(055) 582-3164', 0, NULL, 0, NULL, NULL, NULL, '2018-05-08 11:04:32', '2018-05-08 11:04:32', 2),
-(20, 4, 'BAMBRIK', 'Ilies', 'bambrik@ilies.com', 'uploads/photo/users/userDefault.png', '09/06/1990', 'Doctorant', '$2y$10$3yzcRfDGE5mk5LczAAfIz.M8eza4ogPlQgCiOS4Z99/DYovbCqxh.', NULL, NULL, NULL, NULL, NULL, NULL, 'YFweYhhEGo3Te6T1briI9rHGb1t9LPuvlVeIPjYhngIiDHFim4zCUZGOty3w', '2018-05-08 11:06:10', '2018-12-17 07:44:20', 2),
-(21, 4, 'MESSABIHI', 'Mohamed', 'messabihi@mohamed.com', 'uploads/photo/users/1525785364.png', '09/01/1980', 'Professeur', '$2y$10$JZRRO1Mmsg184Fhgvvd6tuUt9MkDRtkr4pQ9ZFv8.oJhZoaKxADoq', '(077) 014-1363', 0, NULL, 0, NULL, NULL, NULL, '2018-05-08 11:16:04', '2018-05-08 11:16:04', 2),
+(18, 9, 'DIDI', 'Fedoua', 'didi@fedoua.com', 'uploads/photo/users/userDefault.png', '05/02/1970', 'MAA', '$2y$10$SK08b5FVriY3ZbmCx3XiU.../hdo1vTHqooXZMpYv9cyIweLhddny', '(055) 543-2698', NULL, NULL, NULL, NULL, NULL, 'pLhY0STEZPHJBtdGP14Wz8xs1g3cth4tRYkLJuIKNoBt2GNxrajR1pJ6qw1s', '2018-05-08 10:52:44', '2019-01-25 20:10:23', 2),
+(19, 9, 'MANA', 'Mohamed', 'mana@mohamed.com', 'uploads/photo/users/userDefault.png', '12/12/1970', 'MCA', '$2y$10$OWUFM23uVs.uPhQ06D5aD.CsABlysk9anrrIveNifbsoLw1kFr6qu', '(055) 582-3164', NULL, NULL, NULL, NULL, NULL, NULL, '2018-05-08 11:04:32', '2019-01-25 21:49:25', 2),
+(20, 9, 'BAMBRIK', 'Ilies', 'bambrik@ilies.com', 'uploads/photo/users/userDefault.png', '09/06/1990', 'Doctorant', '$2y$10$3yzcRfDGE5mk5LczAAfIz.M8eza4ogPlQgCiOS4Z99/DYovbCqxh.', NULL, NULL, NULL, NULL, NULL, NULL, 'YFweYhhEGo3Te6T1briI9rHGb1t9LPuvlVeIPjYhngIiDHFim4zCUZGOty3w', '2018-05-08 11:06:10', '2019-01-25 21:49:00', 2),
+(21, 9, 'MESSABIHI', 'Mohamed', 'messabihi@mohamed.com', 'uploads/photo/users/1548455999.png', '09/01/1980', 'Professeur', '$2y$10$JZRRO1Mmsg184Fhgvvd6tuUt9MkDRtkr4pQ9ZFv8.oJhZoaKxADoq', '(077) 014-1363', NULL, NULL, NULL, NULL, NULL, NULL, '2018-05-08 11:16:04', '2019-01-25 21:39:59', 2),
 (22, 2, 'TADLAOUI', 'Mohamed', 'mtadlaoui@hotmail.com', 'uploads/photo/users/1525800390.jpg', '04/08/1985', 'MCA', '$2y$10$X6kwpAgHJ1Q/kNFuYZMhTOd7Wg0pn1Hi0gcQeADy5HW6.AcMGJYge', '(077) 965-3214', NULL, NULL, NULL, NULL, 'https://www.linkedin.com/in/mohammedtadlaoui/', 'hXJXBjHxSxJjv4GTrzcOwKgd1L7EpZNl4BrY8K424YaZFv0ggalwke9pEJUO', '2018-05-08 15:26:30', '2018-05-09 05:02:44', 2),
-(23, 3, 'TRARI', 'ahlem', 'ferielbrikci96@gmail.com', 'uploads/photo/users/1525813432.png', NULL, 'Doctorant', '$2y$10$xEFwjzSnjYehdQuTs5cbuuCXG/QY3aE2UrnMX9MiGfIm04rzQHyIC', NULL, NULL, NULL, NULL, NULL, NULL, 'FLCLGujWgX1u2jdlhHeXQua0QBgbgWSzlX0HG8tT0CnebMK18L3Qj5oCFxZt', '2018-05-08 19:03:53', '2018-05-08 19:07:02', 2),
-(24, 5, 'Selaadi', 'yasamine', 'seladji@yasmine.com', 'uploads/photo/users/1525849492.jpg', '12/02/1990', 'MCB', '$2y$10$aeeKR3vLo0src3g4GH1pEONn.dUFwA7KQeNdm1VwehczyWRli61Pi', '(012) 579-9335', NULL, NULL, 0, NULL, NULL, 'rsc058CJNDI1A8E7DnktK4SXnLyHFwtdKhUt2cpuami9OoRynRPDvWbXw6QD', '2018-05-09 05:04:52', '2018-05-09 05:04:52', 2);
+(23, 9, 'TRARI', 'ahlem', 'ferielbrikci96@gmail.com', 'uploads/photo/users/1525813432.png', NULL, 'Doctorant', '$2y$10$xEFwjzSnjYehdQuTs5cbuuCXG/QY3aE2UrnMX9MiGfIm04rzQHyIC', NULL, NULL, NULL, NULL, NULL, NULL, 'FLCLGujWgX1u2jdlhHeXQua0QBgbgWSzlX0HG8tT0CnebMK18L3Qj5oCFxZt', '2018-05-08 19:03:53', '2019-01-25 21:48:10', 2),
+(24, 9, 'Selaadi', 'yasamine', 'seladji@yasmine.com', 'uploads/photo/users/1548456343.jpg', '12/02/1990', 'MCB', '$2y$10$aeeKR3vLo0src3g4GH1pEONn.dUFwA7KQeNdm1VwehczyWRli61Pi', '(012) 579-9335', NULL, NULL, NULL, NULL, NULL, 'rsc058CJNDI1A8E7DnktK4SXnLyHFwtdKhUt2cpuami9OoRynRPDvWbXw6QD', '2018-05-09 05:04:52', '2019-01-25 21:45:43', 2),
+(25, 10, 'Frank', 'Smith', 'Frank@Smith.com', 'uploads/photo/users/1548508779.jpg', NULL, 'Professeur', '$2y$10$vFD2gL1H6./dsQhA7T5OcOHS8B9w0BjVH.nN11eYFepval22GJcK.', NULL, NULL, NULL, NULL, NULL, NULL, 'eWf6sdKciy1IwP2eaGlkZFVEDIQNbltW7guQAYagqtKWkQuQJKXBSbDkSqkg', '2019-01-26 12:18:05', '2019-01-26 12:38:47', 3),
+(26, 11, 'Ariel', 'Flory', 'Ariel@Flory.com', 'uploads/photo/users/1548508864.jpg', NULL, 'Professeur', '$2y$10$oxadzi4c.1YDSrVArfPmx.tLGLroLbUfeWHcsddknpbsVVG3TGQsG', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 12:21:04', '2019-01-26 12:21:04', 2);
 
 --
 -- Index pour les tables exportées
@@ -988,7 +976,7 @@ ALTER TABLE `actualites`
 -- AUTO_INCREMENT pour la table `affecter`
 --
 ALTER TABLE `affecter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 --
 -- AUTO_INCREMENT pour la table `applications`
 --
@@ -998,32 +986,32 @@ ALTER TABLE `applications`
 -- AUTO_INCREMENT pour la table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT pour la table `article_contact`
 --
 ALTER TABLE `article_contact`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT pour la table `article_user`
 --
 ALTER TABLE `article_user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 --
 -- AUTO_INCREMENT pour la table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT pour la table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `equipes`
 --
 ALTER TABLE `equipes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT pour la table `evenements`
 --
@@ -1038,7 +1026,7 @@ ALTER TABLE `evenement_user`
 -- AUTO_INCREMENT pour la table `materiels`
 --
 ALTER TABLE `materiels`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 --
 -- AUTO_INCREMENT pour la table `migrations`
 --
@@ -1058,17 +1046,17 @@ ALTER TABLE `partenaires`
 -- AUTO_INCREMENT pour la table `project_contact`
 --
 ALTER TABLE `project_contact`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT pour la table `projets`
 --
 ALTER TABLE `projets`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT pour la table `projet_user`
 --
 ALTER TABLE `projet_user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT pour la table `roles`
 --
@@ -1078,12 +1066,12 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT pour la table `stages`
 --
 ALTER TABLE `stages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `theses`
 --
 ALTER TABLE `theses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT pour la table `these_contact`
 --
@@ -1093,7 +1081,7 @@ ALTER TABLE `these_contact`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- Contraintes pour les tables exportées
 --

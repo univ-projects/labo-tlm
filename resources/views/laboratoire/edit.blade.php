@@ -261,7 +261,7 @@
 		                        </div>
 		                  </div>
 
-		 
+
 
 
               </fieldset>
@@ -288,7 +288,7 @@
             <tbody>
               @foreach($equipes as $equipe)
               <tr>
-                <td>{{$equipe->nom}}</td>
+                <td>{{$equipe->intitule}}</td>
                 <td>{{$equipe->achronymes}}</td>
                 <td><a href="{{url('membres/'.$equipe->chef_id.'/details')}}">{{$equipe->name}} {{$equipe->prenom}}</a> </td>
                 <td></td>
@@ -401,24 +401,24 @@
                 <td>
                   <div class="btn-group">
 
-                    <form action="{{ url('membres/'.$membre->id)}}" method="post">
+                    <form action="{{ url('membres/'.$membre->user_id)}}" method="post">
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
 
-                        <a href="{{ url('membres/'.$membre->id.'/details')}}" class="btn btn-info">
+                        <a href="{{ url('membres/'.$membre->user_id.'/details')}}" class="btn btn-info">
                           <i class="fa fa-eye"></i>
                         </a>
 
-                        @if(Auth::user()->role->nom == 'admin' || (Auth::user()->role->nom == 'directeur' && Auth::user()->id==$laboDetail->directeur) || (Auth::user()->id==$membre->id))
+                        @if(Auth::user()->role->nom == 'admin' || (Auth::user()->role->nom == 'directeur' && Auth::user()->id==$laboDetail->directeur) || (Auth::user()->id==$membre->user_id))
 
 
-                        <a href="{{url('membres/'.$membre->id.'/edit')}}" class="btn btn-default">
+                        <a href="{{url('membres/'.$membre->user_id.'/edit')}}" class="btn btn-default">
                           <i class="fa fa-edit"></i>
                         </a>
 
 
-                         <a href="#supprimer{{ $membre->id }}Modal" role="button" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-                          <div class="modal fade" id="supprimer{{ $membre->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $membre->id }}ModalLabel" aria-hidden="true">
+                         <a href="#supprimer{{ $membre->user_id }}Modal" role="button" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                          <div class="modal fade" id="supprimer{{ $membre->user_id }}Modal" tabindex="-1" role="dialog" aria-labelledby="supprimer{{ $membre->user_id }}ModalLabel" aria-hidden="true">
                               <div class="modal-dialog">
                                   <div class="modal-content">
                                       <div class="modal-header">
@@ -431,7 +431,7 @@
                                           Voulez-vous vraiment effectuer la suppression ?
                                       </div>
                                       <div class="modal-footer">
-                                          <form class="form-inline" action="{{ url('membres/'.$membre->id)}}"  method="POST">
+                                          <form class="form-inline" action="{{ url('membres/'.$membre->user_id)}}"  method="POST">
                                               @method('DELETE')
                                               @csrf
                                           <button type="button" class="btn btn-light" data-dismiss="modal">Non</button>

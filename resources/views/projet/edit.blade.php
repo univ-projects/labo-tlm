@@ -132,16 +132,8 @@
                         <label class="col-xs-3 control-label">Type</label>
                         <div class="col-xs-9 inputGroupContainer">
                           <div style="width: 70%">
-                            <select name="type" class="form-control select">
-                              <option>{{ $projet -> type}}</option>
-                              <option>Poster</option>
-                              <option>Article court</option>
-                              <option>Article long</option>
-                              <option>Publication(Revue)</option>
-                              <option>Chapitre d'un livre</option>
-                              <option>Livre</option>
-                              <option>Brevet</option>
-                            </select>
+                            <input class="form-control" type="text" name="type" value="{{ $projet -> type}}">
+
                           </div>
                         </div>
                   </div>

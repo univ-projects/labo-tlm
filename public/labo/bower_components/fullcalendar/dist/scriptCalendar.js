@@ -12,7 +12,6 @@ $.ajax({
    async:false,
    success:function(data){
       events=data;
-      console.log('what should be in aarrr1',events);
     } })
 var renderPopup = function (jsEvent, start, end, calEvent) {
 var $popup = $('#calendar-popup');
@@ -150,10 +149,7 @@ scrollTime :  "8:00:00",
 axisFormat: 'h:mm a',
 timeFormat: 'h:mm A()',
 selectable: true,
-events: function(start, end, timezone, callback) {
-let arr = parselocalstorage('events')
-callback(arr);
-},
+events: events,
 eventColor: '#67aac9',
 eventClick: function (calEvent, jsEvent) {
 

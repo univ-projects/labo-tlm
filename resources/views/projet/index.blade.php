@@ -85,12 +85,12 @@
                       <a href="{{ url('projets/'.$projet->id.'/details')}} " class="btn btn-info">
                         <i class="fa fa-eye"></i>
                       </a>
-                      @if(Auth::user()->role->nom != 'membre' )
+                      @if(Auth::user()->role->nom == 'admin' )
                       <a href="{{ url('projets/'.$projet->id.'/edit')}}" class="btn btn-default">
                         <i class="fa fa-edit"></i>
                       </a>
                       @endif
-                      @if(Auth::user()->role->nom != 'membre' )
+                      @if(Auth::user()->role->nom == 'admin' )
                       <!-- <button type="submit" class="btn btn-danger">
                         <i class="fa fa-trash-o"></i>
                       </button> -->

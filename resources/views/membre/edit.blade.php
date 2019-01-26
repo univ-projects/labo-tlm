@@ -214,7 +214,9 @@
                             <div class="col-md-9 selectContainer ">
                               <div class="input-group"  style="width: 40%">
                                   <select name="equipe_id" class="form-control selectpicker">
-                                    <option value="{{$membre->equipe_id}}">{{$membre->equipe->intitule}}</option>
+																		@if(isset($membre->equipe))
+																			<option value="{{$membre->equipe_id}}">{{$membre->equipe->intitule}}</option>
+																		@endif
                                     @foreach($equipes as $equipe)
                                     <option value="{{$equipe->id}}">{{$equipe->intitule}}</option>
                                     @endforeach
@@ -339,6 +341,7 @@
 
 														</div>
 										</div>
+										
 
 
 

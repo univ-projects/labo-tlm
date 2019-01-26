@@ -28,8 +28,8 @@ class userRequest extends FormRequest
             'prenom' => 'required',
             'email' => 'required',
             'password' => 'required|min:6',
-            'grade' => 'required',
-            'equipe' => 'required'
+            'grade' => 'required'
+            
 
 
         ];

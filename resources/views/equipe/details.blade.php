@@ -102,7 +102,7 @@
       <div class="nav-tabs-custom">
        <ul class="nav nav-tabs">
               <li class="active"><a href="#apropos" data-toggle="tab">A propos</a></li>
-              @if(Auth::user()->role->nom == 'admin' || (Auth::user()->role->nom == 'directeur' && Auth::user()->id==$laboDetail->directeur) || (Auth::user()->id==$equipe->chef_id))
+              @if(Auth::user()->role->nom == 'admin' || (isset($equipe->labo->directeur) && Auth::user()->role->nom == 'directeur' && Auth::user()->id==$equipe->labo->directeur) || (Auth::user()->id==$equipe->chef_id))
 
               <li><a href="#modifier" data-toggle="tab">Modifier</a></li>
               @endif
@@ -147,6 +147,7 @@
             </li>
             <!-- END timeline item -->
             <!-- timeline item -->
+              @if($equipe->chef)
             <li>
               <i class="fa fa-user bg-aqua"></i>
 
@@ -160,6 +161,7 @@
                 </div>
               </div>
             </li>
+            @endif
             <!-- END timeline item -->
             <!-- timeline item -->
             <li>
@@ -181,7 +183,9 @@
               <h3 class="timeline-header"><a >Axes de recherche</a></h3>
 
                 <div class="timeline-body">
-                  {{$equipe->axes_recherche}}
+
+                  <?php echo strip_tags($equipe->axes_recherche, '<b><a><i><p>') ?>
+
                 </div>
               </div>
             </li>
@@ -245,7 +249,9 @@
                           <div class="input-group" style="width: 70%">
 
                             <select name="chef_id" class="form-control select2">
+                                @if($equipe->chef)
                               <option value="{{$equipe->chef->id}}">{{$equipe->chef->name}} {{$equipe->chef->prenom}}</option>
+                              @endif
                                @foreach($membres as $membre)
                               <option value="{{$membre->id}}">{{$membre->name}} {{$membre->prenom}}</option>
                                @endforeach
@@ -281,7 +287,7 @@
                           <label class="col-md-3 control-label">Axes de recherche</label>
                           <div class="col-md-9 inputGroupContainer">
                             <div style="width: 70%">
-                              <textarea name="axe_recherche" class="form-control" rows="3" placeholder="Entrez ..." id="txt2">{{$equipe->axes_recherche}}</textarea>
+                              <textarea name="axes_recherche" class="form-control" rows="3" placeholder="Entrez ..." id="txt2">{{$equipe->axes_recherche}}</textarea>
                             </div>
                           </div>
                       </div>
