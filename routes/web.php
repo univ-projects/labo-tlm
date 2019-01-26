@@ -22,7 +22,18 @@ use Illuminate\Support\Facades\Input;
 
 Route::prefix('front')->group(function () {
   Route::get('/', function () {
-      return view('front.multilab');
+    $labs= DB::select("SELECT * from parametres");
+    $ups =  DB::select("SELECT * from evenements where created_at >= now() ");
+    $last = DB::select("SELECT * from evenements where created_at < now() ");
+    $accs = DB::select("SELECT * from actualites order by updated_at desc");
+    $labss =  DB::select("SELECT * FROM equipes WHERE id IN (SELECT equipe_id FROM users WHERE id IN (SELECT auteur FROM actualites ORDER BY updated_at DESC))");
+      return view('front.multilab')->with([
+        'labs'=>$labs,
+        'ups'=>$ups,
+        'last'=>$last,
+        'accs'=>$accs,
+        'labss'=>$labss,
+    ]);
   });
 
 

@@ -6,7 +6,7 @@
 
     <section id="main-slider">
         <div class="owl-carousel">
-            <div class="item" style="background-image: url(images/slider/bg1.jpg);">
+            <div class="item" style="background-image: url(https://dylandimed.univ-tlemcen.dz/assets/uploads/20160614_131907.jpg);">
                 <div class="slider-inner">
                     <div class="container">
                         <div class="row">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div><!--/.item-->
-             <div class="item" style="background-image: url(images/slider/bg2.jpg);">
+             <div class="item" style="background-image: url(http://themes.webdevia.com/laboratory/wp-content/uploads/2014/09/slider.jpg);">
                 <div class="slider-inner">
                     <div class="container">
                         <div class="row">
@@ -43,8 +43,8 @@
         <div class="container">
 
             <div class="section-header">
-                <h2 class="section-title text-center wow fadeInDown">About Us</h2>
-                <p class="text-center wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
+                <h2 class="section-title text-center wow fadeInDown">A-Propos</h2>
+                <!-- <p class="text-center wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p> -->
             </div>
 
             <div class="row">
@@ -57,28 +57,31 @@
                 </div>
 
                 <div class="col-sm-6 wow fadeInRight">
-                    <h3 class="column-title">Multi Capability</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-
-                    <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-
+                    <h3 class="column-title">Easy Lab</h3>
+                  <p>
+Créé en 2000, le laboratoire constitue au sein de la Direction générale de recherche scientifique et technologique un maillon important se référant à la fois à l’environnement et à la santé.
+</p><p>
+Le laboratoire est animé par une diversité de personnes qui mettent en commun leurs connaissances et leurs expériences pour développer la recherche, accompagner les formations et contribuer à la vie de l’université algérienne en général.  22 enseignants-chercheurs, trois ingénieurs du personnel de soutien accompagnent les étudiants de doctorat et de master dans leurs premiers pas dans la recherche.
+</p><p>
+Le laboratoire est issu de l’association de quatre équipes, il analyse les relations environnement-santé publique, avec un intérêt tout particulier pour l’écologie animale et l’écologie humaine. Il apporte une compétence forte dans plusieurs domaines clés : la biodiversité animale, l’évolution,  l’écologie globale, l’anthropologie, l’éco-toxicologie et les indicateurs environnementaux de santé. Les chercheurs utilisent et développent des approches modernes de biologie fondamentale ou appliquée et de modélisation.
+</p>
                     <div class="row">
                         <div class="col-sm-6">
                             <ul class="nostyle">
-                                <li><i class="fa fa-check-square"></i> Ipsum is simply dummy</li>
-                                <li><i class="fa fa-check-square"></i> When an unknown</li>
+                                <li><i class="fa fa-check-square"></i> assurer un développement durable de notre société</li>
+                                <li><i class="fa fa-check-square"></i> assurer un développement durable de notre société</li>
                             </ul>
                         </div>
 
                         <div class="col-sm-6">
                             <ul class="nostyle">
-                                <li><i class="fa fa-check-square"></i> The printing and typesetting</li>
-                                <li><i class="fa fa-check-square"></i> Lorem Ipsum has been</li>
+                                <li><i class="fa fa-check-square"></i> assurer un développement durable de notre société</li>
+                                <li><i class="fa fa-check-square"></i> assurer un développement durable de notre sociétén</li>
                             </ul>
                         </div>
                     </div>
 
-                    <a class="btn btn-primary" href="#">Learn More</a>
+                    <!-- <a class="btn btn-primary" href="#">Learn More</a> -->
 
                 </div>
             </div>
@@ -89,83 +92,25 @@
         <div class="container">
 
             <div class="section-header">
-                <h2 class="section-title text-center wow fadeInDown">Our Services</h2>
-                <p class="text-center wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
+                <h2 class="section-title text-center wow fadeInDown">Nos Laboratoires</h2>
+                <!-- <p class="text-center wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p> -->
             </div>
 
             <div class="row">
                 <div class="features">
+                  @foreach($labs as $lab)
                     <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="0ms">
                         <div class="media service-box">
                             <div class="pull-left">
-                              <i class="fa fa-line-chart"></i>
+                              <img src="{{asset($lab->photo)}}" alt="Logo" style="width:70px; border-radius: 50%;">
                             </div>
                             <div class="media-body">
-                              <a href="127.0.0.1:8000/front/3"> <h4 class="media-heading">UX design</h4></a>
-                                <p>Backed by some of the biggest names in the industry, Firefox OS is an open platform that fosters greater</p>
+                              <a href="{{ url('front/'.$lab->id)}}"> <h4 class="media-heading">{{$lab->achronymes}}</h4></a>
+                                <p>{{$lab->nom}}</p>
                             </div>
                         </div>
                     </div><!--/.col-md-4-->
-
-                    <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="100ms">
-                        <div class="media service-box">
-                            <div class="pull-left">
-                                <i class="fa fa-cubes"></i>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">UI design</h4>
-                                <p>Backed by some of the biggest names in the industry, Firefox OS is an open platform that fosters greater</p>
-                            </div>
-                        </div>
-                    </div><!--/.col-md-4-->
-
-                    <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="200ms">
-                        <div class="media service-box">
-                            <div class="pull-left">
-                                <i class="fa fa-pie-chart"></i>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">SEO Services</h4>
-                                <p>Backed by some of the biggest names in the industry, Firefox OS is an open platform that fosters greater</p>
-                            </div>
-                        </div>
-                    </div><!--/.col-md-4-->
-
-                    <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="300ms">
-                        <div class="media service-box">
-                            <div class="pull-left">
-                                <i class="fa fa-bar-chart"></i>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">iOS App</h4>
-                                <p>Backed by some of the biggest names in the industry, Firefox OS is an open platform that fosters greater</p>
-                            </div>
-                        </div>
-                    </div><!--/.col-md-4-->
-
-                    <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="400ms">
-                        <div class="media service-box">
-                            <div class="pull-left">
-                                <i class="fa fa-language"></i>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Android App</h4>
-                                <p>Backed by some of the biggest names in the industry, Firefox OS is an open platform that fosters greater</p>
-                            </div>
-                        </div>
-                    </div><!--/.col-md-4-->
-
-                    <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="500ms">
-                        <div class="media service-box">
-                            <div class="pull-left">
-                                <i class="fa fa-bullseye"></i>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Win App</h4>
-                                <p>Backed by some of the biggest names in the industry, Firefox OS is an open platform that fosters greater</p>
-                            </div>
-                        </div>
-                    </div><!--/.col-md-4-->
+                  @endforeach
                 </div>
             </div><!--/.row-->
         </div><!--/.container-->
@@ -180,13 +125,13 @@
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <p><img class="img-circle img-thumbnail" src="images/testimonial/01.jpg" alt=""></p>
+                                <p><img class="img-circle img-thumbnail" src="{{asset('labo/bower_components/multi/images/testimonial/01.jpg')}}" alt=""></p>
                                 <h4>Louise S. Morgan</h4>
                                 <small>Treatment, storage, and disposal (TSD) worker</small>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut et dolore magna aliqua. Ut enim ad minim veniam</p>
                             </div>
                             <div class="item">
-                                <p><img class="img-circle img-thumbnail" src="images/testimonial/01.jpg" alt=""></p>
+                                <p><img class="img-circle img-thumbnail" src="{{asset('labo/bower_components/multi/images/testimonial/01.jpg')}}" alt=""></p>
                                 <h4>Louise S. Morgan</h4>
                                 <small>Treatment, storage, and disposal (TSD) worker</small>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut et dolore magna aliqua. Ut enim ad minim veniam</p>
@@ -279,8 +224,7 @@
     <section id="blog">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title text-center wow fadeInDown">Latest Blogs</h2>
-                <p class="text-center wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
+                <h2 class="section-title text-center wow fadeInDown">Dernières Actualites</h2>
             </div>
 
             <div class="row">
@@ -292,20 +236,14 @@
                                     <img class="img-responsive" src="images/blog/01.jpg" alt="">
                                     <span class="post-format post-format-video"><i class="fa fa-film"></i></span>
                                 </div>
-                                <div class="entry-date">25 November 2014</div>
-                                <h2 class="entry-title"><a href="#">While now the fated Pequod had been so long afloat this</a></h2>
+                                <div class="entry-date">{{$accs[0]->created_at}}</div>
+                                <h2 class="entry-title"><a href="#">{{$accs[0]->titre}}</a></h2>
                             </header>
 
                             <div class="entry-content">
-                                <P>With a blow from the top-maul Ahab knocked off the steel head of the lance, and then handing to the mate the long iron rod remaining, bade him hold it upright, without its touching off the steel head of the lance, and then handing to the mate the long iron rod remaining. without its touching off the steel without its touching off the steel</P>
-                                <a class="btn btn-primary" href="#">Read More</a>
+                                <p><?php echo str_limit(strip_tags($accs[0]->contenu,'<b><a><i><img>'), $limit = 100, $end = '...') ?></p><a class="btn btn-primary" href="{{ url('front/'.$labss[0]->labo_id.'/actualites/'.$accs[0]->id)}}">Lire plus</a>
                             </div>
 
-                            <footer class="entry-meta">
-                                <span class="entry-author"><i class="fa fa-pencil"></i> <a href="#">Victor</a></span>
-                                <span class="entry-category"><i class="fa fa-folder-o"></i> <a href="#">Tutorial</a></span>
-                                <span class="entry-comments"><i class="fa fa-comments-o"></i> <a href="#">15</a></span>
-                            </footer>
                         </article>
                     </div>
                 </div><!--/.col-sm-6-->
@@ -318,20 +256,15 @@
                             </div>
                             <div class="media-body">
                                 <header class="entry-header">
-                                    <div class="entry-date">01 December 2014</div>
-                                    <h2 class="entry-title"><a href="#">BeReviews was a awesome envent in dhaka</a></h2>
+                                    <div class="entry-date">{{$accs[1]->created_at}}</div>
+                                    <h2 class="entry-title"><a href="#">{{$accs[1]->titre}}</a></h2>
                                 </header>
 
                                 <div class="entry-content">
-                                    <P>With a blow from the top-maul Ahab knocked off the steel head of the lance, and then handing to the steel</P>
-                                    <a class="btn btn-primary" href="#">Read More</a>
+                                  <p><?php echo str_limit(strip_tags($accs[1]->contenu,'<b><a><i><img>'), $limit = 100, $end = '...') ?></p><a class="btn btn-primary" href="{{ url('front/'.$labss[1]->labo_id.'/actualites/'.$accs[1]->id)}}">Lire plus</a>
                                 </div>
 
-                                <footer class="entry-meta">
-                                    <span class="entry-author"><i class="fa fa-pencil"></i> <a href="#">Campbell</a></span>
-                                    <span class="entry-category"><i class="fa fa-folder-o"></i> <a href="#">Tutorial</a></span>
-                                    <span class="entry-comments"><i class="fa fa-comments-o"></i> <a href="#">15</a></span>
-                                </footer>
+
                             </div>
                         </article>
                     </div>
@@ -343,20 +276,14 @@
                             </div>
                             <div class="media-body">
                                 <header class="entry-header">
-                                    <div class="entry-date">03 November 2014</div>
-                                    <h2 class="entry-title"><a href="#">Play list of old bangle  music and gajal</a></h2>
+                                    <div class="entry-date">{{$accs[2]->created_at}}</div>
+                                    <h2 class="entry-title"><a href="#">{{$accs[2]->titre}}</a></h2>
                                 </header>
 
                                 <div class="entry-content">
-                                    <P>With a blow from the top-maul Ahab knocked off the steel head of the lance, and then handing to the steel</P>
-                                    <a class="btn btn-primary" href="#">Read More</a>
+                                  <p><?php echo str_limit(strip_tags($accs[2]->contenu,'<b><a><i><img>'), $limit = 100, $end = '...') ?></p><a class="btn btn-primary" href="{{ url('front/'.$labss[2]->labo_id.'/actualites/'.$accs[2]->id)}}">Lire plus</a>
                                 </div>
 
-                                <footer class="entry-meta">
-                                    <span class="entry-author"><i class="fa fa-pencil"></i> <a href="#">Ruth</a></span>
-                                    <span class="entry-category"><i class="fa fa-folder-o"></i> <a href="#">Tutorial</a></span>
-                                    <span class="entry-comments"><i class="fa fa-comments-o"></i> <a href="#">15</a></span>
-                                </footer>
                             </div>
                         </article>
                     </div>
@@ -369,8 +296,8 @@
     <section id="portfolio">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title text-center wow fadeInDown">Les Evenements</h2>
-                <p class="text-center wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
+                <h2 class="section-title text-center wow fadeInDown">Nos Evenements</h2>
+                <!-- <p class="text-center wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p> -->
             </div>
 
             <div class="text-center">
@@ -382,93 +309,30 @@
             </div>
 
             <div class="portfolio-items">
+              @foreach($ups as $up)
                 <div class="portfolio-item creative">
                     <div class="portfolio-item-inner">
-                        <img class="img-responsive" src="images/portfolio/01.jpg" alt="">
+                        <img class="img-responsive" src="{{asset($up->photo)}}" alt="">
                         <div class="portfolio-info">
-                            <h3>Portfolio Item 1</h3>
-                            Lorem Ipsum Dolor Sit
-                            <a class="preview" href="images/portfolio/full.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                            <h3>{{$up->titre}}</h3>
+                            {{$up->lieu}}
+                            <a class="preview" href="{{asset($up->photo)}}" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
                         </div>
                     </div>
                 </div><!--/.portfolio-item-->
-
+                @endforeach
+                @foreach($last as $las)
                 <div class="portfolio-item corporate">
                     <div class="portfolio-item-inner">
-                        <img class="img-responsive" src="images/portfolio/02.jpg" alt="">
+                        <img class="img-responsive" src="{{asset($las->photo)}}" alt="">
                         <div class="portfolio-info">
-                            <h3>Portfolio Item 2</h3>
-                            Lorem Ipsum Dolor Sit
-                            <a class="preview" href="images/portfolio/full.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
+                            <h3>{{$las->titre}}</h3>
+                            {{$las->lieu}}
+                            <a class="preview" href="{{asset($las->photo)}}" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
                         </div>
                     </div>
                 </div><!--/.portfolio-item-->
-
-                <div class="portfolio-item creative">
-                    <div class="portfolio-item-inner">
-                        <img class="img-responsive" src="images/portfolio/03.jpg" alt="">
-                        <div class="portfolio-info">
-                            <h3>Portfolio Item 3</h3>
-                            Lorem Ipsum Dolor Sit
-                            <a class="preview" href="images/portfolio/full.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
-                        </div>
-                    </div>
-                </div><!--/.portfolio-item-->
-
-                <div class="portfolio-item corporate">
-                    <div class="portfolio-item-inner">
-                        <img class="img-responsive" src="images/portfolio/04.jpg" alt="">
-                        <div class="portfolio-info">
-                            <h3>Portfolio Item 4</h3>
-                            Lorem Ipsum Dolor Sit
-                            <a class="preview" href="images/portfolio/full.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
-                        </div>
-                    </div>
-                </div><!--/.portfolio-item-->
-
-                <div class="portfolio-item creative">
-                    <div class="portfolio-item-inner">
-                        <img class="img-responsive" src="images/portfolio/05.jpg" alt="">
-                        <div class="portfolio-info">
-                            <h3>Portfolio Item 5</h3>
-                            Lorem Ipsum Dolor Sit
-                            <a class="preview" href="images/portfolio/full.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
-                        </div>
-                    </div>
-                </div><!--/.portfolio-item-->
-
-                <div class="portfolio-item corporate">
-                    <div class="portfolio-item-inner">
-                        <img class="img-responsive" src="images/portfolio/06.jpg" alt="">
-                        <div class="portfolio-info">
-                            <h3>Portfolio Item 5</h3>
-                            Lorem Ipsum Dolor Sit
-                            <a class="preview" href="images/portfolio/full.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
-                        </div>
-                    </div>
-                </div><!--/.portfolio-item-->
-
-                <div class="portfolio-item creative">
-                    <div class="portfolio-item-inner">
-                        <img class="img-responsive" src="images/portfolio/07.jpg" alt="">
-                        <div class="portfolio-info">
-                            <h3>Portfolio Item 7</h3>
-                            Lorem Ipsum Dolor Sit
-                            <a class="preview" href="images/portfolio/full.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
-                        </div>
-                    </div>
-                </div><!--/.portfolio-item-->
-
-                <div class="portfolio-item corporate">
-                    <div class="portfolio-item-inner">
-                        <img class="img-responsive" src="images/portfolio/08.jpg" alt="">
-                        <div class="portfolio-info">
-                            <h3>Portfolio Item 8</h3>
-                            Lorem Ipsum Dolor Sit
-                            <a class="preview" href="images/portfolio/full.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i></a>
-                        </div>
-                    </div>
-                </div><!--/.portfolio-item-->
+                @endforeach
             </div>
         </div><!--/.container-->
     </section><!--/#portfolio-->
@@ -476,8 +340,8 @@
     <section id="get-in-touch">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title text-center wow fadeInDown">Get in Touch</h2>
-                <p class="text-center wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
+                <h2 class="section-title text-center wow fadeInDown">ENTRER EN CONTACT</h2>
+                <!-- <p class="text-center wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p> -->
             </div>
         </div>
     </section><!--/#get-in-touch-->
@@ -492,26 +356,24 @@
                             <h3>Contact Info</h3>
 
                             <address>
-                              <strong>Twitter, Inc.</strong><br>
-                              795 Folsom Ave, Suite 600<br>
-                              San Francisco, CA 94107<br>
-                              <abbr title="Phone">P:</abbr> (123) 456-7890
+                            22, Rue Abi Ayed Abdelkrim Fg Pasteur B.P 119 <br>13000, Tlemcen, Algérie <br>
+                              <abbr title="Phone">P:</abbr> (213) 43 411 189
                             </address>
 
                             <form id="main-contact-form" name="contact-form" method="post" action="#">
                                 <div class="form-group">
-                                    <input type="text" name="name" class="form-control" placeholder="Name" required>
+                                    <input type="text" name="name" class="form-control" placeholder="Nom" required>
                                 </div>
                                 <div class="form-group">
                                     <input type="email" name="email" class="form-control" placeholder="Email" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+                                    <input type="text" name="subject" class="form-control" placeholder="Objet" required>
                                 </div>
                                 <div class="form-group">
                                     <textarea name="message" class="form-control" rows="8" placeholder="Message" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Send Message</button>
+                                <button type="submit" class="btn btn-primary">Envoyer le message</button>
                             </form>
                         </div>
                     </div>
