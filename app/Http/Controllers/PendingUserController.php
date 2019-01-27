@@ -14,12 +14,13 @@ use Auth;
 class PendingUserController extends Controller
 {
 
+
   public function index()
  {
      $membres = PendingUser::all();
      $labo = $this->getCurrentLabo();
      // $laboratoires=Parametre::all();
-   if(Auth::user()->role->nom == 'admin'){
+   if(Auth::user() and Auth::user()->role->nom == 'admin'){
      return view('membre.pending')->with([
        // 'laboratoires' => $laboratoires,
        'membres'=>$membres,
@@ -71,13 +72,14 @@ class PendingUserController extends Controller
       $newMember->email   = $record->email;
       $newMember->date_naissance = $record->date_naissance;
       $newMember->grade =  $record->grade;
+      $newMember->equipe_id = $record->equipe_id;
       $newMember->password =  $record->password;
       $newMember->num_tel =  $record->num_tel;
 
       $newMember->photo = 'uploads/photo/users/userDefault.png';
 
         $newMember->role_id=2;//simple user
-        
+
       if($newMember->save()){
         $this->destroy($id);
       }

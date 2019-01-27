@@ -13,12 +13,12 @@
     <link rel="stylesheet" href="{{ asset('labo/bower_components/font-awesome/css/font-awesome.min.css') }}">
 
     <!-- Bootstrap 3.3.7 -->
-      <link rel="stylesheet" href="{{ asset('labo/bower_components/bootstrap/dist/css/bootstrap.min.css') }}"> 
+      <link rel="stylesheet" href="{{ asset('labo/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
 
 		<!-- Loading main css file -->
 		<link rel="stylesheet" href="{{ asset('styles/main-home-style.css') }}">
 
-      
+
 
 
 
@@ -342,5 +342,6 @@ $(document).ready(function() {
 <script src="{{ asset('labo/bower_components/fullcalendar/dist/scriptCalendar.js') }}"></script>
 
 @yield('script')
+
 
 </html>

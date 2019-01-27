@@ -255,12 +255,12 @@
                         <a href="{{ url('articles/'.$article->id.'/details')}}" class="btn btn-info">
                             <i class="fa fa-eye"></i>
                         </a>
-                        @if(Auth::user()->role->nom == 'admin' || Auth::user()->id == $article->deposer)
+                        @if(Auth::user()->role->nom == 'admin' )
                         <a href="{{ url('articles/'.$article->id.'/edit')}}" class="btn btn-default">
                           <i class="fa fa-edit"></i>
                         </a>
                         @endif
-                        @if( Auth::user()->role->nom != 'membre' || Auth::user()->id == $article->deposer)
+                        @if(Auth::user()->role->nom == 'admin' )
                         <button type="submit" class="btn btn-danger ">
                             <i class="fa fa-trash-o"></i>
                         </button>

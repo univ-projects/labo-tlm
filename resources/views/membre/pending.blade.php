@@ -73,7 +73,7 @@
                             <input type="hidden" name="_method" value="PUT">
                             {{ csrf_field() }}
                               <button type="submit" class="btn btn-success"><i class="fa fa-check"></i></button>
-                              
+
                           </form>
 
                           <form action="{{ url('pendingMembres/'.$membre->id)}}" method="post">
