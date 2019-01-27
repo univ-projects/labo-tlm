@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 26 Janvier 2019 à 14:20
+-- Généré le :  Dim 27 Janvier 2019 à 17:42
 -- Version du serveur :  5.7.14
 -- Version de PHP :  7.2.12
 
@@ -59,6 +59,9 @@ CREATE TABLE `affecter` (
 --
 
 INSERT INTO `affecter` (`id`, `proprietaireEquipe`, `materiel_id`, `user_id`, `from`, `to`, `created_at`, `updated_at`) VALUES
+(77, 13, 79, NULL, '2019-01-27 17:37:02', NULL, '2019-01-27 16:38:16', '2019-01-27 16:38:16'),
+(76, 12, 79, NULL, '2019-01-27 17:37:02', '2019-01-27 17:38:16', '2019-01-27 16:38:00', '2019-01-27 16:38:16'),
+(75, 13, 77, NULL, '2019-01-27 17:37:02', NULL, '2019-01-27 16:37:45', '2019-01-27 16:37:45'),
 (74, NULL, 61, 25, '2019-01-25 22:34:09', NULL, '2019-01-26 13:04:46', '2019-01-26 13:04:46'),
 (73, NULL, 76, 26, '2019-01-26 13:54:35', NULL, '2019-01-26 13:02:47', '2019-01-26 13:02:47'),
 (72, NULL, 76, 11, '2019-01-26 13:54:35', '2019-01-26 14:02:47', '2019-01-26 12:54:35', '2019-01-26 13:02:47'),
@@ -144,7 +147,10 @@ INSERT INTO `articles` (`id`, `publicateur`, `type`, `titre`, `resume`, `lieu_vi
 (23, 1, 'Publication(Revue)', 'QOS dans les réseaux manet', 'QOS des réseaux mesh', 'Alg', 'ALG', NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 09:58:43', '2019-01-26 09:58:43', NULL, 'uploads/photo/article/articleDefault.png', '2016-01-12'),
 (24, 1, 'Livre', 'Travel demand corridors: Modelling approach and relevance in the planning process', 'Travel demand corridors: Modelling approach and relevance in the planning process', 'TLM', 'ALG', NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 10:00:26', '2019-01-26 10:00:26', NULL, 'uploads/photo/article/articleDefault.png', '2018-12-13'),
 (25, 1, 'Article court', 'l\'économie d\'énergie dans les réseaux mesh', 'Travel demand corridors: Modelling approach and relevance in the planning process', 'ORN', 'ALG', NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 10:02:01', '2019-01-26 10:02:01', NULL, 'uploads/photo/article/articleDefault.png', '2016-03-27'),
-(26, 1, 'Brevet', 'Eco-driving training and fuel consumption: Impact, heterogeneity and sustainability,', 'Eco-driving training and fuel consumption: Impact, heterogeneity and sustainability,', 'TLM', 'ALG', NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 10:04:47', '2019-01-26 10:04:47', NULL, 'uploads/photo/article/articleDefault.png', '2017-10-11');
+(26, 1, 'Brevet', 'Eco-driving training and fuel consumption: Impact, heterogeneity and sustainability,', 'Eco-driving training and fuel consumption: Impact, heterogeneity and sustainability,', 'TLM', 'ALG', NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 10:04:47', '2019-01-26 10:04:47', NULL, 'uploads/photo/article/articleDefault.png', '2017-10-11'),
+(27, 1, 'Poster', 'Predictive models for career progression', 'Predictive models for career progression', 'TLM', 'ALG', NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-27 15:23:35', '2019-01-27 15:23:35', NULL, 'uploads/photo/article/articleDefault.png', '2015-12-15'),
+(28, 1, 'Publication(Revue)', 'Generative models : a critical review', 'Generative models : a critical review', 'Alg', 'ALG', NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-27 15:29:10', '2019-01-27 15:29:10', NULL, 'uploads/photo/article/articleDefault.png', '2015-02-20'),
+(29, 1, 'Publication(Revue)', 'Détection des utilisations à risque d’API : approche basée sur le système immunitaire', 'Détection des utilisations à risque d’API : approche basée sur le système immunitaire', 'Alg', 'ALG', NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-27 16:42:05', '2019-01-27 16:42:05', NULL, 'uploads/photo/article/articleDefault.png', '2018-02-08');
 
 -- --------------------------------------------------------
 
@@ -165,6 +171,8 @@ CREATE TABLE `article_contact` (
 --
 
 INSERT INTO `article_contact` (`id`, `contact_id`, `article_id`, `created_at`, `updated_at`) VALUES
+(26, 9, 29, '2019-01-27 16:42:05', '2019-01-27 16:42:05'),
+(25, 6, 27, '2019-01-27 15:23:35', '2019-01-27 15:23:35'),
 (24, 8, 24, '2019-01-26 10:00:26', '2019-01-26 10:00:26'),
 (23, 6, 21, '2019-01-26 09:55:00', '2019-01-26 09:55:00'),
 (22, 8, 21, '2019-01-26 09:55:00', '2019-01-26 09:55:00'),
@@ -205,7 +213,12 @@ INSERT INTO `article_user` (`id`, `user_id`, `article_id`, `created_at`, `update
 (66, 7, 25, '2019-01-26 10:02:02', '2019-01-26 10:02:02'),
 (67, 9, 25, '2019-01-26 10:02:02', '2019-01-26 10:02:02'),
 (68, 21, 25, '2019-01-26 10:02:02', '2019-01-26 10:02:02'),
-(69, 18, 26, '2019-01-26 10:04:47', '2019-01-26 10:04:47');
+(69, 18, 26, '2019-01-26 10:04:47', '2019-01-26 10:04:47'),
+(70, 25, 27, '2019-01-27 15:23:35', '2019-01-27 15:23:35'),
+(71, 26, 27, '2019-01-27 15:23:35', '2019-01-27 15:23:35'),
+(72, 28, 28, '2019-01-27 15:29:10', '2019-01-27 15:29:10'),
+(73, 33, 29, '2019-01-27 16:42:05', '2019-01-27 16:42:05'),
+(74, 34, 29, '2019-01-27 16:42:05', '2019-01-27 16:42:05');
 
 -- --------------------------------------------------------
 
@@ -231,7 +244,8 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `laboratoire`, `libelle`, `photo`, `description`, `quantity`, `created_at`, `updated_at`) VALUES
 (10, 4, 'Lampes en verre flacons, béchers, esprit', 'uploads/photo/materiels/1548455649.jpg', 'Lampes en verre flacons, béchers, esprit', 9, '2019-01-25 21:34:09', '2019-01-26 12:54:35'),
 (11, 3, 'Onduleur line-interactive 700 VA / 230 V', 'uploads/photo/materiels/1548503086.jpg', 'L\'onduleur line-interactive APC Back-UPS 700VA fournit une alimentation par batterie temporaire, en cas de panne de courant. En plus de cela, il dispose d\'une fonction d\'analyse des pannes de batteries avec alerte précoce, permettant ainsi d\'effectuer à temps une maintenance préventive.', 10, '2019-01-26 10:44:46', '2019-01-26 10:45:33'),
-(9, 3, 'Arduino Uno SMD R3', 'uploads/photo/materiels/1548452770.jpg', 'The Arduino UNO is an open-source microcontroller board based on the Microchip ATmega328P microcontroller and developed by Arduino.cc.[2][3] The board is equipped with sets of digital and analog input/output (I/O)', 6, '2019-01-25 20:46:10', '2019-01-25 21:27:39');
+(9, 3, 'Arduino Uno SMD R3', 'uploads/photo/materiels/1548452770.jpg', 'The Arduino UNO is an open-source microcontroller board based on the Microchip ATmega328P microcontroller and developed by Arduino.cc.[2][3] The board is equipped with sets of digital and analog input/output (I/O)', 6, '2019-01-25 20:46:10', '2019-01-25 21:27:39'),
+(12, 9, 'Dell  OptiPlex 3020 i5-4590', 'uploads/photo/materiels/1548610622.jpg', 'Marque	Dell\r\nLaptop	OptiPlex 3020 i5-4590\r\nCatégorie	Classique\r\nTaille Ecran	Ecran 18 pouces', 12, '2019-01-27 16:37:02', '2019-01-27 16:37:02');
 
 -- --------------------------------------------------------
 
@@ -260,7 +274,8 @@ CREATE TABLE `contacts` (
 INSERT INTO `contacts` (`id`, `created_by`, `nom`, `prenom`, `photo`, `fonction`, `email`, `num_tel`, `partenaire_id`, `created_at`, `updated_at`) VALUES
 (6, 1, 'Potvin', 'Alexis', 'uploads/photo/contacts/1548495185.jpg', NULL, 'Alexis@potvin.com', NULL, 1, '2019-01-26 08:33:05', '2019-01-26 08:33:05'),
 (7, 1, 'Rhéaume', 'Parfait', 'uploads/photo/contacts/1548495688.jpg', NULL, 'Rheaume@parfait.com', '(555) 555-555-555', 1, '2019-01-26 08:41:28', '2019-01-26 08:41:28'),
-(8, 1, 'Mohammed', 'Chaouchi', 'uploads/photo/contacts/1548495785.jpg', NULL, 'chaouchi@mohammed', NULL, 2, '2019-01-26 08:43:05', '2019-01-26 08:43:05');
+(8, 1, 'Mohammed', 'Chaouchi', 'uploads/photo/contacts/1548495785.jpg', NULL, 'chaouchi@mohammed', NULL, 2, '2019-01-26 08:43:05', '2019-01-26 08:43:05'),
+(9, 1, 'Ahmed', 'Ahmed', 'uploads/photo/contacts/1548608891.jpg', NULL, 'Ahmed@Ahmed.com', NULL, 3, '2019-01-27 16:08:11', '2019-01-27 16:08:11');
 
 -- --------------------------------------------------------
 
@@ -273,7 +288,7 @@ CREATE TABLE `equipes` (
   `labo_id` int(10) UNSIGNED DEFAULT NULL,
   `chef_id` int(10) UNSIGNED DEFAULT NULL,
   `intitule` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `resume` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `resume` text COLLATE utf8mb4_unicode_ci,
   `achronymes` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `axes_recherche` varchar(2000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -291,7 +306,9 @@ INSERT INTO `equipes` (`id`, `labo_id`, `chef_id`, `intitule`, `resume`, `achron
 (2, 3, 10, 'Système d\'information et connaissance', 'Dans les nouveaux contextes de traitement de l’information les données numériques sont devenues souvent:\r\n \r\n \r\nhétérogènes\r\nnon ou partiellement structurées\r\nvolumineuses\r\ndistribuées/réparties\r\ncréées en flux continue et rapide\r\n \r\n\r\n \r\nIl est devenu impératif de disposer de nouveaux modèles de:\r\n \r\nreprésentation,\r\ntransformation,\r\nrecherche,\r\nrecommandation,\r\néchange,\r\nsécurité,\r\nvisualisation\r\ninterprétation des données,\r\nqui soient appropriés à ces spécificités.', 'sidk', NULL, 'uploads/photo/equipes/1544867720.png', '2018-05-03 07:50:13', '2018-12-15 08:55:20', NULL),
 (9, 3, 18, 'RESEAU,SERVICES ET SYSTÈMES DISTRIBUÉS', '<p>\r\n\r\n• formation sur l\'administration réseau (installation et configuration de tous les serveurs)<br>• déploiement de réseaux<br>• développement d\'applications réseaux<br>• vidéosurveillance via un réseau wifi mesh<br>• création, hébergement et maintenance de sites web<br>• sécurisation d\'un réseau wifi avec un serveur d\'authentification radius professionnel pour les entreprises et les facultés<br>• formation et déploiement d\'une solution de téléphonie sur ip utilisant l\'ipabx asterisk\r\n\r\n<br></p>', 'RSD', '<p>\r\n\r\n• qualité de service, économie d\'énergie et sécurité des réseaux sans fil (ghiloubi, belhocine)<br>• les réseaux véhiculaires (hamza cherif, sedjelmaci)<br>• la radio cognitive (bendaouad, belhabi)<br>• les réseaux de capteurs (benaissa, bengheni, benmansour)<br>• le cloud computing (settouti, bouizem, younsi) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \r\n\r\n<br></p>', 'uploads/photo/equipes/materielDefault.png', '2019-01-25 20:05:22', '2019-01-25 20:05:22', NULL),
 (10, 4, 25, 'Chimie organique, substances naturelles et analyse', '<p>Chimie organique, substances naturelles et analyse<br></p>', 'LRC', '<p>\r\n\r\nLa chimie analytique et de l’environnement sont des domaines de recherche importants au département de chimie. La métabolomique est au cœur des projets de recherche de la <a target="_blank" rel="nofollow" href="https://chimie.uqam.ca/corps-professoral/professeurs/professeur/sleno.lekha/">Pr Sleno</a>&nbsp;grâce à des techniques de chromatographie liquide et spectrométrie de masse de pointe, tandis que le <a target="_blank" rel="nofollow" href="https://chimie.uqam.ca/corps-professoral/professeurs/professeur/tra.huu/">Pr Van Tra</a>&nbsp;s’intéresse à l’analyse des contaminants de l’environnement et en milieu de travail. Pour sa part, le <a target="_blank" rel="nofollow" href="https://chimie.uqam.ca/corps-professoral/professeurs/professeur/belanger.daniel/">Pr. Bélanger</a>&nbsp;développe des outils électrochimiques pour le traitement de l’ammoniaque et du CO2. La <a target="_blank" rel="nofollow" href="https://chimie.uqam.ca/corps-professoral/professeurs/professeur/marcotte.isabelle/">Pr. Marcotte</a>&nbsp;s’intéresse à caractériser au niveau moléculaire l’interaction des contaminants avec les microalgues. Enfin, le <a target="_blank" rel="nofollow" href="https://chimie.uqam.ca/corps-professoral/professeurs/professeur/dewez.david/">Pr. Dewez</a>, étudie l’impact des contaminants organiques et métalliques sur le phytoplancton. Il s’intéresse non seulement à l’absorption et aux effets toxicologiques, mais également à la bioaccumulation et au potentiel d’utilisation des microalgues en phytoremédiation.\r\n\r\n<br></p>', 'uploads/photo/equipes/1548509337.jpg', '2019-01-26 12:15:18', '2019-01-26 12:33:49', NULL),
-(11, 4, NULL, 'Physique théorique', '<p>Physique théorique<br></p>', 'LRP', '<p>\n\ncollisions atomiques, principe variationnel de Schwinger, excitation atomique, sections efficaces, collisions ions multichargés-atomes, saturation des sections efficaces.\n\n<br></p>', 'uploads/photo/equipes/1548508631.jpg', '2019-01-26 12:17:11', '2019-01-26 12:17:11', NULL);
+(11, 4, NULL, 'Physique théorique', '<p>Physique théorique<br></p>', 'LRP', '<p>\n\ncollisions atomiques, principe variationnel de Schwinger, excitation atomique, sections efficaces, collisions ions multichargés-atomes, saturation des sections efficaces.\n\n<br></p>', 'uploads/photo/equipes/1548508631.jpg', '2019-01-26 12:17:11', '2019-01-26 12:17:11', NULL),
+(12, 9, NULL, 'Analyse non linéaire et application', '<p>\r\n\r\n</p><p>&nbsp;Notre but est essentiellement  l’étude des problèmes elliptiques et paraboliques non linéaires avec dépendance en gradient, et \\ou sous la présence de termes singuliers.</p><p>&nbsp;  On s’intéresse d’une part à développer des outils mathématiques pour démontrer des résultats d’existence et de non-existence pour des solutions positives ou des solutions qui change de signe pour les EDP paraboliques. Par suite on s’intéresse à analyser les états stationnaires, c.à.d. les solutions des équations elliptiques associées. On démontre dans quelques cas la convergence des solutions des EDP paraboliques vers leurs états stationnaires ainsi que la vitesse de convergence. Les cas où les solutions explosent en temps fini sera aussi analysé.</p><p>&nbsp;  Les équations avec terme singuliers consistent aussi en un sujet d’intérêt pour l’équipe. Des équations avec singularité de type Hardy Sobolev seront complètement analysées. Notre but est d’établir le comportement de la solution au voisinage de cette singularité. Le cas où le point singulier se trouve sur le bord de domaine ou l’équation est définie, est un sujet d’actualité,  il présente des difficultés majeures et nécessite le développement d’outils fins d’analyse et de géométrie.</p>\r\n\r\n<br><p></p>', 'Analyse', '<p>\r\n\r\n</p><p>Les principaux thèmes de recherche sont</p><ul><li>Etude des problèmes elliptiques et paraboliques non linéaires avec termes singuliers</li><li>Etudes des problèmes elliptiques et paraboliques avec dépendance en gradient issus des équations de Hamilton Jacobi en contrôle stochastique</li><li>Etude des problèmes elliptiques et paraboliques non-locales (laplacien Fractionnaire)</li><li>Systèmes quasi linéaire avec structures variationnels</li><li>Problèmes avec données mesures</li></ul>\r\n\r\n<br><p></p>', 'uploads/photo/equipes/materielDefault.png', '2019-01-27 16:27:43', '2019-01-27 16:27:43', NULL),
+(13, 9, 33, 'Dynamique spatio-temporelle', '<p>\r\n\r\n&nbsp;Chez les populations biologiques, la dispersion spatiale est un trait majeur de l’histoire de vie. L’intérêt de connaître la densité d’une population biologique sur un espace géographique donné s’était déjà manifesté au début du siècle précédent par la construction du modèle probabiliste de la promenade aléatoire. \r\n\r\n<br></p>', 'Algebre', '<p>\r\n\r\n</p><ol><li>Modélisation de la dispersion spatiale des populations biologiques par application des équations intégro-différences.</li><li>Etude des dynamiques spatio-temporelles des populations biologiques par application des modèles matriciels à termes stochastiques.</li><li>Analyse des effets de la stochasticité par la programmation numérique (langage C++).</li><li>Application des méthodes de la statistique multivariée (logiciel R)</li></ol>\r\n\r\n<br><p></p>', 'uploads/photo/equipes/1548610285.jpg', '2019-01-27 16:31:25', '2019-01-27 16:39:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -399,7 +416,19 @@ INSERT INTO `materiels` (`id`, `proprietaireEquipe`, `category_id`, `numero`, `p
 (73, 2, 11, '15485030867', NULL, '2019-01-26 10:44:46', '2019-01-26 10:46:15'),
 (74, NULL, 11, '15485030868', NULL, '2019-01-26 10:44:46', '2019-01-26 10:44:46'),
 (75, 1, 11, '123456', NULL, '2019-01-26 10:45:33', '2019-01-26 10:45:54'),
-(76, NULL, 10, '1234123', 26, '2019-01-26 12:54:35', '2019-01-26 13:02:47');
+(76, NULL, 10, '1234123', 26, '2019-01-26 12:54:35', '2019-01-26 13:02:47'),
+(77, 13, 12, '15486106220', NULL, '2019-01-27 16:37:02', '2019-01-27 16:37:45'),
+(78, NULL, 12, '15486106221', NULL, '2019-01-27 16:37:02', '2019-01-27 16:37:02'),
+(79, 13, 12, '15486106222', NULL, '2019-01-27 16:37:02', '2019-01-27 16:38:16'),
+(80, NULL, 12, '15486106223', NULL, '2019-01-27 16:37:02', '2019-01-27 16:37:02'),
+(81, NULL, 12, '15486106224', NULL, '2019-01-27 16:37:02', '2019-01-27 16:37:02'),
+(82, NULL, 12, '15486106225', NULL, '2019-01-27 16:37:02', '2019-01-27 16:37:02'),
+(83, NULL, 12, '15486106226', NULL, '2019-01-27 16:37:02', '2019-01-27 16:37:02'),
+(84, NULL, 12, '15486106227', NULL, '2019-01-27 16:37:02', '2019-01-27 16:37:02'),
+(85, NULL, 12, '15486106228', NULL, '2019-01-27 16:37:02', '2019-01-27 16:37:02'),
+(86, NULL, 12, '15486106229', NULL, '2019-01-27 16:37:02', '2019-01-27 16:37:02'),
+(87, NULL, 12, '154861062210', NULL, '2019-01-27 16:37:02', '2019-01-27 16:37:02'),
+(88, NULL, 12, '154861062211', NULL, '2019-01-27 16:37:02', '2019-01-27 16:37:02');
 
 -- --------------------------------------------------------
 
@@ -468,7 +497,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (96, '2018_12_25_145330_add_foreign_articles_table', 23),
 (97, '2019_01_12_163503_create_stages_table', 24),
 (98, '2019_01_22_205610_add_delay_projet_table', 24),
-(99, '2019_01_23_163142_create_applications_table', 25);
+(99, '2019_01_23_163142_create_applications_table', 25),
+(100, '2019_01_26_171558_create_pending_users_table', 26),
+(101, '2019_01_26_175530_create_pending_users_table', 27),
+(102, '2019_01_26_183632_create_pending_users_table', 28);
 
 -- --------------------------------------------------------
 
@@ -494,7 +526,8 @@ CREATE TABLE `parametres` (
 
 INSERT INTO `parametres` (`id`, `directeur`, `nom`, `logo`, `created_at`, `updated_at`, `achronymes`, `photo`, `apropos`) VALUES
 (3, 10, 'Labo de recherche d\'informatique', '/uploads/photo/labos/1548259215.png', '2018-11-25 21:34:18', '2019-01-23 15:00:34', 'LRIT', '/uploads/photo/labos/laboImgDefault.png', 'La recherche <u>scientifique</u> constitue un enjeu déterminant au 21éme siècle eu égard aux défis technologiques et à la mondialisation qui sera le champ de confrontation entre les nations industrialisées et modernes, confrontation qui risque de reléguer au second plan les sociétés qui ne se donnent pas les moyens de se développer. Pour redynamiser les secteurs de la recherche, l\'Algérie a promulgué un ensemble de textes réglementaires et notamment la Loi n°98/11 du 22 Août 1998 portant loi d\'orientation et de programme à projection quinquennale 1998/2000, établi un plan national de la recherche scientifique (PNR) et institué un fonds national de la recherche scientifique et du développement technologique (FNR) chargé du financement de la recherche. En application de la Loi n° 98/11 sus-citée et du Décret exécutif n° 99/244 du 31/10/1999 fixant les règles de création, d\'organisation et de fonctionnement du laboratoire de recherche, tout enseignant chercheur ou chercheur associé peut introduire un dossier de proposition de création d\'un laboratoire de recherche. Le laboratoire de recherche est chargé de l\'exécution d\'un ou plusieurs thèmes de recherche scientifique et de développement technologique relatifs aux programmes nationaux de recherche (Art. 10 de la Loi 98/11). La proposition doit recevoir l\'aval du conseil scientifique de l\'établissement du rattachement.\r\n\r\nLe laboratoire de recherche a pour mission de réaliser des objectifs de recherche et de développement, exécuter des études et travaux de recherche et contribuer à l`acquisition du savoir, à l\'amélioration des connaissances, la formation pour et par la recherche et à la diffusion de l\'information scientifique et des résultats obtenus. Dirigé par un Directeur élu, il doit être constitué d\'au moins quatre équipes de recherche, chacune dirigée par un chercheur qualifié et constituée d\'au moins trois chercheurs. Le laboratoire de recherche est doté d\'un conseil de laboratoire chargé d`élaborer des programmes et d\'établir des états prévisionnels des recettes et des dépenses présentés par le directeur du laboratoire. Il est doté de l\'autonomie de gestion et soumis au contrôle financier à posteriori. Il est financé par les subventions du FNRSDT. Le laboratoire de recherche peut trouver ses propres sources de financement, dans le respect de la réglementation, en rapport avec ses activités de recherche par la conclusion de contrats de prestation de service avec des tiers. L`Université Abou Bekr Belkaid de Tlemcen contribué de manière concrète à la promotion de la recherche scientifique par le lancement de plusieurs projets de recherche et notamment la création de vingt laboratoires de recherche (créés durant l\'année 2000 par l\'arrêté n° 88 du 25/07/2000 -annexe1) et sept autres (créés durant l\'année 2001 par l\'arrêté n° 42 du 05/02/2001-annexe2) et cela dans divers thèmes de recherche scientifique tels que fixés par les programmes nationaux de recherche (PNR).'),
-(4, 25, 'Laboratoire de chimie', '/uploads/photo/labos/1548510200.png', '2018-12-15 22:15:15', '2019-01-26 12:43:20', 'LCT', '/uploads/photo/labos/laboLogoDefault.png', 'labo chimie');
+(4, 25, 'Laboratoire de chimie', '/uploads/photo/labos/1548510200.png', '2018-12-15 22:15:15', '2019-01-26 12:43:20', 'LCT', '/uploads/photo/labos/laboLogoDefault.png', 'labo chimie'),
+(9, 33, 'Labo de recherche Mathematiques', '/uploads/photo/labos/1548609604.png', '2019-01-27 16:15:48', '2019-01-27 16:33:02', 'L.A.N.L.M.A', '/uploads/photo/labos/laboLogoDefault.png', 'Nul doute que les Mathématiques sont devenues un outil indispensable pour la résolution de problèmes concrets, en particulier ceux relatifs à la physique, la chimie et les sciences du vivant.\r\n\r\nIl existe diverses méthodes pour approcher les phénomènes concrets par des outils mathématiques.\r\n\r\nCes méthodes se sont développées et améliorées au cours du vingtième siècle et continuent à nous permettre de concevoir des phénomènes réels d’une  façon  plus fine et plus précise.\r\n\r\n \r\n\r\n            La théorie des équations différentielles et aux dérivées partielles non linéaires est l’un des outils mathématiques les plus utilisé pour exprimer ces phénomènes d’une manière plus fiable et concrète.\r\n\r\nEn se basant sur  la théorie de la modélisation, on peut exprimer plusieurs phénomènes issus de la physique, chimie, biologie, économie à l’aide des EDO et des EDP  non linéaires de type elliptique, parabolique et hyperbolique.');
 
 -- --------------------------------------------------------
 
@@ -522,7 +555,8 @@ CREATE TABLE `partenaires` (
 
 INSERT INTO `partenaires` (`id`, `created_by`, `nom`, `type`, `pays`, `ville`, `logo`, `created_at`, `updated_at`, `description`, `lien`) VALUES
 (1, NULL, 'laboratoire Paris', 'laboratoire', 'FR', 'Paris', 'uploads/photo/partenaires/1543877083.jpg', '2018-12-03 16:58:21', '2018-12-03 21:44:43', '<p><b><i>P</i>aris</b></p>', NULL),
-(2, NULL, 'hopital Tlemcen', 'organisme', 'DZ', 'Tlemcen', 'uploads/photo/partenaires/materielDefault.png', '2018-12-05 16:13:05', '2018-12-05 16:13:05', NULL, NULL);
+(2, NULL, 'hopital Tlemcen', 'organisme', 'DZ', 'Tlemcen', 'uploads/photo/partenaires/1548605839.jpg', '2018-12-05 16:13:05', '2019-01-27 15:17:19', NULL, NULL),
+(3, 1, 'Laboratoire d\'Alger', 'laboratoire', 'DZ', 'Alg', 'uploads/photo/partenaires/1548608797.png', '2019-01-27 16:06:37', '2019-01-27 16:06:37', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -550,6 +584,34 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `pending_users`
+--
+
+CREATE TABLE `pending_users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prenom` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `equipe_id` int(10) UNSIGNED DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_naissance` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `grade` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `num_tel` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `autorisation_public_num_tel` tinyint(1) DEFAULT '0',
+  `autorisation_public_photo` tinyint(1) DEFAULT '0',
+  `autorisation_public_date_naiss` tinyint(1) DEFAULT '0',
+  `lien_rg` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lien_linkedin` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role_id` int(10) UNSIGNED NOT NULL DEFAULT '2',
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `project_contact`
 --
 
@@ -566,6 +628,7 @@ CREATE TABLE `project_contact` (
 --
 
 INSERT INTO `project_contact` (`id`, `contact_id`, `project_id`, `created_at`, `updated_at`) VALUES
+(15, 7, 15, '2019-01-27 15:57:38', '2019-01-27 15:57:38'),
 (14, 8, 14, '2019-01-26 13:17:41', '2019-01-26 13:17:41'),
 (13, 8, 11, '2019-01-26 10:18:31', '2019-01-26 10:18:31'),
 (12, 7, 10, '2019-01-26 10:14:36', '2019-01-26 10:14:36');
@@ -602,7 +665,9 @@ INSERT INTO `projets` (`id`, `chef_id`, `intitule`, `resume`, `type`, `partenair
 (11, 4, 'Multi-commodity location-routing: Flow intercepting formulation and branch-and-cut algorithm', 'Multi-commodity location-routing: Flow intercepting formulation and branch-and-cut algorithm', 'projet type', NULL, NULL, NULL, '2019-01-26 10:18:31', '2019-01-26 10:18:31', NULL, 'uploads/photo/projets/projetDefault.png', '2016-01-13', '2018-12-20'),
 (12, 15, 'Erratum to: Approximating the length of Chinese postman tours,', 'Erratum to: Approximating the length of Chinese postman tours,', 'projet Type', NULL, NULL, NULL, '2019-01-26 10:20:39', '2019-01-26 10:20:39', NULL, 'uploads/photo/projets/projetDefault.png', '2019-01-26', '2019-01-31'),
 (13, 2, 'Node stability-based routing in wireless mesh networks', 'Node stability-based routing in wireless mesh networks', 'projet type', NULL, NULL, NULL, '2019-01-26 10:33:38', '2019-01-26 10:33:38', NULL, 'uploads/photo/projets/projetDefault.png', '2015-01-01', '2018-02-15'),
-(14, 25, 'Microscopie à contraste de phase', 'Microscopie à\r\ncontraste de\r\nphase', 'projet type', NULL, NULL, NULL, '2019-01-26 13:17:40', '2019-01-26 13:17:40', NULL, 'uploads/photo/projets/projetDefault.png', '2015-01-28', '2019-01-17');
+(14, 25, 'Microscopie à contraste de phase', 'Microscopie à\r\ncontraste de\r\nphase', 'projet type', NULL, NULL, NULL, '2019-01-26 13:17:40', '2019-01-26 13:17:40', NULL, 'uploads/photo/projets/projetDefault.png', '2015-01-28', '2019-01-17'),
+(15, 25, 'Difference target propagation', 'Difference target propagation', 'type projet', NULL, NULL, NULL, '2019-01-27 15:57:38', '2019-01-27 15:57:38', NULL, 'uploads/photo/projets/projetDefault.png', '2015-02-15', '2017-02-15'),
+(16, 25, 'Simulation du transport de neige', 'Simulation du transport de neige', 'type projet', NULL, NULL, NULL, '2019-01-27 16:02:32', '2019-01-27 16:02:32', NULL, 'uploads/photo/projets/projetDefault.png', '2016-12-12', NULL);
 
 -- --------------------------------------------------------
 
@@ -632,7 +697,11 @@ INSERT INTO `projet_user` (`id`, `user_id`, `projet_id`, `created_at`, `updated_
 (44, 3, 13, '2019-01-26 10:33:38', '2019-01-26 10:33:38'),
 (45, 4, 13, '2019-01-26 10:33:38', '2019-01-26 10:33:38'),
 (46, 24, 14, '2019-01-26 13:17:40', '2019-01-26 13:17:40'),
-(47, 26, 14, '2019-01-26 13:17:40', '2019-01-26 13:17:40');
+(47, 26, 14, '2019-01-26 13:17:40', '2019-01-26 13:17:40'),
+(48, 26, 15, '2019-01-27 15:57:38', '2019-01-27 15:57:38'),
+(49, 28, 15, '2019-01-27 15:57:38', '2019-01-27 15:57:38'),
+(50, 28, 16, '2019-01-27 16:02:32', '2019-01-27 16:02:32'),
+(51, 29, 16, '2019-01-27 16:02:32', '2019-01-27 16:02:32');
 
 -- --------------------------------------------------------
 
@@ -714,7 +783,9 @@ INSERT INTO `theses` (`id`, `coencadreur_int`, `encadreur_int`, `coencadreur_ext
 (6, NULL, 4, NULL, 16, 'QOS des réseaux mesh', 'QOS des réseaux mesh', NULL, '2014-01-05', '2017-02-16', NULL, NULL, '2019-01-25 22:14:15', '2019-01-25 22:14:15', NULL),
 (7, NULL, 8, NULL, 7, 'QOS dans les réseaux manet', 'QOS dans les réseaux manet', NULL, '2015-03-08', '2018-04-15', NULL, NULL, '2019-01-26 08:13:39', '2019-01-26 08:13:39', NULL),
 (8, 3, 4, 6, 20, 'l\'économie d\'énergie dans les réseaux mesh', 'l\'économie d\'énergie dans les réseaux mesh', NULL, '2013-05-11', '2018-01-18', NULL, NULL, '2019-01-26 08:17:21', '2019-01-26 08:44:12', NULL),
-(9, NULL, NULL, NULL, 14, 'l\'économie d\'énergie dans les réseaux mesh', 'l\'économie d\'énergie dans les réseaux mesh', NULL, '2015-01-07', '2018-01-09', NULL, NULL, '2019-01-26 10:08:44', '2019-01-26 10:08:44', NULL);
+(9, NULL, NULL, NULL, 14, 'l\'économie d\'énergie dans les réseaux mesh', 'l\'économie d\'énergie dans les réseaux mesh', NULL, '2015-01-07', '2018-01-09', NULL, NULL, '2019-01-26 10:08:44', '2019-01-26 10:08:44', NULL),
+(10, NULL, 26, 8, 29, 'Learning-Based Matheuristic Solution Methods for Stochastic Network Design', 'Learning-Based Matheuristic Solution Methods for Stochastic Network Design', NULL, '2018-12-12', '2023-02-08', NULL, NULL, '2019-01-27 14:16:51', '2019-01-27 14:16:51', NULL),
+(11, 26, 25, NULL, 28, 'Representation Learning for Visual Data', 'Representation Learning for Visual Data', NULL, '2012-06-13', '2014-03-06', NULL, NULL, '2019-01-27 15:11:29', '2019-01-27 15:11:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -784,7 +855,15 @@ INSERT INTO `users` (`id`, `equipe_id`, `name`, `prenom`, `email`, `photo`, `dat
 (23, 9, 'TRARI', 'ahlem', 'ferielbrikci96@gmail.com', 'uploads/photo/users/1525813432.png', NULL, 'Doctorant', '$2y$10$xEFwjzSnjYehdQuTs5cbuuCXG/QY3aE2UrnMX9MiGfIm04rzQHyIC', NULL, NULL, NULL, NULL, NULL, NULL, 'FLCLGujWgX1u2jdlhHeXQua0QBgbgWSzlX0HG8tT0CnebMK18L3Qj5oCFxZt', '2018-05-08 19:03:53', '2019-01-25 21:48:10', 2),
 (24, 9, 'Selaadi', 'yasamine', 'seladji@yasmine.com', 'uploads/photo/users/1548456343.jpg', '12/02/1990', 'MCB', '$2y$10$aeeKR3vLo0src3g4GH1pEONn.dUFwA7KQeNdm1VwehczyWRli61Pi', '(012) 579-9335', NULL, NULL, NULL, NULL, NULL, 'rsc058CJNDI1A8E7DnktK4SXnLyHFwtdKhUt2cpuami9OoRynRPDvWbXw6QD', '2018-05-09 05:04:52', '2019-01-25 21:45:43', 2),
 (25, 10, 'Frank', 'Smith', 'Frank@Smith.com', 'uploads/photo/users/1548508779.jpg', NULL, 'Professeur', '$2y$10$vFD2gL1H6./dsQhA7T5OcOHS8B9w0BjVH.nN11eYFepval22GJcK.', NULL, NULL, NULL, NULL, NULL, NULL, 'eWf6sdKciy1IwP2eaGlkZFVEDIQNbltW7guQAYagqtKWkQuQJKXBSbDkSqkg', '2019-01-26 12:18:05', '2019-01-26 12:38:47', 3),
-(26, 11, 'Ariel', 'Flory', 'Ariel@Flory.com', 'uploads/photo/users/1548508864.jpg', NULL, 'Professeur', '$2y$10$oxadzi4c.1YDSrVArfPmx.tLGLroLbUfeWHcsddknpbsVVG3TGQsG', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 12:21:04', '2019-01-26 12:21:04', 2);
+(26, 11, 'Ariel', 'Flory', 'Ariel@Flory.com', 'uploads/photo/users/1548508864.jpg', NULL, 'Professeur', '$2y$10$oxadzi4c.1YDSrVArfPmx.tLGLroLbUfeWHcsddknpbsVVG3TGQsG', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 12:21:04', '2019-01-26 12:21:04', 2),
+(27, 1, 'Chouche', 'Lamia', 'chaouche@lamia.com', 'uploads/photo/users/userDefault.png', '19/07/2001', 'MAB', '$2y$10$JP21uG.0nCnUZv0oSWlI6uTwCWFNyt5Yp9jU3uyQLHaeg5dYUyqDW', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-26 18:22:23', '2019-01-27 14:12:08', 2),
+(28, 10, 'Cameron', 'Michelle', 'cameron@michelle.com', 'uploads/photo/users/1548601718.jpg', NULL, 'MAA', '$2y$10$v7aDmaU1Bg1tGkohBpy9E.XmHZNEJv2aqUcKD7jDYF2lRBPuXdgay', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-27 14:08:38', '2019-01-27 14:08:38', 2),
+(29, 11, 'Henriksen', 'Jose', 'Henriksen@Jose.com', 'uploads/photo/users/1548602042.jpg', NULL, 'Doctorant', '$2y$10$QLecWOXUSbdXirgz/sOczODDcFMIcM4p0kGzV/tkD.2YqxLhxPc1q', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-27 14:14:02', '2019-01-27 14:14:02', 2),
+(30, 10, 'Green', 'Johnny', 'Green@Johnny', 'uploads/photo/users/1548606907.jpg', NULL, 'Doctorant', '$2y$10$TZ8XwBhhPnkdC22ACN8oq.Y5FN70eruvHc09tcIFgkISo3h9tgKzG', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-27 15:35:07', '2019-01-27 15:35:07', 2),
+(31, 11, 'Krista', 'Juarez', 'Krista@Juarez', 'uploads/photo/users/1548607005.jpg', NULL, 'Doctorant', '$2y$10$vL2cxB.Vuf7uzpFn4T2Z6uVIfXBU4hyA2ueMkTSitww2JEY4eneWa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-27 15:36:45', '2019-01-27 15:36:45', 2),
+(32, 10, 'Kauffman', 'Ingrid', 'Kauffman@Ingrid', 'uploads/photo/users/1548607143.jpg', NULL, 'MCB', '$2y$10$g1uKh/B8K6aVglEkMxzhf./4B0RUYROdAHAb6GX8iDNUxwXYmT.oG', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-27 15:39:03', '2019-01-27 15:39:03', 2),
+(33, 13, 'Barnes', 'Lori', 'Barnes@Lori.com', 'uploads/photo/users/1548610357.jpg', NULL, 'Professeur', '$2y$10$1C.tjqGR4GgPG.eLk7oTt.tWcf97EJvjOss/Y6SqAliDJKG3WAdly', NULL, NULL, NULL, NULL, NULL, NULL, 'za9J0EKbJCwXCw1v81zXahfAXYYiYUY7IgHLNt4Y3Xqpi0io0LFbCdU06NVq', '2019-01-27 16:32:37', '2019-01-27 16:33:02', 3),
+(34, 13, 'Yassine', 'Yassine', 'Yassine@Yassine', 'uploads/photo/users/1548610842.jpg', NULL, 'MCB', '$2y$10$gLgcj5vAV9r94akxuiEPVe1HJAcfsh3qlVqUwKFGbc88yjcWROxd2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-27 16:40:42', '2019-01-27 16:40:42', 2);
 
 --
 -- Index pour les tables exportées
@@ -902,6 +981,13 @@ ALTER TABLE `partenaires`
   ADD KEY `partenaires_created_by_foreign` (`created_by`);
 
 --
+-- Index pour la table `pending_users`
+--
+ALTER TABLE `pending_users`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pending_users_equipe_id_foreign` (`equipe_id`);
+
+--
 -- Index pour la table `project_contact`
 --
 ALTER TABLE `project_contact`
@@ -976,7 +1062,7 @@ ALTER TABLE `actualites`
 -- AUTO_INCREMENT pour la table `affecter`
 --
 ALTER TABLE `affecter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 --
 -- AUTO_INCREMENT pour la table `applications`
 --
@@ -986,32 +1072,32 @@ ALTER TABLE `applications`
 -- AUTO_INCREMENT pour la table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT pour la table `article_contact`
 --
 ALTER TABLE `article_contact`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT pour la table `article_user`
 --
 ALTER TABLE `article_user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 --
 -- AUTO_INCREMENT pour la table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT pour la table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT pour la table `equipes`
 --
 ALTER TABLE `equipes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT pour la table `evenements`
 --
@@ -1026,37 +1112,42 @@ ALTER TABLE `evenement_user`
 -- AUTO_INCREMENT pour la table `materiels`
 --
 ALTER TABLE `materiels`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 --
 -- AUTO_INCREMENT pour la table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 --
 -- AUTO_INCREMENT pour la table `parametres`
 --
 ALTER TABLE `parametres`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT pour la table `partenaires`
 --
 ALTER TABLE `partenaires`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `pending_users`
+--
+ALTER TABLE `pending_users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `project_contact`
 --
 ALTER TABLE `project_contact`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT pour la table `projets`
 --
 ALTER TABLE `projets`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT pour la table `projet_user`
 --
 ALTER TABLE `projet_user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT pour la table `roles`
 --
@@ -1071,7 +1162,7 @@ ALTER TABLE `stages`
 -- AUTO_INCREMENT pour la table `theses`
 --
 ALTER TABLE `theses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT pour la table `these_contact`
 --
@@ -1081,7 +1172,7 @@ ALTER TABLE `these_contact`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- Contraintes pour les tables exportées
 --

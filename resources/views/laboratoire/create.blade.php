@@ -102,7 +102,7 @@
 
           <div class="container col-xs-12">
 
-            <form class="well form-horizontal" action=" {{url('laboratoires')}} " method="post"  id="contact_form">
+            <form class="well form-horizontal" action=" {{url('laboratoires')}} " method="post"  id="contact_form" enctype="multipart/form-data">
               {{ csrf_field() }}
               <fieldset>
 
@@ -189,18 +189,7 @@
                         </div>
                   </div>
 
-                  <div class="form-group" >
-                      <label class="col-md-3 control-label">Photo</label>
 
-                          <div class="col-md-9 inputGroupContainer" >
-                            <div id='labo-photo-upload'>
-                              <div class="hvr-profile-img">
-                                <input type="file" name="img" id='labo-photo'  class="upload w180" title="Dimensions 180 X 180" id="imag">
-                              </div>
-                              <i class="fa fa-camera"> <h4>Importer une photo</h4></i>
-                            </div>
-                          </div>
-                  </div>
 
 
 

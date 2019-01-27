@@ -306,8 +306,11 @@ class ParametreController extends Controller
 
        if($labo->save()){
          $user = User::find($request->input('directeur'));
+          if(isset($user)){
          $user->role_id=3;//directeur
-         $user->save();
+
+          $user->save();
+        }
        }
 
        return redirect('laboratoires/'.$id.'/details');
@@ -369,8 +372,11 @@ class ParametreController extends Controller
 
         if($newLab->save()){
           $user = User::find($request->input('directeur'));
+          if(isset($user)){
           $user->role_id=3;//directeur
-          $user->save();
+
+            $user->save();
+          }
         }
 
         return redirect('laboratoires');

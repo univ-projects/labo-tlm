@@ -209,6 +209,11 @@
                   <li {{{ (Request::is('membres/*') ? 'class=active' : '') }}} {{{ (Request::is('membres') ? 'class=active' : '') }}}>
                     <a href="{{url('membres')}}"><i class="fa fa-list"></i> Liste</a>
                   </li>
+                  @if(Auth::user()->role->nom == 'admin')
+                  <li {{{ (Request::is('pending/*') ? 'class=active' : '') }}} {{{ (Request::is('pending') ? 'class=active' : '') }}}>
+                    <a href="{{url('pendingMembres')}}"><i class="fa fa-plus"></i> Demandes d'ajouts</a>
+                  </li>
+                  @endif
                 </ul>
               </li>
 

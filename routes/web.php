@@ -127,6 +127,10 @@ Route::get('/{lab}/connexion', function ($lab) {
     return view('auth/login')->with([
       'lab'=>$lab,  ]);
 });
+Route::get('/{lab}/register', function ($lab) {
+    return view('auth/register')->with([
+      'lab'=>$lab,  ]);
+});
 
 });
 
@@ -138,6 +142,7 @@ Route::get('theses-dash', 'dashController@getMonthlyTheseData');
 Route::get('typeArticle-dash', 'dashController@getArticleTypeCount');
 Route::get('gradeMember-dash', 'dashController@getMonthlyMembre');
 Route::get('laboMember-dash', 'dashController@getMembersLaboCount');
+Route::get('typeArticle-stacked-chart', 'dashController@getMonthlyArticleData');
 
 
 Route::get('dashboard','dashController@index');
@@ -196,6 +201,10 @@ Route::post('/postajaxMembres1','UserController@postMembres1');
 Route::post('/postajaxMembres2','UserController@postMembres2');
 Route::post('/postajaxMembres3','UserController@postMembres3');
 
+
+Route::resource('pendingMembres', 'PendingUserController',[
+    'only' => ['index','store','destroy','update']
+]);
 
 
 

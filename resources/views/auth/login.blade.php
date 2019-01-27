@@ -25,10 +25,6 @@
 
         }
 
-
-        body {
-        	font-family: montserrat, arial, verdana;
-        }
         /*form styles*/
         #msform {
         	width: 400px;
