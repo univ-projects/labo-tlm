@@ -73,10 +73,19 @@
               @yield('asidebar')
 							<button class="menu-toggle" style="float:right;"><i class="fa fa-bars"></i></button>
 							<div class="row" style="padding:0;">
+									@if(Auth::user())
+									<div class="col-md-5 col-xs-12" style="padding:0;margin:0 0 0 50px">
+										<!-- <a>Bonjour {{Auth::user()->name}} {{Auth::user()->prenom}} !</a> -->
+										<a class="login btn"  href="{{url('home')}}" style="border-radius: 20px;width:120px">Dashboard</a>
+										<a class="login btn btn-circle " href="{{ route('logout') }}" style="border-radius: 20px;width:120px;">Se deconnecter</a>
+									</div>
+								@else
 									<div class="col-md-5 col-xs-12" style="padding:0;margin:0 0 0 50px">
 										<a class="login btn"  href="{{url('front/'.$lab.'/register')}}" style="border-radius: 20px;width:120px">S'inscrire</a>
 										<a class="login btn btn-circle " href="{{url('front/'.$lab.'/connexion')}}" style="border-radius: 20px;width:120px;">Se connecter</a>
 									</div>
+										@endif
+
 									<div class="col-md-5 col-xs-12" >
 										<form class="example" action="{{url('front/'.$lab.'/search')}}" style="margin:0;max-width:300px;">
 											<input type="text" placeholder="Rechercher..." name="search" required>
