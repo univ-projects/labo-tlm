@@ -36,7 +36,7 @@
     <div class="fullwidth-block">
       <div class="container">
         <h2 class="section-title">Articles récents</h2>
-
+        <?php if(isset($actualites[0]) and isset($actualites[2]) ): ?>
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6  py-0 pl-3 pr-1 featcard" >
              <div id="featured" class="carousel slide carousel-fade" data-ride="carousel" >
@@ -213,7 +213,7 @@
         <button id="toggle" class="pulse-button tooltip2"><span class="tooltiptext">Voir plus</span>&#x25BC;</button>
     </div>
 </div>
-
+<?php endif; ?>
 <!-- Flickity HTML init -->
 <div class="fullwidth-block" >
 
