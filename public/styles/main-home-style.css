@@ -1820,7 +1820,7 @@ figure {
 
 .arrow-list {
   list-style: none;
-  list-style-image: url(public/images/icons/arrow.png);
+
   margin-left: 20px;
   margin-bottom: 30px; }
   .arrow-list li {

@@ -24,7 +24,10 @@ class dashController extends Controller
         $membres = DB::table('users')->distinct('id')->count();
         $equipes = DB::table('equipes')->distinct('id')->count();
         $articles = DB::table('articles')->distinct('id')->count();
-        $theses = DB::table('theses')->distinct('id')->where('date_soutenance',null)->count();
+        $theses = DB::table('theses')->distinct('id')
+        ->where('date_soutenance',null)
+        ->orWhere('date_soutenance','>',Carbon::now())
+        ->count();
         $laboratoires=Parametre::all();
 
 
@@ -217,5 +220,88 @@ class dashController extends Controller
             return   $yearly_membre_count;
 
             }
+
+
+
+            function getYearlyArticleCount2( $year,$type) {
+              if($type!='Article' AND $type!='Livre'){
+                $yearly_article_count = Article::select(DB::raw('DISTINCT article_user.article_id'))->join('article_user','article_user.article_id','=','articles.id')
+                ->join('users','article_user.user_id','=','users.id')
+                ->where('articles.type',$type)
+                ->whereYear('date', $year )->get()->count();
+              }
+              else if($type=='Article'){
+                $yearly_article_count=  Article::select(DB::raw('DISTINCT article_user.article_id'))->join('article_user','article_user.article_id','=','articles.id')
+                ->join('users','article_user.user_id','=','users.id')
+                ->whereYear('date', $year )
+                ->where(function ($query) {
+                  $query->where('articles.type','Article court')
+                  ->orWhere('articles.type','Article long');
+                })->get()->count();
+
+              }
+              else if($type=='Livre'){
+                $yearly_article_count=  Article::select(DB::raw('DISTINCT article_user.article_id'))->join('article_user','article_user.article_id','=','articles.id')
+                ->join('users','article_user.user_id','=','users.id')
+                ->whereYear('date', $year )
+                ->where(function ($query) {
+                  $query->where('articles.type','Livre')
+                  ->orWhere('articles.type','Chapitre d\'un livre');
+                })->get()->count();
+
+              }
+              return $yearly_article_count;
+            }
+
+
+            function getMonthlyArticleData() {
+
+              $yearly_publication_count_array = array();
+              $yearly_brevet_count_array = array();
+              $yearly_poster_count_array = array();
+              $yearly_article_count_array = array();
+              $yearly_livre_count_array = array();
+
+
+
+              $year_array = $this->getAllYears();
+
+              if ( ! empty( $year_array ) ) {
+                foreach ( $year_array as $year ){
+
+                  $yearly_article_count = $this->getYearlyArticleCount2( $year,'Article');
+                  array_push( $yearly_article_count_array, $yearly_article_count );
+
+                  $yearly_publication_count = $this->getYearlyArticleCount2( $year,'Publication(Revue)');
+                  array_push( $yearly_publication_count_array, $yearly_publication_count );
+
+                  $yearly_brevet_count = $this->getYearlyArticleCount2( $year,'Brevet');
+                  array_push( $yearly_brevet_count_array, $yearly_brevet_count );
+
+                  $yearly_livre_count = $this->getYearlyArticleCount2( $year,'Livre');
+                  array_push( $yearly_livre_count_array, $yearly_livre_count );
+
+                  $yearly_poster_count = $this->getYearlyArticleCount2( $year,'Poster');
+                  array_push( $yearly_poster_count_array, $yearly_poster_count );
+
+                }
+              }
+
+              $max_no =max( $yearly_article_count_array )  +max( $yearly_poster_count_array )+max( $yearly_brevet_count_array )  +max( $yearly_publication_count_array )+max( $yearly_livre_count_array );
+              $max = round(( $max_no + 10/2 ) / 10 ) * 10;
+              $yearly_article_these_data_array = array(
+                'months' => $year_array,
+                'article_count_data' => $yearly_article_count_array,
+                'brevet_count_data' => $yearly_brevet_count_array,
+                'publication_count_data' => $yearly_publication_count_array,
+                'livre_count_data' => $yearly_livre_count_array,
+                'poster_count_data' => $yearly_poster_count_array,
+                'max' => $max,
+              );
+
+              return $yearly_article_these_data_array;
+
+              }
+
 
 }

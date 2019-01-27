@@ -414,7 +414,7 @@
 
     <div class="col-md-4">
       <!-- USERS LIST -->
-      <div class="box box-primary">
+      <div class="box box-primary col-md-12">
         <div class="box-header with-border">
           <h3 class="box-title">Logo du partenaire</h3>
 
@@ -425,41 +425,37 @@
         </div>
         <!-- /.box-body -->
       </div>
+      <!-- USERS LIST -->
+      <div class="box box-primary col-md-12">
+        <div class="box-header with-border">
+          <h3 class="box-title">Contacts du partenaires</h3>
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          @if(reset($contacts))
+          <ul class="users-list clearfix">
+            @foreach($contacts as $contact)
+            <li>
+              <a  href="{{url('contacts/'.$contact->id.'/details')}}">
+              <img src="{{asset($contact->photo)}}" alt="User Image">
+                <span class="users-list-name"> {{$contact->nom}}</span>
+              <span class="users-list-date">{{$contact->prenom}}</span>
+              </a>
+            </li>
+            @endforeach
+          </ul>
+          @else
+          <b>Aucun contact trouvé</b>
+          @endif
+          <!-- /.users-list -->
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!--/.box -->
       <!--/.box -->
     </div>
 
-            <div class="col-md-4">
-              <!-- USERS LIST -->
-              <div class="box box-primary">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Contacts du partenaires</h3>
-
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body no-padding">
-                  @if(reset($contacts))
-                  <ul class="users-list clearfix">
-                    @foreach($contacts as $contact)
-                    <li>
-                      <a  href="{{url('contacts/'.$contact->id.'/details')}}">
-                      <img src="{{asset($contact->photo)}}" alt="User Image">
-                        <span class="users-list-name"> {{$contact->nom}}</span>
-                      <span class="users-list-date">{{$contact->prenom}}</span>
-                      </a>
-                    </li>
-                    @endforeach
-                  </ul>
-                  @else
-                  <b>Aucun contact trouvé</b>
-                  @endif
-                  <!-- /.users-list -->
-                </div>
-                <!-- /.box-body -->
-              </div>
-              <!--/.box -->
-            </div>
-
-            <!-- timeLine start -->
 
 
     </div>
