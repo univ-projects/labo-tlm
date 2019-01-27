@@ -50,7 +50,7 @@ Route::prefix('front')->group(function () {
 
 
   Route::get('/{lab}', function ($lab) {
-      return view('front.acceuil')->with([
+      return view('front.lrit')->with([
         'lab'=>$lab,
 
     ]);

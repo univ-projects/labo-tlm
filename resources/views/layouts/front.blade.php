@@ -18,6 +18,10 @@
 		<!-- Loading main css file -->
 		<link rel="stylesheet" href="{{ asset('styles/main-home-style.css') }}">
 
+      <link rel="stylesheet" href="{{ asset('sass/libs/bootstrap4css.css') }}" id="bootstrap-css">
+
+		
+
 		<style media="screen">
 
 			.align-self-end, .align-self-end:focus , .align-self-end:hover{
@@ -210,6 +214,10 @@
 		<script src="{{ asset('labo/bower_components/bootstrap/dist/js/bootstrap4js.js') }}"></script>
 		<script src="{{ asset('labo/bower_components/plugins.js')}}"></script>
 		<script src="{{ asset('labo/bower_components/app.js')}}"></script>
+
+	<script src="{{ asset('js/bootstrap4js.js') }}"></script>
+
+	<script src="{{ asset('js/popperjs.js') }}"></script>
 
 	</body>
 
