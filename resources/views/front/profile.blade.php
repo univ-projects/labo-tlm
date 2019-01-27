@@ -12,7 +12,7 @@
          rgba(11, 125, 218, 0.8)),
         url({{asset('images/images/img/contact.jpg')}});
 
-        background-size:cover;
+
 }
 </style>
 <section id="aboutUs"><!--Aboutus-->
@@ -25,20 +25,18 @@
 	  <div class="row">
 						<div class="col-lg-12 about-us">
 							<div class="row">
-							<div class="col-md-6"> <img class="img-responsive" src="{{asset($membre->photo)}}" align=""> </div><!-- /.col-md-6 -->
+							<div class="col-md-6"> <img class="img-responsive" src="{{asset($membre->photo)}}" align="" height="250" width="370"> </div><!-- /.col-md-6 -->
 								<div class="col-md-6">
 							<!--	<h3>I Design Awesome Web Apps</h3> -->
 									<p>
-                    Actuellement enseignant a l'universite Abou Bakr Belkaid de Tlemcen Departement d'informatique  <!--  bref-->
+                    Actuellement enseignant a l'universite Abou Bakr Belkaid de Tlemcen  <!--  bref-->
 									</p>
 
 									<ul class="about-us-list">
-                    <li class="points">Université de Nantes 2007-2008 </li>
-                    <li class="points">Ecole nationale Superieure d'Informatique 2008-2012 </li>
-                    <li class="points">Universite de Tlemcen  2012 - 2018 </li>
-										<li class="points">Recherche D'intérêts : Environnement Intelligent - Traitement et analyse d’images</li>
-										<li class="points">7 Recherches </li>
-										<li class="points">2 Projets Fini  </li>
+                    <li class="points">Grade: {{$membre->grade}}  </li>
+										<li class="points">J'ai Travaillé avec plus de {{count($avecs)}} chercheurs</li>
+                    	<li class="points">J'ai {{count($article)}} Articles </li>
+                  	<li class="points">J'ai participe a {{count($projets)}} Projets  </li>
 
 									</ul><!-- /.about-us-list -->
 
@@ -108,12 +106,12 @@
 
 
       <figure style="position: absolute; left: 0px; top: 0px; transform: translate3d(1011px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four  android  prototype web isotope-item effect-oscar">
-        <div class="portfolio_img"> <img src="{{asset($articl->photo)}}" alt="Portfolio 1"> </div>
+        <div class="portfolio_img"> <img src="{{asset($articl->photo)}}" height="100" width="120" alt="Portfolio 1" > </div>
          <figcaption>
         <div>
-          <a href="../project.html" class="fancybox">
+          <a href="{{ url('front/'.$lab.'/articles/'.$articl->id)}}" class="fancybox">
           <h2> {{$articl->titre}} </h2>
-              <p><?php echo str_limit(strip_tags($articl->resume, '<b><a><i><img>'), $limit = 40, $end = '...'); ?></p>
+              <!-- <p><?php echo str_limit(strip_tags($articl->resume, '<b><a><i><img>'), $limit = 40, $end = '...'); ?></p> -->
           </a>
         </div>
       </figcaption>
@@ -124,7 +122,7 @@
           <!-- Projet -->
 @foreach ($projets as $projet)
       <figure style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four  design isotope-item effect-oscar">
-        <div class="portfolio_img"> <img src="{{asset($projet->photo)}}" alt="Portfolio 1"> </div>
+        <div class="portfolio_img"> <img src="{{asset($projet->photo)}}" alt="Portfolio 1" height="100px" width="120px"> </div>
        <figcaption>
 				<div>
 				  <a href="../project.html" class="fancybox">

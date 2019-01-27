@@ -19,7 +19,7 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
-    <link rel="shortcut icon" href="{{asset('labo/bower_components/multi/images/ico/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{asset('easyLab.png')}}">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{asset('labo/bower_components/multi/images/ico/apple-touch-icon-144-precomposed.png')}}">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{asset('labo/bower_components/multi/images/ico/apple-touch-icon-114-precomposed.png')}}">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{asset('labo/bower_components/multi/images/ico/apple-touch-icon-72-precomposed.png')}}">
@@ -38,7 +38,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#home"><img src="{{asset('labo/bower_components/multi/images/ogo.png')}}" alt="logo"></a>
+                    <a class="navbar-brand" href="#home"><img src="{{asset('easyLab.png')}}" alt="logo" width="200" height="60"></a>
                 </div>
 
                 <div class="collapse navbar-collapse navbar-right">

@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title','Equipes')  
+@section('title','Equipes')
 @section('content')
 
 <div class="fullwidth-block" style="background:#eee" >
@@ -35,7 +35,7 @@
               <?php $j++; endif; ?>
                   @endforeach
                     <?php if($j>5): ?>
-              	<a href="labo.html">
+              	<a href="equipes/{{$equipe->id}}#team">
 									<br><br> Affiche Plus
 								</a>  <?php endif; ?>
 

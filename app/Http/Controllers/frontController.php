@@ -207,13 +207,13 @@ class frontController extends Controller
       }
 
       public function articledetail($lab,$id){
-        $projet = Article::find($id);
+        $article = Article::find($id);
         $labo = Parametre::find($lab);
         $par = DB::select("SELECT * from users where id = (select publicateur from articles where id = $id)");
 
 
         return view('front.articledetail')->with([
-          'projet'=>$projet,
+          'article'=>$article,
           'labo'=>$labo,
           'par'=>$par,
           'lab'=>$lab,
