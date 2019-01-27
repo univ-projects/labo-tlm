@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
-
+<link rel="shortcut icon" href="{{asset('easyLab.png')}}">
 		<title>@yield('title')</title>
 
 		<!-- Loading third party fonts -->
@@ -20,7 +20,7 @@
 
       <link rel="stylesheet" href="{{ asset('sass/libs/bootstrap4css.css') }}" id="bootstrap-css">
 
-		
+
 
 		<style media="screen">
 

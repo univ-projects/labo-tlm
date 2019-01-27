@@ -1435,8 +1435,9 @@ border: 1px solid #CE1139;
 }
 
 .portfolio-item .portfolio_img img {
-    width: 100%;
-    height: auto;
+  height:200px;
+   width: 200px;
+    
 }
 
 .portfolio-item:hover .item_overlay {

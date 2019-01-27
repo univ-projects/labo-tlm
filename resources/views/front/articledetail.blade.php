@@ -1,5 +1,5 @@
 @extends('layouts.front')
-@extends('layouts.projetdetail')
+
 
 @section('title','Article')
 
@@ -15,7 +15,7 @@
             background-position: center;
             background-size:cover;">
       <div class="container">
-        <h2 class="page-title">{{$projet->titre}}</h2>
+        <h2 class="page-title">{{$article->titre}}</h2>
         <!-- <small>équipe Geni Logiciel</small> -->
       </div>
     </div>
@@ -28,17 +28,17 @@
         <div class="row">
           <div class="col-md-6">
             <figure>
-              <img src="{{asset($projet->photo)}}" alt="" style="width: 500px;height:350px;">
+              <img src="{{asset($article->photo)}}" alt="" style="width: 500px;height:350px;">
             </figure>
           </div>
           <div class="col-md-6">
-            <h2 class="section-title">{{$projet->titre}}</h2>
+            <h2 class="section-title">{{$article->titre}}</h2>
             <ul class="project-info">
-              <li><strong>Type:</strong>{{$projet->type}}</li>
-              <li><strong>Date:</strong> {{$projet->date}}</li>
-              <li><strong>Pays et Ville </strong>{{$projet->lieu_pays}}  {{$projet->lieu_ville}} </li>
-              <li><strong>Conference:</strong> {{$projet->conference}}</li>
-              <li><strong>Journal: {{$projet->journal}}</li>
+              <li><strong>Type:</strong>{{$article->type}}</li>
+              <li><strong>Date:</strong> {{$article->date}}</li>
+              <li><strong>Pays et Ville </strong>{{$article->lieu_pays}}  {{$article->lieu_ville}} </li>
+              <li><strong>Conference:</strong> {{$article->conference}}</li>
+              <li><strong>Journal: {{$article->journal}}</li>
               <li><strong>Par:  </strong>  {{$par[0]->name}} {{$par[0]->prenom}}</li>
 
             </ul>
@@ -47,7 +47,7 @@
 
         <div class="row">
           <div class="col-md-6">
-              {{$projet->resume}}
+              {{$article->resume}}
           </div>
 
         </div>
