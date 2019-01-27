@@ -81,6 +81,7 @@ Route::get('{lab}/A-propos','frontController@apropo');
 Route::get('{lab}/equipes','frontController@equipe');
 
 Route::get('{lab}/projets','frontController@projet');
+Route::get('{lab}/articles','frontController@article');
 
 Route::get('{lab}/projets/{id}','frontController@projetdetail');
 
