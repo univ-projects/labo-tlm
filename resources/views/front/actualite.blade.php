@@ -19,7 +19,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<h2 class="entry-title"><a href="">{{$actualite->titre}}</a></h2>
-								<small class="date" style="font-style:italic">{{$actualite->auteurUser->name}} {{$actualite->auteurUser->prenom}}</small>
+								<small class="date" style="font-style:italic"></small>
 								<p>
 
 										<?php echo strip_tags($actualite->contenu, '<b><a><i><img>') ?>

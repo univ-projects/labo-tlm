@@ -131,62 +131,7 @@
 
 			</main> <!-- .main-content -->
 
-			<footer class="site-footer">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-3">
-							<div class="widget">
-								<h3 class="widget-title">Contact</h3>
-								<address>
-									<strong>Addresse:</strong> 	22, Rue Abi Ayed Abdelkrim Fg Pasteur B.P 119 13000, Tlemcen, Algérie
-								</address>
-								<address>
-									<strong>Téléphone:</strong> 043.41.11.89
-								</address>
-								<address>
-									<strong>Fax:</strong> 043.41.11.91
-								</address>
-								<address>
-									<strong>Email:</strong> univ-tlm@gmail.com
-								</address>
-
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="widget">
-								<h3 class="widget-title">Articles récents</h3>
-								<ul class="arrow-list">
-									<li><a href="article.html">Collaboration entre les enseignants de l'UABT et Coréens</a></li>
-									<li><a href="article.html">Contrôle de Conformité des Laboratoires et des Unités de Recherche</a></li>
-									<li><a href="article.html">Appel à création de nouveaux laboratoires de recherches</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="widget">
-								<h3 class="widget-title">Prochains événements</h3>
-								<ul class="arrow-list">
-									<li><a href="event.html">GDG : Android study Jams, Atelier Désign et séance de Lecture</a></li>
-									<li><a href="event.html">GDG : Android study Jams, Atelier Désign et séance de Lecture</a></li>
-									<li><a href="event.html">GDG : Android study Jams, Atelier Désign et séance de Lecture</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="widget">
-								<h3 class="widget-title">Réseaux sociaux</h3>
-								<p>Vous pouvez aussi suivre laboratoire de recherche Tlemcen sur les réseaux sociaux !</p>
-								<div class="social-links">
-									<a href="#"><i class="fa fa-facebook"></i></a>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-									<a href="#"><i class="fa fa-google-plus"></i></a>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</div>
-							</div>
-						</div>
-					</div> <!-- .row -->
-				</div> <!-- .container -->
-			</footer>
+			
 		</div>
 
 @endsection

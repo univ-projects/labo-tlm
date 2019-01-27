@@ -26,6 +26,7 @@ class frontController extends Controller
             ->join('equipes', 'users.equipe_id', '=', 'equipes.id')
             ->where('equipes.labo_id',$lab)
             ->select('actualites.*')
+            ->orderByDesc('created_at')
             ->get();
 
       $labo = Parametre::find($lab);

@@ -17,7 +17,7 @@
               <div class="project-content">
                 <figure class="featured-image"><img src="{{asset($actualite->photo)}}" alt="{{$actualite->titre}}"></figure>
                 <h2 class="entry-title"><a href="{{ url('front/'.$lab.'/actualites/'.$actualite->id)}}">{{$actualite->titre}}</a></h2>
-                <small class="date">{{$actualite->updated_at}}</small>
+                <small class="date">{{$actualite->created_at}}</small>
                 <p>
                   <?php echo str_limit(strip_tags($actualite->contenu,'<b><a><i><img>'), $limit = 100, $end = '...') ?>
                 </p>
@@ -49,9 +49,7 @@
 
           </div>
         </div>
-        <div align="center">
-            <button id="toggle" class="pulse-button" data-toggle="tooltip" data-placement="bottom" title="Voir plus !">&#x25BC;</button>
-        </div>
+        
       </div>
 
 @endsection

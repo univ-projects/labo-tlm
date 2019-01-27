@@ -50,8 +50,25 @@ Route::prefix('front')->group(function () {
 
 
   Route::get('/{lab}', function ($lab) {
-      return view('front.lrit')->with([
-        'lab'=>$lab,
+
+      $equipes = Equipe::where('labo_id',$lab)->get();
+        $chef = DB::table('users')
+                ->join('equipes', 'users.id', '=', 'equipes.chef_id')
+                ->where('equipes.labo_id',$lab)
+                ->select('users.*')
+                ->get();
+        $membres = DB::table('users')
+                ->join('equipes', 'users.equipe_id', '=', 'equipes.id')
+                ->where('equipes.labo_id',$lab)
+                ->select('users.*')
+              //  ->groupBy('equipe_id')
+                ->get();
+
+        return view('front.lrit')->with([
+          'equipes'=>$equipes,
+          'chef'=>$chef,
+          'membres'=>$membres,
+          'lab'=>$lab,
 
     ]);
   });
