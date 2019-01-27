@@ -4,15 +4,24 @@
 
 
 @section('content')
+<div class="page-head" style="    background-image:
+        linear-gradient(to right bottom,
+         rgba(105, 172, 199, 0.2),
+         rgba(11, 125, 218, 0.8)),
+      url({{asset('images/images/img/actu.jpg')}}); 
+
+        background-size:cover;">
+  <div class="container">
+    <h2 class="page-title">Actualités</h2>
+    <small>Suivez tout ce qui concerne le laboratoire de recherche Tlemcen </small>
+  </div>
+</div>
 
 <div class="fullwidth-block">
         <div class="container">
           <div class="project-list" >
-            <?php $i=0; ?>
+
             @foreach($actualites as $actualite)
-            <?php if ($i<6): ?>
-
-
             <div class="project">
               <div class="project-content">
                 <figure class="featured-image"><img src="{{asset($actualite->photo)}}" alt="{{$actualite->titre}}"></figure>
@@ -24,8 +33,7 @@
                 <a href="{{ url('front/'.$lab.'/actualites/'.$actualite->id)}}" class="button">Voir plus</a>
               </div>
             </div>
-            <?php $i++; ?>
-            <?php else: ?>
+
               <div id="text">
                 <div class="project">
                   <div class="project-content">
@@ -39,17 +47,13 @@
                   </div>
                 </div>
               </div>
-            <?php endif; ?>
-
-
-
             @endforeach
 
 
 
           </div>
         </div>
-        
+
       </div>
 
 @endsection
