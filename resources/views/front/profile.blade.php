@@ -4,7 +4,17 @@
 @section('content')
 
 <!--Header_section-->
+<style media="screen">
+.footer_wrapper {
+    background-image:
+        linear-gradient(to right bottom,
+         rgba(105, 172, 199, 0.2),
+         rgba(11, 125, 218, 0.8)),
+        url({{asset('images/images/img/contact.jpg')}});
 
+        background-size:cover;
+}
+</style>
 <section id="aboutUs"><!--Aboutus-->
 <div class="inner_wrapper aboutUs-container fadeInLeft animated wow">
   <div class="container">

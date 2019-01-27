@@ -12,9 +12,9 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="carousel-content">
-                                    <h2><span>Multi</span> is the best Onepage html template</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et  dolore magna incididunt ut labore aliqua. </p>
-                                    <a class="btn btn-primary btn-lg" href="#">Read More</a>
+                                    <h2>   <span>Bienvenue au Laboratoires de recherche Tlemcen</span></h2>
+                                      <p>Laboratoires de recherche de l'Université Abou bekr belkaid Tlemcen est parmis les meilleurs laboratoires en continent africain</p>
+                                    <a class="btn btn-primary btn-lg" href="#about">Decouvrir Nous</a>
                                 </div>
                             </div>
                         </div>
@@ -27,9 +27,9 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="carousel-content">
-                                    <h2>Beautifully designed <span>free</span> one page template</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et  dolore magna incididunt ut labore aliqua. </p>
-                                    <a class="btn btn-primary btn-lg" href="#">Read More</a>
+                                  <h2>   <span>Bienvenue au Laboratoires de recherche Tlemcen</span></h2>
+                                    <p>Laboratoires de recherche de l'Université Abou bekr belkaid Tlemcen est parmis les meilleurs laboratoires en continent africain</p>
+                                  <a class="btn btn-primary btn-lg" href="#about">Decouvrir Nous</a>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +102,7 @@ Le laboratoire est issu de l’association de quatre équipes, il analyse les re
                     <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="0ms">
                         <div class="media service-box">
                             <div class="pull-left">
-                              <img src="{{asset($lab->photo)}}" alt="Logo" style="width:70px; border-radius: 50%;">
+                              <img src="{{asset($lab->logo)}}" alt="Logo" style="width:70px; border-radius: 50%;">
                             </div>
                             <div class="media-body">
                               <a href="{{ url('front/'.$lab->id)}}"> <h4 class="media-heading">{{$lab->achronymes}}</h4></a>
@@ -116,105 +116,68 @@ Le laboratoire est issu de l’association de quatre équipes, il analyse les re
         </div><!--/.container-->
     </section><!--/#services-->
 
-    <section id="testimonial">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-sm-offset-2">
 
-                    <div id="carousel-testimonial" class="carousel slide text-center" data-ride="carousel">
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner" role="listbox">
-                            <div class="item active">
-                                <p><img class="img-circle img-thumbnail" src="{{asset('labo/bower_components/multi/images/testimonial/01.jpg')}}" alt=""></p>
-                                <h4>Louise S. Morgan</h4>
-                                <small>Treatment, storage, and disposal (TSD) worker</small>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut et dolore magna aliqua. Ut enim ad minim veniam</p>
-                            </div>
-                            <div class="item">
-                                <p><img class="img-circle img-thumbnail" src="{{asset('labo/bower_components/multi/images/testimonial/01.jpg')}}" alt=""></p>
-                                <h4>Louise S. Morgan</h4>
-                                <small>Treatment, storage, and disposal (TSD) worker</small>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut et dolore magna aliqua. Ut enim ad minim veniam</p>
-                            </div>
-                        </div>
-
-                        <!-- Controls -->
-                        <div class="btns">
-                            <a class="btn btn-primary btn-sm" href="#carousel-testimonial" role="button" data-slide="prev">
-                                <span class="fa fa-angle-left" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="btn btn-primary btn-sm" href="#carousel-testimonial" role="button" data-slide="next">
-                                <span class="fa fa-angle-right" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section><!--/#testimonial-->
 
     <section id="work-process">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title text-center wow fadeInDown">Our Process</h2>
-                <p class="text-center wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
+                <h2 class="section-title text-center wow fadeInDown">Nos Statistics</h2>
+                <!-- <p class="text-center wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p> -->
             </div>
 
             <div class="row text-center">
                 <div class="col-md-2 col-md-4 col-xs-6">
                     <div class="wow fadeInUp" data-wow-duration="400ms" data-wow-delay="0ms">
                         <div class="icon-circle">
-                            <span>1</span>
-                            <i class="fa fa-coffee fa-2x"></i>
+                            <span>{{count($labs)}}</span>
+                            <i class="fa fa-flask fa-2x"></i>
                         </div>
-                        <h3>MEET</h3>
+                        <h3>LABORATOIRES</h3>
                     </div>
                 </div>
                 <div class="col-md-2 col-md-4 col-xs-6">
                     <div class="wow fadeInUp" data-wow-duration="400ms" data-wow-delay="100ms">
                         <div class="icon-circle">
-                            <span>2</span>
-                            <i class="fa fa-bullhorn fa-2x"></i>
+                            <span>{{$stat_eq[0]->c}}</span>
+                            <i class="fa fa-users fa-2x"></i>
                         </div>
-                        <h3>PLAN</h3>
+                        <h3>EQUIPES</h3>
                     </div>
                 </div>
                 <div class="col-md-2 col-md-4 col-xs-6">
                     <div class="wow fadeInUp" data-wow-duration="400ms" data-wow-delay="200ms">
                         <div class="icon-circle">
-                            <span>3</span>
-                            <i class="fa fa-image fa-2x"></i>
+                            <span>{{$stat_m[0]->c}}</span>
+                            <i class="fa fa-user fa-2x"></i>
                         </div>
-                        <h3>DESIGN</h3>
+                        <h3>MEMBRES</h3>
                     </div>
                 </div>
                 <div class="col-md-2 col-md-4 col-xs-6">
                     <div class="wow fadeInUp" data-wow-duration="400ms" data-wow-delay="300ms">
                         <div class="icon-circle">
-                            <span>4</span>
-                            <i class="fa fa-heart fa-2x"></i>
+                            <span>{{$stat_p[0]->c}}</span>
+                            <i class="fa fa-folder-open-o  fa-2x"></i>
                         </div>
-                        <h3>DEVELOP</h3>
+                        <h3>PROJETS</h3>
                     </div>
                 </div>
                 <div class="col-md-2 col-md-4 col-xs-6">
                     <div class="wow fadeInUp" data-wow-duration="400ms" data-wow-delay="400ms">
                         <div class="icon-circle">
-                            <span>5</span>
-                            <i class="fa fa-shopping-cart fa-2x"></i>
+                            <span>{{$stat_ar[0]->c}}</span>
+                            <i class="fa fa-file-text-o fa-2x"></i>
                         </div>
-                        <h3>TESTING</h3>
+                        <h3>ARTICLE</h3>
                     </div>
                 </div>
                 <div class="col-md-2 col-md-4 col-xs-6">
                     <div class="wow fadeInUp" data-wow-duration="400ms" data-wow-delay="500ms">
                         <div class="icon-circle">
-                            <span>6</span>
-                            <i class="fa fa-space-shuttle fa-2x"></i>
+                            <span>{{$stat_th[0]->c}}</span>
+                            <i class="fa fa-file-pdf-o  fa-2x"></i>
                         </div>
-                        <h3>LAUNCH</h3>
+                        <h3>THESE</h3>
                     </div>
                 </div>
             </div>
@@ -226,7 +189,7 @@ Le laboratoire est issu de l’association de quatre équipes, il analyse les re
             <div class="section-header">
                 <h2 class="section-title text-center wow fadeInDown">Dernières Actualites</h2>
             </div>
-
+              <?php if(isset($accs[0]) and isset($accs[2]) ): ?>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="blog-post blog-large wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="0ms">
@@ -290,6 +253,7 @@ Le laboratoire est issu de l’association de quatre équipes, il analyse les re
                 </div>
             </div>
 
+          <?php endif; ?>
         </div>
     </section>
 

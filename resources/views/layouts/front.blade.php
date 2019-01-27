@@ -177,8 +177,8 @@
 								<h3 class="widget-title">Prochains événements</h3>
 								<ul class="arrow-list">
 									<li><a href="event.html">GDG : Android study Jams, Atelier Désign et séance de Lecture</a></li>
-									<li><a href="event.html">GDG : Android study Jams, Atelier Désign et séance de Lecture</a></li>
-									<li><a href="event.html">GDG : Android study Jams, Atelier Désign et séance de Lecture</a></li>
+										<li><a href="event.html">GDG : Android study Jams, Atelier Désign et séance de Lecture</a></li>
+										<li><a href="event.html">GDG : Android study Jams, Atelier Désign et séance de Lecture</a></li>
 								</ul>
 							</div>
 						</div>

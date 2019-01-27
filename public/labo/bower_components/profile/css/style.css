@@ -1235,15 +1235,7 @@ border: 1px solid #CE1139;
 /* Footer
 ---------------------------------*/
 
-.footer_wrapper {
-    background-image:
-        linear-gradient(to right bottom,
-         rgba(105, 172, 199, 0.2),
-         rgba(11, 125, 218, 0.8)),
-        url('../../public/images/img/contact.jpg');
 
-        background-size:cover;
-}
 .footer_wrapper input{
   padding: 15px;
   border: 1px solid #ccc;

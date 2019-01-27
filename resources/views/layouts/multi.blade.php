@@ -38,7 +38,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img src="{{asset('labo/bower_components/multi/images/ogo.png')}}" alt="logo"></a>
+                    <a class="navbar-brand" href="#home"><img src="{{asset('labo/bower_components/multi/images/ogo.png')}}" alt="logo"></a>
                 </div>
 
                 <div class="collapse navbar-collapse navbar-right">

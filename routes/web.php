@@ -19,20 +19,32 @@ use Illuminate\Support\Facades\Input;
 
 
 
-
+  Route::get('/', function () {
+    return redirect('front/');
+  });
 Route::prefix('front')->group(function () {
   Route::get('/', function () {
     $labs= DB::select("SELECT * from parametres");
-    $ups =  DB::select("SELECT * from evenements where created_at >= now() ");
-    $last = DB::select("SELECT * from evenements where created_at < now() ");
+    $ups =  DB::select("SELECT * from evenements where evenements.to >= now() ");
+    $last = DB::select("SELECT * from evenements where evenements.to < now() ");
     $accs = DB::select("SELECT * from actualites order by updated_at desc");
     $labss =  DB::select("SELECT * FROM equipes WHERE id IN (SELECT equipe_id FROM users WHERE id IN (SELECT auteur FROM actualites ORDER BY updated_at DESC))");
+    $stat_equipes  = DB::select("SELECT count(*) as c from equipes");
+    $stat_membre= DB::select("SELECT count(*) as c from users");
+    $stat_projet= DB::select("SELECT count(*) as c from projets");
+    $stat_article= DB::select("SELECT count(*) as c from articles");
+    $stat_these= DB::select("SELECT count(*) as c from theses");
       return view('front.multilab')->with([
         'labs'=>$labs,
         'ups'=>$ups,
         'last'=>$last,
         'accs'=>$accs,
         'labss'=>$labss,
+        'stat_eq'=>$stat_equipes,
+        'stat_m'=>$stat_membre,
+        'stat_p'=>$stat_projet,
+        'stat_ar'=>$stat_article,
+        'stat_th'=>$stat_these,
     ]);
   });
 
