@@ -2,13 +2,13 @@
 
 
   <?php
-  
+
   use App\Actualite;
   use App\Evenement;
 
   $actualites = Actualite::orderByDesc('created_at')->get();
   $evenements = Evenement::orderBy('from')->get();
-  
+
 
 
   ?>
@@ -27,14 +27,14 @@
     <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('labo/bower_components/font-awesome/css/font-awesome.min.css') }}">
-    
+
     <!-- Bootstrap 3.3.7 -->
-       <link rel="stylesheet" href="{{ asset('sass/libs/bootstrap4css.css') }}" id="bootstrap-css"> 
+       <link rel="stylesheet" href="{{ asset('sass/libs/bootstrap4css.css') }}" id="bootstrap-css">
 
     <!-- Loading main css file -->
     <link rel="stylesheet" href="{{ asset('styles/main-home-style.css') }}">
 
-      
+
 
 
 
@@ -132,7 +132,7 @@
       </header>
 
 
-      
+
 
       <main class="main-content">
 
@@ -140,7 +140,7 @@
     <div class="fullwidth-block">
       <div class="container">
         <h2 class="section-title">Actualités récents</h2>
-        
+        @if(isset($actualites))
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6  py-0 pl-3 pr-1 featcard" >
              <div id="featured" class="carousel slide carousel-fade" data-ride="carousel" >
@@ -266,6 +266,7 @@
 
 
       </div>
+      @endif
     </div>
 
 
@@ -274,6 +275,7 @@
 <div class="fullwidth-block" style="background:#edf2f4">
     <div class="container" >
       <h2 class="section-title">Actualités plus anciens</h2>
+      @if(isset($actualites))
       <div class="project-list" >
         @for ($i = 4; $i < 7  ; $i++)
             <div class="project" >
@@ -290,13 +292,14 @@
 
           @endfor
 
-         
-        
-        
 
 
-        
+
+
+
+
       </div>
+      @endif
     </div>
     <div  align="center" style="margin-bottom:25px">
   <a href="{{url('front/'.$lab.'/actualites')}}" class="button home-actualite">Voir tout les actualités</a>
@@ -319,6 +322,7 @@
                         </ol>
 
                         <!-- Carousel items -->
+                        @if(isset($evenements))
                        <div class="carousel-inner">
 
                             <div class="carousel-item active">
@@ -349,7 +353,7 @@
                                         </a>
                                     </div>
                                     @endfor
-                                    
+
                                 </div>
                                 <!--.row-->
                             </div>
@@ -389,6 +393,7 @@
                             <!--.item-->
 
                         </div>
+                        @endif
                         <!--.carousel-inner-->
                     </div>
                     <!--.Carousel-->
@@ -405,12 +410,13 @@
 
 
 
-    
+
 </div>
 
 <div class="fullwidth-block" style="background:#eee" >
     <div class="container" >
       <h2 class="section-title">Equipes</h2>
+      @if(isset($equipes))
       <div class="project-list" >
         <?php $i=-1; ?>
         @foreach($equipes as $equipe )
@@ -456,6 +462,7 @@
 
 
       </div>
+      @endif
     </div>
 
 </div>
@@ -656,7 +663,3 @@ $(document).ready(function() {
 @yield('script')
 
 </html>
-
-
-
-

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 @extends('layouts.front')
 
-@section('title','A-propo')    
+@section('title','A-propo')
 
 @section('content')
 
@@ -44,7 +44,8 @@
 									<br><br>
 
 						      <p style="text-align: center;">
-                          {{$labo->apropos}}
+
+													<?php echo strip_tags($labo->apropos, '<b><a><i><img>') ?>
 
 									 </p>
 										<br><br><br><br>
@@ -59,7 +60,7 @@
 										<p style="text-align: center;">
 							      <strong>
 							        <span style="font-size: 55px; padding-bottom: 0px; color: #69acc7;">{{$labosum}}</span></strong><br>
-							        <strong style="color: #69acc7;">différents laboratoires </strong>
+							        <strong style="color: #69acc7;">différents equipes </strong>
 							      </p>
 									</div>
 								</div>
@@ -131,7 +132,7 @@
 
 			</main> <!-- .main-content -->
 
-			
+
 		</div>
 
 @endsection

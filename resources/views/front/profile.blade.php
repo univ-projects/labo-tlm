@@ -125,7 +125,7 @@
         <div class="portfolio_img"> <img src="{{asset($projet->photo)}}" alt="Portfolio 1" height="100px" width="120px"> </div>
        <figcaption>
 				<div>
-				  <a href="../project.html" class="fancybox">
+				  <a href="{{ url('front/'.$lab.'/projets/'.$projet->id)}}" class="fancybox">
 					<h2>{{$projet->intitule}}</h2>
 							<p><?php echo str_limit(strip_tags($projet->resume, '<b><a><i><img>'), $limit = 50, $end = '...'); ?></p>
 				  </a>

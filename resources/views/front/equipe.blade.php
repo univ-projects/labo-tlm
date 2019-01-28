@@ -31,18 +31,18 @@
                 <?php $j=0; ?>
                   @foreach($membres as $membre)
                 <?php  if($membre->equipe_id == $equipe->id && $j<6): ?>
-                <a href="profile/{{$membre->id}}"  data-toggle="tooltip" data-placement="top" title="{{$membre->name}} {{$membre->prenom}}"><img src="{{asset($membre->photo)}}" alt="" width="50px" height="50px"  class="img img-responsive rounded-circle"></a>
+                <a href="{{ url('front/'.$lab.'/profile/'.$membre->id)}}"  data-toggle="tooltip" data-placement="top" title="{{$membre->name}} {{$membre->prenom}}"><img src="{{asset($membre->photo)}}" alt="" width="50px" height="50px"  class="img img-responsive rounded-circle"></a>
               <?php $j++; endif; ?>
                   @endforeach
                     <?php if($j>5): ?>
-              	<a href="equipes/{{$equipe->id}}#team">
+              	<a href="{{ url('front/'.$lab.'/equipes/'.$equipe->id)}}#team">
 									<br><br> Affiche Plus
 								</a>  <?php endif; ?>
 
 							</div>
 
 
-            <a href="equipes/{{$equipe->id}}" class="button col-md-12">Voir le groupe !</a>
+            <a href="{{ url('front/'.$lab.'/equipes/'.$equipe->id)}}" class="button col-md-12">Voir le groupe !</a>
           </div>
         </div>
  @endforeach

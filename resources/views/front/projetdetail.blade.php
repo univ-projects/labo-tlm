@@ -167,14 +167,14 @@ section .section-title {
               <li><strong>Client:</strong> Lorem ipsum</li>
               <li><strong>Manager:</strong> Howard Brown</li>
               <li><strong>Equipe: {{$equipe[0]->intitule}}</li>
-              <li><strong>But:</strong> Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</li>
+              <!-- <li><strong>But:</strong> Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</li> -->
 
             </ul>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
               {{$projet->resume}}
           </div>
 
@@ -196,7 +196,7 @@ section .section-title {
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <p><img class=" img-fluid" src="{{asset($membre->photo)}}" alt="card image"></p>
-                                      <a href="profil/{{$membre->id}}"> <h4 class="card-title">{{$membre->name}} {{$membre->prenom}}</h4></a>
+                                      <a href="{{ url('front/'.$lab.'/profile/'.$membre->id)}}"> <h4 class="card-title">{{$membre->name}} {{$membre->prenom}}</h4></a>
                                         <p class="card-text">Docteur à Abou Bakr Belkaid University of Tlemcen</p>
                                         <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                                     </div>
@@ -205,7 +205,7 @@ section .section-title {
                             <div class="backside">
                                 <div class="card">
                                     <div class="card-body text-center mt-4">
-                                        <a href="profil/{{$membre->id}}">   <h4 class="card-title">{{$membre->name}} {{$membre->prenom}}</h4></a>
+                                        <a href="{{ url('front/'.$lab.'/profile/'.$membre->id)}}">   <h4 class="card-title">{{$membre->name}} {{$membre->prenom}}</h4></a>
                                         <p class="card-text">Docteur à Abou Bakr Belkaid University of Tlemcen</p>
                                         <ul class="list-inline">
                                             <li class="list-inline-item">
@@ -261,7 +261,7 @@ section .section-title {
       </div>
     </div>
 
-    <div class="fullwidth-block" data-bg-color="#edf2f4">
+    <!-- <div class="fullwidth-block" data-bg-color="#edf2f4">
       <div class="container">
 
         <div class="row">
@@ -284,13 +284,13 @@ section .section-title {
 
             </div>
             <!-- row -->
-          </div>
+          <!-- </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
+    </div> -->
 
 
 

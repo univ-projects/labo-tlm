@@ -64,7 +64,7 @@ class frontController extends Controller
       $projet = DB::table('projets')
               ->join('projet_user', 'projets.id', '=', 'projet_user.projet_id')
               ->where('projet_user.user_id',$id)
-            //  ->select('projets.*')
+              ->select('projets.*')
               ->get();
 
      $avecs=  DB::select("SELECT * FROM users WHERE id IN (SELECT user_id FROM projet_user where projet_id in (SELECT projet_id FROM projet_user WHERE user_id = (SELECT id from users where id = $id)))");
@@ -95,7 +95,10 @@ class frontController extends Controller
              ->select('users.*')
              ->get();
        $membre = $membre->count();
-       $labosum = Parametre::all();
+       $labosum = DB::table('equipes')
+             ->where('equipes.labo_id',$lab)
+             ->select('equipes.*')
+             ->get();
        $labosum = $labosum->count();
 
        $article = DB::table('articles')

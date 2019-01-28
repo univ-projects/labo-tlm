@@ -36,7 +36,7 @@
               <figure class="project-image"><img src="{{asset($projet->photo)}}" alt="Project"></figure>
               <h3 class="project-title">{{$projet->titre}}</h3>
               <p>  <?php echo str_limit(strip_tags($projet->resume, '<b><a><i><img>'), $limit = 100, $end = '...') ?></p>
-              <a href="articles/{{$projet->id}}" class="button">Voir détails</a>
+              <a href="{{ url('front/'.$lab.'/articles/'.$projet->id)}}" class="button">Voir détails</a> 
             </div>
           </div>
             @endforeach

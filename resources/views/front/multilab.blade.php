@@ -104,7 +104,7 @@ Le laboratoire est issu de l’association de quatre équipes, il analyse les re
                               <img src="{{asset($lab->logo)}}" alt="Logo" style="width:70px; border-radius: 50%;">
                             </div>
                             <div class="media-body">
-                              <a href="{{ url('front/'.$lab->id)}}"> <h4 class="media-heading">{{$lab->achronymes}}</h4></a>
+                              <a href="{{ url('front/'.$lab->id.'/A-propos')}}"> <h4 class="media-heading">{{$lab->achronymes}}</h4></a>
                                 <p>{{$lab->nom}}</p>
                             </div>
                         </div>
@@ -188,14 +188,14 @@ Le laboratoire est issu de l’association de quatre équipes, il analyse les re
             <div class="section-header">
                 <h2 class="section-title text-center wow fadeInDown">Dernières Actualites</h2>
             </div>
-              <?php if(isset($accs[0]) and isset($accs[2]) ): ?>
+              <?php if(isset($accs[0]) and isset($accs[2])  and isset($accs[1]) ): ?>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="blog-post blog-large wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="0ms">
                         <article>
                             <header class="entry-header">
                                 <div class="entry-thumbnail">
-                                    <img class="img-responsive" src="images/blog/01.jpg" alt="">
+                                    <img class="img-responsive" src="{{asset($accs[0]->photo)}}" alt="">
                                     <span class="post-format post-format-video"><i class="fa fa-film"></i></span>
                                 </div>
                                 <div class="entry-date">{{$accs[0]->created_at}}</div>
@@ -213,8 +213,8 @@ Le laboratoire est issu de l’association de quatre équipes, il analyse les re
                     <div class="blog-post blog-media wow fadeInRight" data-wow-duration="300ms" data-wow-delay="100ms">
                         <article class="media clearfix">
                             <div class="entry-thumbnail pull-left">
-                                <img class="img-responsive" src="images/blog/02.jpg" alt="">
-                                <span class="post-format post-format-gallery"><i class="fa fa-image"></i></span>
+                                <img class="img-responsive" src="{{asset($accs[1]->photo)}}" alt="">
+                                <span class="post-format post-format-video"><i class="fa fa-image"></i></span>
                             </div>
                             <div class="media-body">
                                 <header class="entry-header">
@@ -233,7 +233,7 @@ Le laboratoire est issu de l’association de quatre équipes, il analyse les re
                     <div class="blog-post blog-media wow fadeInRight" data-wow-duration="300ms" data-wow-delay="200ms">
                         <article class="media clearfix">
                             <div class="entry-thumbnail pull-left">
-                                <img class="img-responsive" src="images/blog/03.jpg" alt="">
+                                <img class="img-responsive" src="{{asset($accs[2]->photo)}}" alt="">
                                 <span class="post-format post-format-audio"><i class="fa fa-music"></i></span>
                             </div>
                             <div class="media-body">
