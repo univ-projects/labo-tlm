@@ -28,7 +28,7 @@
 						<div class="labo-users">
 
 								<h4>Membres</h4>
-<?php $j=0; ?>
+                <?php $j=0; ?>
                   @foreach($membres as $membre)
                 <?php  if($membre->equipe_id == $equipe->id && $j<6): ?>
                 <a href="profile/{{$membre->id}}"  data-toggle="tooltip" data-placement="top" title="{{$membre->name}} {{$membre->prenom}}"><img src="{{asset($membre->photo)}}" alt="" width="50px" height="50px"  class="img img-responsive rounded-circle"></a>

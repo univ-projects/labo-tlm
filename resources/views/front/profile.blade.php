@@ -111,7 +111,7 @@
         <div>
           <a href="{{ url('front/'.$lab.'/articles/'.$articl->id)}}" class="fancybox">
           <h2> {{$articl->titre}} </h2>
-              <!-- <p><?php echo str_limit(strip_tags($articl->resume, '<b><a><i><img>'), $limit = 40, $end = '...'); ?></p> -->
+             <p><?php echo str_limit(strip_tags($articl->resume, '<b><a><i><img>'), $limit = 40, $end = '...'); ?></p>
           </a>
         </div>
       </figcaption>
@@ -160,11 +160,13 @@
   <div class="container">
     <div class="row centered">
             @foreach($avecs as $avec)
+            <?php if ($avec->id != $membre->id): ?>
       <a href="{{$avec->id}}">  <div class="col-md-4 centered"> <img class="img img-circle lt-box" src="{{asset($avec->photo)}}" height="120px" width="120px" alt="">
             <div class="rt-box"><h4><strong>{{$avec->name}}  {{$avec->prenom}}</strong></h4>
                   <p>{{$avec->grade}}</p><br/>
 		        </div>
           </div></a>
+        <?php endif ?>
        @endforeach
 
   </div>
@@ -174,6 +176,42 @@
 </section>
 <!--/Team-->
 <!--Footer-->
+@if(isset($these[0]))
+<section class="page_section team" id="team"><!--main-section team-start-->
+  <div class="container">
+    <h2>Ma these</h2>
+   <h3>{{$these[0]->titre}}</h3>
+   <h4>{{$these[0]->sujet}}</h4>
+   @if(isset($ens1))
+   <h2>Encadré Par</h2>
+		<div id="team" name="team">
+  <div class="container">
+    <div class="row centered">
+      @foreach($ens1 as $en)
+<a href="{{$en->id}}">  <div class="col-md-4 centered"> <img class="img img-circle lt-box" src="{{asset($en->photo)}}" height="120px" width="120px" alt="">
+      <div class="rt-box"><h4><strong>{{$en->name}}  {{$en->prenom}}</strong></h4>
+            <p>{{$en->grade}}</p><br/>
+      </div>
+    </div></a>
+ @endforeach
+ @if(isset($ens1))
+ @foreach($ens2 as $en)
+<a href="{{$en->id}}">  <div class="col-md-4 centered"> <img class="img img-circle lt-box" src="{{asset($en->photo)}}" height="120px" width="120px" alt="">
+ <div class="rt-box"><h4><strong>{{$en->name}}  {{$en->prenom}}</strong></h4>
+       <p>{{$en->grade}}</p><br/>
+ </div>
+</div></a>
+@endforeach
+  @endif
+  </div>
+  <!-- row -->
+</div>
+	</div>
+  @endif
+</section>
+@endif
+
+
 
 <footer class="footer_wrapper" id="contact">
   <div class="container">

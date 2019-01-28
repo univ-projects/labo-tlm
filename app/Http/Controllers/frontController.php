@@ -68,8 +68,12 @@ class frontController extends Controller
               ->get();
 
      $avecs=  DB::select("SELECT * FROM users WHERE id IN (SELECT user_id FROM projet_user where projet_id in (SELECT projet_id FROM projet_user WHERE user_id = (SELECT id from users where id = $id)))");
-
-
+     $these = DB::table('theses')
+           ->where('theses.user_id',$id)
+           ->select('theses.*')
+           ->get();
+    $ens1 = DB::select("SELECT * from users where id in (SELECT coencadreur_int from theses where user_id = $id)");
+    $ens2 = DB::select("SELECT * from users where id in (SELECT encadreur_int from theses where user_id = $id)");
      return view('front.profile')->with([
           'membre' =>$membre,
           'labo'=>$labo,
@@ -77,6 +81,9 @@ class frontController extends Controller
           'projets'=>$projet,
           'avecs'=>$avecs,
           'lab'=>$lab,
+          'these'=>$these,
+          'ens1'=>$ens1,
+          'ens2'=>$ens2,
       ]);
     }
 
@@ -153,11 +160,19 @@ class frontController extends Controller
                 ->select('users.*')
                 ->get();
 
+        $projets = DB::table('projets')
+                ->join('users', 'users.id', '=', 'projets.chef_id')
+                ->where('users.equipe_id',$id)
+                ->select('projets.*')
+                ->get();
+        $contacts = DB::SELECT("SELECT * from partenaires where id in (select partenaire_id from contacts where id in (select contact_id from project_contact where project_id in (select projet_id from projet_user where user_id in (select id from users where equipe_id = $id))))");
         return view('front.equipedetail')->with([
           'equipe'=>$equipe,
           'chef'=>$chef,
           'membres'=>$membres,
           'lab'=>$lab,
+          'projets'=>$projets,
+          'contacts'=>$contacts,
         ]);
       }
 

@@ -209,7 +209,7 @@
                         <p style="text-align:center">{{$lab->nom}}</p>
                      </div>
                     </div>
-                    <?php $i++; if($i==3) break; ?>
+                    <?php $i++; if($i==4) break; ?>
                   @endforeach
                 </div>
               </div>

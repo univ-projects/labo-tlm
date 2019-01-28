@@ -176,7 +176,7 @@ section .section-title {
                 <div class="row">
 
                   <a href="../profile/{{$equipe->chef_id}}" style="color:black">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                       <img src="{{asset($chef[0]->photo)}}" alt="" width="60px" height="60px" class="img img-responsivee" style="border-radius:20px">
                     </div>
                     <div class="col-md-8">
@@ -189,7 +189,8 @@ section .section-title {
               <li>
                 <h3>Description</h3>
                 <p>
-                    <!-- {{$equipe->description}} -->
+                  <?php echo strip_tags($equipe->resume, '<b><a><i><img>') ?>
+
                 </p>
               </li>
             </ol>
@@ -197,26 +198,22 @@ section .section-title {
           <div class="col-md-4">
             <h2 class="section-title">Axes de recherche</h2>
             <p>
-              <span style="color:#67acc9">1-</span>
-              {{$equipe->axes_recherche}}
+
+                <?php echo strip_tags($equipe->axes_recherche, '<b><a><i><img>') ?>
+
               <br/>
 
             </p>
           </div>
-
-
           <div class="col-md-4">
-            <h2 class="section-title">Récentes activités</h2>
-            <ul class="arrow-list has-border">
-              <li> <a href="project.html"> Vériﬁcation de contrats logiciels à l’aide de transformations de modèles Application à Kmeliai </a></li>
-              <li> <a href="project.html"> Vériﬁcation de contrats logiciels à l’aide de transformations de modèles Application à Kmeliai </a></li>
-              <li> <a href="project.html"> Vériﬁcation de contrats logiciels à l’aide de transformations de modèles Application à Kmeliai </a></li>
-              <li> <a href="project.html"> Vériﬁcation de contrats logiciels à l’aide de transformations de modèles Application à Kmeliai </a></li>
-              <li> <a href="project.html"> Vériﬁcation de contrats logiciels à l’aide de transformations de modèles Application à Kmeliais </a></li>
-              <li> <a href="project.html"> Vériﬁcation de contrats logiciels à l’aide de transformations de modèles Application à Kmeliai </a></li>
-              <li> <a href="project.html"> Vériﬁcation de contrats logiciels à l’aide de transformations de modèles Application à Kmeliai </a></li>
-            </ul>
+            <h2 class="section-title">Organismes Partenaires</h2>
+              <ul>
+                @foreach($contacts as $contact)
+                <li>{{$contact->nom}}</li>
+                @endforeach
+              </ul>
           </div>
+
 
       </div>
     </div>
@@ -227,7 +224,7 @@ section .section-title {
 
     <section id="team" class="pb-5">
         <div class="container">
-            <h5 class="section-title h1">OUR TEAM</h5>
+            <h5 class="section-title h1">Notre Equipes</h5>
             <div class="row">
                 <!-- Team member -->
                 @foreach($membres as $membre)
@@ -289,7 +286,23 @@ section .section-title {
     </section>
     <!-- Team -->
 
-
+    <div class="fullwidth-block">
+      <div class="container">
+          <h5 class="section-title h1">Nos Projets</h5>
+        <div class="project-list">
+            @foreach($projets as $projet)
+          <div class="project">
+            <div class="project-content">
+              <figure class="project-image"><img src="{{asset($projet->photo)}}" alt="Project"></figure>
+              <h3 class="project-title">{{$projet->intitule}}</h3>
+              <p>  <?php echo str_limit(strip_tags($projet->resume, '<b><a><i><img>'), $limit = 100, $end = '...') ?></p>
+              <a href="projets/{{$projet->id}}" class="button">Voir détails</a>
+            </div>
+          </div>
+            @endforeach
+        </div>
+      </div>
+    </div>
 
 
 
