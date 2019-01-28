@@ -206,6 +206,27 @@ class frontController extends Controller
         ]);
       }
 
+      public function article($lab){
+
+
+          $articles = DB::table('articles')
+                ->join('article_user', 'article_user.article_id', '=', 'articles.id')
+                ->join('users', 'users.id', '=', 'article_user.user_id')
+                ->join('equipes', 'users.equipe_id', '=', 'equipes.id')
+                ->where('equipes.labo_id',$lab)
+                ->whereNull('articles.deleted_at')
+                ->select('articles.*')
+                ->distinct('id')
+                ->get();
+
+        return view('front.articles')->with([
+          'articles'=>$articles,
+          'lab'=>$lab,
+
+        ]);
+
+      }
+
       public function articledetail($lab,$id){
         $article = Article::find($id);
         $labo = Parametre::find($lab);

@@ -14,7 +14,7 @@
                                 <div class="carousel-content">
                                     <h2>   <span>Bienvenue au Laboratoires de recherche Tlemcen</span></h2>
                                       <p>Laboratoires de recherche de l'Université Abou bekr belkaid Tlemcen est parmis les meilleurs laboratoires en continent africain</p>
-                                    <a class="btn btn-primary btn-lg" href="#about">Decouvrir Nous</a>
+                                    <a class="btn btn-primary btn-lg" href="#services">Decouvrez nos laboratoires !</a>
                                 </div>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                                 <div class="carousel-content">
                                   <h2>   <span>Bienvenue au Laboratoires de recherche Tlemcen</span></h2>
                                     <p>Laboratoires de recherche de l'Université Abou bekr belkaid Tlemcen est parmis les meilleurs laboratoires en continent africain</p>
-                                  <a class="btn btn-primary btn-lg" href="#about">Decouvrir Nous</a>
+                                  <a class="btn btn-primary btn-lg" href="#services">Decouvrez nos laboratoires !</a>
                                 </div>
                             </div>
                         </div>

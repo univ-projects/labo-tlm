@@ -17,6 +17,7 @@ class Controller extends BaseController
 
     public function getCurrentLabo()
     {
+      if(Auth::user()){
       $labo= DB::table('parametres')
                ->select( DB::raw('equipes.labo_id,users.equipe_id,users.id,parametres.id as id'))
                ->leftjoin('equipes', 'equipes.labo_id', '=', 'parametres.id')
@@ -27,5 +28,7 @@ class Controller extends BaseController
      $labo=reset($labo);
      $labo=reset($labo);
      return (isset($labo->id))?Parametre::find($labo->id):'';
+      }
     }
+
 }

@@ -16,7 +16,7 @@
 
     <article class="search-result row">
 			<div class="col-xs-12 col-sm-12 col-md-3">
-				<a href="profile/{{$user->id}}" title="Lorem ipsum" class="thumbnail"><img src="{{asset($user->photo)}}" alt="Lorem ipsum" /></a>
+				<a href="profile/{{$user->id}}" title="Lorem ipsum" class="thumbnail"><img src="{{asset($user->photo)}}" alt="Lorem ipsum" width="150" height="150" /></a>
 			</div>
 
   			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
@@ -32,7 +32,7 @@
 
   <article class="search-result row">
     <div class="col-xs-12 col-sm-12 col-md-3">
-      <a href="articles/{{$article->id}}" title="Lorem ipsum" class="thumbnail"><img src="{{asset($article->photo)}}" alt="Lorem ipsum" /></a>
+      <a href="articles/{{$article->id}}" title="Lorem ipsum" class="thumbnail"><img src="{{asset($article->photo)}}" alt="Lorem ipsum" width="150" height="150" /></a>
     </div>
 
       <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
@@ -48,7 +48,7 @@
 
   <article class="search-result row">
     <div class="col-xs-12 col-sm-12 col-md-3">
-      <a href="projets/{{$projet->id}}" title="Lorem ipsum" class="thumbnail"><img src="{{asset($projet->photo)}}" alt="Lorem ipsum" /></a>
+      <a href="projets/{{$projet->id}}" title="Lorem ipsum" class="thumbnail"><img src="{{asset($projet->photo)}}" alt="Lorem ipsum" width="150" height="150" /></a>
     </div>
 
       <div class="col-xs-12 col-sm-12 col-md-7 excerpet">

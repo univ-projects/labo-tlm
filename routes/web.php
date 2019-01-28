@@ -81,6 +81,7 @@ Route::get('{lab}/A-propos','frontController@apropo');
 Route::get('{lab}/equipes','frontController@equipe');
 
 Route::get('{lab}/projets','frontController@projet');
+Route::get('{lab}/articles','frontController@article');
 
 Route::get('{lab}/projets/{id}','frontController@projetdetail');
 
@@ -145,12 +146,13 @@ Route::get('/{lab}/connexion', function ($lab) {
       'lab'=>$lab,  ]);
 });
 Route::get('/{lab}/register', function ($lab) {
+  $labos=Equipe::all();
     return view('auth/register')->with([
-      'lab'=>$lab,  ]);
+      'lab'=>$lab,
+    'laboratoires'=>$labos ]);
 });
 
 });
-
 
 
 

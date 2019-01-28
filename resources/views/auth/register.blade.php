@@ -352,6 +352,20 @@
           <fieldset>
             <h2 class="fs-title">Paramètres du compte</h2>
             <h3 class="fs-subtitle">Veuillez entrez un email et un mot de passe</h3>
+
+            <div class="form-group">
+                    <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-flask"></i></span>
+                        <select name="equipe" class="form-control selectpicker" >
+                          <option value="0">Equipes</option>
+                           @foreach($laboratoires as $l)
+                          <option value="{{$l->id}}">{{$l->intitule}}</option>
+                          @endforeach
+                        </select>
+
+                    </div>
+            </div>
+
             <input type="text" name="email" placeholder="Email" />
             <input type="password" name="password" placeholder="Mot de passe" />
 

@@ -13,12 +13,12 @@
     <link rel="stylesheet" href="{{ asset('labo/bower_components/font-awesome/css/font-awesome.min.css') }}">
     
     <!-- Bootstrap 3.3.7 -->
-      <link rel="stylesheet" href="{{ asset('labo/bower_components/bootstrap/dist/css/bootstrap.min.css') }}"> 
+      <link rel="stylesheet" href="{{ asset('labo/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
 
 		<!-- Loading main css file -->
 		<link rel="stylesheet" href="{{ asset('styles/main-home-style.css') }}">
 
-      
+
 
 
 
@@ -104,7 +104,8 @@
 								<li class="menu-item {{{ (Request::is('front/'.$lab.'/A-propos/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/'.$lab.'/A-propos') ? 'current-menu-item' : '') }}}"><a href="{{url('front/'.$lab.'/A-propos')}}">A propos</a></li>
 								<li class="menu-item {{{ (Request::is('front/'.$lab.'/actualites/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/'.$lab.'/actualites') ? 'current-menu-item' : '') }}}"><a href="{{url('front/'.$lab.'/actualites')}}">Actualités</a></li>
 								<li class="menu-item {{{ (Request::is('front/'.$lab.'/equipes/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/'.$lab.'/equipes') ? 'current-menu-item' : '') }}} "><a href="{{url('front/'.$lab.'/equipes')}}">Equipe</a></li>
-									<li class="menu-item {{{ (Request::is('front/'.$lab.'/projets/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/'.$lab.'/projets') ? 'current-menu-item' : '') }}} "><a href="{{url('front/'.$lab.'/projets')}}">Projet</a></li>
+								<li class="menu-item {{{ (Request::is('front/'.$lab.'/projets/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/'.$lab.'/projets') ? 'current-menu-item' : '') }}} "><a href="{{url('front/'.$lab.'/projets')}}">Projet</a></li>
+								<li class="menu-item {{{ (Request::is('front/'.$lab.'/articles/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/'.$lab.'/articles') ? 'current-menu-item' : '') }}} "><a href="{{url('front/'.$lab.'/articles')}}">Article</a></li>
 								<li class="menu-item {{{ (Request::is('front/'.$lab.'/Evenements/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/'.$lab.'/Evenements') ? 'current-menu-item' : '') }}} "><a href="{{url('front/'.$lab.'/Evenements')}}">Evénements</a></li>
 								<li class="menu-item {{{ (Request::is('front/'.$lab.'/Contact/*') ? 'current-menu-item' : '') }}} {{{ (Request::is('front/'.$lab.'/Contact') ? 'current-menu-item' : '') }}}"><a href="{{url('front/'.$lab.'/Contact')}}">Contact</a></li>
 							</ul>
@@ -342,5 +343,6 @@ $(document).ready(function() {
 <script src="{{ asset('labo/bower_components/fullcalendar/dist/scriptCalendar.js') }}"></script>
 
 @yield('script')
+
 
 </html>
